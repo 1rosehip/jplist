@@ -1,9 +1,6 @@
 #[jQuery jPList Plugin](http://jplist.com)
 
-**jQuery jPList Plugin** is a flexible jQuery plugin 
-for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc). 
-
-Get started at [jplist.com](http://jplist.com)
+**jQuery jPList Plugin** is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc). Get started at [jplist.com](http://jplist.com)
 
 ###Features
 - Works with any content (tables, lists, div elements etc...)

@@ -1,0 +1,29 @@
+{
+    "name": "jplist",
+    "title": "jQuery jPList Plugin",
+    "description": "jQuery jPList Plugin is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc).",
+    "keywords": [
+        "sort",
+        "filter",
+        "paging",
+        "pagination",
+        "filtering",
+        "list",
+        "grid",
+		"ascending",
+		"descending",
+		"autopagination"
+    ],
+    "version": "5.0.1",
+    "author": {
+        "name": "Miriam Zusin",
+        "url": "http://jplist.com"
+    },
+    "bugs": "https://github.com/no81no/jplist/issu",
+    "homepage": "http://jplist.com",
+    "docs": "http://jplist.com",
+    "download": "https://github.com/no81no/jplist",
+    "dependencies": {
+        "jquery": ">=1.7.1"
+    }
+}
