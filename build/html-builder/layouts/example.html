@@ -1,0 +1,33 @@
+@!(layoutsFolder, title, jplistCall, demo)
+
+@function meta(){
+	<title>jQuery jPList Plugin - @(title)</title>
+}
+
+@function css(){
+		<link href="../../css/jplist.min.css" rel="stylesheet" type="text/css" />
+}
+
+@function scripts(){
+		<script src="../../js/jplist.min.js"></script>
+
+		@(jplistCall)
+}
+
+@function breadCrumbs(){						 
+    <a title="" href="../start-here.html">Home</a> &raquo; Demo
+}
+
+@function placeholder(){
+										
+					<div class="box text-shadow">
+						<h1 class="h1-30-normal left">@(title)</h1>
+						<p class="right">
+							<a href="../../demo.html" title="" class="read-more-blue-icon title-16-underline-normal">More DEMOs</a>
+						</p>
+					</div>
+					
+					@(demo)				
+}	
+
+@render(layoutsFolder + '/default.html', '../../../', meta(), css(), scripts(), breadCrumbs(), placeholder(), 'demo')				

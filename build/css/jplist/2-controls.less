@@ -1,0 +1,530 @@
+/**
+* jplist-control
+*/
+.jplist-control-mixin(){
+	float: left;
+	height: 30px;
+	box-shadow: 0px 0px 1px #fff;
+	background: #fff;
+	
+	.border-box-mixin();	
+	border: 1px solid @light-grey5;
+	border-radius: 3px;
+	
+	text-shadow: 1px 1px 1px #fff;	
+	color: @black1;
+}
+
+/**
+* jplist inner control - like label or checkbox inside group
+*/
+.jplist-inner-control-mixin(){
+	float: left;
+	display: inline-block;
+	height: 30px;
+	background: #fff;	
+	.border-box-mixin();
+	color: @black1;
+}
+
+/**
+* jplist control gradient
+*/
+.jplist-control-gradient-mixin(){
+	.linear-gradient(#fff, #fff, @light-grey4); //bgcolor, from, to		
+}
+
+/**
+* jplist panel
+*/
+.panel-mixin(){
+		
+	/**
+	* <= IE8 -> no css gradients
+	*/
+	.no-cssgradients{
+		.jplist-panel{
+			button:hover{
+				background: @white1;
+			}
+		}
+	}
+	
+	.jplist-ios-button{
+		display: none;
+	}
+	
+	.jplist-panel{	
+		color: @black1;
+		
+		button{
+			.jplist-control-mixin();
+			.linear-gradient(#fff, #fff, @light-grey4); //bgcolor, from, to			
+			margin: 10px 10px 0 0;			
+		}
+		
+		button:hover{
+			color: @blue;			
+			.linear-gradient(#f2f2f2, #fafafa, #ededed); //bgcolor, from, to
+		}
+		
+		button.jplist-disabled{
+			background: @light-grey2;
+			color: @dark-grey1;
+			cursor: default;
+		}
+		
+		button.jplist-selected{
+			color: @orange;
+		}
+		
+		input[type="text"]{
+			.jplist-control-mixin();
+			width: 150px;
+			text-indent: 5px;
+			background: #fff;
+		}
+		
+		input[type="checkbox"],
+		input[type="radio"]{
+			.jplist-inner-control-mixin();
+		}
+		
+		label{
+			float: left;
+			height: 30px;
+			line-height: 30px;
+			padding: 0 5px;
+			display: inline-block;			
+			.border-box-mixin();
+			color: @black1;
+			cursor: pointer;
+		}
+		
+		.text-filter-box{
+			height: 30px;			
+			float: left;
+			margin: 10px 10px 0 0;
+			
+			.jplist-icon{
+				background: @light-blue1;
+			}
+			
+			.jplist-label{
+				margin: 0;
+				border-right: 0;
+				background: @light-grey;
+			}
+			
+			button{
+				margin: 0;
+				border-left: 0;
+				padding: 0 10px;
+			}
+		}
+		
+		/**
+		* used in checkboxes group, text filters group etc.
+		*/
+		.jplist-group{
+			.jplist-control-mixin();
+			margin: 10px 10px 0 0;
+			padding: 0 0 0 5px;
+			height: auto;
+			
+			input, label{
+				height: 28px;
+				line-height: 30px;
+			}
+			
+			ul{
+				list-style: none;
+				padding: 0;
+				margin: 0 0 0 10px;
+				line-height: 28px;
+				
+				li{
+					float: left;
+					margin-right: 15px;					
+					overflow: hidden;
+					height: 28px;
+					line-height: 30px;
+				}
+			}
+		}
+	}
+	
+	
+	/**
+	* used in pagination infor when pages number is 0
+	*/
+	.jplist-empty{
+		display: none;
+	}
+		
+	.jplist-icon{
+		.jplist-control-mixin();		
+		display: inline-block;
+		line-height: 30px;
+		padding: 0 10px;
+		border-right: 0;
+	}
+	
+	.jplist-icon:hover{
+		color: @blue;
+	}
+	
+	.jplist-label{		
+		.jplist-control-mixin();
+		line-height: 30px;
+		padding: 0 10px;			
+		margin: 10px 10px 0 0;	
+		.linear-gradient(#fff, #fff, @light-grey4); //bgcolor, from, to
+	}
+	
+	.jplist-selected{
+		color: @red1;
+	}
+	
+	@media only screen and (max-width: 600px){
+		.jplist-panel{
+			display: none;
+		}
+		
+		.jplist-ios-button{
+			display: block;
+			width: 100%;
+			text-align: center;
+			cursor: pointer;
+			font-size: 15px;
+			line-height: 30px;
+			.jplist-control-mixin();
+			.linear-gradient(#fff, #fff, @light-grey4); //bgcolor, from, to
+		}
+		
+		.jplist-ios-button:hover{
+			.linear-gradient(#f2f2f2, #fafafa, #ededed); //bgcolor, from, to
+		}
+		
+		.jplist-ios-show{
+			display: block;
+		}
+	}
+}
+
+/**
+* dropdowns
+*/
+.dropdowns-mixin(){
+
+    .jplist-drop-down{
+        .jplist-control-mixin();
+        width: 130px;		
+		.linear-gradient(#fff, #fff, @light-grey4); //bgcolor, from, to		
+		margin: 10px 10px 0 0;
+
+        .jplist-dd-panel{
+            float: left;
+            width: 130px;
+            height: 30px;
+            line-height: 30px;
+            overflow: hidden;
+			text-indent: 10px;
+			cursor: pointer;
+        }
+		
+		.jplist-dd-panel:after{
+			content: @arrow-down;
+			color: #111;
+			display: inline-block;
+			float: right;
+			margin: 0 10px;
+		}
+		
+        ul {
+			.border-box-mixin();
+			border:1px solid @light-grey5;
+			border-radius:0 0 3px 3px;
+			
+            position:relative;
+            top:0;
+            z-index:1000;
+			
+            width: 128px;
+            display: none;
+            overflow: hidden;
+			
+			background: #fff;			
+            
+            list-style: none;           
+            margin:0;
+            padding:0;
+			
+			box-shadow: 0 3px 6px @grey2;
+
+            li{
+                width: 100%;
+                float: left;
+				height: 30px;
+				line-height: 30px;
+				text-indent: 10px;
+				cursor: pointer;
+            }
+
+            li:hover {
+                background-color:@light-grey3;
+            }
+        }
+    }
+	
+	.jplist-drop-down:hover{
+		.jplist-dd-panel{
+			color: @blue;
+		}
+		
+		.jplist-dd-panel:after{
+			color: @blue;
+		}
+	}
+}
+
+/**
+* pagination
+*/
+.pagination-mixin(){
+
+	.jplist-panel{
+		.jplist-pagination{		
+			cursor:pointer;
+			float: left;
+			line-height: 30px;
+
+			button{
+				display: inline-block;           
+				color: @blue;
+				height: 30px;
+				line-height: 30px;
+				padding: 0 10px;
+			}
+
+			.jplist-current{
+				font-weight: bold;
+				color: @orange;
+			}
+			
+			.jplist-pagingprev,
+			.jplist-pagingmid,
+			.jplist-pagingnext {
+				float:left;
+			}
+			
+			.jplist-pagingprev,
+			.jplist-pagingnext{
+				button{
+					font-size: 20px;
+					font-family: @courier;
+				}
+			}
+		}
+	}
+	
+	.jplist-one-page{
+		display: none;
+	}
+}
+
+/**
+* reset box and button
+*/
+.reset-btn-mixin(){
+
+    .jplist-reset-btn{		
+		width: 75px;
+    }
+}
+
+/**
+* list/grid view control
+*/
+.list-grid-view-mixin(){
+	
+	.jplist-panel{
+	
+		.jplist-views{
+			float: left;
+
+			.jplist-view{
+				.jplist-control-mixin();
+				cursor: pointer;
+				width: 32px;
+			}
+			
+			.jplist-list-view{
+				background: url('../img/icons/list-btn.png') no-repeat 50% 50%;
+			}
+
+			.jplist-grid-view{
+				background: url('../img/icons/grid-btn-disabled.png') no-repeat 50% 50%;
+			}
+			
+			.jplist-thumbs-view{
+				background: url('../img/icons/thumbs-btn-disabled.png') no-repeat 50% 50%;
+			}
+		}		
+	}
+	
+	.jplist-grid-view{
+		.jplist-panel{
+			.jplist-views{
+			   
+			    .jplist-list-view{
+					background: url('../img/icons/list-btn-disabled.png') no-repeat 50% 50%;
+			    }
+
+			    .jplist-grid-view{
+					background: url('../img/icons/grid-btn.png') no-repeat 50% 50%;
+			    }
+				
+				.jplist-thumbs-view{
+					background: url('../img/icons/thumbs-btn-disabled.png') no-repeat 50% 50%;
+				}
+		   }
+	   }
+	}
+	
+	.jplist-thumbs-view{
+		.jplist-panel{
+			.jplist-views{
+			   
+			    .jplist-list-view{
+					background: url('../img/icons/list-btn-disabled.png') no-repeat 50% 50%;
+			    }
+
+			    .jplist-grid-view{
+					background: url('../img/icons/grid-btn-disabled.png') no-repeat 50% 50%;
+			    }
+				
+				.jplist-thumbs-view{
+					background: url('../img/icons/thumbs-btn.png') no-repeat 50% 50%;
+				}
+		   }
+	   }
+	}
+}
+
+/**
+* radio filters
+*/
+.radio-filters-mixin(){
+
+    .radio-filters{
+        float: left;
+        margin: 5px 15px 0 0;
+
+        input{
+            vertical-align: baseline;
+        }
+
+        label{
+            margin-right: 10px;
+        }
+    }
+
+    .radio{
+        float: left;
+    }
+}
+
+/**
+* select
+*/
+.select-mixin(){
+
+    .jplist-select{
+		.jplist-control-mixin();
+		float: left;
+		margin: 10px 10px 0 0;
+		padding: 5px;
+    }
+}
+
+/**
+* range slider
+*/
+.range-slider-mixin(){
+
+    .jplist-range-slider{
+        float: left;
+        margin-top: 15px;
+
+        .value{
+            float: left;
+            margin: 0 15px;
+            font-size: 12px;
+        }
+
+        .ui-slider{
+            float: left;
+            width: 130px;
+        }
+    }
+
+    .ui-slider{
+        margin-top: 5px;
+    }
+}
+
+/**
+* datepicker
+*/
+.datepicker-mixin(){
+
+    .jplist-date-picker-range{
+        float: left;
+        margin-top: 10px;
+		
+       .gap{
+            float: left;
+            display: block;
+            margin-right: 5px;
+       }
+    }
+
+    .date-picker{
+        float: left;
+        border: 1px solid @light-grey5;
+        margin-right: 5px;
+        width: 100px;
+    }
+}
+
+/**
+* preloader
+*/
+.preloader-mixin(){
+	
+	.jplist-hide-preloader{
+		display: none;
+	}
+	
+	.jplist-preloader{
+		height: 30px;
+		line-height: 30px;
+		margin: 10px 10px 0 0;
+		float: right;
+	}
+}
+
+/**
+* mixin calls
+*/
+.panel-mixin();
+.dropdowns-mixin();
+.pagination-mixin();
+.reset-btn-mixin();
+.radio-filters-mixin();
+.select-mixin();
+.range-slider-mixin();
+.datepicker-mixin();
+.list-grid-view-mixin();
+.preloader-mixin();

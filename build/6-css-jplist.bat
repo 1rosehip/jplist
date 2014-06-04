@@ -1,0 +1,1 @@
+lessc -x css/jplist/1-styles.less > ../html/css/jplist.min.css

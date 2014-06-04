@@ -1,0 +1,2 @@
+@!(count)
+Current number is @count. Next number is @(count + 1).

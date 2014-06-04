@@ -1,0 +1,1 @@
+node closure/1-c.js

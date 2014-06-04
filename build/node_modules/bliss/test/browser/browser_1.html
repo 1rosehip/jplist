@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <script src="../../lib/browser.js"></script>
+  </head>
+  <body>
+    <script id="greet" language="text/bliss">@!(person) Hello @person</script>
+    <script language="text/bliss">
+      <p>@greet("John Doe")</p>
+      @{messages = 10}
+      <p>
+        You have @(messages) @(messages == 1 ? "message" : "messages")!
+      </p>
+    </script>
+    <script>
+    bliss.compileNodeList( document.querySelectorAll("script[language='text/bliss']") );
+    </script>
+  </body>
+</html>

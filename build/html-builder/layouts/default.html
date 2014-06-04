@@ -1,0 +1,143 @@
+@!(pathPrefix, meta, css, scripts, breadCrumbs, placeholder, topMenuActive)
+<!doctype html>
+<html>
+    <head>
+		@meta
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	    <!-- css -->
+		<link href="http://fonts.googleapis.com/css?family=Droid+Sans:400" rel="stylesheet" type="text/css" />
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+        <link rel="stylesheet" href="@(pathPrefix)html/css/vendor/normalize.css" />
+		<link rel="stylesheet" href="@(pathPrefix)html/css/styles.min.css" />
+        <link href="@(pathPrefix)html/img/common/favicon.png" rel="shortcut icon" />
+		@css		
+		
+		<!-- js -->		
+        <script src="@(pathPrefix)html/js/vendor/jquery-1.10.0.min.js"></script>
+		<script src="@(pathPrefix)html/js/vendor/modernizr.min.js"></script>
+		@scripts
+		
+    </head>
+    <body>
+	
+		<!-- black top bar -->
+		<div class="box" id="black-top-bar">
+			<div class="center">			
+                <div class="box">
+					<ul class="hmenu right" id="social-menu">
+						<li>
+							<a href="https://www.facebook.com/miriam.zusin" title=""><i class="fa fa-facebook"></i></a>
+						</li>
+						<li>
+							<a href="https://plus.google.com/105939222257494574786/posts" title=""><i class="fa fa-google-plus"></i></a>
+						</li>						
+						<li>
+							<a href="https://github.com/no81no" title=""><i class="fa fa-github"></i></a>
+						</li>
+						<li>
+							<a href="http://www.linkedin.com/pub/miriam-zusin/2b/65b/933" title=""><i class="fa fa-linkedin"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+				
+		<!-- header -->
+		<header class="box" id="header">
+			<div class="box" id="header-box">
+				<div class="center">			
+					<div class="box">
+
+						<!-- logo -->
+						<div id="logo" class="left">							
+							<a href="/" title="">jQuery jPList Plugin</a>
+						</div>
+						
+						<!-- main navigation -->
+						<ul class="default-menu hmenu right" id="top-menu">	
+							<li><a title="" href="mailto:no81no@@gmail.com"><i class="fa fa-envelope"></i> Contacts</a></li>
+							<li><a title="" href="mailto:no81no@@gmail.com" class="orange"><i class="fa fa-coffee"></i> Freelance</a></li>
+						</ul>
+
+					</div>
+				</div>					
+			</div>
+		</header>
+		
+		<!-- bread crumbs-->
+		<div id="bread-crumbs-box" class="box">
+			<div id="bread-crumbs" class="box">
+			
+				<div class="center">
+					<div class="box text-shadow">
+						<p>
+							@breadCrumbs
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- main content -->
+		<div id="main-content" class="box">
+			<div class="center">
+				<div id="page-content" class="box">
+
+					<!-- tabs navigation -->
+					<ul class="default-menu hmenu left box">	
+							@createMenuLink("index", pathPrefix + "start-here.html", "Overview", "fa fa-home")
+							@createMenuLink("demo", pathPrefix + "html/demo.html", "Demo", "fa fa-picture-o")
+							<li>
+								<a title="" href="http://jplist.com/home/usage"><i class="fa fa-wrench"></i> Usage</a>
+							</li>
+							<li>
+								<a title="" href="http://jplist.com/home/js-settings"><i class="fa fa-cog"></i> JS Settings</a>
+							</li>
+							<li>
+								<a title="" href="http://jplist.com/home/controls"><i class="fa fa-th"></i> Controls</a>
+							</li>
+							<li>
+								<a title="" href="http://jplist.com/home/changelog"><i class="fa fa-clock-o"></i> Changelog</a>
+							</li>
+							<li>
+								<a title="" href="http://jplist.com/home/license" class="orange"><i class="fa fa-shopping-cart"></i> License</a>
+							</li>
+					</ul>
+	
+					@placeholder
+				</div>
+			</div>
+		</div>	
+		
+		<!-- footer -->
+		<footer class="box" id="footer">
+			<div class="center">			
+                <div class="box">
+				
+					<p class="align-center" id="footer-content">
+						Copyright &copy; @getYear() <a href="mailto:no81no@@gmail.com" title="">Miriam Zusin.</a>
+					</p>
+					
+				</div>
+			</div>
+		</footer>	
+    </body>
+</html>
+
+@function createMenuLink(active, href, title, iconName){@if(topMenuActive === active){
+						<li class="active">
+							<a title="" href="@href"><i class="@(iconName)"></i> @title</a>
+						</li>
+	}
+	else{
+						<li>
+							<a title="" href="@href"><i class="@(iconName)"></i> @title</a>
+						</li>
+	}	
+}
+
+@function getYear(){@{var date = new Date();} @(date.getFullYear())}
+
+@function setActive(current){@if(topMenuActive === current){ class="active"}}
