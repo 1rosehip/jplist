@@ -19,6 +19,16 @@
         "name": "Miriam Zusin",
         "url": "http://jplist.com"
     },
+	"licenses": [
+		{
+		  "type": "GPL V3 License for non-commercial projects",
+		  "url": "https://gnu.org/licenses/gpl.html"
+		},
+		{
+		  "type": "jQuery jPList Plugin Commercial License",
+		  "url": "http://jplist.com/home/download"
+		}
+	  ],
     "bugs": "https://github.com/no81no/jplist/issu",
     "homepage": "http://jplist.com",
     "docs": "http://jplist.com",
