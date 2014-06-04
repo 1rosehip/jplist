@@ -23,17 +23,6 @@ Get started at [jplist.com](http://jplist.com)
 - Annotated source code
 - Solid documentation
 
-###Browser Compatibility
-- Internet Explorer 8+
-- Firefox
-- Chrome
-- Safari
-- Opera
-
-###jQuery Compatibility
-- Works with jQuery from [version 1.7](http://code.jquery.com/jquery-1.7.min.js)
-- Works with jQuery 2.x versions
-
 ##Examples
 
 ###Layout Examples
@@ -59,6 +48,45 @@ Get started at [jplist.com](http://jplist.com)
 - [Google Style Pagination](http://jplist.com/actionsexamples/google-style-pagination)
 - [Pagination Without "Items per Page" Dropdown](http://jplist.com/actionsexamples/pagination-without-items-per-page)
 - [Hidden Sort (Default Sort Control)](http://jplist.com/actionsexamples/hidden-sort)
+
+###Toggle Filters by jQuery Path
+- [Checkbox Filters](jplist.com/togglefilterspathexamples/checkbox-filters) - filter by jQuery path using group of checkboxes. OR logic inside group, AND logic between different groups
+- [Radio Button Filters](http://jplist.com/togglefilterspathexamples/radio-buttons-filters) - filter by jQuery path with radio buttons
+- [Button Filters](http://jplist.com/togglefilterspathexamples/button-filters-input) - filter by jQuery path with BUTTON elements
+- [Button Filters Group](http://jplist.com/togglefilterspathexamples/button-filters-span-group) - filter by jQuery path using group of elements like SPAN, INPUT, etc. OR logic inside group, AND logic between different groups
+- [Button Filters Group (Single Mode)](http://jplist.com/togglefilterspathexamples/button-filters-span-group-single-mode) - button filters group when only one button can be selected at the same time
+- [Button Filters and Counters](jplist.com/togglefilterspathexamples/button-filters-span) - filter by jQuery path with SPAN elements and counter controls
+- [Range Filter](http://jplist.com/togglefilterspathexamples/range-filter) - range filter by jQuery path with any element (SPAN, INPUT, etc.)
+
+###Toggle Filters by Text
+- [Checkbox Text Filter](http://jplist.com/togglefilterstextexamples/checkbox-text-filter) - filter by checkboxes text values. OR logic inside group, AND logic between different groups
+- [Button Text Filter](http://jplist.com/togglefilterstextexamples/button-text-filter) - filter by text using any elements like SPAN, INPUT etc.
+- [Button Text Filter Group](http://jplist.com/togglefilterstextexamples/button-text-filter-group) - filter by text using any elements like SPAN, INPUT etc. OR logic inside group, AND logic between different groups
+
+###jPList with jQuery UI
+- [Range Slider](http://jplist.com/jqueryuiexamples/range-slider) - jQuery UI range slider
+- [Date Picker Filter](http://jplist.com/jqueryuiexamples/date-picker-range-filter) - jQuery UI date picker
+
+###DateTime Examples
+- [DateTime 1](http://jplist.com/datetimeexamples/datetime-1) - {day}.{month}.{year}
+- [DateTime 2](http://jplist.com/datetimeexamples/datetime-2) - {month} {day}, {year} {hour}:{min}:{sec}
+- [DateTime 3](http://jplist.com/datetimeexamples/datetime-3) - {month} {day}, {year}
+
+###Other Examples
+- [Fade Animation](jplist.com/otherexamples/fade-animation) - example page of fade animation in jPList
+- [jPList with Fancybox](http://jplist.com/otherexamples/jplist-with-fancybox) - example of jPList with lightbox
+- [Large Amount of Data](jplist.com/otherexamples/large-amount-of-data-demo) - demo with 1000 items on the page
+
+###Browser Compatibility
+- Internet Explorer 8+
+- Firefox
+- Chrome
+- Safari
+- Opera
+
+###jQuery Compatibility
+- Works with jQuery from [version 1.7](http://code.jquery.com/jquery-1.7.min.js)
+- Works with jQuery 2.x versions
 
 ##License
 - For non-commercial, personal, or open source projects and applications, 
