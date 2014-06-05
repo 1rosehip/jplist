@@ -1,4 +1,5 @@
-#[jQuery jPList Plugin](http://jplist.com)
+# ![Alt text](http://localhost:8086/content/img/common/rocket-40.png) [jQuery jPList Plugin](http://jplist.com)
+
 
 **jQuery jPList Plugin** is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc). Get started at [jplist.com](http://jplist.com)
 
