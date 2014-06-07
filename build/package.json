@@ -1,6 +1,6 @@
 {
 	"name": "build",
-	"version": "5.0.1105",
+	"version": "5.0.1106",
 	"dependencies": {
 		"closurecompiler": "*",
 		"jshint": "*",
@@ -12,7 +12,7 @@
 	"target-folder": "../..",
 	"partials-folder": "partials",
 	"templates": [
-		"start-here.html",
+		"index.html",
 		"html/demo.html",
 		"html/examples/1-layout/div-layout.html",
 		"html/examples/1-layout/table-1.html",

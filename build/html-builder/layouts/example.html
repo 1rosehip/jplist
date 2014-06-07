@@ -15,19 +15,22 @@
 }
 
 @function breadCrumbs(){						 
-    <a title="" href="../start-here.html">Home</a> &raquo; Demo
+    <a title="" href="../../../index.html">Home</a> &raquo; Demo
 }
 
 @function placeholder(){
-										
-					<div class="box text-shadow">
-						<h1 class="h1-30-normal left">@(title)</h1>
-						<p class="right">
-							<a href="../../demo.html" title="" class="read-more-blue-icon title-16-underline-normal">More DEMOs</a>
-						</p>
-					</div>
-					
-					@(demo)				
+<div class="box">
+	<div class="center">
+		<div class="box text-shadow">
+			<h1 class="h1-30-normal left">@(title)</h1>
+			<p class="right">
+				<a href="../../demo.html" title="" class="read-more-blue-icon title-16-underline-normal">More DEMOs</a>
+			</p>
+		</div>
+		
+		@(demo)	
+	</div>
+</div>
 }	
 
 @render(layoutsFolder + '/default.html', '../../../', meta(), css(), scripts(), breadCrumbs(), placeholder(), 'demo')				

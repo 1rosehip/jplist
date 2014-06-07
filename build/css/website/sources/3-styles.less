@@ -51,18 +51,20 @@
         margin: 0;
     }
 
-    #page-content{
-        padding-bottom:30px;
-    }
-
     h2{
         font-size:16px;
         margin:30px 0 0 0;
         padding:0;
     }
 	
+	.fa-external-link{
+		font-size: 9px;
+		margin-left: 3px;
+	}
+	
 	@media only screen and (max-width: 500px){
-		.ios-500px-width-100{
+		.ios-500px-width-100,
+		.ios-500px-width-100.box-50{
 			width: 100%;
 		}
 	}
@@ -95,6 +97,13 @@
         line-height: 90px;
 		font-family: 'Droid Sans', sans-serif;
 		font-size: 32px;
+		vertical-align: middle;
+		
+		img{
+			height: 45px;
+			margin-right: 15px;
+			vertical-align: middle;
+		}
 		
 		a{
 			text-shadow: 1px 1px 1px #fff;
@@ -118,17 +127,13 @@
 
     #bread-crumbs-box{
         border-bottom:1px solid #fff;
-        margin-bottom:25px;
-    }
-
-    #main-content{
-        min-height:600px;
     }
 
     #footer{
         background:@black1 url(@black-bg);
         height:300px;
         color:@light-grey;
+		margin-top: 30px;
 
         a{
             font-weight:normal;
@@ -138,6 +143,89 @@
     #footer-content{
         margin-top:150px;
     }
+	
+	@media only screen and (max-width: 500px){
+		
+		#logo{
+			text-align: center;
+			line-height: 65px;
+			
+			a{
+				float: right;
+			}
+		}
+	}
+}
+
+/**
+* home page colored preview
+*/
+.hp-colored-preview-mixin(){
+	
+	/**
+	* home page colored preview box
+	*/
+	#hp-colored-preview-box{
+		background: @light-blue;
+		border-top: 1px solid #fff;
+		border-bottom: 1px solid #fff;
+		margin-bottom: 25px;
+		padding: 40px 0;
+				
+		.img{
+			font-size: 0;
+			line-height: 0;
+			float: left;
+			width: 40%;
+			margin-right: 5%;
+			
+			img{
+				border: 1px solid #fff;
+				max-width: 100%;
+			}
+		}
+		
+		.content{
+			float: left;
+			width: 50%;
+		}
+		
+		.txt{			
+			font-size: 18px;
+			color: #fff;
+			line-height: 30px;
+			max-width: 500px;
+			margin: 10px 0 15px 0;
+			font-family: 'Droid Sans',sans-serif;
+			
+			a{
+				font-weight: normal;
+				color: #fff;
+			}	
+		}
+		
+		
+		.btns{
+			a{
+				transition: all 0.25s ease 0s;
+			}
+			
+			a:hover{
+				text-shadow: 1px 1px 10px @grey3;
+			}
+		}
+		
+		@media only screen and (max-width: 500px){
+			.img{
+				width: 100%;
+			}
+			
+			.content{
+				float: left;
+				width: 100%;
+			}
+		}
+	}
 }
 
 /**
@@ -467,3 +555,4 @@
 .settings-table-mixin();
 .spacers-mixin();
 .license-mixin();
+.hp-colored-preview-mixin();
