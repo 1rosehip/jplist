@@ -1,8 +1,13 @@
 @!(data)
 
 @function jplistCall(data){
+			
+			<!-- lazy load script: http://www.appelsiini.net/projects/lazyload -->
+			<script src="../../js/vendor/jquery.lazyload.min.js"></script>
+			
 			<script>
 			$('document').ready(function(){
+				
 				$('#demo').jplist({
 				
 					//main options
@@ -13,12 +18,25 @@
 					//save plugin state
 					,storage: 'localstorage' //'', 'cookies', 'localstorage'			
 					,storageName: 'views'
+					
+					//this code occurs on every jplist action
+					,redrawCallback: function(collection, $dataview, statuses){
+					
+						//init lazy load on a filtered set of elements
+						$('.list-item img').lazyload();
+					}
 				});
 			});
 			</script>
 }
 
-@function demo(data){					
+@function demo(data){	
+					<div class="box">
+						<p style="margin: 0 0 30px 0" class="text-shadow">
+							A fairly common web interface feature is the dynamic view switcher. This demo page has control that switches between list view, grid view and thumbs view. Also you can read about views control in our <a href="http://blog.jplist.com/listgrid-view-switcher-using-jquery-jplist-plugin/" title="List/Grid View Switcher using jQuery jPList Plugin">blog</a>.
+						</p>
+					</div>
+					
 					<!-- demo -->
 					<div id="demo" class="box jplist">
 					
@@ -144,7 +162,7 @@
 							
 						</div>
 						
-						@render(data.partialsFolder + '/div-products-list-450.html')	
+						@render(data.partialsFolder + '/div-products-list-450-lazy.html')	
 						
 						<div class="box jplist-no-results text-shadow align-center">
 							<p>No results found</p>
