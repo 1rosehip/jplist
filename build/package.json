@@ -1,6 +1,6 @@
 {
 	"name": "build",
-	"version": "5.0.1106",
+	"version": "5.0.1107",
 	"dependencies": {
 		"closurecompiler": "*",
 		"jshint": "*",
