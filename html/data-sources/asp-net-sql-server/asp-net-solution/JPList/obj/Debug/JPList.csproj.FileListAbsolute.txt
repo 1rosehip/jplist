@@ -1,0 +1,5 @@
+C:\inetpub\wwwroot\codelib\jplist\bin\JPList.dll
+C:\inetpub\wwwroot\codelib\jplist\bin\JPList.pdb
+C:\inetpub\wwwroot\codelib\jplist\html\data-sources\asp-net-sql-server\JPList\JPList\obj\Debug\ResolveAssemblyReference.cache
+C:\inetpub\wwwroot\codelib\jplist\html\data-sources\asp-net-sql-server\JPList\JPList\obj\Debug\JPList.dll
+C:\inetpub\wwwroot\codelib\jplist\html\data-sources\asp-net-sql-server\JPList\JPList\obj\Debug\JPList.pdb
