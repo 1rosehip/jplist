@@ -1,7 +1,7 @@
-# ![jQuery jPList Plugin](http://jplist.com/content/img/common/rocket-50.png) [jQuery jPList Plugin](http://jplist.com)
+# ![jPList - jQuery Data Grid Controls](http://jplist.com/content/img/common/rocket-50.png) [jPList - jQuery Data Grid Controls](http://jplist.com)
 
 
-**jQuery jPList Plugin** is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc). Get started at [jplist.com](http://jplist.com)
+**jPList** is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc). Get started at [jplist.com](http://jplist.com)
 
 ###Features
 - Works with any content (tables, lists, div elements etc...)
@@ -88,7 +88,7 @@
 
 ##License
 - For non-commercial, personal, or open source projects and applications, 
-you may use jQuery jPList Plugin for free under the terms of the [GPL V3 License](https://gnu.org/licenses/gpl.html). 
+you may use jPList for free under the terms of the [GPL V3 License](https://gnu.org/licenses/gpl.html). 
 - If your project generates any type of income, e.g. sells products, ads, services or just represents a commercial company, you should get a commercial license at [http://jplist.com/home/download](http://jplist.com/home/download)
 
 ##Links

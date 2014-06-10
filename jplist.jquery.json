@@ -1,7 +1,7 @@
 {
     "name": "jplist",
-    "title": "jQuery jPList Plugin",
-    "description": "jQuery jPList Plugin is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc).",
+    "title": "jPList - jQuery Data Grid Controls",
+    "description": "jPList is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc).",
     "keywords": [
         "sort",
         "filter",
@@ -25,8 +25,8 @@
 		  "url": "https://gnu.org/licenses/gpl.html"
 		},
 		{
-		  "type": "jQuery jPList Plugin Commercial License",
-		  "url": "http://jplist.com/home/download"
+		  "type": "jPList - jQuery Data Grid Controls Commercial License",
+		  "url": "http://www.binpress.com"
 		}
 	  ],
     "bugs": "https://github.com/no81no/jplist/issue",
