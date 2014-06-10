@@ -21,6 +21,78 @@
 }
 
 /**
+* grid menu, used on homepage
+*/
+.grid-menu-mixin(){
+	
+	.grid-menu-row{
+		margin-bottom: 20px;
+		line-height: 30px;
+		
+		.grid-menu-cell{
+			width: 30%;
+			
+			ul{
+				width: 80%;
+				background: @white2;
+				border-radius: 2px;
+				padding-top: 15px;
+				padding-bottom: 15px;
+			}
+		}
+		
+		h2{
+			transition: all 0.25s ease 0s;
+			text-shadow: 1px 1px 10px @grey3;
+			font-weight: normal;
+			font-family: 'Droid Sans', sans-serif;
+		}
+		
+		h2:hover{
+			color: @black1;
+			text-shadow: 1px 1px 10px @black1;
+		}
+		
+	}
+	
+	@media only screen and (max-width: 800px){
+
+		.grid-menu-row{
+			.grid-menu-cell{				
+				ul{
+					background: none;
+				}
+			}
+		}
+    }
+	
+	@media only screen and (max-width: 600px){
+
+		.grid-menu-row{
+			.grid-menu-cell{				
+				width: 50%;
+				
+				ul{
+					background: @white2;
+					border-radius: 2px;
+					padding-top: 15px;
+					padding-bottom: 15px;
+				}
+			}
+		}
+    }
+	
+	@media only screen and (max-width: 400px){
+
+		.grid-menu-row{
+			.grid-menu-cell{				
+				width: 100%;
+			}
+		}
+    }
+}
+
+/**
 * arrows menu
 */
 .arrows-menu-mixin(){
@@ -35,6 +107,10 @@
       .active{
           color: @orange;
       }
+	  
+	  .empty{
+		list-style: none;
+	  }
   }
 
   .arrows-menu-p20{
@@ -44,6 +120,7 @@
           padding-bottom: 20px;
       }
   }	
+    
 }
 
 /**
@@ -215,3 +292,4 @@
 .default-menu-mixin();
 .top-menu-mixin();
 .fa-mixin();
+.grid-menu-mixin();
