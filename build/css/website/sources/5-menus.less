@@ -170,6 +170,25 @@
 }
 
 /**
+* black top left menu
+*/
+.black-top-left-menu(){
+	#black-top-bar-left-menu{	
+		line-height: 45px;
+		
+		a{
+			color: @light-grey5;
+			transition: all 0.25s ease 0s;
+		}
+		
+		a:hover{
+			color: #fff;
+			text-shadow: 1px 1px 10px #fff;
+		}
+	}
+}
+
+/**
 * default menu mixin
 */
 .default-menu-mixin(){
@@ -299,3 +318,4 @@
 .top-menu-mixin();
 .fa-mixin();
 .grid-menu-mixin();
+.black-top-left-menu();
