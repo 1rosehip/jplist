@@ -1,6 +1,6 @@
 {
 	"name": "build",
-	"version": "5.1.1",
+	"version": "5.1.5",
 	"dependencies": {
 		"closurecompiler": "*",
 		"jshint": "*",
@@ -49,6 +49,7 @@
 		"html/examples/6-other/fade-animation.html",
 		"html/examples/7-data-source/php-sqlite-demo.html",
 		"html/examples/7-data-source/php-mysql-demo.html",
+		"html/examples/7-data-source/php-mysql-json-handlebars-demo.html",
 		"html/examples/7-data-source/asp-net-sql-server-demo.html"
 	],
 	"jplist-source-files-core": [

@@ -2,7 +2,7 @@
 <html>
     <head>
 		
-	<title>jPList - jQuery Data Grid Controls - PHP and MySQL Demo</title>
+	<title>jPList - jQuery Data Grid Controls - PHP and MySQL with JSON and Handlebars Template</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -23,6 +23,9 @@
 
 		
 			
+			<!-- Handlebars Templates Library: http://handlebarsjs.com -->
+			<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.min.js"></script>
+			
 			<script>
 			$('document').ready(function(){
 				$('#demo').jplist({
@@ -39,7 +42,7 @@
 						
 						    //ajax settings
 						    ajax:{
-							  url: '../../data-sources/php-mysql-demo/server-html.php'
+							  url: '../../data-sources/php-mysql-demo/server-json.php'
 							  ,dataType: 'html'
 							  ,type: 'POST'
 						    }
@@ -159,7 +162,7 @@
 <div class="box">
 	<div class="center">
 		<div class="box text-shadow">
-			<h1 class="h1-30-normal left">PHP and MySQL Demo</h1>
+			<h1 class="h1-30-normal left">PHP and MySQL with JSON and Handlebars Template</h1>
 			<p class="right">
 				<a href="../../demo.html" title="" class="read-more-blue-icon title-16-underline-normal">More DEMOs</a>
 			</p>

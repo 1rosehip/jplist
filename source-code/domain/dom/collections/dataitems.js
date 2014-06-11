@@ -160,7 +160,7 @@
 			dataitem = context.dataview[i];
 			
 			//add dataitem html
-			html += dataitem.html;
+			html += dataitem.content;
 		}
 		return html;
 	};

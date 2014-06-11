@@ -406,8 +406,8 @@
 	jQuery.fn.jplist.domain.dom.services.SortService = jQuery.fn.jplist.domain.dom.services.SortService || {};
 	jQuery.fn.jplist.domain.dom.services.pagination = jQuery.fn.jplist.domain.dom.services.pagination || {};
 	
-	jQuery.fn.jplist.domain.serverHTML = jQuery.fn.jplist.domain.serverHTML || {};
-	jQuery.fn.jplist.domain.serverHTML.models = jQuery.fn.jplist.domain.serverHTML.models || {};
+	jQuery.fn.jplist.domain.server = jQuery.fn.jplist.domain.server || {};
+	jQuery.fn.jplist.domain.server.models = jQuery.fn.jplist.domain.server.models || {};
 	
 	/**
 	* Infrastructure Layer Namespace

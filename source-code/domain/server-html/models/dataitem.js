@@ -8,22 +8,22 @@
 	'use strict';		
 		
 	/**
-	* data item - item returned from server as HTML
+	* data item - item returned from server as HTML, JSON, XML, etc.
 	* @constructor
-	* @param {string} html - the whole html returned from server
+	* @param {string} content - the whole content returned from server
 	*/
-	jQuery.fn.jplist.domain.serverHTML.models.DataItemModel = function(html){
+	jQuery.fn.jplist.domain.server.models.DataItemModel = function(content){
 		
-		var $html = jQuery(html);
+		var $content = jQuery(content);
 				
-		this.html = '';
+		this.content = '';
 		this.format = '';
 		this.count = 0;		
 		
-		if($html.length > 0){
-			this.html = $html.html();
-			this.format = $html.attr('data-format');			
-			this.count = Number($html.attr('data-count')) || 0;
+		if($content.length > 0){
+			this.content = $content.html();
+			this.format = $content.attr('data-format');			
+			this.count = Number($content.attr('data-count')) || 0;
 		}
 	};
 })();

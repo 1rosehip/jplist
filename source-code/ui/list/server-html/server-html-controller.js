@@ -29,7 +29,7 @@
 	/**
 	* update statuses with data from server
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.domain.serverHTML.models.DataItemModel} dataitem - server data item
+	* @param {jQuery.fn.jplist.domain.server.models.DataItemModel} dataitem - server data item
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
 	var setServerData = function(context, dataitem, statuses){
@@ -88,7 +88,7 @@
 				//OK callback
 				,function(html, statuses){
 					
-					var dataitem = new jQuery.fn.jplist.domain.serverHTML.models.DataItemModel(html);
+					var dataitem = new jQuery.fn.jplist.domain.server.models.DataItemModel(html);
 										
 					//udapte statuses with server data
 					setServerData(context, dataitem, statuses);

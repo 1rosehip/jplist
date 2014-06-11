@@ -10,7 +10,7 @@
 	/**
 	* data item viewmodel - used in server html list view/controller
 	* @constructor
-	* @param {jQuery.fn.jplist.domain.serverHTML.models.DataItemModel|null} dataItem
+	* @param {jQuery.fn.jplist.domain.server.models.DataItemModel|null} dataItem
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>|null} statuses
 	* @param {Object} scopeObserver - scope observer
 	*/
@@ -23,7 +23,7 @@
 	
 	/**
 	* set data item
-	* @param {jQuery.fn.jplist.domain.serverHTML.models.DataItemModel|null} dataItem
+	* @param {jQuery.fn.jplist.domain.server.models.DataItemModel|null} dataItem
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>|null} statuses
 	*/
 	jQuery.fn.jplist.ui.list.models.DataItemModel.prototype.set = function(dataItem, statuses){

@@ -35,16 +35,16 @@
 	/**
 	* render callback
 	* @param {Object} context - jplist panel 'this' object
-	* @param {string} html
+	* @param {string} content
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
-	var renderCallback = function(context, html, statuses){
+	var renderCallback = function(context, content, statuses){
 		
 		//animate to top
 		//animateToTop(context);
 		
 		//send redraw event
-		context.observer.trigger(context.observer.events.setStatusesEvent, [statuses, html]);
+		context.observer.trigger(context.observer.events.setStatusesEvent, [statuses, content]);
 		
 		if(context.options.deepLinking){
 				
@@ -54,17 +54,17 @@
 			
 		//redraw callback
 		if(jQuery.isFunction(context.options.redrawCallback)){
-			context.options.redrawCallback(html, statuses);
+			context.options.redrawCallback(content, statuses);
 		}
 	};
 	
 	/**
-	* build result html
+	* build result content
 	* @param {Object} context
-	* @param {string} html
+	* @param {string} content
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
-	var buildHtml = function(context, html, statuses){
+	var buildContent = function(context, content, statuses){
 		
 		var lastStatusNotInAnimation = false
 			,lastStatus
@@ -74,7 +74,7 @@
 			});
 			
 		//no results found
-		if(!html || jQuery.trim(html) === ''){
+		if(!content || jQuery.trim(content) === ''){
 			context.$noResults.removeClass('jplist-hidden');
 			context.$itemsBox.addClass('jplist-hidden');
 		}
@@ -106,23 +106,23 @@
 				options //user options
 				,context.$itemsBox //scene
 				,null
-				,jQuery(html) //new items
+				,jQuery(content) //new items
 				,context.options.effect //animation effect
 				,context.timeline //timeline object
 				,function(){
 					
 					//send render callback
-					renderCallback(context, html, statuses);
+					renderCallback(context, content, statuses);
 				}
 				,context.observer
 			);		
 		}
 		else{
-			//update container html
-			context.$itemsBox.html(html);
+			//update container content
+			context.$itemsBox.html(content);
 			
 			//send render callback
-			renderCallback(context, html, statuses);
+			renderCallback(context, content, statuses);
 		}
 	};
 	
@@ -150,7 +150,7 @@
 		
 		/**
 		* on model changed
-		* @param {jQuery.fn.jplist.domain.serverHTML.models.DataItemModel|null} dataItem
+		* @param {jQuery.fn.jplist.domain.server.models.DataItemModel|null} dataItem
 		* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>|null} statuses
 		*/
 		context.scopeObserver.on(context.scopeObserver.events.modelChanged, function(e, dataItem, statuses){
@@ -163,8 +163,8 @@
 			//show items box
 			context.$itemsBox.removeClass('jplist-hidden');
 			
-			//build result html
-			buildHtml(context, /** @type {string} */ (dataItem.html), statuses);
+			//build result content
+			buildContent(context, /** @type {string} */ (dataItem.content), statuses);
 		});
 	};
 	
