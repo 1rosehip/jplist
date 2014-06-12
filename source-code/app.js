@@ -229,6 +229,9 @@
 					,serverOkCallback: null
 					,serverErrorCallback: null
 				}
+					
+				//render function for json + templates like handlebars, xml + xslt etc.
+				,render: null
 			}
 			
 			//panel controls

@@ -28,6 +28,11 @@
 			
 			<script>
 			$('document').ready(function(){
+				
+				var $list = $('#demo .list')
+					,template = Handlebars.compile($('#jplist-template').html());
+				
+				//init jplist with php + mysql data source, json and handlebars template
 				$('#demo').jplist({
 				
 					itemsBox: '.list' 
@@ -46,6 +51,11 @@
 							  ,dataType: 'html'
 							  ,type: 'POST'
 						    }
+						}
+						
+						//render function for json + templates like handlebars, xml + xslt etc.
+						,render: function(json, statuses){
+							$list.html(template($.parseJSON(json)));
 						}
 					 }
          
@@ -169,7 +179,28 @@
 		</div>
 		
 		
+	
 					
+					<!-- handlebars template -->
+					<script id="jplist-template" type="text/x-handlebars-template">
+						{{#each this}}
+						
+							<div class="list-item box">	
+								<div class="img left">
+									<img src="{{image}}" alt="" title=""/>
+								</div>
+								
+								<div class="block right">
+									<p class="title">{{title}}</p>
+									<p class="desc">{{description}}</p>
+									<p class="like">{{likes}} Likes</p>
+									<p class="theme">{{keyword1}}, {{keyword2}}</p>
+								</div>
+							</div>
+							
+						{{/each}}
+					</script>
+			
 					<!-- demo -->
 					<div id="demo" class="box jplist">
 					
