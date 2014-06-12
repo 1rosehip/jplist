@@ -36,24 +36,28 @@
 								,xsltTree;
 					
 							if(document.implementation && document.implementation.createDocument && window.XSLTProcessor){								
-								xsltProcessor = new XSLTProcessor();
-								xsltProcessor.importStylesheet($.parseXML(template));
-								$list.html(xsltProcessor.transformToFragment(dataItem.content, document));
+							
+								if(dataItem.content){
+									xsltProcessor = new XSLTProcessor();
+									xsltProcessor.importStylesheet($.parseXML(template));
+									$list.html(xsltProcessor.transformToFragment(dataItem.content, document));
+								}
 							}
 							else{//IE ...
-								
-								//xml
-								srcTree = new ActiveXObject('Msxml2.DOMDocument.6.0'); 
-								srcTree.async = false; 
-								srcTree.loadXML(dataItem.responseText); 
-								
-								//xslt
-								xsltTree = new ActiveXObject('Msxml2.DOMDocument.6.0'); 
-								xsltTree.async = false; 
-								xsltTree.loadXML(template); 
-								
-								//paste
-								$list.html(srcTree.transformNode(xsltTree)); 
+								if(dataItem.responseText){
+									//xml
+									srcTree = new ActiveXObject('Msxml2.DOMDocument.6.0'); 
+									srcTree.async = false; 
+									srcTree.loadXML(dataItem.responseText); 
+									
+									//xslt
+									xsltTree = new ActiveXObject('Msxml2.DOMDocument.6.0'); 
+									xsltTree.async = false; 
+									xsltTree.loadXML(template); 
+									
+									//paste
+									$list.html(srcTree.transformNode(xsltTree)); 
+								}
 							}
 						}
 					 }

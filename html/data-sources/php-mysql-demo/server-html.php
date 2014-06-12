@@ -294,7 +294,7 @@
 		
 		$html = "";
 		
-		$html .= "<div data-type='jplist-dataitem' data-format='html' data-count='" . $count . "' class='box'>";
+		$html .= "<div data-type='jplist-dataitem' data-count='" . $count . "' class='box'>";
 		$html .= $itemsHtml;
 		$html .= "</div>";		
 		

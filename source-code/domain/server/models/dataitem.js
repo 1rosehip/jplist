@@ -47,8 +47,15 @@
 			
 			case 'xml':{
 				var $content = jQuery(content).find('root');
-				this.content = content;
+				
 				this.count = Number($content.attr('count')) || 0;
+				
+				if(this.count > 0){
+					this.content = content;
+				}
+				else{
+					this.content = '';
+				}
 			}
 			break;
 		}
