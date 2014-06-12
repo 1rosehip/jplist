@@ -241,20 +241,21 @@
 		
 	/**
 	* get the whole content with wrapper 
-	* that has data attributes with data format (html, json, xml, ...) and count used in pagination
+	* it used for pagination count
 	* @param {string} $itemsJSON - items json
 	* @param {number} $count - all items number
 	* @return {string} html
 	*/
-	function getHTMLWrapper($itemsJSON, $count){
+	function getWrapper($itemsJSON, $count){
 		
-		$html = "";
+		$json = "";
 		
-		$html .= "<div data-type='jplist-dataitem' data-format='json' data-count='" . $count . "' class='box'>";
-		$html .= $itemsJSON;
-		$html .= "</div>";		
+		$json .= "{";
+		$json .= "\"count\":" . $count;
+		$json .= ",\"data\":" . $itemsJSON;
+		$json .= "}";		
 		
-		return $html;
+		return $json;
 	}
 		
 	/**
@@ -350,7 +351,7 @@
 			$json .= "]";
 			
 			//print json
-			echo(getHTMLWrapper($json, $count));
+			echo(getWrapper($json, $count));
 			
 			//close the database connection
 			$db = NULL;

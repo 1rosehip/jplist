@@ -27,14 +27,14 @@
 						    //ajax settings
 						    ajax:{
 							  url: '../../data-sources/php-mysql-demo/server-json.php'
-							  ,dataType: 'html'
+							  ,dataType: 'json'
 							  ,type: 'POST'
 						    }
 						}
 						
 						//render function for json + templates like handlebars, xml + xslt etc.
 						,render: function(json, statuses){
-							$list.html(template($.parseJSON(json)));
+							$list.html(template(json));
 						}
 					 }
          

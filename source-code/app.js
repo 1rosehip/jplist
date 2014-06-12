@@ -222,7 +222,7 @@
 					//ajax settings
 					ajax:{
 						url: 'server.php'
-						,dataType: 'html'
+						,dataType: 'html'						
 						,type: 'POST'
 						//,cache: false
 					}

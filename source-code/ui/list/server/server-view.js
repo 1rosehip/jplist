@@ -82,57 +82,54 @@
 			context.$noResults.addClass('jplist-hidden');
 			context.$itemsBox.removeClass('jplist-hidden');
 		}
-		
-		if(context.options.dataSource && jQuery.isFunction(context.options.dataSource.render)){
-		
-			//render the content
-			context.options.dataSource.render(content, statuses);
+				
+		if(context.options.effect){
 			
-			//send render callback
-			renderCallback(context, content, statuses);
+			//get last status from history
+			if(context.history){
+				lastStatus = context.history.getLastStatus();
+				
+				if(lastStatus && !(lastStatus.inAnimation)){
+					lastStatusNotInAnimation = true;
+				}
+			}
+			
+			if(lastStatusNotInAnimation){
+				options = optionsZeroDuration;
+			}
+			else{
+				options = context.options;					
+			}
+			
+			//animate items
+			jQuery.fn.jplist.animation.drawItems(
+				options //user options
+				,context.$itemsBox //scene
+				,null
+				,jQuery(content) //new items
+				,context.options.effect //animation effect
+				,context.timeline //timeline object
+				,function(){
+					
+					//send render callback
+					renderCallback(context, content, statuses);
+				}
+				,context.observer
+			);		
 		}
 		else{
-			if(context.options.effect){
-				
-				//get last status from history
-				if(context.history){
-					lastStatus = context.history.getLastStatus();
-					
-					if(lastStatus && !(lastStatus.inAnimation)){
-						lastStatusNotInAnimation = true;
-					}
-				}
-				
-				if(lastStatusNotInAnimation){
-					options = optionsZeroDuration;
-				}
-				else{
-					options = context.options;					
-				}
-				
-				//animate items
-				jQuery.fn.jplist.animation.drawItems(
-					options //user options
-					,context.$itemsBox //scene
-					,null
-					,jQuery(content) //new items
-					,context.options.effect //animation effect
-					,context.timeline //timeline object
-					,function(){
-						
-						//send render callback
-						renderCallback(context, content, statuses);
-					}
-					,context.observer
-				);		
+			if(context.options.dataSource && jQuery.isFunction(context.options.dataSource.render)){
+			
+				//render the content
+				context.options.dataSource.render(content, statuses);				
 			}
 			else{
 				//update container content
 				context.$itemsBox.html(content);
-				
-				//send render callback
-				renderCallback(context, content, statuses);
 			}
+			
+			//send render callback
+			renderCallback(context, content, statuses);
 		}
 	};
 	

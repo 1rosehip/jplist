@@ -77,6 +77,18 @@
 		*/
 		context.observer.on(context.observer.events.renderList, function(event, obj, statuses){
 			
+			var ajaxDataType = 'html';
+			
+			//update ajax data type - it could be 'html', 'xml' or 'json'
+			if(context.options.dataSource && context.options.dataSource.server && context.options.dataSource.server.ajax){
+			
+				ajaxDataType = context.options.dataSource.server.ajax.dataType;
+				
+				if(!ajaxDataType){
+					ajaxDataType = 'html';
+				}	
+			}
+			
 			//save statuses to storage according to user options (if needed)
 			context.storage.save(statuses);			
 						
@@ -86,9 +98,9 @@
 				,context.options
 				
 				//OK callback
-				,function(html, statuses){
+				,function(content, statuses){
 					
-					var dataitem = new jQuery.fn.jplist.domain.server.models.DataItemModel(html);
+					var dataitem = new jQuery.fn.jplist.domain.server.models.DataItemModel(content, ajaxDataType);
 										
 					//udapte statuses with server data
 					setServerData(context, dataitem, statuses);

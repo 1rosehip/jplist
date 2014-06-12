@@ -11,20 +11,44 @@
 	* data item - item returned from server as HTML, JSON, XML, etc.
 	* @constructor
 	* @param {string} content - the whole content returned from server
+	* @param {string} dataType - 'html', 'json' or 'xml'
 	*/
-	jQuery.fn.jplist.domain.server.models.DataItemModel = function(content){
+	jQuery.fn.jplist.domain.server.models.DataItemModel = function(content, dataType){
 		
-		var $content = jQuery(content);
-				
+		//init properties		
 		this.content = '';
-		this.format = '';
-		this.count = 0;		
-		
-		if($content.length > 0){
-			this.content = $content.html();
-			this.format = $content.attr('data-format');			
-			this.count = Number($content.attr('data-count')) || 0;
+		this.dataType = dataType;
+		this.count = 0;
+
+		if(!(this.dataType)){
+			this.dataType = 'html';
 		}
+		
+		switch(this.dataType){
+			
+			case 'html':{
+				
+				var $content = jQuery(content);
+				
+				if($content.length > 0){
+					this.content = $content.html();		
+					this.count = Number($content.attr('data-count')) || 0;
+				}
+			}
+			break;
+			
+			case 'json':{
+				this.content = content['data'];
+				this.count = content['count'];
+			}
+			break;
+			
+			case 'xml':{
+			
+			}
+			break;
+		}
+		
 	};
 })();
 
