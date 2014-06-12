@@ -136,7 +136,7 @@
 		context.model = new jQuery.fn.jplist.ui.list.models.DataItemModel(null, null, context.scopeObserver);
 		
 		//init view
-		context.view = new jQuery.fn.jplist.ui.list.views.ServerHTMLView($root, options, observer, context.scopeObserver, context.model, context.history);
+		context.view = new jQuery.fn.jplist.ui.list.views.ServerView($root, options, observer, context.scopeObserver, context.model, context.history);
 		
 		//init events
 		initEvents(context);
@@ -145,7 +145,7 @@
 	};
 	
 	/**
-	* Server
+	* Server Controller
 	* @constructor 
 	* @param {jQueryObject} $root - jplist root element
 	* @param {Object} options - jplist user options
@@ -154,7 +154,7 @@
 	* @param {jQuery.fn.jplist.app.History} history
 	* @return {Object}
 	*/
-	jQuery.fn.jplist.ui.list.controllers.ServerHTML = function($root, options, observer, panel, history){				
+	jQuery.fn.jplist.ui.list.controllers.ServerController = function($root, options, observer, panel, history){				
 		return new Init($root, options, observer, panel, history);
 	};
 })();

@@ -87,7 +87,7 @@
 				//debug info
 				jQuery.fn.jplist.info(context.options, 'Data Source: ', context.options.dataSource);
 		
-				var server = new jQuery.fn.jplist.ui.list.controllers.ServerHTML(
+				var server = new jQuery.fn.jplist.ui.list.controllers.ServerController(
 					context.$root
 					,context.options
 					,context.observer

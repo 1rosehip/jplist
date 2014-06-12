@@ -227,7 +227,7 @@
 	* @param {jQuery.fn.jplist.ui.list.models.DataItemModel} model
 	* @param {jQuery.fn.jplist.app.History} history	
 	*/
-	jQuery.fn.jplist.ui.list.views.ServerHTMLView = function($root, options, observer, scopeObserver, model, history){	
+	jQuery.fn.jplist.ui.list.views.ServerView = function($root, options, observer, scopeObserver, model, history){	
 		return new Init($root, options, observer, scopeObserver, model, history);
 	};
 })();
