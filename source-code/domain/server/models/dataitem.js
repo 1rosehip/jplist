@@ -12,13 +12,15 @@
 	* @constructor
 	* @param {string} content - the whole content returned from server
 	* @param {string} dataType - 'html', 'json' or 'xml'
+	* @param {string} responseText
 	*/
-	jQuery.fn.jplist.domain.server.models.DataItemModel = function(content, dataType){
+	jQuery.fn.jplist.domain.server.models.DataItemModel = function(content, dataType, responseText){
 		
 		//init properties		
 		this.content = '';
 		this.dataType = dataType;
 		this.count = 0;
+		this.responseText = responseText;
 
 		if(!(this.dataType)){
 			this.dataType = 'html';
@@ -44,7 +46,9 @@
 			break;
 			
 			case 'xml':{
-			
+				var $content = jQuery(content).find('root');
+				this.content = content;
+				this.count = Number($content.attr('count')) || 0;
 			}
 			break;
 		}

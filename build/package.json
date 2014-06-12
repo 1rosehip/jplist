@@ -1,6 +1,6 @@
 {
 	"name": "build",
-	"version": "5.1.18",
+	"version": "5.1.30",
 	"dependencies": {
 		"closurecompiler": "*",
 		"jshint": "*",
@@ -51,6 +51,7 @@
 		"html/examples/7-data-source/php-mysql-demo.html",
 		"html/examples/7-data-source/php-mysql-json-handlebars-demo.html",
 		"html/examples/7-data-source/php-mysql-json-mustache-demo.html",
+		"html/examples/7-data-source/php-mysql-xml-xslt-demo.html",
 		"html/examples/7-data-source/asp-net-sql-server-demo.html"
 	],
 	"jplist-source-files-core": [

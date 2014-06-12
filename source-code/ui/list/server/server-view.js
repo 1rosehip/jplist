@@ -61,10 +61,10 @@
 	/**
 	* build result content
 	* @param {Object} context
-	* @param {string} content
+	* @param {jQuery.fn.jplist.domain.server.models.DataItemModel} dataItem
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
-	var buildContent = function(context, content, statuses){
+	var buildContent = function(context, dataItem, statuses){
 		
 		var lastStatusNotInAnimation = false
 			,lastStatus
@@ -74,7 +74,7 @@
 			});
 			
 		//no results found
-		if(!content || jQuery.trim(content) === ''){
+		if(!(dataItem.content) || jQuery.trim(dataItem.content) === ''){
 			context.$noResults.removeClass('jplist-hidden');
 			context.$itemsBox.addClass('jplist-hidden');
 		}
@@ -106,13 +106,13 @@
 				options //user options
 				,context.$itemsBox //scene
 				,null
-				,jQuery(content) //new items
+				,jQuery(dataItem.content) //new items
 				,context.options.effect //animation effect
 				,context.timeline //timeline object
 				,function(){
 					
 					//send render callback
-					renderCallback(context, content, statuses);
+					renderCallback(context, dataItem.content, statuses);
 				}
 				,context.observer
 			);		
@@ -121,15 +121,15 @@
 			if(context.options.dataSource && jQuery.isFunction(context.options.dataSource.render)){
 			
 				//render the content
-				context.options.dataSource.render(content, statuses);				
+				context.options.dataSource.render(dataItem, statuses);				
 			}
 			else{
 				//update container content
-				context.$itemsBox.html(content);
+				context.$itemsBox.html(dataItem.content);
 			}
 			
 			//send render callback
-			renderCallback(context, content, statuses);
+			renderCallback(context, dataItem.content, statuses);
 		}
 	};
 	
@@ -171,7 +171,7 @@
 			context.$itemsBox.removeClass('jplist-hidden');
 			
 			//build result content
-			buildContent(context, /** @type {string} */ (dataItem.content), statuses);
+			buildContent(context, dataItem, statuses);
 		});
 	};
 	

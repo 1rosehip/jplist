@@ -2,7 +2,7 @@
 <html>
     <head>
 		
-	<title>jPList - jQuery Data Grid Controls - PHP and MySQL with JSON and Mustache Template</title>
+	<title>jPList - jQuery Data Grid Controls - PHP and MySQL Demo with XML Format and XSLT Template</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -23,16 +23,12 @@
 
 		
 			
-			<!-- mustache template: https://github.com/janl/mustache.js -->
-			<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.js"></script>	
-			
 			<script>
 			$('document').ready(function(){
-				
+			
 				var $list = $('#demo .list')
-					,template = Mustache.compile($('#jplist-template').html());
+					,template = $('#xslt-template').html();
 				
-				//init jplist with php + mysql data source, json and Mustache template
 				$('#demo').jplist({
 				
 					itemsBox: '.list' 
@@ -47,15 +43,39 @@
 						
 						    //ajax settings
 						    ajax:{
-							  url: '../../data-sources/php-mysql-demo/server-json.php'
-							  ,dataType: 'json'
+							  url: '../../data-sources/php-mysql-demo/server-xml.php'
+							  ,dataType: 'xml'
 							  ,type: 'POST'
 						    }
 						}
 						
-						//render function for json + templates like Mustache, xml + xslt etc.
-						,render: function(dataItem, statuses){
-							$list.html(template(dataItem.content));
+						//render with handlebars
+						,render: function(dataItem){
+							
+							var xsltProcessor
+								,srcTree
+								,xsltTree;
+					
+							if(document.implementation && document.implementation.createDocument && window.XSLTProcessor){								
+								xsltProcessor = new XSLTProcessor();
+								xsltProcessor.importStylesheet($.parseXML(template));
+								$list.html(xsltProcessor.transformToFragment(dataItem.content, document));
+							}
+							else{//IE ...
+								
+								//xml
+								srcTree = new ActiveXObject('Msxml2.DOMDocument.6.0'); 
+								srcTree.async = false; 
+								srcTree.loadXML(dataItem.responseText); 
+								
+								//xslt
+								xsltTree = new ActiveXObject('Msxml2.DOMDocument.6.0'); 
+								xsltTree.async = false; 
+								xsltTree.loadXML(template); 
+								
+								//paste
+								$list.html(srcTree.transformNode(xsltTree)); 
+							}
 						}
 					 }
          
@@ -172,7 +192,7 @@
 <div class="box">
 	<div class="center">
 		<div class="box text-shadow">
-			<h1 class="h1-30-normal left">PHP and MySQL with JSON and Mustache Template</h1>
+			<h1 class="h1-30-normal left">PHP and MySQL Demo with XML Format and XSLT Template</h1>
 			<p class="right">
 				<a href="../../demo.html" title="" class="read-more-blue-icon title-16-underline-normal">More DEMOs</a>
 			</p>
@@ -180,25 +200,31 @@
 		
 		
 	
-					
-					<!-- Mustache template -->
-					<script id="jplist-template" type="x-tmpl-mustache">
-						{{#.}}
-						
-							<div class="list-item box">	
-								<div class="img left">
-									<img src="{{image}}" alt="" title=""/>
-								</div>
-								
-								<div class="block right">
-									<p class="title">{{title}}</p>
-									<p class="desc">{{description}}</p>
-									<p class="like">{{likes}} Likes</p>
-									<p class="theme">{{keyword1}}, {{keyword2}}</p>
-								</div>
-							</div>
-							
-						{{/.}}
+					<!-- xslt template -->
+					<script id="xslt-template" type="text/xslt-template">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:output method="html" indent="yes" encoding="utf-8" omit-xml-declaration="no"/>
+	<xsl:template match="/">
+			
+		<xsl:for-each select="//item">
+			
+			<div class="list-item box">	
+			
+				<div class="img left">
+					<img src="{image}" alt="" title=""/>
+				</div>
+				
+				<div class="block right">
+					<p class="title"><xsl:value-of select="title"/></p>
+					<p class="desc"><xsl:value-of select="description"/></p>
+					<p class="like"><xsl:value-of select="likes"/> Likes</p>
+					<p class="theme"><xsl:value-of select="keyword1"/>, <xsl:value-of select="keyword2"/></p>
+				</div>
+			</div>
+		</xsl:for-each>
+				
+	</xsl:template>
+</xsl:stylesheet>					
 					</script>
 			
 					<!-- demo -->

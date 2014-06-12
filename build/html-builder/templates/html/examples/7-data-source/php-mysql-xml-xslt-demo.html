@@ -1,38 +1,13 @@
-<!doctype html>
-<html>
-    <head>
-		
-	<title>jPList - jQuery Data Grid Controls - PHP and MySQL with JSON and Mustache Template</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+@!(data)
 
-	    <!-- css -->
-		<link href="http://fonts.googleapis.com/css?family=Droid+Sans:400" rel="stylesheet" type="text/css" />
-		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
-        <link rel="stylesheet" href="../../../html/css/vendor/normalize.css" />
-		<link rel="stylesheet" href="../../../html/css/styles.min.css" />
-        <link href="../../../html/img/common/favicon.png" rel="shortcut icon" />
-		
-		<link href="../../css/jplist.min.css" rel="stylesheet" type="text/css" />		
-		
-		<!-- js -->		
-        <script src="../../../html/js/vendor/jquery-1.10.0.min.js"></script>
-		<script src="../../../html/js/vendor/modernizr.min.js"></script>
-		
-		<script src="../../js/jplist.min.js"></script>
-
-		
-			
-			<!-- mustache template: https://github.com/janl/mustache.js -->
-			<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.js"></script>	
+@function jplistCall(data){
 			
 			<script>
 			$('document').ready(function(){
-				
+			
 				var $list = $('#demo .list')
-					,template = Mustache.compile($('#jplist-template').html());
+					,template = $('#xslt-template').html();
 				
-				//init jplist with php + mysql data source, json and Mustache template
 				$('#demo').jplist({
 				
 					itemsBox: '.list' 
@@ -47,158 +22,73 @@
 						
 						    //ajax settings
 						    ajax:{
-							  url: '../../data-sources/php-mysql-demo/server-json.php'
-							  ,dataType: 'json'
+							  url: '../../data-sources/php-mysql-demo/server-xml.php'
+							  ,dataType: 'xml'
 							  ,type: 'POST'
 						    }
 						}
 						
-						//render function for json + templates like Mustache, xml + xslt etc.
-						,render: function(dataItem, statuses){
-							$list.html(template(dataItem.content));
+						//render with handlebars
+						,render: function(dataItem){
+							
+							var xsltProcessor
+								,srcTree
+								,xsltTree;
+					
+							if(document.implementation && document.implementation.createDocument && window.XSLTProcessor){								
+								xsltProcessor = new XSLTProcessor();
+								xsltProcessor.importStylesheet($.parseXML(template));
+								$list.html(xsltProcessor.transformToFragment(dataItem.content, document));
+							}
+							else{//IE ...
+								
+								//xml
+								srcTree = new ActiveXObject('Msxml2.DOMDocument.6.0'); 
+								srcTree.async = false; 
+								srcTree.loadXML(dataItem.responseText); 
+								
+								//xslt
+								xsltTree = new ActiveXObject('Msxml2.DOMDocument.6.0'); 
+								xsltTree.async = false; 
+								xsltTree.loadXML(template); 
+								
+								//paste
+								$list.html(srcTree.transformNode(xsltTree)); 
+							}
 						}
 					 }
          
 				});
 			});
 			</script>
-		
-    </head>
-    <body>
-	
-		<!-- black top bar -->
-		<div class="box" id="black-top-bar">
-			<div class="center">			
-                <div class="box">
-				
-					<!-- left menu -->
-                    <ul class="hmenu left iphone-hidden" id="black-top-bar-left-menu">
-                        <li><a href="https://github.com/no81no/jplist/issues?state=open" title=""><i class="fa fa-asterisk"></i> Request a feature / <i class="fa fa-bug"></i> Report a bug</a></li>
-                    </ul>
-					
-					<!-- social menu -->
-					<ul class="hmenu right" id="social-menu">
-						<li>
-							<a href="https://www.facebook.com/jplist" title=""><i class="fa fa-facebook"></i>&nbsp;</a>
-						</li>
-						<li>
-							<a href="https://plus.google.com/+Jplistjs" title=""><i class="fa fa-google-plus"></i></a>
-						</li>						
-						<li>
-							<a href="https://github.com/no81no/jplist" title=""><i class="fa fa-github"></i></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-				
-		<!-- header -->
-		<header class="box" id="header">
-			<div class="box" id="header-box">
-				<div class="center">			
-					<div class="box">
+}
 
-						<!-- logo -->
-						<div id="logo" class="left">	
-							<img src="http://jplist.com/content/img/common/rocket.png" alt="" title="" />
-							<a href="/" title="">jPList - jQuery Data Grid Controls</a>
-						</div>
-						
-						<!-- main navigation -->
-						<ul class="default-menu hmenu right" id="top-menu">	
-							<li><a title="" href="mailto:no81no@gmail.com"><i class="fa fa-envelope"></i> Contacts</a></li>
-							<li><a href="http://blog.jplist.com" title="jPList Blog"><i class="fa fa-star"></i> Blog</a></li>
-							<li><a title="" href="mailto:no81no@gmail.com" class="orange"><i class="fa fa-coffee"></i> Freelance</a></li>
-						</ul>
-
-					</div>
-				</div>					
-			</div>
-		</header>
-		
-		<!-- bread crumbs-->
-		<div id="bread-crumbs-box" class="box">
-			<div id="bread-crumbs" class="box">
+@function demo(data){	
+					<!-- xslt template -->
+					<script id="xslt-template" type="text/xslt-template">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:output method="html" indent="yes" encoding="utf-8" omit-xml-declaration="no"/>
+	<xsl:template match="/">
 			
-				<div class="center">
-					<div class="box text-shadow">
-						<p>
-							
-						 
-    <a title="" href="../../../index.html">Home</a> &raquo; Demo
-						</p>
-					</div>
+		<xsl:for-each select="//item">
+			
+			<div class="list-item box">	
+			
+				<div class="img left">
+					<img src="{image}" alt="" title=""/>
+				</div>
+				
+				<div class="block right">
+					<p class="title"><xsl:value-of select="title"/></p>
+					<p class="desc"><xsl:value-of select="description"/></p>
+					<p class="like"><xsl:value-of select="likes"/> Likes</p>
+					<p class="theme"><xsl:value-of select="keyword1"/>, <xsl:value-of select="keyword2"/></p>
 				</div>
 			</div>
-		</div>
-		
-		<!-- main content -->
-		<div class="box">
-			<div class="center">
-				<div class="box">
-
-					<!-- tabs navigation -->
-					<ul class="default-menu hmenu left box">	
-							
-						<li>
-							<a title="" href="../../../index.html"><i class="fa fa-home"></i> Overview</a>
-						</li>
-							
-						<li class="active">
-							<a title="" href="../../../html/demo.html"><i class="fa fa-picture-o"></i> Demo</a>
-						</li>
-							<li>
-								<a title="" href="http://jplist.com/home/usage"><i class="fa fa-wrench"></i> Usage <i class="fa fa-external-link"></i></a>
-							</li>
-							<li>
-								<a title="" href="http://jplist.com/home/js-settings"><i class="fa fa-cog"></i> JS Settings <i class="fa fa-external-link"></i></a>
-							</li>
-							<li>
-								<a title="" href="http://jplist.com/home/controls"><i class="fa fa-th"></i> Controls <i class="fa fa-external-link"></i></a>
-							</li>
-							<li>
-								<a title="" href="http://jplist.com/home/changelog"><i class="fa fa-clock-o"></i> Changelog <i class="fa fa-external-link"></i></a>
-							</li>
-							<li>
-								<a title="" href="http://jplist.com/home/download" class="orange"><i class="fa fa-download"></i> Download <i class="fa fa-external-link"></i></a>
-							</li>
-					</ul>	
-					
-				</div>
-			</div>
-		</div>	
-		
-		
-<div class="box">
-	<div class="center">
-		<div class="box text-shadow">
-			<h1 class="h1-30-normal left">PHP and MySQL with JSON and Mustache Template</h1>
-			<p class="right">
-				<a href="../../demo.html" title="" class="read-more-blue-icon title-16-underline-normal">More DEMOs</a>
-			</p>
-		</div>
-		
-		
-	
-					
-					<!-- Mustache template -->
-					<script id="jplist-template" type="x-tmpl-mustache">
-						{{#.}}
-						
-							<div class="list-item box">	
-								<div class="img left">
-									<img src="{{image}}" alt="" title=""/>
-								</div>
-								
-								<div class="block right">
-									<p class="title">{{title}}</p>
-									<p class="desc">{{description}}</p>
-									<p class="like">{{likes}} Likes</p>
-									<p class="theme">{{keyword1}}, {{keyword2}}</p>
-								</div>
-							</div>
-							
-						{{/.}}
+		</xsl:for-each>
+				
+	</xsl:template>
+</xsl:stylesheet>					
 					</script>
 			
 					<!-- demo -->
@@ -492,58 +382,7 @@
 							</div>					
 						</div>
 					</div>
-					<!-- end of demo -->	
-	</div>
-</div>
-		
-		<!-- footer -->
-		<footer class="box" id="footer">
-			<div class="center">	
-            		
-                <!-- footer top row -->
-                <div class="box footer-top-row">
-				
-                    <div class="left box-30">
-                        <ul class="vmenu-2">
-                            <li class="header">Support/Help</li>
-                            <li><a href="https://github.com/no81no/jplist/issues?state=open" title=""><i class="fa fa-asterisk"></i> Request a feature</a></li>
-                            <li><a href="https://github.com/no81no/jplist/issues?state=open" title=""><i class="fa fa-bug"></i> Report a bug</a></li>
-                            <li><a href="https://github.com/no81no/jplist" title=""><i class="fa fa-github"></i> Download on GitHub</a></li>
-                            <li><a href="http://www.binpress.com/app/jplist-jquery-data-grid-controls/2085?ad=34027"><i class="fa fa-shopping-cart"></i> Get commercial license</a></li>
-                            <li><a href="mailto:no81no@gmail.com" title=""><i class="fa fa-envelope"></i> Contact us</a></li>
-                        </ul>
-                    </div>
+					<!-- end of demo -->				
+}	
 
-                    <div class="left box-30">
-                        <ul class="vmenu-2">
-                            <li class="header">Follow jPList</li>
-                            <!--li><a href="" title="">Follow us on Twitter</a></li-->
-                            <li><a href="https://www.facebook.com/jplist" title=""><i class="fa fa-facebook"></i>&nbsp;&nbsp; Be a fan on Facebook</a></li>
-                            <li><a href="https://plus.google.com/+Jplistjs" title=""><i class="fa fa-google-plus"></i> Follow us on Google+</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="right box-30 binpress-banner">
-                        <a href="http://www.binpress.com?u=34027" title="Binpress - Frameworks, libraries, SDKs and Open-Source projects">
-                            <img src="http://cdn.binpress.com/binpress-1-dark.png" alt="Binpress - Cut your development time and costs in half" width="280" height="58" style="border:none;" />
-                        </a>
-                    </div>
-                </div>
-			</div>
-
-            <!-- footer bottom row -->
-            <div class="box footer-bot-row">
-                <div class="center">	
-                    
-                    <div class="box">
-					    <p class="align-center" id="footer-content">
-						    Copyright &copy;  2014 <a href="mailto:no81no@gmail.com" title="">Miriam Zusin.</a>
-					    </p>					
-				    </div>
-
-                </div>
-            </div>
-		</footer>	
-		
-    </body>
-</html>
+@render(data.layoutsFolder + '/example.html', data.layoutsFolder, 'PHP and MySQL Demo with XML Format and XSLT Template', jplistCall(data), demo(data))				

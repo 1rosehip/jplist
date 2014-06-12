@@ -98,9 +98,9 @@
 				,context.options
 				
 				//OK callback
-				,function(content, statuses){
+				,function(content, statuses, ajax, response){
 					
-					var dataitem = new jQuery.fn.jplist.domain.server.models.DataItemModel(content, ajaxDataType);
+					var dataitem = new jQuery.fn.jplist.domain.server.models.DataItemModel(content, ajaxDataType, response['responseText']);
 										
 					//udapte statuses with server data
 					setServerData(context, dataitem, statuses);

@@ -43,16 +43,16 @@
 		}));
 					
 		//send ajax request to the server
-		jQuery.ajax(serverOptions.ajax).done(function(serverData){
-		
+		jQuery.ajax(serverOptions.ajax).done(function(serverData, ajax, response){
+			
 			//server ok callback
 			if(jQuery.isFunction(okCallback)){
-				okCallback(serverData, statuses);
+				okCallback(serverData, statuses, ajax, response);
 			}
 			
 			//server ok callback
 			if(jQuery.isFunction(serverOptions.serverOkCallback)){
-				serverOptions.serverOkCallback(serverData, statuses);
+				serverOptions.serverOkCallback(serverData, statuses, ajax, response);
 			}
 		})
 		.fail(function(){

@@ -33,8 +33,8 @@
 						}
 						
 						//render function for json + templates like handlebars, xml + xslt etc.
-						,render: function(json, statuses){
-							$list.html(template(json));
+						,render: function(dataItem, statuses){
+							$list.html(template(dataItem.content));
 						}
 					 }
          
