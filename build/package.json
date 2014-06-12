@@ -50,6 +50,7 @@
 		"html/examples/7-data-source/php-sqlite-demo.html",
 		"html/examples/7-data-source/php-mysql-demo.html",
 		"html/examples/7-data-source/php-mysql-json-handlebars-demo.html",
+		"html/examples/7-data-source/php-mysql-json-mustache-demo.html",
 		"html/examples/7-data-source/asp-net-sql-server-demo.html"
 	],
 	"jplist-source-files-core": [
