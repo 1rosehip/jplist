@@ -34,6 +34,9 @@
 
 ### Data Sources
 - [PHP + MySQL Example](http://jplist.com/datasourcesexamples/php-mysql-demo) - server side demo using PHP and MySQL database
+- [PHP + MySQL + JSON + Handlebars Example](http://jplist.com/datasourcesexamples/php-mysql-json-handlebars-demo) - server side demo using PHP, MySQL database with JSON format and Handlebars Template
+- [PHP + MySQL + JSON + Mustache Example](http://jplist.com/datasourcesexamples/php-mysql-json-mustache-demo) - server side demo using PHP, MySQL database with JSON format and Mustache Template
+- [PHP + MySQL + XML + XSLT Example](http://jplist.com/datasourcesexamples/php-mysql-xml-xslt-demo) - server side demo using PHP, MySQL database with XML format and XSLT Template				
 - [ASP.NET and SQL Server Demo](http://jplist.com/datasourcesexamples/asp-net-sql-server-demo) - server side demo using ASP.NET and SQL Server database
 - [PHP + SQLite Example](http://jplist.com/datasourcesexamples/php-sqlite-demo) - server side demo using PHP and SQLite database
 
