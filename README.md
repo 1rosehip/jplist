@@ -112,7 +112,7 @@
 ##License
 - For non-commercial, personal, or open source projects and applications, 
 you may use jPList for free under the terms of the [GPL V3 License](https://gnu.org/licenses/gpl.html). 
-- If your project generates any type of income, e.g. sells products, ads, services or just represents a commercial company, you should get a commercial license at [www.binpress.com](http://www.binpress.com/app/jplist-jquery-data-grid-controls/2085)
+- If your project generates any type of income, e.g. sells products, ads, services or just represents a commercial company, you should get a commercial license at [www.binpress.com](http://www.binpress.com/app/jplist-jquery-data-grid-controls/2085?ad=34027)
 
 ##Links
 - [Project Home](http://jplist.com)
