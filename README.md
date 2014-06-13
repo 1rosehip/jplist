@@ -3,23 +3,43 @@
 
 **jPList** is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc). Get started at [jplist.com](http://jplist.com)
 
-###Features
+###Common Features
 - Works with any content (tables, lists, div elements etc...)
-- Ascending and descending sorting
-- Alphanumeric and numeric sorting
-- Sorting by date and time
-- Auto pagination
-- Any number of textbox filters
-- Any number of drop down filters
-- Checkbox and radio button filters
 - Data sources: PHP + MySQL, ASP.NET + Sql Server, PHP + SQLite
-- Supports local storage and cookies
+- Works with JavaScript templates like Handlebars, Mustache etc.
+- Supports XML + XSLT
 - Grid/list view demo page
+- Supports local storage and cookies
+- Has deep links support
 - Fully customizable styles
 - Works in all major browsers
-- SEO friendly
 - Annotated source code
 - Solid documentation
+
+### Sorting
+- Ascending and descending sorting
+- Sort numbers, text, date and time
+- SELECT and UL/LI sort controls
+
+###Pagination
+- Auto pagination control
+- Google style pagination
+- Items per page control
+
+###Filter and Search
+- Any number of textbox filters
+- Any number of dropdown filters
+- Filter by jQuery path or by text content
+- Checkbox and radio button filters
+- Button filter controls
+- Range filter controls
+
+###Other Controls
+- Reset button Control
+- Back button Control
+- Counter Controls
+- jQuery UI range slider filter
+- jQuery UI date picker range filter
 
 ##Examples
 
