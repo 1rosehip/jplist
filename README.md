@@ -116,7 +116,6 @@ you may use jPList for free under the terms of the [GPL V3 License](https://gnu.
 
 ##Links
 - [Project Home](http://jplist.com)
-- [Blog about jPList](http://blog.jplist.com)
 - [jPList on Binpress](http://www.binpress.com/app/jplist-jquery-data-grid-controls/2085)
 - [jPList on Facebook](https://www.facebook.com/jplist)
 - [jPList on Google+](https://plus.google.com/+Jplistjs)
