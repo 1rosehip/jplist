@@ -328,7 +328,8 @@
 	var setStatus = function(context, status, restoredFromStorage){
 				
 		var $li
-			,$span = null;		
+			,$span = null
+			,$liList;		
 		
 		//savestorages status
 		if(context.inStorage && restoredFromStorage){			
@@ -338,6 +339,9 @@
 		if(!context.inStorage && restoredFromStorage){
 			$span = getSpanWithDefaultValue(context);
 		}
+		
+		//get li list
+		$liList = context.$control.find('li');
 		
 		switch(context.action){
 				
@@ -354,10 +358,15 @@
 				}
 				else{
 					//remove active class
-					context.$control.find('li').removeClass('active');
+					$liList.removeClass('active');
 					
 					//set active class
 					$li = context.$control.find('li:has([data-path="' + status.data.path + '"])');
+					
+					if($li.length <= 0){
+						$li = $liList.eq(0);
+					}
+					
 					$li.addClass('active');
 					
 					//update dropdown panel
@@ -378,9 +387,9 @@
 					context.history.addStatus(status);
 					context.observer.trigger(context.observer.events.statusEvent, [status]);
 				}
-				else{
+				else{					
 					//remove active class
-					context.$control.find('li').removeClass('active');
+					$liList.removeClass('active');
 					
 					//set active class
 					if(status.data.path == 'default'){
@@ -388,6 +397,10 @@
 					}
 					else{
 						$li = context.$control.find('li:has([data-path="' + status.data.path + '"][data-type="' + status.data.type + '"][data-order="' + status.data.order + '"])');
+					}
+					
+					if($li.length <= 0){
+						$li = $liList.eq(0);
 					}
 					
 					$li.addClass('active');
@@ -408,14 +421,18 @@
 					context.history.addStatus(status);
 					context.observer.trigger(context.observer.events.statusEvent, [status]);
 				}
-				else{
+				else{					
 					//remove active class
-					context.$control.find('li').removeClass('active');
+					$liList.removeClass('active');
 					
 					//set active class
 					$li = context.$control.find('li:has([data-number="' + status.data.number + '"])');
 					if($li.length === 0){
 						$li = context.$control.find('li:has([data-number="all"])');
+					}
+					
+					if($li.length <= 0){
+						$li = $liList.eq(0);
 					}
 					
 					$li.addClass('active');
