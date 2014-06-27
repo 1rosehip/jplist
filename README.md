@@ -41,6 +41,17 @@
 - jQuery UI range slider filter
 - jQuery UI date picker range filter
 
+##jPList CDN
+jPList CDN is provided by [cdnjs](http://www.cdnjs.com):
+
+```
+<script src="//cdnjs.cloudflare.com/ajax/libs/jplist/5.1.35/jplist.min.js"></script>
+```
+
+```
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jplist/5.1.35/jplist.min.css" />
+```
+
 ##Examples
 
 ###Layout Examples
