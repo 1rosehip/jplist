@@ -86,11 +86,31 @@ class jplist{
 	*/
 	public function admin_register_head(){
 		
-		$css = $this->jplist_relative_path . '/admin/css/options.css';
+		//add jplist css and js for admin
+		$css = $this->jplist_relative_path . '/admin/css/jplist-admin.min.css';
 		$js = $this->jplist_relative_path . '/admin/js/jplist-admin.min.js';
 		
 		echo "<link rel='stylesheet' href='$css' />";
 		echo "<script src='$js'></script>";
+		
+		//add codemirror files
+		$codemirror = $this->jplist_relative_path . '/admin/codemirror/lib/codemirror.js';
+		$show_hint = $this->jplist_relative_path . '/admin/codemirror/addon/hint/show-hint.js';
+		$xml_hint = $this->jplist_relative_path . '/admin/codemirror/addon/hint/xml-hint.js';
+		$html_hint = $this->jplist_relative_path . '/admin/codemirror/addon/hint/html-hint.js';
+		$codemirror_xml = $this->jplist_relative_path . '/admin/codemirror/mode/xml/xml.js';
+		$codemirror_js = $this->jplist_relative_path . '/admin/codemirror/mode/javascript/javascript.js';
+		$codemirror_css = $this->jplist_relative_path . '/admin/codemirror/mode/css/css.js';
+		$htmlmixed = $this->jplist_relative_path . '/admin/codemirror/mode/htmlmixed/htmlmixed.js';
+		
+		echo "<script src='$codemirror'></script>";
+		echo "<script src='$show_hint'></script>";
+		echo "<script src='$xml_hint'></script>";
+		echo "<script src='$html_hint'></script>";
+		echo "<script src='$codemirror_xml'></script>";
+		echo "<script src='$codemirror_js'></script>";
+		echo "<script src='$codemirror_css'></script>";
+		echo "<script src='$htmlmixed'></script>";		
 	}
 	
 	/**
@@ -131,6 +151,114 @@ class jplist{
 				<p>
 					<input type="button" value="Save changes" class="button-primary" />
 				</p>
+			</div>
+			
+			<div class="wrap">
+			
+				<!-- jPList admin content -->
+				<div class="jp-box">
+					
+					<!-- top panel controls -->
+					<div class="jp-box jp-settings-box">
+						
+						<!-- header -->
+						<div class="jp-box jp-settings-header">
+							<p>Top Panel Controls</p>
+						</div>
+						
+						<!-- content -->
+						<div class="jp-box jp-settings-content">
+							<p>
+								<textarea>
+  <!-- reset button -->
+  <button 
+	 type="button" 
+	 class="jplist-reset-btn"
+	 data-control-type="reset" 
+	 data-control-name="reset" 
+	 data-control-action="reset">
+	 Reset  <i class="fa fa-share"></i>
+  </button>
+  
+  <!-- items per page dropdown -->
+  <div 
+	 class="jplist-drop-down" 
+	 data-control-type="drop-down" 
+	 data-control-name="paging" 
+	 data-control-action="paging">
+	 
+	 <ul>
+		<li><span data-number="3"> 3 per page </span></li>
+		<li><span data-number="5"> 5 per page </span></li>
+		<li><span data-number="10" data-default="true"> 10 per page </span></li>
+		<li><span data-number="all"> view all </span></li>
+	 </ul>
+  </div>
+  
+  <!-- sort dropdown -->
+  <div 
+	 class="jplist-drop-down" 
+	 data-control-type="drop-down" 
+	 data-control-name="sort" 
+	 data-control-action="sort"
+	 data-datetime-format="{month}/{day}/{year}"> <!-- {year}, {month}, {day}, {hour}, {min}, {sec} -->
+	 
+	 <ul>
+		<li><span data-path="default">Sort by</span></li>
+		<li><span data-path=".title" data-order="asc" data-type="text">Title A-Z</span></li>
+		<li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
+		<li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
+		<li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
+		<li><span data-path=".like" data-order="asc" data-type="number" data-default="true">Likes asc</span></li>
+		<li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
+		<li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
+		<li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
+	 </ul>
+  </div>
+
+  <!-- filter by title -->
+  <div class="text-filter-box">
+  
+	 <i class="fa fa-search  jplist-icon"></i>
+	 
+	 <!--[if lt IE 10]>
+	 <div class="jplist-label">Filter by Title:</div>
+	 <![endif]-->
+	 
+	 <input 
+		data-path=".title" 
+		type="text" 
+		value="" 
+		placeholder="Filter by Title" 
+		data-control-type="textbox" 
+		data-control-name="title-filter" 
+		data-control-action="filter"
+	 />
+  </div>
+		
+  <!-- pagination results -->
+  <div 
+	 class="jplist-label" 
+	 data-type="Page {current} of {pages}" 
+	 data-control-type="pagination-info" 
+	 data-control-name="paging" 
+	 data-control-action="paging">
+  </div>
+	 
+  <!-- pagination -->
+  <div 
+	 class="jplist-pagination" 
+	 data-control-type="pagination" 
+	 data-control-name="paging" 
+	 data-control-action="paging">
+  </div>								
+								</textarea>
+							</p>
+						</div>
+					</div>
+					
+				</div>
+				
 			</div>
 		<?php
 	}

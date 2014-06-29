@@ -1,0 +1,1 @@
+lessc -x 3-css/app.less > ../admin/css/jplist-admin.min.css
