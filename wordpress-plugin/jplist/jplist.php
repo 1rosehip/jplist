@@ -27,6 +27,11 @@ class jplist{
 	public $jplist_options;
 	
 	/**
+	* jplist controls instance
+	*/
+	public $jplist_controls;
+	
+	/**
 	* contructor
 	*/
 	function jplist(){
@@ -40,6 +45,13 @@ class jplist{
 		
 		//include
 		require_once($this->jplist_abs_path . '/php/shortcodes.php' );
+		require_once($this->jplist_abs_path . '/php/controls.php' );
+		
+		//init jplist control
+		$this->jplist_controls = new jplist_controls();
+		
+		//init shorcodes
+		jplist_shortcodes::init($this->jplist_relative_path, $this->jplist_options);
 		
 		//add settings page
 		add_action('admin_menu',  array(&$this, 'add_settings_page'));
@@ -68,10 +80,8 @@ class jplist{
 			wp_enqueue_script('jplist');
 		});
 		
-		add_action('wp_ajax_save_changes', array(&$this, 'save_changes_callback'));
-		
-		//init shorcodes
-		jplist_shortcodes::init($this->jplist_relative_path, $this->jplist_options);
+		//save changes (ajax)
+		add_action('wp_ajax_save_changes', array(&$this, 'save_changes_callback'));		
 		
 		//on plugin activation		
 		register_activation_hook(__FILE__, array(&$this, 'register_activation'));
@@ -87,6 +97,7 @@ class jplist{
 	* save changes -> ajax callback
 	*/
 	public function save_changes_callback(){
+	
 		$jsSettings = $_POST['js'];
 		$topPanel = $_POST['top'];
 		$bottomPanel = $_POST['bot'];
@@ -95,26 +106,11 @@ class jplist{
 		update_option('jplist_top', $topPanel);
 		update_option('jplist_bot', $bottomPanel);
 		
-		echo($jsSettings);
-		echo($topPanel);
-		echo($bottomPanel);
+		//echo($jsSettings);
+		//echo($topPanel);
+		//echo($bottomPanel);
+		
 		die();
-		
-		/*
-		//create one default jplist
-		$data = new jplist_settings_data();
-		
-		//init default options list
-		$defaults[] = $data->get_data_array();
-		
-		//test
-		$test = new jplist_settings_data(); 
-		$test->jplist_items_box_path = '12345';
-		$defaults[] = $test->get_data_array();
-		
-		//save to db
-		update_option($this->jplist_options, $defaults);
-		*/
 	}
 	
 	/**
@@ -220,14 +216,15 @@ class jplist{
 							
 							<!-- hidden content -->
 							<div class="hidden" id="js-settings-bar-ta-content">
-   $('document').ready(function(){
-            
-      $('#demo').jplist({	
-         itemsBox: '.list' 
-         ,itemPath: '.list-item'
-         ,panelPath: '.jplist-panel'
-      });
-   });							
+<?php
+if(!get_option('jplist_js')){
+
+	echo($this->jplist_controls->js_settings);
+} 
+else{
+	echo(get_option('jplist_js'));
+}
+?>						
 							</div>
 						</div>
 						
@@ -249,89 +246,16 @@ class jplist{
 							
 							<!-- hidden content -->
 							<div class="hidden" id="top-bar-ta-content">
-  <!-- reset button -->
-  <button 
-	 type="button" 
-	 class="jplist-reset-btn"
-	 data-control-type="reset" 
-	 data-control-name="reset" 
-	 data-control-action="reset">
-	 Reset  <i class="fa fa-share"></i>
-  </button>
-  
-  <!-- items per page dropdown -->
-  <div 
-	 class="jplist-drop-down" 
-	 data-control-type="drop-down" 
-	 data-control-name="paging" 
-	 data-control-action="paging">
-	 
-	 <ul>
-		<li><span data-number="3"> 3 per page </span></li>
-		<li><span data-number="5"> 5 per page </span></li>
-		<li><span data-number="10" data-default="true"> 10 per page </span></li>
-		<li><span data-number="all"> view all </span></li>
-	 </ul>
-  </div>
-  
-  <!-- sort dropdown -->
-  <div 
-	 class="jplist-drop-down" 
-	 data-control-type="drop-down" 
-	 data-control-name="sort" 
-	 data-control-action="sort"
-	 data-datetime-format="{month}/{day}/{year}"> 
-	 <!-- {year}, {month}, {day}, {hour}, {min}, {sec} -->
-	 
-	 <ul>
-		<li><span data-path="default">Sort by</span></li>
-		<li><span data-path=".title" data-order="asc" data-type="text">Title A-Z</span></li>
-		<li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
-		<li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
-		<li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
-		<li><span data-path=".like" data-order="asc" data-type="number" data-default="true">Likes asc</span></li>
-		<li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
-		<li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
-		<li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
-	 </ul>
-  </div>
+							
+<?php
+if(!get_option('jplist_top')){
 
-  <!-- filter by title -->
-  <div class="text-filter-box">
-  
-	 <i class="fa fa-search  jplist-icon"></i>
-	 
-	 <!--[if lt IE 10]>
-	 <div class="jplist-label">Filter by Title:</div>
-	 <![endif]-->
-	 
-	 <input 
-		data-path=".title" 
-		type="text" 
-		value="" 
-		placeholder="Filter by Title" 
-		data-control-type="textbox" 
-		data-control-name="title-filter" 
-		data-control-action="filter"
-	 />
-  </div>
-		
-  <!-- pagination results -->
-  <div 
-	 class="jplist-label" 
-	 data-type="Page {current} of {pages}" 
-	 data-control-type="pagination-info" 
-	 data-control-name="paging" 
-	 data-control-action="paging">
-  </div>
-	 
-  <!-- pagination -->
-  <div 
-	 class="jplist-pagination" 
-	 data-control-type="pagination" 
-	 data-control-name="paging" 
-	 data-control-action="paging">
-  </div>							
+	echo($this->jplist_controls->top_panel);
+} 
+else{
+	echo(get_option('jplist_top'));
+}
+?>
 							</div>	
 							<!-- end of hidden content -->
 							
@@ -355,60 +279,15 @@ class jplist{
 							
 							<!-- hidden content -->
 							<div class="hidden" id="bottom-bar-ta-content">
-  
-  <!-- items per page dropdown -->
-  <div 
-	 class="jplist-drop-down" 
-	 data-control-type="drop-down" 
-	 data-control-name="paging" 
-	 data-control-action="paging">
-	 
-	 <ul>
-		<li><span data-number="3"> 3 per page </span></li>
-		<li><span data-number="5"> 5 per page </span></li>
-		<li><span data-number="10"> 10 per page </span></li>
-		<li><span data-number="all"> view all </span></li>
-	 </ul>
-  </div>
-  
-  <!-- sort dropdown -->
-  <div 
-	 class="jplist-drop-down" 
-	 data-control-type="drop-down" 
-	 data-control-name="sort" 
-	 data-control-action="sort"
-	 data-datetime-format="{month}/{day}/{year}"> 
-	 <!-- {year}, {month}, {day}, {hour}, {min}, {sec} -->
-	 
-	 <ul>
-		<li><span data-path="default">Sort by</span></li>
-		<li><span data-path=".title" data-order="asc" data-type="text">Title A-Z</span></li>
-		<li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
-		<li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
-		<li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
-		<li><span data-path=".like" data-order="asc" data-type="number" data-default="true">Likes asc</span></li>
-		<li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
-		<li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
-		<li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
-	 </ul>
-  </div>
-		
-  <!-- pagination results -->
-  <div 
-	 class="jplist-label" 
-	 data-type="Page {current} of {pages}" 
-	 data-control-type="pagination-info" 
-	 data-control-name="paging" 
-	 data-control-action="paging">
-  </div>
-	 
-  <!-- pagination -->
-  <div 
-	 class="jplist-pagination" 
-	 data-control-type="pagination" 
-	 data-control-name="paging" 
-	 data-control-action="paging">
-  </div>							
+<?php  
+if(!get_option('jplist_bot')){
+
+	echo($this->jplist_controls->bot_panel);
+} 
+else{
+	echo(get_option('jplist_bot'));
+}
+?>
 							</div>	
 							<!-- end of hidden content -->
 							
@@ -461,6 +340,7 @@ class jplist{
 		
 			//delete options if exists
 			delete_option($this->jplist_options);
+			//delete_option('jplist_top');
 		}
 		
 		/*
