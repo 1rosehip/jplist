@@ -68,6 +68,8 @@ class jplist{
 			wp_enqueue_script('jplist');
 		});
 		
+		add_action('wp_ajax_save_changes', array(&$this, 'save_changes_callback'));
+		
 		//init shorcodes
 		jplist_shortcodes::init($this->jplist_relative_path, $this->jplist_options);
 		
@@ -79,6 +81,40 @@ class jplist{
 			
 		//on plugin uninstall		
 		register_uninstall_hook(__FILE__, 'register_uninstall');			
+	}
+	
+	/**
+	* save changes -> ajax callback
+	*/
+	public function save_changes_callback(){
+		$jsSettings = $_POST['js'];
+		$topPanel = $_POST['top'];
+		$bottomPanel = $_POST['bot'];
+		
+		update_option('jplist_js', $jsSettings);
+		update_option('jplist_top', $topPanel);
+		update_option('jplist_bot', $bottomPanel);
+		
+		echo($jsSettings);
+		echo($topPanel);
+		echo($bottomPanel);
+		die();
+		
+		/*
+		//create one default jplist
+		$data = new jplist_settings_data();
+		
+		//init default options list
+		$defaults[] = $data->get_data_array();
+		
+		//test
+		$test = new jplist_settings_data(); 
+		$test->jplist_items_box_path = '12345';
+		$defaults[] = $test->get_data_array();
+		
+		//save to db
+		update_option($this->jplist_options, $defaults);
+		*/
 	}
 	
 	/**
@@ -149,6 +185,8 @@ class jplist{
 		$this->check_permissions();	
 		
 		?>
+		<div class="wrap" id="jplist-admin-page">
+		
 			<div class="wrap">
 				<h2>jPList - jQuery Data Grid Controls Settings</h2>
 				<p>Welcome to the administration panel of the jPList plugin.</p>
@@ -156,7 +194,8 @@ class jplist{
 			
 			<div class="wrap">
 				<p>
-					<input type="button" value="Save changes" class="button-primary" />
+					<input type="button" value="Save changes" class="button-primary" data-type="save-changes" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
+					<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/admin/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
 				</p>
 			</div>
 			
@@ -164,6 +203,35 @@ class jplist{
 			
 				<!-- jPList admin content -->
 				<div class="jp-box">
+					
+					<!-- jplist plugin call -->
+					<div class="jp-box jp-settings-box">
+					
+						<!-- header -->
+						<div class="jp-box jp-settings-header">
+							<p>JavaScript Settings</p>
+						</div>
+						
+						<!-- content -->
+						<div class="jp-box jp-settings-content">
+							
+							<!-- codemirror placeholder -->
+							<div id="js-settings-bar-ta"></div>
+							
+							<!-- hidden content -->
+							<div class="hidden" id="js-settings-bar-ta-content">
+   $('document').ready(function(){
+            
+      $('#demo').jplist({	
+         itemsBox: '.list' 
+         ,itemPath: '.list-item'
+         ,panelPath: '.jplist-panel'
+      });
+   });							
+							</div>
+						</div>
+						
+					</div>
 					
 					<!-- top panel controls -->
 					<div class="jp-box jp-settings-box">
@@ -350,6 +418,14 @@ class jplist{
 				</div>
 				
 			</div>
+		
+			<div class="wrap">
+				<p>
+					<input type="button" value="Save changes" class="button-primary" data-type="save-changes" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
+					<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/admin/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
+				</p>
+			</div>
+		</div>
 		<?php
 	}
 	

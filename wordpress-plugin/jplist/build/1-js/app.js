@@ -8,6 +8,62 @@
 	'use strict';	
 	
 	/**
+	* init events
+	* @param {Object} context
+	*/
+	var initEvents = function(context){
+		
+		jQuery('[data-type="save-changes"]').on('click', function(){
+			
+			var jsSettings = ''
+				,topPanel = ''
+				,bottomPanel = ''
+				,$this = jQuery(this)
+				,$preloader;
+				
+			if(context.jsSettings){
+				jsSettings = context.jsSettings.getValue();
+			}
+			
+			if(context.topPanel){
+				topPanel = context.topPanel.getValue();
+			}
+			
+			if(context.bottomPanel){
+				bottomPanel = context.bottomPanel.getValue();
+			}
+			
+			//show preloader
+			$preloader = $this.next('.jp-preloader').show();
+			
+			jQuery.ajax({
+				url: $this.attr('data-url')
+				,type: 'POST'
+				,data:{
+					js: jsSettings
+					,top: topPanel
+					,bot: bottomPanel
+					,action: 'save_changes'
+				}
+			}).done(function(content){
+				
+				//done
+				
+			}).fail(function(){
+				
+				//error ...
+				
+			}).always(function(){
+				
+				//hide preloader
+				$preloader.hide();
+			});
+			
+			//console.log(jsSettings, topPanel, bottomPanel);
+		});
+	};
+	
+	/**
 	* init codemirror
 	* @param {Object} context
 	*/
@@ -15,6 +71,13 @@
 				
 		if(window.CodeMirror){
 				
+			//init js settings
+			context.jsSettings = window.CodeMirror(document.getElementById('js-settings-bar-ta'), {
+				mode: 'text/html'
+				,extraKeys: {'Ctrl-Space': 'autocomplete'}
+				,value: jQuery('#js-settings-bar-ta-content').html()
+			});
+			
 			//init top panel
 			context.topPanel = window.CodeMirror(document.getElementById('top-bar-ta'), {
 				mode: 'text/html'
@@ -36,10 +99,14 @@
 		var context = {
 			topPanel: null
 			,bottomPanel: null
+			,jsSettings: null
 		};
 		
 		//init codemirror
 		initCodemirror(context);
+		
+		//init events
+		initEvents(context);
 	});
 			
 })();
