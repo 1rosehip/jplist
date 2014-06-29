@@ -7,8 +7,39 @@
 (function(){
 	'use strict';	
 	
+	/**
+	* init codemirror
+	* @param {Object} context
+	*/
+	var initCodemirror = function(context){
+				
+		if(window.CodeMirror){
+				
+			//init top panel
+			context.topPanel = window.CodeMirror(document.getElementById('top-bar-ta'), {
+				mode: 'text/html'
+				,extraKeys: {'Ctrl-Space': 'autocomplete'}
+				,value: jQuery('#top-bar-ta-content').html()
+			});
+			
+			//init bottom panel
+			context.bottomPanel = window.CodeMirror(document.getElementById('bottom-bar-ta'), {
+				mode: 'text/html'
+				,extraKeys: {'Ctrl-Space': 'autocomplete'}
+				,value: jQuery('#bottom-bar-ta-content').html()
+			});
+		}
+	};
+	
 	jQuery(document).ready(function(){
-		console.log('test');
+		
+		var context = {
+			topPanel: null
+			,bottomPanel: null
+		};
+		
+		//init codemirror
+		initCodemirror(context);
 	});
 			
 })();

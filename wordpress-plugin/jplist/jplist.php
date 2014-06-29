@@ -94,6 +94,13 @@ class jplist{
 		echo "<script src='$js'></script>";
 		
 		//add codemirror files
+		
+		$codemirror_css =  $this->jplist_relative_path . '/admin/codemirror/lib/codemirror.css';
+		$show_hint_css = $this->jplist_relative_path . '/admin/codemirror/addon/hint/show-hint.css';
+		
+		echo "<link rel='stylesheet' href='$codemirror_css' />";
+		echo "<link rel='stylesheet' href='$show_hint_css' />";
+		
 		$codemirror = $this->jplist_relative_path . '/admin/codemirror/lib/codemirror.js';
 		$show_hint = $this->jplist_relative_path . '/admin/codemirror/addon/hint/show-hint.js';
 		$xml_hint = $this->jplist_relative_path . '/admin/codemirror/addon/hint/xml-hint.js';
@@ -168,8 +175,12 @@ class jplist{
 						
 						<!-- content -->
 						<div class="jp-box jp-settings-content">
-							<p>
-								<textarea>
+							
+							<!-- codemirror placeholder -->
+							<div id="top-bar-ta"></div>
+							
+							<!-- hidden content -->
+							<div class="hidden" id="top-bar-ta-content">
   <!-- reset button -->
   <button 
 	 type="button" 
@@ -201,7 +212,8 @@ class jplist{
 	 data-control-type="drop-down" 
 	 data-control-name="sort" 
 	 data-control-action="sort"
-	 data-datetime-format="{month}/{day}/{year}"> <!-- {year}, {month}, {day}, {hour}, {min}, {sec} -->
+	 data-datetime-format="{month}/{day}/{year}"> 
+	 <!-- {year}, {month}, {day}, {hour}, {min}, {sec} -->
 	 
 	 <ul>
 		<li><span data-path="default">Sort by</span></li>
@@ -251,12 +263,90 @@ class jplist{
 	 data-control-type="pagination" 
 	 data-control-name="paging" 
 	 data-control-action="paging">
-  </div>								
-								</textarea>
-							</p>
+  </div>							
+							</div>	
+							<!-- end of hidden content -->
+							
 						</div>
 					</div>
+					<!-- end of top panel controls -->
 					
+					<!-- bottom panel controls -->
+					<div class="jp-box jp-settings-box">
+						
+						<!-- header -->
+						<div class="jp-box jp-settings-header">
+							<p>Bottom Panel Controls</p>
+						</div>
+						
+						<!-- content -->
+						<div class="jp-box jp-settings-content">
+							
+							<!-- codemirror placeholder -->
+							<div id="bottom-bar-ta"></div>
+							
+							<!-- hidden content -->
+							<div class="hidden" id="bottom-bar-ta-content">
+  
+  <!-- items per page dropdown -->
+  <div 
+	 class="jplist-drop-down" 
+	 data-control-type="drop-down" 
+	 data-control-name="paging" 
+	 data-control-action="paging">
+	 
+	 <ul>
+		<li><span data-number="3"> 3 per page </span></li>
+		<li><span data-number="5"> 5 per page </span></li>
+		<li><span data-number="10"> 10 per page </span></li>
+		<li><span data-number="all"> view all </span></li>
+	 </ul>
+  </div>
+  
+  <!-- sort dropdown -->
+  <div 
+	 class="jplist-drop-down" 
+	 data-control-type="drop-down" 
+	 data-control-name="sort" 
+	 data-control-action="sort"
+	 data-datetime-format="{month}/{day}/{year}"> 
+	 <!-- {year}, {month}, {day}, {hour}, {min}, {sec} -->
+	 
+	 <ul>
+		<li><span data-path="default">Sort by</span></li>
+		<li><span data-path=".title" data-order="asc" data-type="text">Title A-Z</span></li>
+		<li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
+		<li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
+		<li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
+		<li><span data-path=".like" data-order="asc" data-type="number" data-default="true">Likes asc</span></li>
+		<li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
+		<li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
+		<li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
+	 </ul>
+  </div>
+		
+  <!-- pagination results -->
+  <div 
+	 class="jplist-label" 
+	 data-type="Page {current} of {pages}" 
+	 data-control-type="pagination-info" 
+	 data-control-name="paging" 
+	 data-control-action="paging">
+  </div>
+	 
+  <!-- pagination -->
+  <div 
+	 class="jplist-pagination" 
+	 data-control-type="pagination" 
+	 data-control-name="paging" 
+	 data-control-action="paging">
+  </div>							
+							</div>	
+							<!-- end of hidden content -->
+							
+						</div>
+					</div>
+					<!-- end of bottom panel controls -->
 				</div>
 				
 			</div>
