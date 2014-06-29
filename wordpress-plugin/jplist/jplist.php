@@ -86,9 +86,11 @@ class jplist{
 	*/
 	public function admin_register_head(){
 		
-		$url = $this->jplist_relative_path . '/admin/css/options.css';
+		$css = $this->jplist_relative_path . '/admin/css/options.css';
+		$js = $this->jplist_relative_path . '/admin/js/jplist-admin.min.js';
 		
-		echo "<link rel='stylesheet' href='$url' />";
+		echo "<link rel='stylesheet' href='$css' />";
+		echo "<script src='$js'></script>";
 	}
 	
 	/**
@@ -120,7 +122,16 @@ class jplist{
 		$this->check_permissions();	
 		
 		?>
-		Test
+			<div class="wrap">
+				<h2>jPList - jQuery Data Grid Controls Settings</h2>
+				<p>Welcome to the administration panel of the jPList plugin.</p>
+			</div>		
+			
+			<div class="wrap">
+				<p>
+					<input type="button" value="Save changes" class="button-primary" />
+				</p>
+			</div>
 		<?php
 	}
 	
