@@ -1,6 +1,6 @@
 {
 	"name": "jplist-wordpress-plugin",
-	"version": "0.0.15",
+	"version": "0.0.34",
 	"dependencies": {
 		"closurecompiler": "*",
 		"less": "*"

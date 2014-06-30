@@ -18,6 +18,7 @@
 			var jsSettings = ''
 				,topPanel = ''
 				,bottomPanel = ''
+				,template = ''
 				,$this = jQuery(this)
 				,$preloader;
 				
@@ -33,6 +34,10 @@
 				bottomPanel = context.bottomPanel.getValue();
 			}
 			
+			if(context.handlebarsTemplate){
+				template = context.handlebarsTemplate.getValue();
+			}
+			
 			//show preloader
 			$preloader = $this.next('.jp-preloader').show();
 			
@@ -43,6 +48,7 @@
 					js: jsSettings
 					,top: topPanel
 					,bot: bottomPanel
+					,template: template
 					,action: 'save_changes'
 				}
 			}).done(function(content){
@@ -76,20 +82,35 @@
 				mode: 'text/html'
 				,extraKeys: {'Ctrl-Space': 'autocomplete'}
 				,value: jQuery('#js-settings-bar-ta-content').html()
-			});
+				,lineNumbers: true
+				,lineWrapping: true
+			});			
 			
 			//init top panel
 			context.topPanel = window.CodeMirror(document.getElementById('top-bar-ta'), {
 				mode: 'text/html'
 				,extraKeys: {'Ctrl-Space': 'autocomplete'}
 				,value: jQuery('#top-bar-ta-content').html()
+				,lineNumbers: true
+				,lineWrapping: true
 			});
-			
+						
 			//init bottom panel
 			context.bottomPanel = window.CodeMirror(document.getElementById('bottom-bar-ta'), {
 				mode: 'text/html'
 				,extraKeys: {'Ctrl-Space': 'autocomplete'}
 				,value: jQuery('#bottom-bar-ta-content').html()
+				,lineNumbers: true
+				,lineWrapping: true
+			});
+			
+			//init handlebars template
+			context.handlebarsTemplate = window.CodeMirror(document.getElementById('handlebars-template-bar-ta'), {
+				mode: 'text/html'
+				,extraKeys: {'Ctrl-Space': 'autocomplete'}
+				,value: jQuery('#handlebars-template-bar-ta-content').html()
+				,lineNumbers: true
+				,lineWrapping: true
 			});
 		}
 	};
@@ -100,6 +121,7 @@
 			topPanel: null
 			,bottomPanel: null
 			,jsSettings: null
+			,handlebarsTemplate: null
 		};
 		
 		//init codemirror

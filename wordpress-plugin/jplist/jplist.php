@@ -32,6 +32,11 @@ class jplist{
 	public $jplist_controls;
 	
 	/**
+	* jplist shortcodes instance
+	*/
+	public $jplist_shortcodes;
+	
+	/**
 	* contructor
 	*/
 	function jplist(){
@@ -49,10 +54,8 @@ class jplist{
 		
 		//init jplist control
 		$this->jplist_controls = new jplist_controls();
-		
-		//init shorcodes
-		jplist_shortcodes::init($this->jplist_relative_path, $this->jplist_options);
-		
+		$this->jplist_shortcodes = new jplist_shortcodes($this->jplist_relative_path, $this->jplist_options, $this->jplist_controls);
+				
 		//add settings page
 		add_action('admin_menu',  array(&$this, 'add_settings_page'));
 		
@@ -78,6 +81,15 @@ class jplist{
 			
 			//add jplist
 			wp_enqueue_script('jplist');
+			
+			//deregister jplist
+			wp_deregister_script('handlebars');
+			
+			//register jplist
+			wp_register_script('handlebars', '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.min.js', false, '2.0.0-alpha.4', true);
+			
+			//add jplist
+			wp_enqueue_script('handlebars');
 		});
 		
 		//save changes (ajax)
@@ -101,14 +113,12 @@ class jplist{
 		$jsSettings = $_POST['js'];
 		$topPanel = $_POST['top'];
 		$bottomPanel = $_POST['bot'];
+		$template = $_POST['template'];
 		
 		update_option('jplist_js', $jsSettings);
 		update_option('jplist_top', $topPanel);
 		update_option('jplist_bot', $bottomPanel);
-		
-		//echo($jsSettings);
-		//echo($topPanel);
-		//echo($bottomPanel);
+		update_option('jplist_template', $template);
 		
 		die();
 	}
@@ -141,6 +151,7 @@ class jplist{
 		$codemirror_js = $this->jplist_relative_path . '/admin/codemirror/mode/javascript/javascript.js';
 		$codemirror_css = $this->jplist_relative_path . '/admin/codemirror/mode/css/css.js';
 		$htmlmixed = $this->jplist_relative_path . '/admin/codemirror/mode/htmlmixed/htmlmixed.js';
+		$autoformat = $this->jplist_relative_path . '/admin/codemirror/lib/util/formatting.js';		
 		
 		echo "<script src='$codemirror'></script>";
 		echo "<script src='$show_hint'></script>";
@@ -150,6 +161,7 @@ class jplist{
 		echo "<script src='$codemirror_js'></script>";
 		echo "<script src='$codemirror_css'></script>";
 		echo "<script src='$htmlmixed'></script>";		
+		echo "<script src='$autoformat'></script>";		
 	}
 	
 	/**
@@ -222,7 +234,7 @@ if(!get_option('jplist_js')){
 	echo($this->jplist_controls->js_settings);
 } 
 else{
-	echo(get_option('jplist_js'));
+	echo(stripslashes_deep(get_option('jplist_js')));
 }
 ?>						
 							</div>
@@ -250,10 +262,10 @@ else{
 <?php
 if(!get_option('jplist_top')){
 
-	echo($this->jplist_controls->top_panel);
+	print($this->jplist_controls->top_panel);
 } 
 else{
-	echo(get_option('jplist_top'));
+	echo(stripslashes_deep(get_option('jplist_top')));
 }
 ?>
 							</div>	
@@ -285,7 +297,7 @@ if(!get_option('jplist_bot')){
 	echo($this->jplist_controls->bot_panel);
 } 
 else{
-	echo(get_option('jplist_bot'));
+	echo(stripslashes_deep(get_option('jplist_bot')));
 }
 ?>
 							</div>	
@@ -294,7 +306,41 @@ else{
 						</div>
 					</div>
 					<!-- end of bottom panel controls -->
+					
+					<!-- handlebars template -->
+					<div class="jp-box jp-settings-box">
+						
+						<!-- header -->
+						<div class="jp-box jp-settings-header">
+							<p>Handlebars Template</p>
+						</div>
+						
+						<!-- content -->
+						<div class="jp-box handlebars-template-content">
+							
+							<!-- codemirror placeholder -->
+							<div id="handlebars-template-bar-ta"></div>
+							
+							<!-- hidden content -->
+							<div class="hidden" id="handlebars-template-bar-ta-content">
+<?php  
+if(!get_option('jplist_template')){
+
+	echo($this->jplist_controls->template);
+} 
+else{
+	echo(stripslashes_deep(get_option('jplist_template')));
+}
+?>
+							</div>	
+							<!-- end of hidden content -->
+							
+						</div>
+					</div>
+					<!-- end of handlebars template -->
 				</div>
+				
+				
 				
 			</div>
 		
