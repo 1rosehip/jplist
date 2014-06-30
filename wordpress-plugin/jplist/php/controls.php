@@ -54,17 +54,8 @@
 			$content .= "<script id='jplist-template' type='text/x-handlebars-template'>\r\n";
 				$content .= "\t{{#each this}}\r\n";
 				
-					$content .= "\t\t<div class='list-item box'>\r\n";	
-						$content .= "\t\t\t<div class='img left'>\r\n";
-							$content .= "\t\t\t\t<img src='{{image}}' alt='' title=''/>\r\n";
-						$content .= "\t\t\t</div>\r\n";
-						
-						$content .= "\t\t\t<div class='block right'>\r\n";
-							$content .= "\t\t\t\t<p class='title'>{{title}}</p>\r\n";
-							$content .= "\t\t\t\t<p class='desc'>{{description}}</p>\r\n";
-							$content .= "\t\t\t\t<p class='like'>{{likes}} Likes</p>\r\n";
-							$content .= "\t\t\t\t<p class='theme'>{{keyword1}}, {{keyword2}}</p>\r\n";
-						$content .= "\t\t\t</div>\r\n";
+					$content .= "\t\t<div data-type='item' style='float: left; width: 100%; margin: 20px 0'>\r\n";	
+					$content .= "\t\t\t\t<p class='title'>{{post_title}}</p>\r\n";
 					$content .= "\t\t</div>\r\n";
 					
 				$content .= "\t{{/each}}\r\n";
@@ -116,15 +107,28 @@
 						
 							$js .= "\t\t\t\t//ajax settings\r\n";
 							$js .= "\t\t\t\tajax:{\r\n";
-							  $js .= "\t\t\t\t\turl: 'server-json.php'\r\n";
-							  $js .= "\t\t\t\t\t,dataType: 'json'\r\n";
+							  $js .= "\t\t\t\t\turl: '" . admin_url('admin-ajax.php') . "'\r\n"; 
+							  $js .= "\t\t\t\t\t,dataType: 'json'\r\n"; 
 							  $js .= "\t\t\t\t\t,type: 'POST'\r\n";
+							  $js .= "\t\t\t\t\t,data: { action: 'jplist_get_posts' }\r\n";
 							$js .= "\t\t\t\t}\r\n";
 						$js .= "\t\t\t}\r\n\r\n";
 						
 						$js .= "\t\t\t//render function for json + templates like handlebars, xml + xslt etc.\r\n";
 						$js .= "\t\t\t,render: function(dataItem, statuses){\r\n";
 							$js .= "\t\t\t\t\$list.html(template(dataItem.content));\r\n";
+						$js .= "\t\t\t}\r\n";
+					 $js .= "\t\t}\r\n\r\n";
+					 
+					 //panel controls
+					 $js .= "\t\t,controlTypes:{\r\n";
+						
+						$js .= "\t\t\t'textbox':{\r\n";
+						   $js .= "\t\t\t\tclassName: 'Textbox'\r\n"; 
+						   $js .= "\t\t\t\t,options: {\r\n";
+							  $js .= "\t\t\t\t\teventName: 'keyup' //'keyup', 'input' or other event\r\n";
+							  $js .= "\t\t\t\t\t,ignore: '' \r\n";						
+						   $js .= "\t\t\t\t}\r\n";
 						$js .= "\t\t\t}\r\n";
 					 $js .= "\t\t}\r\n\r\n";
 

@@ -37,6 +37,11 @@ class jplist{
 	public $jplist_shortcodes;
 	
 	/**
+	* jplist logic
+	*/
+	public $domain;
+	
+	/**
 	* contructor
 	*/
 	function jplist(){
@@ -49,12 +54,14 @@ class jplist{
 		$this->jplist_options = 'jplist_options';
 		
 		//include
-		require_once($this->jplist_abs_path . '/php/shortcodes.php' );
-		require_once($this->jplist_abs_path . '/php/controls.php' );
+		require_once($this->jplist_abs_path . '/php/shortcodes.php');
+		require_once($this->jplist_abs_path . '/php/controls.php');
+		require_once($this->jplist_abs_path . '/php/jplist-domain.php');
 		
 		//init jplist control
 		$this->jplist_controls = new jplist_controls();
 		$this->jplist_shortcodes = new jplist_shortcodes($this->jplist_relative_path, $this->jplist_options, $this->jplist_controls);
+		$this->domain = new jplist_domain();
 				
 		//add settings page
 		add_action('admin_menu',  array(&$this, 'add_settings_page'));
@@ -93,7 +100,10 @@ class jplist{
 		});
 		
 		//save changes (ajax)
-		add_action('wp_ajax_save_changes', array(&$this, 'save_changes_callback'));		
+		add_action('wp_ajax_save_changes', array(&$this, 'save_changes_callback'));	
+		
+		//get posts (ajax)
+		add_action('wp_ajax_jplist_get_posts', array(&$this, 'get_posts_callback'));
 		
 		//on plugin activation		
 		register_activation_hook(__FILE__, array(&$this, 'register_activation'));
@@ -103,6 +113,18 @@ class jplist{
 			
 		//on plugin uninstall		
 		register_uninstall_hook(__FILE__, 'register_uninstall');			
+	}
+	
+	/**
+	* get posts -> ajax callback
+	*/
+	public function get_posts_callback(){
+	
+		$statuses = $_POST['statuses'];
+		
+		echo($this->domain->get_posts_json($statuses));
+		
+		die();
 	}
 	
 	/**

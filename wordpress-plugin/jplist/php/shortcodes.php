@@ -15,7 +15,7 @@ class jplist_shortcodes{
 	*/
 	public function jplist_shortcodes($jplist_relative_path, $jplist_options, $jplist_controls){
 	
-		//init vars
+		//init properties
 		$this->jplist_relative_path = $jplist_relative_path;
 		$this->jplist_options = $jplist_options;
 		$this->jplist_controls = $jplist_controls;
