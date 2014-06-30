@@ -132,6 +132,15 @@ class jplist_shortcodes{
 		
 		$html .= '</script>';
 		
+		//add handlebars template
+		
+		if(!get_option('jplist_template')){				
+			$html .= stripslashes_deep($this->jplist_controls->template);
+		} 
+		else{
+			$html .= stripslashes_deep(get_option('jplist_template'));
+		}
+		
 		return $html;
 	}
 }	

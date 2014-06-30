@@ -79,7 +79,7 @@
 				
 			//init js settings
 			context.jsSettings = window.CodeMirror(document.getElementById('js-settings-bar-ta'), {
-				mode: 'text/html'
+				mode: 'text/typescript'
 				,extraKeys: {'Ctrl-Space': 'autocomplete'}
 				,value: jQuery('#js-settings-bar-ta-content').html()
 				,lineNumbers: true

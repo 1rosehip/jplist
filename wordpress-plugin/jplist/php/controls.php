@@ -79,6 +79,7 @@
 		*/
 		public function get_js_settings(){
 			
+			/*
 			$js = '';
 			
 			$js .= "jQuery('document').ready(function(){\r\n\r\n";
@@ -87,6 +88,46 @@
 					$js .= "\t\titemsBox: '.list' \n";
 					$js .= "\t\t,itemPath: '[data-type=\"item\"]' \r\n";
 					$js .= "\t\t,panelPath: '.jplist-panel' \r\n";
+				$js .= "\t});\r\n";
+			$js .= "});\r\n";
+			
+			return $js;
+			*/
+			
+			$js = "";
+			
+			$js .= "jQuery('document').ready(function(){\r\n\r\n";
+							
+				$js .= "\tvar \$list = jQuery('#jplist-box .list')\r\n";
+					$js .= "\t\t,template = Handlebars.compile(jQuery('#jplist-template').html());\r\n\r\n";
+				
+				$js .= "\t//init jplist with php + mysql data source, json and handlebars template\r\n";
+				$js .= "\tjQuery('#jplist-box').jplist({\r\n\r\n";
+				
+					$js .= "\t\titemsBox: '.list'\r\n"; 
+					$js .= "\t\t,itemPath: '[data-type=\"item\"]'\r\n"; 
+					$js .= "\t\t,panelPath: '.jplist-panel'\r\n\r\n";
+					
+					$js .= "\t\t//data source\r\n";
+					$js .= "\t\t,dataSource: {\r\n\r\n";
+						
+						$js .= "\t\t\ttype: 'server'\r\n";
+						$js .= "\t\t\t,server: {\r\n\r\n";
+						
+							$js .= "\t\t\t\t//ajax settings\r\n";
+							$js .= "\t\t\t\tajax:{\r\n";
+							  $js .= "\t\t\t\t\turl: 'server-json.php'\r\n";
+							  $js .= "\t\t\t\t\t,dataType: 'json'\r\n";
+							  $js .= "\t\t\t\t\t,type: 'POST'\r\n";
+							$js .= "\t\t\t\t}\r\n";
+						$js .= "\t\t\t}\r\n\r\n";
+						
+						$js .= "\t\t\t//render function for json + templates like handlebars, xml + xslt etc.\r\n";
+						$js .= "\t\t\t,render: function(dataItem, statuses){\r\n";
+							$js .= "\t\t\t\t\$list.html(template(dataItem.content));\r\n";
+						$js .= "\t\t\t}\r\n";
+					 $js .= "\t\t}\r\n\r\n";
+
 				$js .= "\t});\r\n";
 			$js .= "});\r\n";
 			
