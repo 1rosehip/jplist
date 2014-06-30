@@ -59,45 +59,18 @@ class jplist{
 		require_once($this->jplist_abs_path . '/php/jplist-domain.php');
 		
 		//init jplist control
-		$this->jplist_controls = new jplist_controls();
+		$this->jplist_controls = new jplist_controls($this->jplist_relative_path);
 		$this->jplist_shortcodes = new jplist_shortcodes($this->jplist_relative_path, $this->jplist_options, $this->jplist_controls);
 		$this->domain = new jplist_domain();
 				
 		//add settings page
 		add_action('admin_menu',  array(&$this, 'add_settings_page'));
 		
-		//admin head
+		//content head
 		add_action('admin_head', array(&$this, 'admin_register_head'));	
 		
-		add_action('wp_enqueue_scripts', function(){
-
-			//deregister jplist
-			wp_deregister_style('jplist_styles');
-			
-			//register jplist
-			wp_register_style('jplist_styles', '//cdnjs.cloudflare.com/ajax/libs/jplist/5.1.35/jplist.min.css', false, '5.1.35', 'all'); 
-			
-			//add jplist
-			wp_enqueue_style('jplist_styles');
-			
-			//deregister jplist
-			wp_deregister_script('jplist');
-			
-			//register jplist
-			wp_register_script('jplist', '//cdnjs.cloudflare.com/ajax/libs/jplist/5.1.35/jplist.min.js', array('jquery'), '5.1.35', true);
-			
-			//add jplist
-			wp_enqueue_script('jplist');
-			
-			//deregister jplist
-			wp_deregister_script('handlebars');
-			
-			//register jplist
-			wp_register_script('handlebars', '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.min.js', false, '2.0.0-alpha.4', true);
-			
-			//add jplist
-			wp_enqueue_script('handlebars');
-		});
+		//init scripts and styles
+		add_action('wp_enqueue_scripts', array(&$this, 'init_scripts_and_styles'));
 		
 		//save changes (ajax)
 		add_action('wp_ajax_save_changes', array(&$this, 'save_changes_callback'));	
@@ -113,6 +86,39 @@ class jplist{
 			
 		//on plugin uninstall		
 		register_uninstall_hook(__FILE__, 'register_uninstall');			
+	}
+	
+	/**
+	* init scripts and styles
+	*/
+	public function init_scripts_and_styles(){
+		
+		//deregister jplist
+		wp_deregister_style('jplist_styles');
+		
+		//register jplist
+		wp_register_style('jplist_styles', $this->jplist_relative_path . '/content/css/jplist-admin.min.css', false, '5.1.35', 'all'); 
+		
+		//add jplist
+		wp_enqueue_style('jplist_styles');
+		
+		//deregister jplist
+		wp_deregister_script('jplist');
+		
+		//register jplist
+		wp_register_script('jplist', '//cdnjs.cloudflare.com/ajax/libs/jplist/5.1.35/jplist.min.js', array('jquery'), '5.1.35', true);
+		
+		//add jplist
+		wp_enqueue_script('jplist');
+		
+		//deregister jplist
+		wp_deregister_script('handlebars');
+		
+		//register jplist
+		wp_register_script('handlebars', '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.min.js', false, '2.0.0-alpha.4', true);
+		
+		//add jplist
+		wp_enqueue_script('handlebars');
 	}
 	
 	/**
@@ -151,29 +157,29 @@ class jplist{
 	public function admin_register_head(){
 		
 		//add jplist css and js for admin
-		$css = $this->jplist_relative_path . '/admin/css/jplist-admin.min.css';
-		$js = $this->jplist_relative_path . '/admin/js/jplist-admin.min.js';
+		$css = $this->jplist_relative_path . '/content/css/jplist-admin.min.css';
+		$js = $this->jplist_relative_path . '/content/js/jplist-admin.min.js';
 		
 		echo "<link rel='stylesheet' href='$css' />";
 		echo "<script src='$js'></script>";
 		
 		//add codemirror files
 		
-		$codemirror_css =  $this->jplist_relative_path . '/admin/codemirror/lib/codemirror.css';
-		$show_hint_css = $this->jplist_relative_path . '/admin/codemirror/addon/hint/show-hint.css';
+		$codemirror_css =  $this->jplist_relative_path . '/content/codemirror/lib/codemirror.css';
+		$show_hint_css = $this->jplist_relative_path . '/content/codemirror/addon/hint/show-hint.css';
 		
 		echo "<link rel='stylesheet' href='$codemirror_css' />";
 		echo "<link rel='stylesheet' href='$show_hint_css' />";
 		
-		$codemirror = $this->jplist_relative_path . '/admin/codemirror/lib/codemirror.js';
-		$show_hint = $this->jplist_relative_path . '/admin/codemirror/addon/hint/show-hint.js';
-		$xml_hint = $this->jplist_relative_path . '/admin/codemirror/addon/hint/xml-hint.js';
-		$html_hint = $this->jplist_relative_path . '/admin/codemirror/addon/hint/html-hint.js';
-		$codemirror_xml = $this->jplist_relative_path . '/admin/codemirror/mode/xml/xml.js';
-		$codemirror_js = $this->jplist_relative_path . '/admin/codemirror/mode/javascript/javascript.js';
-		$codemirror_css = $this->jplist_relative_path . '/admin/codemirror/mode/css/css.js';
-		$htmlmixed = $this->jplist_relative_path . '/admin/codemirror/mode/htmlmixed/htmlmixed.js';
-		$autoformat = $this->jplist_relative_path . '/admin/codemirror/lib/util/formatting.js';		
+		$codemirror = $this->jplist_relative_path . '/content/codemirror/lib/codemirror.js';
+		$show_hint = $this->jplist_relative_path . '/content/codemirror/addon/hint/show-hint.js';
+		$xml_hint = $this->jplist_relative_path . '/content/codemirror/addon/hint/xml-hint.js';
+		$html_hint = $this->jplist_relative_path . '/content/codemirror/addon/hint/html-hint.js';
+		$codemirror_xml = $this->jplist_relative_path . '/content/codemirror/mode/xml/xml.js';
+		$codemirror_js = $this->jplist_relative_path . '/content/codemirror/mode/javascript/javascript.js';
+		$codemirror_css = $this->jplist_relative_path . '/content/codemirror/mode/css/css.js';
+		$htmlmixed = $this->jplist_relative_path . '/content/codemirror/mode/htmlmixed/htmlmixed.js';
+		$autoformat = $this->jplist_relative_path . '/content/codemirror/lib/util/formatting.js';		
 		
 		echo "<script src='$codemirror'></script>";
 		echo "<script src='$show_hint'></script>";
@@ -225,7 +231,7 @@ class jplist{
 			<div class="wrap">
 				<p>
 					<input type="button" value="Save changes" class="button-primary" data-type="save-changes" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
-					<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/admin/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
+					<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
 				</p>
 			</div>
 			
@@ -369,7 +375,7 @@ else{
 			<div class="wrap">
 				<p>
 					<input type="button" value="Save changes" class="button-primary" data-type="save-changes" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
-					<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/admin/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
+					<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
 				</p>
 			</div>
 		</div>

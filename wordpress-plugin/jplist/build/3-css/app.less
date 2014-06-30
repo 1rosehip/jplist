@@ -1,75 +1,10 @@
-
 /**
-* common
+* import files
 */
-.common-mixin(){
-	
-	#jplist-admin-page{
-		p, img{
-			vertical-align: middle;
-		}
-	}
-
-	.jp-preloader{
-		display: none;
-		margin-left: 5px;
-	}
-}
-
-/**
-* grid
-*/
-.grid-mixin(){
-	.jp-box{
-		width: 100%;
-		float: left;		
-	}
-}
-
-/**
-* settings box
-*/
-.settings-box(){
-	
-	.jp-settings-box{
-		border: 1px solid #e5e5e5;
-		background: #fff;
-		padding-bottom: 5px;
-		margin: 0 0 20px 0;
-		
-		p{
-			margin: 0;
-			padding: 5px 15px 0 15px;
-		}
-	}
-	
-	.jp-settings-header{
-		border-bottom: 1px solid #e5e5e5;
-		padding-bottom: 5px;
-		font-weight: bold;		
-		color: #007F48;
-		
-		p{
-			font-size: 15px;
-		}
-	}
-}
-
-/**
-* codemirror
-
-.codemirror-mixin(){
-	.CodeMirror {
-		border-top: 1px solid #888; 
-		border-bottom: 1px solid #888;
-	}
-}
-*/
-
-/**
-* mixin calls
-*/
-.common-mixin();
-.grid-mixin();
-.settings-box();
-//.codemirror-mixin();
+@import "3-css/jplist/1-styles.less";
+@import "3-css/jplist/2-controls.less";
+@import "3-css/jplist/3-list-and-views.less";
+@import "3-css/jplist/4-ul-li-and-views.less";
+@import "3-css/admin/admin.less";
+@import "3-css/helpers.less";
+@import "3-css/vars.less";

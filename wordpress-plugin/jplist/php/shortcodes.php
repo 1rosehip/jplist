@@ -3,7 +3,6 @@
 /**
 * jPlist shortcodes class
 */
-
 class jplist_shortcodes{
 
 	public $jplist_relative_path;
@@ -27,36 +26,6 @@ class jplist_shortcodes{
 		* @return {string} html
 		*/
 		add_shortcode('jplist',  array(&$this, 'init_shortcodes'));
-	}
-	
-	/**
-	* get content html
-	* @return {string} content html
-	*/
-	public function getContentHTML($atts, $content){
-		
-		$html = '';
-
-		//global $post;
-		$args = array('numberposts' => -1); 
-		$posts = get_posts($args);
-		if ($posts){	
-			foreach($posts as $post){
-				
-				$html .= '<div data-type="item" style="float: left; width: 100%; margin: 20px 0">';
-					$html .= '<div style="float: left; margin: 0 15px 15px 15px;">';
-						$html .= '<a href="' . get_permalink($post->ID) . '">';
-							$html .= get_the_post_thumbnail($post->ID, 'thumbnail', '');			
-						$html .= '</a>';
-					$html .= '</div>';
-					$html .= '<a title="' . $post->post_title . '" href="' . get_permalink($post->ID) . '" class="title">' . $post->post_title . '</a>';
-					$html .= '<p>' . wp_trim_words($post->post_content) . '</p>';
-					$html .= '<a href="' . get_permalink($post->ID) . '" title="' . $post->post_title . '">Read More</a>';
-				$html .= '</div>';
-			}
-		}
-
-		return $html;
 	}
 		
 	/**
@@ -95,10 +64,8 @@ class jplist_shortcodes{
 		
 		$html .= '</div>';
 		
-		//data
-		$html .= '<div class="list box text-shadow">';
-		$html .= $this->getContentHTML($atts, $content);
-		$html .= '</div>';
+		//ajax content here
+		$html .= '<div class="list box text-shadow"></div>';
 		
 		//no results
 		$html .= $no_results;

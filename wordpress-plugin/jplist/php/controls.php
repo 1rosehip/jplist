@@ -5,6 +5,8 @@
 	*/
 	class jplist_controls{
 		
+		public $jplist_relative_path;
+		
 		//controls
 		public $reset_btn;
 		public $items_per_page;
@@ -12,6 +14,7 @@
 		public $title_text_filter;
 		public $pagination_results;
 		public $pagination;
+		public $preloader;
 		
 		//default panels html
 		public $top_panel;
@@ -22,7 +25,10 @@
 		/**
 		* constructor
 		*/
-		public function jplist_controls(){
+		public function jplist_controls($jplist_relative_path){
+			
+			//init properties
+			$this->jplist_relative_path = $jplist_relative_path;
 			
 			//init default controls html
 			$this->reset_btn = $this->get_reset_btn_html();
@@ -31,9 +37,10 @@
 			$this->title_text_filter = $this->get_title_text_filter_html();
 			$this->pagination_results = $this->get_pagination_results_html();
 			$this->pagination = $this->get_pagination_html();
+			$this->preloader = $this->get_preloader_html();
 			
 			//init default panel html
-			$this->top_panel = $this->reset_btn . $this->items_per_page . $this->sort_dd . $this->title_text_filter . $this->pagination_results . $this->pagination;
+			$this->top_panel = $this->reset_btn . $this->items_per_page . $this->sort_dd . $this->title_text_filter . $this->preloader. $this->pagination_results . $this->pagination;
 			$this->bot_panel = $this->items_per_page . $this->sort_dd . $this->pagination_results . $this->pagination;
 			
 			//init default js settings
@@ -41,6 +48,25 @@
 			
 			//get handlebars template content
 			$this->template = $this->get_template_content();
+		}
+		
+		/**
+		* get preloader 
+		*/
+		public function get_preloader_html(){
+			
+			$html = "";
+			
+			$html .= "<!-- preloader for data sources -->\r\n";
+			$html .= "<div \r\n";
+				$html .= "\tclass='jplist-hide-preloader jplist-preloader' \r\n";
+				$html .= "\tdata-control-type='preloader' \r\n";
+				$html .= "\tdata-control-name='preloader' \r\n";
+				$html .= "\tdata-control-action='preloader'>\r\n";
+				$html .= "\t<img src='" . $this->jplist_relative_path . "/content/img/common/ajax-loader-line.gif' alt='Loading...' title='Loading...' />\r\n";
+			$html .= "</div>\r\n\r\n";
+			
+			return $html;
 		}
 		
 		/**
@@ -69,22 +95,7 @@
 		* @return {string}
 		*/
 		public function get_js_settings(){
-			
-			/*
-			$js = '';
-			
-			$js .= "jQuery('document').ready(function(){\r\n\r\n";
-	
-				$js .= "\tjQuery('#jplist-box').jplist({\r\n";	
-					$js .= "\t\titemsBox: '.list' \n";
-					$js .= "\t\t,itemPath: '[data-type=\"item\"]' \r\n";
-					$js .= "\t\t,panelPath: '.jplist-panel' \r\n";
-				$js .= "\t});\r\n";
-			$js .= "});\r\n";
-			
-			return $js;
-			*/
-			
+						
 			$js = "";
 			
 			$js .= "jQuery('document').ready(function(){\r\n\r\n";
