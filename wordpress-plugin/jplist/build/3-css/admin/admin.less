@@ -4,114 +4,59 @@
 */
 .admin-common-mixin(){
 
-    .jplist-hidden{
-        display: none;
+    .jp-box{
+        width: 100%;
+		float: left;
     }
+	
+	#jplist-admin-page{
+		p, img{
+			vertical-align: middle;
+		}
+	}
+	
+	.jp-preloader{
+		display: none;
+		margin-left: 5px;
+	}
 }
 
 /**
-* double sort list
+* settings box
 */
-.admin-double-sort-mixin(){
 
-    .double-sort .list{
+.admin-settings-box-mixin(){	
 
-        float: left;
-        width: 100%;
-        padding: 1.25em 0;
+	.jp-settings-box{
+		border: 1px solid #e5e5e5;
+		background: #fff;
+		padding-bottom: 5px;
+		margin: 0 0 20px 0;		
 
-        .list-item{
-            float: left;
-            width: 96%;
-            margin: 0 2% 1em 2%;
-            clear: both;
-        }
-    }
+		p{
+			margin: 0;
+			padding: 5px 15px 0 15px;
+		}
+	}
 
-    .subject{
-        font-family: @verdana;
-        font-size: 14px;
-        line-height: 24px;
-        color: #444;
-    }
+	.jp-settings-header{
+		border-bottom: 1px solid #e5e5e5;
+		padding-bottom: 5px;
+		font-weight: bold;
+		color: #007F48;		
 
-    .course{
-        font-family: @verdana;
-        font-size: 12px;
-        line-height: 24px;
-        color: @red;
-    }
+		p{
+
+			fontsize: 15px;
+
+		}
+	}
+
 }
 
-/**
-* sticky elements
-*/
-.admin-sticky-mixin(){
-
-    .jplist-sticky{
-        position: fixed;
-        width: 100%;
-
-        left: 0;
-        top: 0;
-        z-index: 1000;
-
-        background: @light-grey;
-        padding-bottom: 5px;
-    }
-
-    .sticky-demo{
-
-        .panel > .center{
-            max-width: 100%;
-        }
-
-        .jplist-sticky > .center{
-            max-width: 95%;
-        }
-    }
-}
-
-/**
-* demo table
-*/
-.admin-demo-tbl-mixin(){
-   .demo-tbl{
-        background: #fff;
-        width: 100%;
-        float: left;
-        border-collapse: collapse;
-        border-right: 1px solid @light-grey5;
-        border-bottom: 1px solid @light-grey5;
-		margin: 30px 0;
-
-        td,
-        th{
-            border-left: 1px solid @light-grey5;
-            border-top: 1px solid @light-grey5;
-            vertical-align: top;
-            padding: 15px;
-        }
-
-        p{
-            margin:0;
-            padding:0 15px 5px 0;
-        }
-
-       .odd{
-            background: @light-blue1;
-       }
-
-       .even{
-            background: @white1;
-       }
-   }
-}
 
 /**
 * mixin calls
 */
 .admin-common-mixin();
-.admin-demo-tbl-mixin();
-.admin-double-sort-mixin();
-.admin-sticky-mixin();
+.admin-settings-box-mixin();

@@ -124,11 +124,14 @@
 			,handlebarsTemplate: null
 		};
 		
-		//init codemirror
-		initCodemirror(context);
+		if(window.location.href.indexOf('jplist.php') !== -1){
 		
-		//init events
-		initEvents(context);
+			//init codemirror
+			initCodemirror(context);
+			
+			//init events
+			initEvents(context);
+		}
 	});
 			
 })();

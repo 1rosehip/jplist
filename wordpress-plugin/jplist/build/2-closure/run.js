@@ -21,7 +21,7 @@ var init = (function(){
 		
 	//init target paths
 	self.targets = [
-		'../admin/js/jplist-admin.min.js'
+		'../content/js/jplist-admin.min.js'
 	];	
 	
 	//load package.json
