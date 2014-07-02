@@ -1,61 +1,23 @@
-+ delete content, put preloader
-+ add text fiter button
-- add styles
-- add filter image in css
-- add restore default buttons in admin
+jplist
+------
+- add list/grid view
+- responsive
+
+php
+----
+- code review -> domain, ui, app, dal, mvc -> in php...
+- remove options on deinstall...
+- check if plugin is OK?
+- option names -> should be class properties
+
+admin
+-----
++ add restore default buttons in admin
+- the plugin settings should be simpler somehow...
 - add docs in admin
 - add license in admin
 - add link to website and github in admin
-- add list styles, remove inline styles
-- check if plugin is OK?
-- remove options on deinstall...
-- the plugin settings should be simpler somehow...
-- code review -> domain, ui, app, dal, mvc -> in php...
-- add list/grid view
-- shortcode ->  remove gibrish.. 
+
+other
+-----
 - shortcode -> how to add to wsywig?
-- add list-grid view
-- responsive
-
-
-/**
-* get content html
-* @return {string} content html
-*/
-public function getContentHTML($atts, $content){
-	
-	$html = '';
-
-	//global $post;
-	$args = array('numberposts' => -1); 
-	$posts = get_posts($args);
-	if ($posts){	
-		foreach($posts as $post){
-			
-			$html .= '<div data-type="item" style="float: left; width: 100%; margin: 20px 0">';
-				$html .= '<div style="float: left; margin: 0 15px 15px 15px;">';
-					$html .= '<a href="' . get_permalink($post->ID) . '">';
-						$html .= get_the_post_thumbnail($post->ID, 'thumbnail', '');			
-					$html .= '</a>';
-				$html .= '</div>';
-				$html .= '<a title="' . $post->post_title . '" href="' . get_permalink($post->ID) . '" class="title">' . $post->post_title . '</a>';
-				$html .= '<p>' . wp_trim_words($post->post_content) . '</p>';
-				$html .= '<a href="' . get_permalink($post->ID) . '" title="' . $post->post_title . '">Read More</a>';
-			$html .= '</div>';
-		}
-	}
-
-	return $html;
-}
-
-/*
-$aaa = $this->wpdb->get_results(
-	$this->wpdb->prepare(
-		"SELECT * FROM wp_posts where `post_title` like '%%%s%%' and `post_content` like '%%%s%%' ",
-		array("w", 
-		"w")
-	)			
-);
-
-print_r(var_dump($aaa), true);
-*/

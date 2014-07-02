@@ -8,11 +8,83 @@
 	'use strict';	
 	
 	/**
+	* reset panel
+	* @param {Object} context
+	* @param {jQueryObject} $el
+	* @param {string} action
+	* @param {Object} codemirror
+	*/
+	var reset = function(context, $el, action, codemirror){
+		
+		var $preloader;
+		
+		//show preloader
+		$preloader = $el.prev('.jp-preloader').show();
+		
+		jQuery.ajax({
+			url: $el.attr('data-url')
+			,type: 'POST'
+			,data:{
+				action: action
+			}
+		}).done(function(content){
+			
+			if(codemirror){
+				codemirror['setValue'](content);
+			}
+			
+		}).fail(function(){
+			
+			//error ...
+			
+		}).always(function(){
+			
+			//hide preloader
+			$preloader.hide();
+		});
+	};
+	
+	/**
 	* init events
 	* @param {Object} context
 	*/
 	var initEvents = function(context){
 		
+		/**
+		* reset javascript panel
+		*/
+		jQuery('[data-type="reset-js"]').on('click', function(){
+			
+			reset(context, jQuery(this), 'reset_js_panel', context.jsSettings);
+		});
+		
+		/**
+		* reset top panel
+		*/
+		jQuery('[data-type="reset-top-panel"]').on('click', function(){
+			
+			reset(context, jQuery(this), 'reset_top_panel', context.topPanel);
+		});
+		
+		/**
+		* reset bottom panel
+		*/
+		jQuery('[data-type="reset-bot-panel"]').on('click', function(){
+			
+			reset(context, jQuery(this), 'reset_bot_panel', context.bottomPanel);
+		});
+		
+		/**
+		* reset template
+		*/
+		jQuery('[data-type="reset-template"]').on('click', function(){
+			
+			reset(context, jQuery(this), 'reset_template_panel', context.handlebarsTemplate);			
+		});
+		
+		/**
+		* save changes
+		*/
 		jQuery('[data-type="save-changes"]').on('click', function(){
 			
 			var jsSettings = ''
@@ -65,7 +137,6 @@
 				$preloader.hide();
 			});
 			
-			//console.log(jsSettings, topPanel, bottomPanel);
 		});
 	};
 	

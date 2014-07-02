@@ -78,6 +78,12 @@ class jplist{
 		//get posts (ajax)
 		add_action('wp_ajax_jplist_get_posts', array(&$this, 'get_posts_callback'));
 		
+		//reset panels (ajax)
+		add_action('wp_ajax_reset_js_panel', array(&$this, 'reset_js_panel_callback'));
+		add_action('wp_ajax_reset_top_panel', array(&$this, 'reset_top_panel_callback'));
+		add_action('wp_ajax_reset_bot_panel', array(&$this, 'reset_bot_panel_callback'));
+		add_action('wp_ajax_reset_template_panel', array(&$this, 'reset_js_template_callback'));
+		
 		//on plugin activation		
 		register_activation_hook(__FILE__, array(&$this, 'register_activation'));
 		
@@ -157,6 +163,46 @@ class jplist{
 		update_option('jplist_bot', $bottomPanel);
 		update_option('jplist_template', $template);
 		
+		die();
+	}
+	
+	/**
+	* reset js panel -> ajax callback
+	*/
+	public function reset_js_panel_callback(){
+	
+		delete_option('jplist_js');	
+		echo($this->jplist_controls->js_settings);
+		die();
+	}
+	
+	/**
+	* reset top panel -> ajax callback
+	*/
+	public function reset_top_panel_callback(){
+	
+		delete_option('jplist_top');	
+		echo($this->jplist_controls->top_panel);		
+		die();
+	}
+	
+	/**
+	* reset bottom panel -> ajax callback
+	*/
+	public function reset_bot_panel_callback(){
+	
+		delete_option('jplist_bot');	
+		echo($this->jplist_controls->bot_panel);
+		die();
+	}
+	
+	/**
+	* reset template panel -> ajax callback
+	*/
+	public function reset_js_template_callback(){
+	
+		delete_option('jplist_template');	
+		echo($this->jplist_controls->template);
 		die();
 	}
 	
@@ -254,7 +300,11 @@ class jplist{
 					
 						<!-- header -->
 						<div class="jp-box jp-settings-header">
-							<p>JavaScript Settings</p>
+							<p class="jp-left">JavaScript Settings</p>
+							<p class="jp-right">								
+								<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
+								<input type="button" value="Reset" class="button-primary" data-type="reset-js" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
+							</p>
 						</div>
 						
 						<!-- content -->
@@ -284,7 +334,11 @@ else{
 						
 						<!-- header -->
 						<div class="jp-box jp-settings-header">
-							<p>Top Panel Controls</p>
+							<p class="jp-left">Top Panel Controls</p>
+							<p class="jp-right">
+								<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
+								<input type="button" value="Reset" class="button-primary" data-type="reset-top-panel" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
+							</p>
 						</div>
 						
 						<!-- content -->
@@ -317,7 +371,11 @@ else{
 						
 						<!-- header -->
 						<div class="jp-box jp-settings-header">
-							<p>Bottom Panel Controls</p>
+							<p class="jp-left">Bottom Panel Controls</p>
+							<p class="jp-right">
+								<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
+								<input type="button" value="Reset" class="button-primary" data-type="reset-bot-panel" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
+							</p>
 						</div>
 						
 						<!-- content -->
@@ -349,7 +407,11 @@ else{
 						
 						<!-- header -->
 						<div class="jp-box jp-settings-header">
-							<p>Handlebars Template</p>
+							<p class="jp-left">Handlebars Template</p>
+							<p class="jp-right">
+								<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
+								<input type="button" value="Reset" class="button-primary" data-type="reset-template" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
+							</p>
 						</div>
 						
 						<!-- content -->
