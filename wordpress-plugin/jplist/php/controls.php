@@ -78,10 +78,18 @@
 			
 			$content .= "<!-- handlebars template -->\r\n";
 			$content .= "<script id='jplist-template' type='text/x-handlebars-template'>\r\n";
-				$content .= "\t{{#each this}}\r\n";
 				
-					$content .= "\t\t<div data-type='item' style='float: left; width: 100%; margin: 20px 0'>\r\n";	
-					$content .= "\t\t\t\t<p class='title'>{{post_title}}</p>\r\n";
+				$content .= "\t<!-- loop items -->\r\n";
+				$content .= "\t{{#each this}}\r\n\r\n";				
+					
+					$content .= "\t\t<!-- jplist item --> \r\n";
+					$content .= "\t\t<div class='jplist-item' data-type='item'>\r\n";
+					
+					$content .= "\t\t\t\t<p class='jplist-title'><a href='{{link}}' title='{{post_title}}'>{{post_title}}</a></p>\r\n";
+					$content .= "\t\t\t\t<p class='jplist-thumb'><a href='{{link}}' title='{{post_title}}'>{{{thumb}}}</a></p>\r\n";
+					$content .= "\t\t\t\t<p class='jplist-excerpt'>{{excerpt}}</p>\r\n";
+					$content .= "\t\t\t\t<p class='jplist-readmore'><a href='{{link}}' title='{{post_title}}'>Read More</a></p>\r\n";
+					
 					$content .= "\t\t</div>\r\n";
 					
 				$content .= "\t{{/each}}\r\n";
@@ -211,8 +219,8 @@
 				 
 				 $html .= "\t<ul>\r\n";
 					$html .= "\t\t<li><span data-path='default'>Sort by</span></li>\r\n";
-					$html .= "\t\t<li><span data-path='.title' data-order='asc' data-type='text'>Title A-Z</span></li>\r\n";
-					$html .= "\t\t<li><span data-path='.title' data-order='desc' data-type='text'>Title Z-A</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='.jplist-title' data-order='asc' data-type='text'>Title A-Z</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='.jplist-title' data-order='desc' data-type='text'>Title Z-A</span></li>\r\n";
 				 $html .= "\t</ul>\r\n";
 			$html .= "</div>\r\n\r\n";
 			
@@ -228,22 +236,28 @@
 			$html = "";
 			$html .= "<!-- filter by title -->\r\n";
 			$html .= "<div class='text-filter-box'>\r\n";
-
-			$html .= "\t<i class='fa fa-search  jplist-icon'></i>\r\n\r\n";
 			 
 			$html .= "\t<!--[if lt IE 10]>\r\n";
 			$html .= "\t<div class='jplist-label'>Filter by Title:</div>\r\n";
 			$html .= "\t<![endif]-->\r\n\r\n";
 			 
 			$html .= "\t<input \r\n";
-				$html .= "\tdata-path='.title' \r\n";
+				$html .= "\tdata-path='.jplist-title' \r\n";
 				$html .= "\ttype='text' \r\n";
 				$html .= "\tvalue='' \r\n";
 				$html .= "\tplaceholder='Filter by Title' \r\n";
 				$html .= "\tdata-control-type='textbox' \r\n";
 				$html .= "\tdata-control-name='title-filter' \r\n";
 				$html .= "\tdata-control-action='filter' \r\n";
-			$html .= "/>\r\n";
+				$html .= "\tdata-button='#title-search-button' \r\n";
+			$html .= "/>\r\n\r\n";
+			
+			$html .= "\t<button  \r\n";
+				$html .= "\ttype='button' \r\n"; 
+				$html .= "\tid='title-search-button'> \r\n";
+				$html .= "\t<i class='fa fa-search'></i> \r\n";
+			$html .= "\t</button> \r\n\r\n";
+			
 			$html .= "</div>\r\n\r\n";
 			
 			return $html;

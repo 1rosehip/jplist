@@ -49,7 +49,7 @@ class jplist_domain{
 		
 			switch($data->path){
 			
-				case ".title":{
+				case ".jplist-title":{
 					$query = "order by post_title";
 					break;
 				}
@@ -86,7 +86,7 @@ class jplist_domain{
     *     "name": "title-filter",
     *     "type": "textbox",
     *     "data": {
-    *         "path": ".title",
+    *         "path": ".jplist-title",
     *         "ignore": "[~!@#$%^&*()+=`'\"/\\_]+",
     *         "value": "",
     *         "filterType": "text"
@@ -216,7 +216,7 @@ class jplist_domain{
 		$json = "[]";		
 		$preparedParams = array();
 		$pagingStatus = null;
-		$filter = "";
+		$filter = "where `post_status` = 'publish' ";
 		$sort = "";
 		$query = "";
 		$count = 0;
@@ -274,19 +274,7 @@ class jplist_domain{
 			
 			//init query with sort and filter
 			$query = "SELECT * FROM wp_posts " . $filter . " " . $sort . " " . $paging;
-			
-			/*
-			$aaa = $this->wpdb->get_results(
-				$this->wpdb->prepare(
-					"SELECT * FROM wp_posts where `post_title` like '%%%s%%' and `post_content` like '%%%s%%' ",
-					array("w", 
-					"w")
-				)			
-			);
-			
-			print_r(var_dump($aaa), true);
-			*/
-						
+									
 			if(count($preparedParams) > 0){
 			
 				$items = $this->wpdb->get_results(
@@ -301,13 +289,22 @@ class jplist_domain{
 			}
 			
 			$json = "[";
-			foreach($items as $item){
+			foreach($items as $post){
 				
 				if($counter > 0){
 					$json .= ",";
 				}
 				
-				$json .= json_encode($item);
+				//add additional properties
+				$link = get_permalink($post->ID);
+				$thumb = get_the_post_thumbnail($post->ID, 'thumbnail', '');
+				$excerpt = wp_trim_words($post->post_content);
+				
+				$post->link = $link;
+				$post->thumb = $thumb;
+				$post->excerpt = $excerpt;
+				
+				$json .= json_encode($post);
 				
 				$counter++;
 			}

@@ -1,5 +1,6 @@
 + delete content, put preloader
-- add text fiter button
++ add text fiter button
+- font awesome ???
 - add filter image in css
 - add restore default buttons in admin
 - add docs in admin
@@ -44,3 +45,15 @@ public function getContentHTML($atts, $content){
 
 	return $html;
 }
+
+/*
+$aaa = $this->wpdb->get_results(
+	$this->wpdb->prepare(
+		"SELECT * FROM wp_posts where `post_title` like '%%%s%%' and `post_content` like '%%%s%%' ",
+		array("w", 
+		"w")
+	)			
+);
+
+print_r(var_dump($aaa), true);
+*/
