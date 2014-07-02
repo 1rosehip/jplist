@@ -10,14 +10,13 @@ php
 - check if plugin is OK?
 - option names -> should be class properties
 
-admin
------
-+ add restore default buttons in admin
-- the plugin settings should be simpler somehow...
-- add docs in admin
-- add license in admin
-- add link to website and github in admin
-
 other
 -----
 - shortcode -> how to add to wsywig?
+
+FUTURE REALEASE
+================
+
+admin
+-----
+- the plugin settings should be simpler somehow...

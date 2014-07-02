@@ -215,6 +215,7 @@ class jplist{
 		$css = $this->jplist_relative_path . '/content/css/jplist-admin.min.css';
 		$js = $this->jplist_relative_path . '/content/js/jplist-admin.min.js';
 		
+		echo "<link rel='stylesheet' href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' />";
 		echo "<link rel='stylesheet' href='$css' />";
 		echo "<script src='$js'></script>";
 		
@@ -280,7 +281,7 @@ class jplist{
 		
 			<div class="wrap">
 				<h2>jPList - jQuery Data Grid Controls Settings</h2>
-				<p>Welcome to the administration panel of the jPList plugin.</p>
+				<p>Welcome to the administration panel of the jPList plugin. Get started at <a href="http://jplist.com">jplist.com</a>, fork it on <a href="https://github.com/no81no/jplist">GitHub</a> or read license <a href="http://jplist.com/home/download" title="">here</a>.</p>
 			</div>		
 			
 			<div class="wrap">
@@ -295,46 +296,16 @@ class jplist{
 				<!-- jPList admin content -->
 				<div class="jp-box">
 					
-					<!-- jplist plugin call -->
-					<div class="jp-box jp-settings-box">
-					
-						<!-- header -->
-						<div class="jp-box jp-settings-header">
-							<p class="jp-left">JavaScript Settings</p>
-							<p class="jp-right">								
-								<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
-								<input type="button" value="Reset" class="button-primary" data-type="reset-js" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
-							</p>
-						</div>
-						
-						<!-- content -->
-						<div class="jp-box jp-settings-content">
-							
-							<!-- codemirror placeholder -->
-							<div id="js-settings-bar-ta"></div>
-							
-							<!-- hidden content -->
-							<div class="hidden" id="js-settings-bar-ta-content">
-<?php
-if(!get_option('jplist_js')){
-
-	echo($this->jplist_controls->js_settings);
-} 
-else{
-	echo(stripslashes_deep(get_option('jplist_js')));
-}
-?>						
-							</div>
-						</div>
-						
-					</div>
 					
 					<!-- top panel controls -->
 					<div class="jp-box jp-settings-box">
 						
 						<!-- header -->
 						<div class="jp-box jp-settings-header">
-							<p class="jp-left">Top Panel Controls</p>
+							<p class="jp-left">
+								<a href="http://jplist.com/home/controls" title="jPList Controls"><i class="fa fa-question-circle"></i></a>
+								Top Panel Controls
+							</p>
 							<p class="jp-right">
 								<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
 								<input type="button" value="Reset" class="button-primary" data-type="reset-top-panel" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
@@ -371,7 +342,10 @@ else{
 						
 						<!-- header -->
 						<div class="jp-box jp-settings-header">
-							<p class="jp-left">Bottom Panel Controls</p>
+							<p class="jp-left">
+								<a href="http://jplist.com/home/controls" title="jPList Controls"><i class="fa fa-question-circle"></i></a>
+								Bottom Panel Controls
+							</p>
 							<p class="jp-right">
 								<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
 								<input type="button" value="Reset" class="button-primary" data-type="reset-bot-panel" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
@@ -407,7 +381,10 @@ else{
 						
 						<!-- header -->
 						<div class="jp-box jp-settings-header">
-							<p class="jp-left">Handlebars Template</p>
+							<p class="jp-left">
+								<a href="http://handlebarsjs.com" title="Handlebars"><i class="fa fa-question-circle"></i></a>
+								Handlebars Template
+							</p>
 							<p class="jp-right">
 								<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
 								<input type="button" value="Reset" class="button-primary" data-type="reset-template" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
@@ -437,9 +414,45 @@ else{
 						</div>
 					</div>
 					<!-- end of handlebars template -->
+					
+					<!-- jplist plugin call -->
+					<div class="jp-box jp-settings-box">
+					
+						<!-- header -->
+						<div class="jp-box jp-settings-header">
+							<p class="jp-left">
+								<a href="http://jplist.com/home/js-settings" title="jPList JavaScript Settings"><i class="fa fa-question-circle"></i></a>
+								JavaScript Settings
+							</p>
+							<p class="jp-right">								
+								<img class="jp-preloader" src="<?php echo($this->jplist_relative_path); ?>/content/img/common/ajax-loader.gif" alt="Loaing..." title="Loaing..." />
+								<input type="button" value="Reset" class="button-primary" data-type="reset-js" data-url="<?php echo(admin_url('admin-ajax.php')); ?>" />
+							</p>
+						</div>
+						
+						<!-- content -->
+						<div class="jp-box jp-settings-content">
+							
+							<!-- codemirror placeholder -->
+							<div id="js-settings-bar-ta"></div>
+							
+							<!-- hidden content -->
+							<div class="hidden" id="js-settings-bar-ta-content">
+<?php
+if(!get_option('jplist_js')){
+
+	echo($this->jplist_controls->js_settings);
+} 
+else{
+	echo(stripslashes_deep(get_option('jplist_js')));
+}
+?>						
+							</div>
+						</div>
+						
+					</div>
+					
 				</div>
-				
-				
 				
 			</div>
 		
