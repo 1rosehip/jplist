@@ -216,7 +216,7 @@ class jplist_domain{
 		$json = "[]";		
 		$preparedParams = array();
 		$pagingStatus = null;
-		$filter = "where `post_status` = 'publish' ";
+		$filter = "where `post_status` = 'publish' and `post_type` = 'post' ";
 		$sort = "";
 		$query = "";
 		$count = 0;

@@ -93,6 +93,15 @@ class jplist{
 	*/
 	public function init_scripts_and_styles(){
 		
+		//deregister font-awesome
+		wp_deregister_style('font-awesome');
+		
+		//register font-awesome
+		wp_register_style('font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css', false, '4.0.3', 'all'); 
+		
+		//add font-awesome
+		wp_enqueue_style('font-awesome');
+		
 		//deregister jplist
 		wp_deregister_style('jplist_styles');
 		

@@ -1,13 +1,12 @@
 + delete content, put preloader
 + add text fiter button
-- font awesome ???
+- add styles
 - add filter image in css
 - add restore default buttons in admin
 - add docs in admin
 - add license in admin
 - add link to website and github in admin
 - add list styles, remove inline styles
-- debug tools?
 - check if plugin is OK?
 - remove options on deinstall...
 - the plugin settings should be simpler somehow...
@@ -15,6 +14,9 @@
 - add list/grid view
 - shortcode ->  remove gibrish.. 
 - shortcode -> how to add to wsywig?
+- add list-grid view
+- responsive
+
 
 /**
 * get content html

@@ -42,18 +42,18 @@ class jplist_shortcodes{
 		
 		//no results
 		$no_results = '';
-		$no_results .= '<div class="box jplist-no-results text-shadow align-center">';
+		$no_results .= '<div class="jplist-no-results">';
 			$no_results .= '<p>No results found</p>';
 		$no_results .= '</div>';
 	
 		$html = '';
-		$html .= '<div id="jplist-box" class="box jplist" style="float: left; width: 100%;">';
+		$html .= '<div class="jplist">';
 		
 		//top ios button
 		$html .= $ios_btn;
 		
 		//top panel
-		$html .= '<div class="jplist-panel box panel-top" style="float: left; width: 100%; margin: 0 0 15px 0">';
+		$html .= '<div class="jplist-panel panel-top">';
 		
 		if(!get_option('jplist_top')){				
 			$html .= stripslashes_deep($this->jplist_controls->top_panel);
@@ -65,7 +65,7 @@ class jplist_shortcodes{
 		$html .= '</div>';
 		
 		//ajax content here
-		$html .= '<div class="list box text-shadow"></div>';
+		$html .= '<div class="jplist-list"></div>';
 		
 		//no results
 		$html .= $no_results;
@@ -74,7 +74,7 @@ class jplist_shortcodes{
 		$html .= $ios_btn;
 		
 		//bottom panel
-		$html .= '<div class="jplist-panel box panel-bottom" style="float: left; width: 100%; margin: 15px 0 0 0">';
+		$html .= '<div class="jplist-panel panel-bottom">';
 		
 		if(!get_option('jplist_bot')){				
 			$html .= stripslashes_deep($this->jplist_controls->bot_panel);

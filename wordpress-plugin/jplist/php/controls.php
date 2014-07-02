@@ -40,7 +40,7 @@
 			$this->preloader = $this->get_preloader_html();
 			
 			//init default panel html
-			$this->top_panel = $this->reset_btn . $this->items_per_page . $this->sort_dd . $this->title_text_filter . $this->preloader. $this->pagination_results . $this->pagination;
+			$this->top_panel = $this->reset_btn . $this->items_per_page . $this->sort_dd . $this->title_text_filter . $this->pagination_results . $this->pagination . $this->preloader;
 			$this->bot_panel = $this->items_per_page . $this->sort_dd . $this->pagination_results . $this->pagination;
 			
 			//init default js settings
@@ -85,10 +85,15 @@
 					$content .= "\t\t<!-- jplist item --> \r\n";
 					$content .= "\t\t<div class='jplist-item' data-type='item'>\r\n";
 					
-					$content .= "\t\t\t\t<p class='jplist-title'><a href='{{link}}' title='{{post_title}}'>{{post_title}}</a></p>\r\n";
-					$content .= "\t\t\t\t<p class='jplist-thumb'><a href='{{link}}' title='{{post_title}}'>{{{thumb}}}</a></p>\r\n";
-					$content .= "\t\t\t\t<p class='jplist-excerpt'>{{excerpt}}</p>\r\n";
-					$content .= "\t\t\t\t<p class='jplist-readmore'><a href='{{link}}' title='{{post_title}}'>Read More</a></p>\r\n";
+					$content .= "\t\t\t\t<!-- title -->\r\n";	
+					$content .= "\t\t\t\t<div class='jplist-title'><p><a href='{{link}}' title='{{post_title}}'>{{post_title}}</a></p></div>\r\n";	
+					
+					$content .= "\t\t\t\t<div class='jplist-thumb'><p><a href='{{link}}' title='{{post_title}}'>{{{thumb}}}</a></p></div>\r\n";
+								
+					$content .= "\t\t\t\t<div class='jplist-item-content'>\r\n";
+					$content .= "\t\t\t\t\t<p class='jplist-excerpt'>{{excerpt}}</p>\r\n";
+					$content .= "\t\t\t\t\t<p class='jplist-readmore'><a href='{{link}}' title='{{post_title}}'>Read More &#187;</a></p>\r\n";
+					$content .= "\t\t\t\t</div>\r\n";
 					
 					$content .= "\t\t</div>\r\n";
 					
@@ -108,13 +113,13 @@
 			
 			$js .= "jQuery('document').ready(function(){\r\n\r\n";
 							
-				$js .= "\tvar \$list = jQuery('#jplist-box .list')\r\n";
+				$js .= "\tvar \$list = jQuery('.jplist .jplist-list')\r\n";
 					$js .= "\t\t,template = Handlebars.compile(jQuery('#jplist-template').html());\r\n\r\n";
 				
 				$js .= "\t//init jplist with php + mysql data source, json and handlebars template\r\n";
-				$js .= "\tjQuery('#jplist-box').jplist({\r\n\r\n";
+				$js .= "\tjQuery('.jplist').jplist({\r\n\r\n";
 				
-					$js .= "\t\titemsBox: '.list'\r\n"; 
+					$js .= "\t\titemsBox: '.jplist-list'\r\n"; 
 					$js .= "\t\t,itemPath: '[data-type=\"item\"]'\r\n"; 
 					$js .= "\t\t,panelPath: '.jplist-panel'\r\n\r\n";
 					
@@ -234,18 +239,18 @@
 		public function get_title_text_filter_html(){
 			
 			$html = "";
-			$html .= "<!-- filter by title -->\r\n";
+			$html .= "<!-- filter by post title -->\r\n";
 			$html .= "<div class='text-filter-box'>\r\n";
 			 
 			$html .= "\t<!--[if lt IE 10]>\r\n";
-			$html .= "\t<div class='jplist-label'>Filter by Title:</div>\r\n";
+			$html .= "\t<div class='jplist-label'>Filter by Post Title:</div>\r\n";
 			$html .= "\t<![endif]-->\r\n\r\n";
 			 
 			$html .= "\t<input \r\n";
 				$html .= "\tdata-path='.jplist-title' \r\n";
 				$html .= "\ttype='text' \r\n";
 				$html .= "\tvalue='' \r\n";
-				$html .= "\tplaceholder='Filter by Title' \r\n";
+				$html .= "\tplaceholder='Filter by Post Title' \r\n";
 				$html .= "\tdata-control-type='textbox' \r\n";
 				$html .= "\tdata-control-name='title-filter' \r\n";
 				$html .= "\tdata-control-action='filter' \r\n";
