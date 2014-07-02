@@ -37,6 +37,11 @@ class jplist{
 	public $jplist_shortcodes;
 	
 	/**
+	* jPlist editor (TinyMCE)
+	*/
+	public $jplist_editor;
+	
+	/**
 	* jplist logic
 	*/
 	public $domain;
@@ -57,11 +62,13 @@ class jplist{
 		require_once($this->jplist_abs_path . '/php/shortcodes.php');
 		require_once($this->jplist_abs_path . '/php/controls.php');
 		require_once($this->jplist_abs_path . '/php/jplist-domain.php');
+		require_once($this->jplist_abs_path . '/php/editor.php');
 		
 		//init jplist control
 		$this->jplist_controls = new jplist_controls($this->jplist_relative_path);
 		$this->jplist_shortcodes = new jplist_shortcodes($this->jplist_relative_path, $this->jplist_options, $this->jplist_controls);
 		$this->domain = new jplist_domain();
+		$this->jplist_editor = new jplist_editor($this->jplist_relative_path);
 				
 		//add settings page
 		add_action('admin_menu',  array(&$this, 'add_settings_page'));
