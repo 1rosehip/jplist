@@ -54,20 +54,19 @@ class jplist{
 		//init includes path
 		$this->jplist_abs_path = dirname(__FILE__); //ABSPATH
 		$this->jplist_relative_path = get_bloginfo('wpurl') . '/wp-content/plugins/jplist';
-		
-		//init jplist options db record
-		$this->jplist_options = 'jplist_options';
-		
-		//include
-		require_once($this->jplist_abs_path . '/php/shortcodes.php');
-		require_once($this->jplist_abs_path . '/php/controls.php');
-		require_once($this->jplist_abs_path . '/php/jplist-domain.php');
-		require_once($this->jplist_abs_path . '/php/editor.php');
+				
+		//includes
+		require_once($this->jplist_abs_path . '/php/domain/shortcodes.php');
+		require_once($this->jplist_abs_path . '/php/domain/controls.php');
+		require_once($this->jplist_abs_path . '/php/dal/db.php');
+		require_once($this->jplist_abs_path . '/php/dal/options.php');
+		require_once($this->jplist_abs_path . '/php/ui/editor.php');
 		
 		//init jplist control
+		$this->domain = new jplist_db();
+		$this->jplist_options = new jplist_options();
 		$this->jplist_controls = new jplist_controls($this->jplist_relative_path);
-		$this->jplist_shortcodes = new jplist_shortcodes($this->jplist_relative_path, $this->jplist_options, $this->jplist_controls);
-		$this->domain = new jplist_domain();
+		$this->jplist_shortcodes = new jplist_shortcodes($this->jplist_relative_path, $this->jplist_options, $this->jplist_controls);		
 		$this->jplist_editor = new jplist_editor($this->jplist_relative_path);
 				
 		//add settings page
@@ -178,7 +177,7 @@ class jplist{
 	*/
 	public function reset_js_panel_callback(){
 	
-		delete_option('jplist_js');	
+		delete_option($this->jplist_options->jplist_js);	
 		echo($this->jplist_controls->js_settings);
 		die();
 	}
@@ -188,7 +187,7 @@ class jplist{
 	*/
 	public function reset_top_panel_callback(){
 	
-		delete_option('jplist_top');	
+		delete_option($this->jplist_options->jplist_top);	
 		echo($this->jplist_controls->top_panel);		
 		die();
 	}
@@ -198,7 +197,7 @@ class jplist{
 	*/
 	public function reset_bot_panel_callback(){
 	
-		delete_option('jplist_bot');	
+		delete_option($this->jplist_options->jplist_bot);	
 		echo($this->jplist_controls->bot_panel);
 		die();
 	}
@@ -208,7 +207,7 @@ class jplist{
 	*/
 	public function reset_js_template_callback(){
 	
-		delete_option('jplist_template');	
+		delete_option($this->jplist_options->jplist_template);	
 		echo($this->jplist_controls->template);
 		die();
 	}
@@ -329,12 +328,12 @@ class jplist{
 							<div class="hidden" id="top-bar-ta-content">
 							
 <?php
-if(!get_option('jplist_top')){
+if(!get_option($this->jplist_options->jplist_top)){
 
 	print($this->jplist_controls->top_panel);
 } 
 else{
-	echo(stripslashes_deep(get_option('jplist_top')));
+	echo(stripslashes_deep(get_option($this->jplist_options->jplist_top)));
 }
 ?>
 							</div>	
@@ -368,12 +367,12 @@ else{
 							<!-- hidden content -->
 							<div class="hidden" id="bottom-bar-ta-content">
 <?php  
-if(!get_option('jplist_bot')){
+if(!get_option($this->jplist_options->jplist_bot)){
 
 	echo($this->jplist_controls->bot_panel);
 } 
 else{
-	echo(stripslashes_deep(get_option('jplist_bot')));
+	echo(stripslashes_deep(get_option($this->jplist_options->jplist_bot)));
 }
 ?>
 							</div>	
@@ -407,12 +406,12 @@ else{
 							<!-- hidden content -->
 							<div class="hidden" id="handlebars-template-bar-ta-content">
 <?php  
-if(!get_option('jplist_template')){
+if(!get_option($this->jplist_options->jplist_template)){
 
 	echo($this->jplist_controls->template);
 } 
 else{
-	echo(stripslashes_deep(get_option('jplist_template')));
+	echo(stripslashes_deep(get_option($this->jplist_options->jplist_template)));
 }
 ?>
 							</div>	
@@ -446,12 +445,12 @@ else{
 							<!-- hidden content -->
 							<div class="hidden" id="js-settings-bar-ta-content">
 <?php
-if(!get_option('jplist_js')){
+if(!get_option($this->jplist_options->jplist_js)){
 
 	echo($this->jplist_controls->js_settings);
 } 
 else{
-	echo(stripslashes_deep(get_option('jplist_js')));
+	echo(stripslashes_deep(get_option($this->jplist_options->jplist_js)));
 }
 ?>						
 							</div>
@@ -493,36 +492,9 @@ else{
 	* on plugin activation
 	*/
 	public function register_activation(){
-	
-		$options = false;
-		$defaults = array();
-		$data = NULL;
-		
-		//get jplist options from db
-		$options = get_option($this->jplist_options);
-		
-		if($options){
-		
-			//delete options if exists
-			delete_option($this->jplist_options);
-			//delete_option('jplist_top');
-		}
-		
-		/*
-		//create one default jplist
-		$data = new jplist_settings_data();
-		
-		//init default options list
-		$defaults[] = $data->get_data_array();
-		
-		//test
-		$test = new jplist_settings_data(); 
-		$test->jplist_items_box_path = '12345';
-		$defaults[] = $test->get_data_array();
-		
-		//save to db
-		update_option($this->jplist_options, $defaults);
-		*/
+			
+		//delete old options (if they exist)
+		$this->jplist_options->delete_options();		
 	}
 	
 	/**
@@ -530,16 +502,8 @@ else{
 	*/
 	public static function register_uninstall(){
 		
-		$options = false;
-		
-		//get jplist options from db
-		$options = get_option($this->jplist_options);
-		
-		if($options){
-		
-			//delete options if exists
-			delete_option($this->jplist_options);
-		}
+		//delete old options (if they exist)
+		$this->jplist_options->delete_options();
 	}
 		
 }	

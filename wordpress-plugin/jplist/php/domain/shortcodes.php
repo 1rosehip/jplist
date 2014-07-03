@@ -55,11 +55,11 @@ class jplist_shortcodes{
 		//top panel
 		$html .= '<div class="jplist-panel panel-top">';
 		
-		if(!get_option('jplist_top')){				
+		if(!get_option($this->jplist_options->jplist_top)){				
 			$html .= stripslashes_deep($this->jplist_controls->top_panel);
 		} 
 		else{
-			$html .= stripslashes_deep(get_option('jplist_top'));
+			$html .= stripslashes_deep(get_option($this->jplist_options->jplist_top));
 		}
 		
 		$html .= '</div>';
@@ -76,11 +76,11 @@ class jplist_shortcodes{
 		//bottom panel
 		$html .= '<div class="jplist-panel panel-bottom">';
 		
-		if(!get_option('jplist_bot')){				
+		if(!get_option($this->jplist_options->jplist_bot)){				
 			$html .= stripslashes_deep($this->jplist_controls->bot_panel);
 		} 
 		else{
-			$html .= stripslashes_deep(get_option('jplist_bot'));
+			$html .= stripslashes_deep(get_option($this->jplist_options->jplist_bot));
 		}
 		
 		$html .= '</div>';
@@ -90,22 +90,22 @@ class jplist_shortcodes{
 		//add jplist call script
 		$html .= '<script>';
 		
-		if(!get_option('jplist_js')){				
+		if(!get_option($this->jplist_options->jplist_js)){				
 			$html .= stripslashes_deep($this->jplist_controls->js_settings);
 		} 
 		else{
-			$html .= stripslashes_deep(get_option('jplist_js'));
+			$html .= stripslashes_deep(get_option($this->jplist_options->jplist_js));
 		}
 		
 		$html .= '</script>';
 		
 		//add handlebars template
 		
-		if(!get_option('jplist_template')){				
+		if(!get_option($this->jplist_options->jplist_template)){				
 			$html .= stripslashes_deep($this->jplist_controls->template);
 		} 
 		else{
-			$html .= stripslashes_deep(get_option('jplist_template'));
+			$html .= stripslashes_deep(get_option($this->jplist_options->jplist_template));
 		}
 		
 		return $html;

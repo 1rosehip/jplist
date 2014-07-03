@@ -7,12 +7,6 @@ php
 ----
 - code review -> domain, ui, app, dal, mvc -> in php...
 - remove options on deinstall...
-- check if plugin is OK?
-- option names -> should be class properties
-
-other
------
-- shortcode -> how to add to wsywig?
 
 FUTURE REALEASE
 ================
@@ -20,3 +14,7 @@ FUTURE REALEASE
 admin
 -----
 - the plugin settings should be simpler somehow...
+
+php
+---
+- unit tests?

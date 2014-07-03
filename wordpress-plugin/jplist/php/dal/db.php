@@ -1,9 +1,9 @@
 <?php
 		
 /**
-* jPList Domain Class
+* jPList DataBase Class
 */
-class jplist_domain{
+class jplist_db{
 	
 	//status (from client)
 	public $statuses;
@@ -14,7 +14,7 @@ class jplist_domain{
 	/**
 	* constructor
 	*/
-	public function jplist_domain(){
+	public function jplist_db(){
 		
 		//init properties
 		$this->wpdb = $GLOBALS['wpdb'];
