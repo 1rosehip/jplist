@@ -195,7 +195,7 @@
 			,handlebarsTemplate: null
 		};
 		
-		if(window.location.href.indexOf('jplist.php') !== -1){
+		if(jQuery('#jplist-admin-page').length > 0){
 		
 			//init codemirror
 			initCodemirror(context);
