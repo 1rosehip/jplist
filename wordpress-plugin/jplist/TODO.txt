@@ -1,12 +1,18 @@
 jplist
 ------
+- sort by post date
+
+- tags? categories? -> checkbox filters
+
 - add list/grid view
 - responsive
 
-php
-----
-- code review -> domain, ui, app, dal, mvc -> in php...
-- remove options on deinstall...
+- ajax seo ...
+
+- what wordpress version?
+
+
+
 
 FUTURE REALEASE
 ================
@@ -18,3 +24,24 @@ admin
 php
 ---
 - unit tests?
+
+
+Plugin Submission and Promotion
+--------------------------------
+http://codex.wordpress.org/Plugin_Submission_and_Promotion
+
+wordpress command line
+-----------------------
+http://wp-cli.org/
+
+ Readme File
+
+http://codex.wordpress.org/Writing_a_Plugin
+--------------------------------------------
+If you want to host your Plugin on http://wordpress.org/extend/plugins/, you also need to create a readme.txt file in a standard format, and include it with your Plugin. See http://wordpress.org/extend/plugins/about/readme.txt for a description of the format or use the automatic plugin 'readme.txt' generator. 
+
+Internationalizing Your Plugin...
+http://codex.wordpress.org/I18n_for_WordPress_Developers
+
+WordPress Coding Standards
+http://codex.wordpress.org/WordPress_Coding_Standards

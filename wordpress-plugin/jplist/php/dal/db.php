@@ -58,6 +58,11 @@ class jplist_db{
 					$query = "order by post_content";
 					break;
 				}
+				
+				case ".jplist-date":{
+					$query = "order by post_date";
+					break;
+				}
 			}
 			
 			if(isset($data->order)){
@@ -299,10 +304,18 @@ class jplist_db{
 				$link = get_permalink($post->ID);
 				$thumb = get_the_post_thumbnail($post->ID, 'thumbnail', '');
 				$excerpt = wp_trim_words($post->post_content);
+				$date = get_the_date('', $post->ID);
+				$time = get_the_time('', $post->ID);
+				$hidden_date = get_the_date('Y-n-j ', $post->ID);
+				$hidden_time = get_the_time('G-i-s', $post->ID);
 				
 				$post->link = $link;
 				$post->thumb = $thumb;
 				$post->excerpt = $excerpt;
+				$post->date = $date;
+				$post->time = $time;
+				$post->hidden_date = $hidden_date;
+				$post->hidden_time = $hidden_time;
 				
 				$json .= json_encode($post);
 				

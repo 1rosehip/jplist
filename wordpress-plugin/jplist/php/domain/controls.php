@@ -83,7 +83,7 @@
 				$content .= "\t{{#each this}}\r\n\r\n";				
 					
 					$content .= "\t\t<!-- jplist item --> \r\n";
-					$content .= "\t\t<div class='jplist-item' data-type='item'>\r\n";
+					$content .= "\t\t<div class='jplist-item' id='jplist-item-{{ID}}' data-type='item'>\r\n";
 					
 					$content .= "\t\t\t\t<!-- title -->\r\n";	
 					$content .= "\t\t\t\t<div class='jplist-title'><p><a href='{{link}}' title='{{post_title}}'>{{post_title}}</a></p></div>\r\n";	
@@ -91,6 +91,8 @@
 					$content .= "\t\t\t\t<div class='jplist-thumb'><p><a href='{{link}}' title='{{post_title}}'>{{{thumb}}}</a></p></div>\r\n";
 								
 					$content .= "\t\t\t\t<div class='jplist-item-content'>\r\n";
+					$content .= "\t\t\t\t\t<p class='jplist-date'>{{date}} {{time}}</p>\r\n";
+					//$content .= "\t\t\t\t\t<p class='jplist-date-hidden'>{{hidden_date}}-{{hidden_time}}</p>\r\n";
 					$content .= "\t\t\t\t\t<p class='jplist-excerpt'>{{excerpt}}</p>\r\n";
 					$content .= "\t\t\t\t\t<p class='jplist-readmore'><a href='{{link}}' title='{{post_title}}'>Read More &#187;</a></p>\r\n";
 					$content .= "\t\t\t\t</div>\r\n";
@@ -220,12 +222,14 @@
 				 $html .= "data-control-type='drop-down' \r\n"; 
 				 $html .= "data-control-name='sort' \r\n";
 				 $html .= "data-control-action='sort' \r\n";
-				 $html .= "data-datetime-format='{month}/{day}/{year}'>\r\n";
+				 $html .= "data-datetime-format='{year}-{month}-{day}-{hour}-{min}-{sec}'>\r\n";
 				 
 				 $html .= "\t<ul>\r\n";
 					$html .= "\t\t<li><span data-path='default'>Sort by</span></li>\r\n";
-					$html .= "\t\t<li><span data-path='.jplist-title' data-order='asc' data-type='text'>Title A-Z</span></li>\r\n";
-					$html .= "\t\t<li><span data-path='.jplist-title' data-order='desc' data-type='text'>Title Z-A</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='.jplist-title' data-order='asc' data-type='text'>Post Title A-Z</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='.jplist-title' data-order='desc' data-type='text'>Post Title Z-A</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='.jplist-date' data-order='asc' data-type='datetime'>Post Date asc</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='.jplist-date' data-order='desc' data-type='datetime'>Post Date desc</span></li>\r\n";
 				 $html .= "\t</ul>\r\n";
 			$html .= "</div>\r\n\r\n";
 			

@@ -16,7 +16,7 @@ If your project generates any type of income, e.g. sells products, ads, services
 	*/
 	class jplist{
 		
-		/** @type {string} */
+		//paths
 		public $jplist_abs_path;
 		public $jplist_relative_path;
 		
