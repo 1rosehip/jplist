@@ -87,7 +87,7 @@
 			   $html .= "\tclass='jplist-group'\r\n";
 			   $html .= "\tdata-control-type='checkbox-group-filter'\r\n";
 			   $html .= "\tdata-control-action='filter'\r\n";
-			   $html .= "\tdata-control-name='themes'>\r\n\r\n";
+			   $html .= "\tdata-control-name='categories'>\r\n\r\n";
 			   
 			   foreach ($categories as $category) {
 				   $html .= "\t<input \r\n";

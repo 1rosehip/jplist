@@ -21,6 +21,37 @@ class jplist_db{
 	}
 	
 	/**
+	* get checkbox group filter query
+	* @param {Array.<string>} pathGroup - paths list
+	* @return {string} query
+	* @param {Array.<string>} $preparedParams - array of params for prepare statement
+	*/
+	function getCheckboxGroupFilterQuery($keyword, $pathGroup, &$preparedParams){
+		
+		$path = "";
+		$length = count($pathGroup);
+		$query = "";
+		
+		for($i=0; $i<$length; $i++){
+			
+			//get path
+			$path = $pathGroup[$i];
+			
+			//replace dot
+			$path = str_replace(array("."), "", $path);
+			
+			if($i !== 0){
+				$query .= " or ";
+			}
+			
+			$query .= " " . $keyword . " like '%%%s%%' ";
+			array_push($preparedParams, "$path");
+		}
+		
+		return $query;
+	}
+	
+	/**
 	* get sort query
 	* @param {Object} $status
 	* @param {Array.<string>} $preparedParams - array of params for prepare statement
@@ -140,6 +171,24 @@ class jplist_db{
 					}
 					break;
 				}
+				
+				case "categories":{
+					if(isset($data->pathGroup) && is_array($data->pathGroup)){
+						$prevQueryNotEmpty = strrpos($prevQuery, "where");
+						$query = "";
+						$filter = $this->getCheckboxGroupFilterQuery("slug", $data->pathGroup, $preparedParams);
+						
+						if($filter){
+							if($prevQueryNotEmpty === false){
+								$query = "where " . $filter;
+							}
+							else{
+								$query = " and (" . $filter . ")";
+							}
+						}						
+					}
+					break;
+				}
 			}
 		}
 		
@@ -256,7 +305,13 @@ class jplist_db{
 			}
 			
 			//count database items for pagination
-			$query = "SELECT count(ID) FROM wp_posts " . $filter . " " . $sort;
+			//$query = "SELECT count(ID) FROM wp_posts " . $filter . " " . $sort;			
+			$query = "";
+			$query .= "SELECT count(ID) ";
+			$query .= "FROM wp_posts ";
+			$query .= "INNER JOIN wp_term_relationships ON wp_posts.ID  = wp_term_relationships.object_id ";
+			$query .= "INNER JOIN wp_terms ON wp_term_relationships.term_taxonomy_id = wp_terms.term_id ";
+			$query .= $filter . " " . $sort;
 			
 			if(count($preparedParams) > 0){
 				
@@ -277,7 +332,20 @@ class jplist_db{
 			}
 			
 			//init query with sort and filter
-			$query = "SELECT * FROM wp_posts " . $filter . " " . $sort . " " . $paging;
+			/*
+			SELECT wp_posts.ID, wp_posts.post_date, wp_posts.post_content, wp_posts.post_title, wp_posts.post_name, wp_posts.comment_count, wp_terms.name, wp_terms.slug
+			FROM wp_posts 
+			INNER JOIN wp_term_relationships ON wp_posts.ID  = wp_term_relationships.object_id
+			INNER JOIN wp_terms ON wp_term_relationships.term_taxonomy_id = wp_terms.term_id
+			WHERE `post_status` = 'publish' and `post_type` = 'post' 
+			*/
+			$query = "";
+			$query .= "SELECT wp_posts.ID, wp_posts.post_date, wp_posts.post_content, wp_posts.post_title, wp_posts.post_name, wp_posts.comment_count, wp_terms.name, wp_terms.slug ";
+			$query .= "FROM wp_posts ";
+			$query .= "INNER JOIN wp_term_relationships ON wp_posts.ID  = wp_term_relationships.object_id ";
+			$query .= "INNER JOIN wp_terms ON wp_term_relationships.term_taxonomy_id = wp_terms.term_id ";
+			$query .= $filter . " " . $sort . " " . $paging;
+			//$query = "SELECT * FROM wp_posts " . $filter . " " . $sort . " " . $paging;
 									
 			if(count($preparedParams) > 0){
 			
