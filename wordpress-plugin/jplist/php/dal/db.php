@@ -54,8 +54,8 @@ class jplist_db{
 					break;
 				}
 				
-				case ".content":{
-					$query = "order by post_content";
+				case ".jplist-comments":{
+					$query = "order by comment_count";
 					break;
 				}
 				

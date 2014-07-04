@@ -94,6 +94,7 @@
 					$content .= "\t\t\t\t\t<p class='jplist-date'>{{date}} {{time}}</p>\r\n";
 					//$content .= "\t\t\t\t\t<p class='jplist-date-hidden'>{{hidden_date}}-{{hidden_time}}</p>\r\n";
 					$content .= "\t\t\t\t\t<p class='jplist-excerpt'>{{excerpt}}</p>\r\n";
+					$content .= "\t\t\t\t\t<p class='jplist-comments'>{{comment_count}} Comment(s)</p>\r\n";
 					$content .= "\t\t\t\t\t<p class='jplist-readmore'><a href='{{link}}' title='{{post_title}}'>Read More &#187;</a></p>\r\n";
 					$content .= "\t\t\t\t</div>\r\n";
 					
@@ -124,6 +125,9 @@
 					$js .= "\t\titemsBox: '.jplist-list'\r\n"; 
 					$js .= "\t\t,itemPath: '[data-type=\"item\"]'\r\n"; 
 					$js .= "\t\t,panelPath: '.jplist-panel'\r\n\r\n";
+					
+					$js .= "\t\t,storage: 'localstorage'\r\n"; 
+					$js .= "\t\t,storageName: 'jplist'\r\n\r\n"; 
 					
 					$js .= "\t\t//data source\r\n";
 					$js .= "\t\t,dataSource: {\r\n\r\n";
@@ -230,6 +234,8 @@
 					$html .= "\t\t<li><span data-path='.jplist-title' data-order='desc' data-type='text'>Post Title Z-A</span></li>\r\n";
 					$html .= "\t\t<li><span data-path='.jplist-date' data-order='asc' data-type='datetime'>Post Date asc</span></li>\r\n";
 					$html .= "\t\t<li><span data-path='.jplist-date' data-order='desc' data-type='datetime'>Post Date desc</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='.jplist-comments' data-order='asc' data-type='number'>Comments asc</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='.jplist-comments' data-order='desc' data-type='number'>Comments desc</span></li>\r\n";
 				 $html .= "\t</ul>\r\n";
 			$html .= "</div>\r\n\r\n";
 			
