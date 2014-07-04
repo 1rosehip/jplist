@@ -1,7 +1,5 @@
 jplist
 ------
-- sort by post date
-
 - tags? categories? -> checkbox filters
 
 - add list/grid view

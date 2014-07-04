@@ -12,7 +12,9 @@
 		public $items_per_page;
 		public $sort_dd;
 		public $title_text_filter;
-		public $pagination_results;
+		public $content_text_filter;
+		public $pagination_results_top;
+		public $pagination_results_bot;
 		public $pagination;
 		public $preloader;
 		
@@ -35,13 +37,15 @@
 			$this->items_per_page = $this->get_items_per_page_html();
 			$this->sort_dd = $this->get_sort_dd_html();
 			$this->title_text_filter = $this->get_title_text_filter_html();
-			$this->pagination_results = $this->get_pagination_results_html();
+			$this->content_text_filter = $this->get_post_content_text_filter_html();
+			$this->pagination_results_top = $this->get_pagination_results_html(false);
+			$this->pagination_results_bot = $this->get_pagination_results_html(true);
 			$this->pagination = $this->get_pagination_html();
 			$this->preloader = $this->get_preloader_html();
 			
 			//init default panel html
-			$this->top_panel = $this->reset_btn . $this->items_per_page . $this->sort_dd . $this->title_text_filter . $this->pagination_results . $this->pagination . $this->preloader;
-			$this->bot_panel = $this->items_per_page . $this->sort_dd . $this->pagination_results . $this->pagination;
+			$this->top_panel = $this->reset_btn . $this->items_per_page . $this->sort_dd . $this->title_text_filter . $this->content_text_filter . $this->pagination_results_top . $this->pagination . $this->preloader;
+			$this->bot_panel = $this->items_per_page . $this->sort_dd . $this->pagination_results_bot . $this->pagination;
 			
 			//init default js settings
 			$this->js_settings = $this->get_js_settings();
@@ -126,8 +130,8 @@
 					$js .= "\t\t,itemPath: '[data-type=\"item\"]'\r\n"; 
 					$js .= "\t\t,panelPath: '.jplist-panel'\r\n\r\n";
 					
-					$js .= "\t\t,storage: 'localstorage'\r\n"; 
-					$js .= "\t\t,storageName: 'jplist'\r\n\r\n"; 
+					//$js .= "\t\t,storage: 'localstorage'\r\n"; 
+					//$js .= "\t\t,storageName: 'jplist'\r\n\r\n"; 
 					
 					$js .= "\t\t//data source\r\n";
 					$js .= "\t\t,dataSource: {\r\n\r\n";
@@ -279,16 +283,59 @@
 		}
 		
 		/**
+		* get post content text filter HTML
+		* @return {string}
+		*/
+		public function get_post_content_text_filter_html(){
+			
+			$html = "";
+			$html .= "<!-- filter by post content -->\r\n";
+			$html .= "<div class='text-filter-box'>\r\n";
+			 
+			$html .= "\t<!--[if lt IE 10]>\r\n";
+			$html .= "\t<div class='jplist-label'>Filter by Content:</div>\r\n";
+			$html .= "\t<![endif]-->\r\n\r\n";
+			 
+			$html .= "\t<input \r\n";
+				$html .= "\tdata-path='.jplist-content' \r\n";
+				$html .= "\ttype='text' \r\n";
+				$html .= "\tvalue='' \r\n";
+				$html .= "\tplaceholder='Filter by Content' \r\n";
+				$html .= "\tdata-control-type='textbox' \r\n";
+				$html .= "\tdata-control-name='content-filter' \r\n";
+				$html .= "\tdata-control-action='filter' \r\n";
+				$html .= "\tdata-button='#content-search-button' \r\n";
+			$html .= "/>\r\n\r\n";
+			
+			$html .= "\t<button  \r\n";
+				$html .= "\ttype='button' \r\n"; 
+				$html .= "\tid='content-search-button'> \r\n";
+				$html .= "\t<i class='fa fa-search'></i> \r\n";
+			$html .= "\t</button> \r\n\r\n";
+			
+			$html .= "</div>\r\n\r\n";
+			
+			return $html;
+		}
+		
+		/**
 		* get pagination results HTML
 		* @return {string}
 		*/
-		public function get_pagination_results_html(){
+		public function get_pagination_results_html($is_bottom){
 			
 			$html = "";
 			$html .= "<!-- pagination info -->\r\n";
 			$html .= "<div \r\n";
 				 $html .= "\tclass='jplist-label' \r\n";
-				 $html .= "\tdata-type='Page {current} of {pages}' \r\n";
+				 
+				 if($is_bottom){
+					$html .= "\tdata-type='{start} - {end} of {all}' \r\n";
+				 }
+				 else{
+					$html .= "\tdata-type='Page {current} of {pages}' \r\n";
+				 }
+				 
 				 $html .= "\tdata-control-type='pagination-info' \r\n"; 
 				 $html .= "\tdata-control-name='paging' \r\n";
 				 $html .= "\tdata-control-action='paging'>\r\n";

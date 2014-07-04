@@ -227,8 +227,7 @@ class jplist_db{
 		$count = 0;
 		$counter = 0;
 		
-		try{
-			
+		try{			
 			if(isset($statuses)){
 								
 				//statuses => array

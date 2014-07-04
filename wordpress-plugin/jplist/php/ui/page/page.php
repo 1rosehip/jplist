@@ -23,6 +23,7 @@
 			
 			//get posts (ajax)
 			add_action('wp_ajax_jplist_get_posts', array(&$this, 'get_posts_callback'));	
+			add_action('wp_ajax_nopriv_jplist_get_posts', array(&$this, 'get_posts_callback'));	
 		}	
 		
 		/**
@@ -72,8 +73,7 @@
 		*/
 		public function get_posts_callback(){
 		
-			$statuses = $_POST['statuses'];
-			
+			$statuses = $_POST['statuses'];			
 			echo($this->db->get_posts_json($statuses));
 			
 			die();
