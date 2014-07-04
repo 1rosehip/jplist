@@ -1,7 +1,5 @@
 jplist
 ------
-- tags? categories? -> checkbox filters
-
 - add list/grid view
 - responsive
 

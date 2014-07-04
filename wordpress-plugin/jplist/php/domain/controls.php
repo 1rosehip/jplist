@@ -387,7 +387,7 @@
 				 }
 				 
 				 $html .= "\tdata-control-type='pagination-info' \r\n"; 
-				 $html .= "\tdata-control-name='paging' \r\n";
+				 $html .= "\tdata-control-name='paging' \r\n";				
 				 $html .= "\tdata-control-action='paging'>\r\n";
 			$html .= "</div>\r\n\r\n";
 			
@@ -406,6 +406,8 @@
 				$html .= "\tclass='jplist-pagination' \r\n";
 				$html .= "\tdata-control-type='pagination' \r\n";
 				$html .= "\tdata-control-name='paging' \r\n";
+				$html .= "\t data-mode='google-like' \r\n";
+				$html .= "\t data-range='4' \r\n";
 				
 				if($is_bottom){
 					$html .= "\tdata-control-animate-to-top='true' \r\n";
