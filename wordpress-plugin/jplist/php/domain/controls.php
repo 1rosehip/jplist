@@ -15,8 +15,10 @@
 		public $content_text_filter;
 		public $pagination_results_top;
 		public $pagination_results_bot;
-		public $pagination;
+		public $pagination_top;
+		public $pagination_bot;
 		public $preloader;
+		public $categories_checkbox_filter;
 		
 		//default panels html
 		public $top_panel;
@@ -40,18 +42,66 @@
 			$this->content_text_filter = $this->get_post_content_text_filter_html();
 			$this->pagination_results_top = $this->get_pagination_results_html(false);
 			$this->pagination_results_bot = $this->get_pagination_results_html(true);
-			$this->pagination = $this->get_pagination_html();
+			$this->pagination_top = $this->get_pagination_html(false);
+			$this->pagination_bot = $this->get_pagination_html(true);
 			$this->preloader = $this->get_preloader_html();
+			$this->categories_checkbox_filter = $this->jplist_categories_checkbox_filter();
 			
 			//init default panel html
-			$this->top_panel = $this->reset_btn . $this->items_per_page . $this->sort_dd . $this->title_text_filter . $this->content_text_filter . $this->pagination_results_top . $this->pagination . $this->preloader;
-			$this->bot_panel = $this->items_per_page . $this->sort_dd . $this->pagination_results_bot . $this->pagination;
+			$this->top_panel = $this->reset_btn . $this->items_per_page . $this->sort_dd . $this->title_text_filter . $this->content_text_filter . $this->categories_checkbox_filter . $this->pagination_results_top . $this->pagination_top . $this->preloader;
+			$this->bot_panel = $this->items_per_page . $this->sort_dd . $this->pagination_results_bot . $this->pagination_bot;
 			
 			//init default js settings
 			$this->js_settings = $this->get_js_settings();
 			
 			//get handlebars template content
 			$this->template = $this->get_template_content();
+		}
+		
+		/**
+		* checkbox filter for categories
+		*/
+		public function jplist_categories_checkbox_filter(){
+			
+			$html = "";
+			
+			$args = array(
+				'type'                     => 'post',
+				'child_of'                 => 0,
+				'parent'                   => '',
+				'orderby'                  => 'name',
+				'order'                    => 'ASC',
+				'hide_empty'               => 1,
+				'hierarchical'             => 1,
+				'exclude'                  => '',
+				'include'                  => '',
+				'number'                   => '',
+				'taxonomy'                 => 'category',
+				'pad_counts'               => false
+			); 
+
+			$categories = get_categories($args);
+			
+			$html .= "<!-- checkbox filters -->\r\n";
+			$html .= "<div \r\n";
+			   $html .= "\tclass='jplist-group'\r\n";
+			   $html .= "\tdata-control-type='checkbox-group-filter'\r\n";
+			   $html .= "\tdata-control-action='filter'\r\n";
+			   $html .= "\tdata-control-name='themes'>\r\n\r\n";
+			   
+			   foreach ($categories as $category) {
+				   $html .= "\t<input \r\n";
+					  $html .= "\t\tdata-path='." . $category->slug . "' \r\n";
+					  $html .= "\t\tid='jplist-cat-" . $category->slug . "' \r\n";
+					  $html .= "\t\ttype='checkbox' \r\n";									
+				   $html .= "\t/>\r\n\r\n";
+				   
+				   $html .= "\t<label for='jplist-cat-" . $category->slug . "'>" . $category->name . "</label>\r\n\r\n";	
+				}			   
+			   
+			$html .= "</div>\r\n\r\n";
+			
+			return $html;
 		}
 		
 		/**
@@ -348,7 +398,7 @@
 		* get pagination HTML
 		* @return {string}
 		*/
-		public function get_pagination_html(){
+		public function get_pagination_html($is_bottom){
 			
 			$html = "";
 			$html .= "<!-- pagination -->\r\n";
@@ -356,7 +406,13 @@
 				$html .= "\tclass='jplist-pagination' \r\n";
 				$html .= "\tdata-control-type='pagination' \r\n";
 				$html .= "\tdata-control-name='paging' \r\n";
-				$html .= "\tdata-control-action='paging'>\r\n";
+				
+				if($is_bottom){
+					$html .= "\tdata-control-animate-to-top='true' \r\n";
+				}
+				
+				$html .= "\tdata-control-action='paging'>\r\n";				
+				
 			$html .= "</div>\r\n\r\n";
 			
 			return $html;
