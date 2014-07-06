@@ -1,1 +1,0 @@
-The asset-pipeline is extremely extensible and easy to customize to suit ones needs. You might extend the asset-pipeline to handle a new type of asset that may need to be preprocessed before being served to the browser, or you may want to define a new custom directive. This guide will go over the basics of how to perform those tasks with ease.

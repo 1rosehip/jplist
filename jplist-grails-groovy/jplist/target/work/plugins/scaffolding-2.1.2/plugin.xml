@@ -1,9 +1,0 @@
-<plugin name='scaffolding' version='2.1.2' grailsVersion='2.4.0 &gt; *'>
-  <author>Burt Beckwith</author>
-  <authorEmail>bbeckwith@gopivotal.com</authorEmail>
-  <title>Grails Scaffolding Plugin</title>
-  <description>Handles the configuration of dynamic scaffolding</description>
-  <documentation>http://grails.org/plugin/scaffolding</documentation>
-  <type>ScaffoldingGrailsPlugin</type>
-  <resources />
-</plugin>

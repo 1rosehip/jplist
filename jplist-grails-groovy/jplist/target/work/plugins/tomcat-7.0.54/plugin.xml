@@ -1,9 +1,0 @@
-<plugin name='tomcat' version='7.0.54' grailsVersion='2.3 &gt; *'>
-  <author>Graeme Rocher</author>
-  <authorEmail>graeme.rocher@springsource.com</authorEmail>
-  <title>Apache Tomcat plugin for Grails</title>
-  <description>Makes Tomcat 7.0 the default servlet container for Grails at development time.</description>
-  <documentation>http://grails.org/plugin/tomcat</documentation>
-  <type>TomcatGrailsPlugin</type>
-  <resources />
-</plugin>
