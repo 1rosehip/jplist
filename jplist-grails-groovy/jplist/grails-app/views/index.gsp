@@ -30,9 +30,10 @@
 
 						//ajax settings
 						ajax: {
-							url: '/content/data-sources/php-mysql-demo/server-json.php'
+							url: 'handler/index'
 							, dataType: 'json'
 							, type: 'POST'
+							, cache: false
 						}
 					}
 
