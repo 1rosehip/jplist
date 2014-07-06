@@ -1,0 +1,13 @@
+<plugin name='cache' version='1.1.7' grailsVersion='2.0 &gt; *'>
+  <author>Jeff Brown</author>
+  <authorEmail>jbrown@vmware.com</authorEmail>
+  <title>Cache Plugin</title>
+  <description>Grails Cache Plugin</description>
+  <documentation>http://grails-plugins.github.com/grails-cache/</documentation>
+  <type>CacheGrailsPlugin</type>
+  <resources>
+    <resource>DefaultCacheConfig</resource>
+    <resource>grails.plugin.cache.GrailsCacheAdminService</resource>
+    <resource>grails.plugin.cache.CacheTagLib</resource>
+  </resources>
+</plugin>

@@ -1,0 +1,15 @@
+introduction:
+  title: Introduction
+configuration:
+  title: Configuration
+usage:
+  title: Usage
+  directives: Manifests and Directives
+  organization: Asset Organization
+  linking: Linking to Assets
+  encoding: Encoding
+extending:
+  title: Extending Asset-Pipeline
+  assetfile: Asset File Definitions
+  processors: Processors
+  postprocessors: Post-Processors

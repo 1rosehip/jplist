@@ -1,0 +1,12 @@
+<plugin name='database-migration' version='1.4.0' grailsVersion='2.3.0 &gt; *'>
+  <author>Burt Beckwith</author>
+  <authorEmail>burt@burtbeckwith.com</authorEmail>
+  <title>Grails Database Migration Plugin</title>
+  <description>Grails Database Migration Plugin</description>
+  <documentation>http://grails-plugins.github.io/grails-database-migration/</documentation>
+  <type>DatabaseMigrationGrailsPlugin</type>
+  <resources>
+    <resource>DbdocUrlMappings</resource>
+    <resource>grails.plugin.databasemigration.DbdocController</resource>
+  </resources>
+</plugin>

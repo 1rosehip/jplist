@@ -1,0 +1,39 @@
+Processors are where the real power of asset-pipeline comes into play. These are the driving force behind making compileable assets such as LESS, and Coffeescript first class citizens. Gone is the need to run a compiler on the side, and gone is the delay between making changes in development.
+
+A Processor is an implementation of the @Processor@ interface via the @AbstractProcessor@ class. It must have a constructor with an @AssetCompiler@ argument, and it must have a process method. The rest is up to the developer.
+The reason the AssetCompiler is passed is for giving the processor access to manipulate the precompiler phase. If a null precompiler is passed, than development mode is assumed and the processor can infer that. An example use case
+for this is the SassProcessor in the SASS/SCSS Asset Pipeline Plugin. Image sprite generation causes additional image files to be created that need added to the list of files to process.
+
+{code}
+class CoffeeScriptProcessor extends AbstractProcessor {
+
+  Scriptable globalScope
+  ClassLoader classLoader
+
+  CoffeeScriptProcessor(AssetCompiler precompiler){
+    super(precompiler)
+  }
+
+  def process(input, assetFile) {
+    try {
+      def cx = Context.enter()
+      def compileScope = cx.newObject(globalScope)
+      compileScope.setParentScope(globalScope)
+      compileScope.put("coffeeScriptSrc", compileScope, input)
+      def result = cx.evaluateString(compileScope, "CoffeeScript.compile(coffeeScriptSrc)", "CoffeeScript compile command", 0, null)
+      return result
+    } catch (Exception e) {
+      throw new Exception("""
+        CoffeeScript Engine compilation of coffeescript to javascript failed.
+        $e
+        """)
+    } finally {
+      Context.exit()
+    }
+  }
+}
+{code}
+
+Above is an excerpt of the @CoffeeScriptProcessor@ plugin. This plugin takes advantage of RhinoJs to use the CoffeeScript compiler and provide the application with direct support for CoffeeScript files. The @process@ method takes an input, as well as a reference to the asset file definition, and returns a result. To use your processor simply add it to your 'static processors' array on the @AssetFile@ definition.
+
+The @LESSProcessor@ was not used in this example as it's more complicated due to supporting the @import LESS directive and cache dependencies on the cache manager. However, it is a great example to look at and highly recommended.

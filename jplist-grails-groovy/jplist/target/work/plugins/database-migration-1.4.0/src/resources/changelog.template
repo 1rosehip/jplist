@@ -1,0 +1,6 @@
+databaseChangeLog = {
+
+	changeSet(author: "@author@", id: "@id@") {
+		// TODO add changes and preconditions here
+	}
+}
