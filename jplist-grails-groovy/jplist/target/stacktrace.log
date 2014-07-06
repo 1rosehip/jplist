@@ -245,3 +245,47 @@ insert into item (id, version, description, image, keyword1, keyword2, likes, ti
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
 	at java.lang.Thread.run(Thread.java:724)
+2014-07-06 11:56:38,965 [Thread-11] ERROR StackTrace  - Full Stack Trace:
+java.lang.IllegalArgumentException: Dynamic method is<Artefact>Class(artefactClass) requires a single Class parameter
+	at org.codehaus.groovy.grails.commons.DefaultGrailsApplication.invokeMethod(DefaultGrailsApplication.java:628)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(PogoMetaClassSite.java:45)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:45)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:108)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:116)
+	at CacheGrailsPlugin$_closure4.doCall(CacheGrailsPlugin.groovy:183)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1270)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:90)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1085)
+	at groovy.lang.ExpandoMetaClass.invokeMethod(ExpandoMetaClass.java:1110)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:909)
+	at groovy.lang.Closure.call(Closure.java:423)
+	at CacheGrailsPlugin$_closure4.call(CacheGrailsPlugin.groovy)
+	at org.codehaus.groovy.grails.plugins.DefaultGrailsPlugin.invokeOnChangeListener(DefaultGrailsPlugin.java:767)
+	at org.codehaus.groovy.grails.plugins.DefaultGrailsPlugin.notifyOfEvent(DefaultGrailsPlugin.java:716)
+	at org.codehaus.groovy.grails.plugins.DefaultGrailsPluginManager.informObservers(DefaultGrailsPluginManager.java:242)
+	at org.codehaus.groovy.grails.plugins.DefaultGrailsPlugin.notifyOfEvent(DefaultGrailsPlugin.java:732)
+	at org.codehaus.groovy.grails.plugins.AbstractGrailsPluginManager.informOfClassChange(AbstractGrailsPluginManager.java:405)
+	at org.codehaus.groovy.grails.plugins.AbstractGrailsPluginManager.informOfFileChange(AbstractGrailsPluginManager.java:366)
+	at org.codehaus.groovy.grails.project.compiler.GrailsProjectWatcher.informPluginManager(GrailsProjectWatcher.java:226)
+	at org.codehaus.groovy.grails.project.compiler.GrailsProjectWatcher.access$400(GrailsProjectWatcher.java:48)
+	at org.codehaus.groovy.grails.project.compiler.GrailsProjectWatcher$1.onNew(GrailsProjectWatcher.java:152)
+	at org.codehaus.groovy.grails.compiler.AbstractDirectoryWatcher.fireOnNew(AbstractDirectoryWatcher.java:76)
+	at org.codehaus.groovy.grails.compiler.PollingDirectoryWatcher.cacheFilesForDirectory(PollingDirectoryWatcher.java:107)
+	at org.codehaus.groovy.grails.compiler.PollingDirectoryWatcher.checkForNewFiles(PollingDirectoryWatcher.java:87)
+	at org.codehaus.groovy.grails.compiler.PollingDirectoryWatcher.run(PollingDirectoryWatcher.java:45)
+	at org.codehaus.groovy.grails.compiler.DirectoryWatcher.run(DirectoryWatcher.java:160)
+	at org.codehaus.groovy.grails.project.compiler.GrailsProjectWatcher.run(GrailsProjectWatcher.java:161)
+2014-07-06 11:56:38,969 [Thread-11] ERROR StackTrace  - Full Stack Trace:
+java.lang.IllegalArgumentException: Dynamic method is<Artefact>Class(artefactClass) requires a single Class parameter
+	at CacheGrailsPlugin$_closure4.doCall(CacheGrailsPlugin.groovy:183)
+2014-07-06 11:56:38,970 [Thread-11] ERROR StackTrace  - Full Stack Trace:
+java.lang.IllegalArgumentException: Dynamic method is<Artefact>Class(artefactClass) requires a single Class parameter
+	at CacheGrailsPlugin$_closure4.doCall(CacheGrailsPlugin.groovy:183)
+2014-07-06 11:56:38,970 [Thread-11] ERROR StackTrace  - Full Stack Trace:
+java.lang.IllegalArgumentException: Dynamic method is<Artefact>Class(artefactClass) requires a single Class parameter
+	at CacheGrailsPlugin$_closure4.doCall(CacheGrailsPlugin.groovy:183)
