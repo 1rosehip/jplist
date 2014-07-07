@@ -5,7 +5,6 @@
 
 ###Common Features
 - Works with any content (tables, lists, div elements etc...)
-- Data sources: PHP + MySQL, ASP.NET + Sql Server, PHP + SQLite
 - Works with JavaScript templates like Handlebars, Mustache etc.
 - Supports XML + XSLT
 - Grid/list view demo page
@@ -15,6 +14,13 @@
 - Works in all major browsers
 - Annotated source code
 - Solid documentation
+
+### Data Sources
+- PHP + MySQL
+- PHP + SQLite
+- ASP.NET + Sql Server
+- WordPress plugin
+- Groovy, Grails and MySQL
 
 ### Sorting
 - Ascending and descending sorting
