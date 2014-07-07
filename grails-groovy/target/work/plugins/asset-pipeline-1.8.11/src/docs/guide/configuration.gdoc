@@ -1,0 +1,71 @@
+Asset-Pipeline has several customizable options to tweak the compiler to suit your needs. Below is a list of the various configuration options and explanations for how to use them
+
+h3. Excludes and Includes
+
+Certain files are not needed for compilation in production. This can be configured globally or for a specific plugin by using the provided configuration options:
+
+{table}
+*Property* | *Value*
+grails.assets.excludes | \["tiny_mce/src/\*.js"]
+grails.assets.plugin."twitter-bootstrap".excludes | \["\*\*/\*.less"]
+grails.assets.plugin."twitter-bootstrap".includes | \["bootstrap.less"]
+{table}
+
+Above you will notice the use of an includes. An includes allows you to override a specific file after the excludes scan has already been performed. The above example makes sure the @bootstrap.less@ file can be compiled from the @twitter-bootstrap plugin@.
+
+h3. Minification
+
+The Asset-pipeline comes with the newer version of UglifyJs to minify your JavaScript assets. This is great for compression and a few options are provided to tune the minifier. UglifyJS can be enabled/disabled entirely as well as configured via various options.
+
+{table}
+*Property* | *Value*
+grails.assets.minifyJs | *true* or *false*
+grails.assets.minifyCss | *true* or *false*
+grails.assets.minifyOptions | *Map*
+{table}
+
+{code}
+grails.assets.minifyOptions = [
+  strictSemicolons: false,
+  mangleOptions: [mangle: true, toplevel: false, defines: null, except: null, no_functions:false],
+  genOptions: [indent_start:0, indent_level:4, quote_keys: false, space_colon: false, beautify: false, ascii_only: false, inline_script:false]
+]
+{code}
+
+Above are the default values for the majority of UglifyJS. For specifics on what these options do please refer to the documentation for UglifyJS. It is worth noting that @mangle: true@ is what mangles variable names and may need to be turned off using this information.
+
+h3. Mappings and Asset Taglib URLs
+
+In many cases you may want to change the URL for which to include your static assets. This can be useful when using a CDN or perhaps even using Nginx to server your static assets.
+
+To change the url for your taglibs use the following configuration option:
+
+{code}
+grails.assets.url = "http://cdn.example.com/"
+{code}
+
+Now your files are gonna reference the CDN when running in the production environment. To go with this feature, you can have your application automatically copy your asset files out of your base war file on startup of your application. Optionally the asset url config can also be defined as a closure that takes a request argument.
+
+{code}
+grails.assets.url = { request ->
+	if(request.isSecure()) {
+		return "https://cdn.example.com/"
+	} else {
+		return "http://cdn.example.com/"
+	}
+}
+{code}
+
+This allows more fine grained control of your asset urls based on the incoming request. An example, might be ssl detection or even changing cdn region by source Ip.
+
+{code}
+grails.assets.storagePath = "/var/cdn/path"
+{code}
+
+You can also change the default tomcat path for both debugging and file inclusion using the @mapping@ config option.
+
+{code}
+grails.assets.mapping = 'assets'
+{code}
+
+For all these configuration options, you will want to put these config values in the appropriate environment in Config.groovy.

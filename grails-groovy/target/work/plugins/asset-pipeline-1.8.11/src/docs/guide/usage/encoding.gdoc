@@ -1,0 +1,15 @@
+In some cases it may be necessary to specify an encoding for your assets. An example might be for Japanese characters in a javascript file. To do this 2 things must be done. First we simply set the charset attribute when we include are javascript file:
+
+{code}
+<asset:javascript src="application.js" charset="utf-8"/>
+{code}
+
+This should take care of testing in development mode and debugging. However, when we move to production/war mode the precompiler has no way to infer the desired encoding for compilation. To accomplish this we have the @//= encoding@ directive. This can be placed at the top of your @application.js@ to define the desired compilation encoding.
+
+{code}
+//=encoding UTF-8
+//=require_self
+//=require_tree .
+{code}
+
+That's all there is to it.
