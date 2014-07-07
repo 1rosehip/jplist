@@ -93,10 +93,15 @@
 				<div class="box">
 
 					<!-- tabs navigation -->
-					<ul class="default-menu hmenu left box">	
-						<li class="active">
-								<a class="" href="/" title=""><i class="fa fa-home"></i> Test...</a>
+					<ul class="default-menu hmenu box">							
+						
+						<li>
+							<a title="" href="http://jplist.com"><i class="fa fa-home"></i> Project Home <i class="fa fa-external-link"></i></a>
+						</li>						
+						<li>
+							<a title="" href="http://jplist.com/home/download" class="orange"><i class="fa fa-download"></i> Download <i class="fa fa-external-link"></i></a>
 						</li>
+					
 					</ul>
 				</div>
 			</div>

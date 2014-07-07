@@ -52,7 +52,7 @@
 			<div class="center">
 
 				<div class="box text-shadow">
-					<h1 class="h1-30-normal left">jPList with Grails</h1>
+					<h1 class="h1-30-normal left">jPList with Groovy, Grails and MySQL</h1>
 				</div>
 
 				<div class="box text-shadow">
@@ -77,12 +77,13 @@
 						{{/each}}
 					</script>
 
-					<!-- description -->
+					<!-- description
 					<div class="box">
 						<p class="text-shadow" style="margin: 0 0 30px 0">
 							Test......	
 						</p>	
 					</div>
+					-->
 
 					<!-- demo -->
 					<div id="demo" class="box jplist">
