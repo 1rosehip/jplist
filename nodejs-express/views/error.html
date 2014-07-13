@@ -1,0 +1,17 @@
+@!(data)
+
+@function placeholder(data){
+	aaa	
+}
+
+
+
+
+extends layout
+
+block content
+  h1= message
+  h2= error.status
+  pre #{error.stack}
+  
+ @render('layouts/default.html', 'Miriam Zusin | Front End Development', '', '', '', placeholder(data)) 

@@ -1,0 +1,2 @@
+@!(count)
+@count @(count == 1 ? "item" : "items")

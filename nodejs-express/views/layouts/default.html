@@ -1,0 +1,127 @@
+@!(title, css, scripts, breadCrumbs, placeholder)
+<!doctype html>
+<html>
+    <head>
+        <title>@title</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<!-- css -->
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/css/vendor/normalize.css" />
+		<link rel="stylesheet" href="/css/styles.min.css" />
+        <!--link href="/img/common/favicon.png" rel="shortcut icon" /-->
+		@css		
+		
+		<!-- js -->	
+        <script src="/js/vendor/jquery-1.10.0.min.js"></script>		
+		<script src="/js/vendor/modernizr.min.js"></script>
+		<script src="/js/website.min.js"></script>
+		@scripts
+		
+		<!--link rel="icon" type="image/png" href="/favicon.png" /-->
+		
+    </head>
+    <body>
+	
+		<!-- black top bar -->
+		<div class="box" id="black-top-bar">
+			<div class="center">			
+                <div class="box">
+					<ul class="hmenu right" id="social-menu">
+						<li>
+							<a href="https://www.facebook.com/miriam.zusin" title=""><i class="fa fa-facebook"></i></a>
+						</li>
+						<li>
+							<a href="https://plus.google.com/105939222257494574786/posts" title=""><i class="fa fa-google-plus"></i></a>
+						</li>						
+						<li>
+							<a href="https://github.com/no81no" title=""><i class="fa fa-github"></i></a>
+						</li>
+						<li>
+							<a href="http://www.linkedin.com/pub/miriam-zusin/2b/65b/933" title=""><i class="fa fa-linkedin"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<!-- header -->
+		<header class="box" id="header">
+			<div class="box" id="header-box">
+				<div class="center">			
+					<div class="box">
+
+						<!-- logo -->
+						<div id="logo" class="left">							
+							<a href="http://no81no.com" title="">
+								<img src="html/img/common/logo.png" alt="" title="" class="align-middle" />
+							</a>
+						</div>	
+						
+						<!-- main navigation -->
+						<ul class="default-menu hmenu right" id="top-menu">						
+							<li><a title="" href="http://no81no.com"><i class="fa fa-reply-all"></i> All Projects</a></li>
+							<li><a title="" href="http://codecanyon.net/user/no81no/portfolio"><i class="fa fa-asterisk"></i> CodeCanyon</a></li>
+							<li><a title="" href="mailto:no81no@@gmail.com"><i class="fa fa-envelope"></i> Contacts</a></li>
+							<li><a title="" href="mailto:no81no@@gmail.com" class="orange"><i class="fa fa-coffee"></i> Freelance</a></li>
+						</ul>
+
+					</div>
+				</div>					
+			</div>
+		</header>
+		
+		<!-- bread crumbs-->
+		<div id="bread-crumbs-box" class="box">
+			<div id="bread-crumbs" class="box">
+			
+				<div class="center">
+					<div class="box text-shadow">
+						<p>
+							@breadCrumbs
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- main content -->
+		<div id="main-content" class="box">
+			<div class="center">
+				<div id="page-content" class="box">
+
+					<!-- tabs navigation -->
+					<ul class="default-menu hmenu left box">	
+						<li>
+							<a title="" href="http://codecanyon.net/item/jquery-jplist-plugin/1860318" class="orange"><i class="fa fa-shopping-cart"></i> Buy</a>
+						</li>
+					</ul>
+	
+					@placeholder
+				</div>
+			</div>
+		</div>	
+	
+		<!-- footer -->
+		<footer class="box" id="footer">
+			<div class="center">			
+                <div class="box">
+				
+					<p class="align-center" id="footer-content">
+						Copyright &copy; @getYear() <a href="mailto:no81no@@gmail.com" title="">Miriam Zusin.</a>
+						<span>&copy; 2009 - @getYear() Miriam Zusin. All rights reserved.</span>
+						<span>Powered by <a href="http://nodejs.org/" title="">NodeJS</a> &amp; <a href="http://expressjs.com/" title="">Express</a>.</span>
+					</p>
+					
+				</div>
+			</div>
+		</footer>	
+		
+	</body>
+</html>
+
+@function getYear(){ 
+	@{var date = new Date();}
+	@(date.getFullYear())
+}
