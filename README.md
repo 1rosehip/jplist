@@ -21,6 +21,7 @@
 - ASP.NET + Sql Server
 - WordPress plugin
 - Groovy, Grails and MySQL
+- NodeJS, Express and MySQL
 
 ### Sorting
 - Ascending and descending sorting
