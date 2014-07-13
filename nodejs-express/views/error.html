@@ -1,17 +1,17 @@
 @!(data)
 
 @function placeholder(data){
-	aaa	
+	<div class="box">
+		<div class="center">
+			<div class="box text-shadow align-center">			
+				<h1 class="h1-30-normal">Not Found / 404</h1>
+				<p style="padding: 50px 0">
+					<img title="" alt="" src="/images/common/rocket.png">
+				</p>
+				<p>Sorry! The page you were looking for could not be found</p>						
+			</div>		
+		</div>
+	</div>
 }
 
-
-
-
-extends layout
-
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
-  
- @render('layouts/default.html', 'Miriam Zusin | Front End Development', '', '', '', placeholder(data)) 
+@render('layouts/default.html', 'Miriam Zusin | Front End Development', '', '', '', placeholder(data)) 

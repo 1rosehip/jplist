@@ -1,7 +1,9 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+	,router = express.Router();
 
-/* GET home page. */
+/**
+* get /index (home page)
+*/
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
