@@ -15,12 +15,13 @@
         "jade": "~1.3.0",
         "less-middleware": "1.0.x",
         "bliss": "*",
-        "mysql": "*"
+        "mysql": "*",
+		"underscore": "*"
     },
     "db": {
         "host": "127.0.0.1",
         "user": "root",
         "password": "root",
-		"database": "jplist"
+		"database": "jplist_nodejs"
     }
 }
