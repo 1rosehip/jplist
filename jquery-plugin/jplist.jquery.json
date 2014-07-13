@@ -14,15 +14,15 @@
 		"descending",
 		"autopagination"
     ],
-    "version": "5.1.37",
+    "version": "5.1.38",
     "author": {
         "name": "Miriam Zusin",
         "url": "http://jplist.com"
     },
 	"licenses": [
 		{
-		  "type": "GPL V3 License for non-commercial projects",
-		  "url": "https://gnu.org/licenses/gpl.html"
+		  "type": "Free for non-commercial projects",
+		  "url": "http://www.binpress.com/license/read/id/2749/app/2085"
 		},
 		{
 		  "type": "jPList - jQuery Data Grid Controls Commercial License",
