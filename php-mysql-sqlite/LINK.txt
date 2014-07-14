@@ -1,1 +1,1 @@
-https://github.com/no81no/jplist/tree/master/html/examples/7-data-source
+https://github.com/no81no/jplist/tree/master/jquery-plugin/html/data-sources

@@ -18,12 +18,12 @@
 - Solid documentation
 
 ### Data Sources
-- PHP + MySQL
-- PHP + SQLite
-- ASP.NET + Sql Server
-- WordPress plugin
-- Groovy, Grails and MySQL
-- NodeJS, Express and MySQL   
+- [PHP + MySQL](https://github.com/no81no/jplist/tree/master/jquery-plugin/html/data-sources/php-mysql-demo)
+- [PHP + SQLite](https://github.com/no81no/jplist/tree/master/jquery-plugin/html/data-sources/php-sqlite-demo)
+- [ASP.NET + Sql Server](https://github.com/no81no/jplist/tree/master/asp-net)
+- [WordPress plugin](https://github.com/no81no/jplist/tree/master/wordpress-plugin)
+- [Groovy, Grails and MySQL](https://github.com/no81no/jplist/tree/master/grails-groovy)
+- [NodeJS, Express and MySQL](https://github.com/no81no/jplist/tree/master/nodejs-express)
 
 ### Sorting
 - Ascending and descending sorting
