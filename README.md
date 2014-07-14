@@ -72,6 +72,9 @@ jPList CDN is provided by [cdnjs](http://www.cdnjs.com):
 - [Views Control (List, Grid and Thumbs Views)](http://jplist.com/layoutexamples/list-grid) - demo with control that switches between views: list, grid or thumbs
 - [Demo With Sticky Panel](http://jplist.com/layoutexamples/sticky-panel) - demo with sticky panel
 
+### CMS
+- [WordPress Plugin](http://jplist.com/home/jplist-wordpress-version)
+
 ### Data Sources
 - [PHP + MySQL Example](http://jplist.com/datasourcesexamples/php-mysql-demo) - server side demo using PHP and MySQL database
 - [PHP + MySQL + JSON + Handlebars Example](http://jplist.com/datasourcesexamples/php-mysql-json-handlebars-demo) - server side demo using PHP, MySQL database with JSON format and Handlebars Template
