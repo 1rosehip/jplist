@@ -61,6 +61,7 @@ you may use jPList for free http://www.binpress.com/license/read/id/2749/app/208
 
 ##Links
 - [Project Home](http://jplist.com)
+- [NPM](https://www.npmjs.org/package/jplist)
 - [jPList on Binpress](http://www.binpress.com/app/jplist-jquery-data-grid-controls/2085?ad=34027)
 - [jPList on Facebook](https://www.facebook.com/jplist)
 - [jPList on Google+](https://plus.google.com/+Jplistjs)
