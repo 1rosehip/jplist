@@ -91,6 +91,9 @@ var compile = function(targets, files, externs){
 			// Options in the API exclude the "--" prefix
 			compilation_level: "SIMPLE_OPTIMIZATIONS" //WHITESPACE_ONLY, SIMPLE_OPTIMIZATIONS, ADVANCED_OPTIMIZATIONS
 			
+			,create_source_map: '../minified/jplist.min.map'
+			,source_map_format: 'V3'
+			
 			,warning_level: "VERBOSE" //QUIET | DEFAULT |  VERBOSE
 
 			// Capitalization does not matter 
@@ -106,7 +109,7 @@ var compile = function(targets, files, externs){
 			//...
 		}
 		,function(error, result) {
-		
+			
 			//display error/warnings
 			console.log(error);
 			

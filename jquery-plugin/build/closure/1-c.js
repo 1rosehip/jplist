@@ -5,7 +5,7 @@ var compiler = require('./modules/compiler.js');
 */
 var init = (function(){
 	
-	var self = {
+	var context = {
 	
 		//libs
 		fs: require('fs')
@@ -18,23 +18,23 @@ var init = (function(){
 	};
 	
 	//init externs
-	self.externs = ['closure/externs/jquery-1.7.externs.js'];
+	context.externs = ['closure/externs/jquery-1.7.externs.js'];
 		
 	//init target paths
-	self.targets = [
+	context.targets = [
 		'../minified/jplist.min.js'
 		,'../html/js/jplist.min.js'
 	];	
 	
 	//load package.json
-	self.packageJson = JSON.parse(self.fs.readFileSync('package.json', 'utf8')); 
+	context.packageJson = JSON.parse(context.fs.readFileSync('package.json', 'utf8')); 
 		
 	//init files list
-	self.coreFiles = self.packageJson['jplist-source-files-core'];
-    self.controlsFiles = self.packageJson['jplist-source-files-controls'];
+	context.coreFiles = context.packageJson['jplist-source-files-core'];
+    context.controlsFiles = context.packageJson['jplist-source-files-controls'];
 	
 	//compile with google closure compiler
-	compiler.compile(self.targets, self.coreFiles.concat(self.controlsFiles), self.externs);
+	compiler.compile(context.targets, context.coreFiles.concat(context.controlsFiles), context.externs);
 	
 })();
 
