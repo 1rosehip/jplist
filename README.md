@@ -29,6 +29,7 @@
 - Ascending and descending sorting
 - Sort numbers, text, date and time
 - SELECT and UL/LI sort controls
+- Sort by 'Most Reviewed' and by 'Top Rated' items
 
 ###Pagination
 - Auto pagination control
