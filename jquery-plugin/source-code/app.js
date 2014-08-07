@@ -360,7 +360,20 @@
 				
 				'star-rating':{
 					className: 'StarRating'
-					,options: {}
+					,options: {
+						render: function(json){
+							
+							var template
+								,html = '';
+							
+							if(window.Handlebars){
+								template = window.Handlebars.compile(jQuery('#star-rating-template').html());
+								html = template(json);
+							}
+							
+							return html;
+						}
+					}
 				}
 			}
 		}, userOptions);

@@ -29,27 +29,18 @@
 	*/
 	var initControls = function(context){
 	
-		var dataItem
-			,$itemControls;
-		
-		if(context.dataitemsCollection && context.dataitemsCollection.dataitems){
-		
-			for(var i=0; i<context.dataitemsCollection.dataitems.length; i++){
+		var $itemsBox;
+
+		if(context.options && context.options.itemsBox){
+			$itemsBox = context.$root.find(context.options.itemsBox);
+			
+			if($itemsBox.length > 0){
 				
-				dataItem = context.dataitemsCollection.dataitems[i];
-				
-				if(dataItem && dataItem.jqElement && dataItem.jqElement.length > 0){
+				$itemsBox.find('[data-control-type]').each(function(){
 					
-					//find item controls in data item
-					$itemControls = dataItem.jqElement.find('[data-control-type]');
-					
-					$itemControls.each(function(){
-						
-						//add control to the list
-						add(context, jQuery(this));
-					});					
-				}				
-				
+					//add control to the list
+					add(context, jQuery(this));
+				});			
 			}
 		}
 	};
@@ -61,17 +52,15 @@
 	* @param {Object} observer
 	* @param {jQuery.fn.jplist.app.History} history
 	* @param {jQueryObject} $root
-	* @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} dataitemsCollection
 	* @return {Object}
 	*/
-	var Init = function(options, observer, history, $root, dataitemsCollection){
+	var Init = function(options, observer, history, $root){
 	
 		var context = {
             options: options
 			,observer: observer
 			,history: history
 			,$root: $root
-			,dataitemsCollection: dataitemsCollection
 			,controls: []
 			,controlFactory: null	
 		};
@@ -92,11 +81,10 @@
 	* @param {Object} observer
 	* @param {jQuery.fn.jplist.app.History} history
 	* @param {jQueryObject} $root
-	* @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} dataitemsCollection
 	* @return {Object}
 	*/
-	jQuery.fn.jplist.ui.list.collections.ItemControlCollection = function(options, observer, history, $root, dataitemsCollection){	
-		return new Init(options, observer, history, $root, dataitemsCollection);
+	jQuery.fn.jplist.ui.list.collections.ItemControlCollection = function(options, observer, history, $root){	
+		return new Init(options, observer, history, $root);
 	};
 	
 })();

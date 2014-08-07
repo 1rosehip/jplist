@@ -84,20 +84,19 @@
 			,listView: null
 		};
 		
-		//init list view for dom dataitems
-		context.listView = new jQuery.fn.jplist.ui.list.views.DOMView(context.$root, context.options, context.observer, context.history);
-		
-		//init collection
-		context.collection = getCollection(context, panel.paths);
-		
 		//get item controls
 		context.itemControls = new jQuery.fn.jplist.ui.list.collections.ItemControlCollection(
 			context.options
 			,context.observer
 			,context.history
 			,context.$root
-			,context.collection
 		);
+		
+		//init list view for dom dataitems
+		context.listView = new jQuery.fn.jplist.ui.list.views.DOMView(context.$root, context.options, context.observer, context.history);
+		
+		//init collection
+		context.collection = getCollection(context, panel.paths);
 		
 		//init events
 		initEvents(context);
