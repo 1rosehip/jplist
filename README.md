@@ -94,6 +94,9 @@ npm install jplist
 - [ASP.NET and SQL Server Demo](http://jplist.com/datasourcesexamples/asp-net-sql-server-demo) - server side demo using ASP.NET and SQL Server database
 - [PHP + SQLite Example](http://jplist.com/datasourcesexamples/php-sqlite-demo) - server side demo using PHP and SQLite database
 
+### Item Control Examples
+- [Star Rating Demo](http://jplist.com/itemcontrolexamples/star-rating) - sort by 'Most Reviewed' and by 'Top Rated' items
+
 ###Actions Examples
 - [Dropdown Filters With UL/LI](http://jplist.com/actionsexamples/drop-down-filters-ul-li) - filter by jQuery path dropdown with UL/LI layout
 - [Dropdown Filters With SELECT](http://jplist.com/actionsexamples/drop-down-filters-select) - filter by jQuery path dropdown with SELECT layout
