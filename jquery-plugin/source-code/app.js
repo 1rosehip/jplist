@@ -71,7 +71,7 @@
 			//html data source (dom)
 			case 'html':{
 				
-				var dom = new jQuery.fn.jplist.ui.list.controllers.DOMController(
+				new jQuery.fn.jplist.ui.list.controllers.DOMController(
 					context.$root
 					,context.options
 					,context.observer
@@ -87,7 +87,7 @@
 				//debug info
 				jQuery.fn.jplist.info(context.options, 'Data Source: ', context.options.dataSource);
 		
-				var server = new jQuery.fn.jplist.ui.list.controllers.ServerController(
+				new jQuery.fn.jplist.ui.list.controllers.ServerController(
 					context.$root
 					,context.options
 					,context.observer
@@ -355,6 +355,14 @@
 				}
 			}
 			
+			//item controls
+			,itemControlTypes: {
+				
+				'star-rating':{
+					className: 'StarRating'
+					,options: {}
+				}
+			}
 		}, userOptions);
 		
 		//init events - used to save last status
@@ -429,8 +437,10 @@
 	jQuery.fn.jplist.ui.list = jQuery.fn.jplist.ui.list || {};
 	jQuery.fn.jplist.ui.list.models = jQuery.fn.jplist.ui.list.models || {};
 	jQuery.fn.jplist.ui.list.controllers = jQuery.fn.jplist.ui.list.controllers || {};
+	jQuery.fn.jplist.ui.list.collections = jQuery.fn.jplist.ui.list.collections || {};
 	jQuery.fn.jplist.ui.list.views = jQuery.fn.jplist.ui.list.views || {};	
 	jQuery.fn.jplist.ui.controls = jQuery.fn.jplist.ui.controls || {};
+	jQuery.fn.jplist.ui.itemControls = jQuery.fn.jplist.ui.itemControls || {};
 	jQuery.fn.jplist.ui.statuses = jQuery.fn.jplist.ui.statuses || {};
 	jQuery.fn.jplist.ui.panel = jQuery.fn.jplist.ui.panel || {};
 	jQuery.fn.jplist.ui.panel.controllers = jQuery.fn.jplist.ui.panel.controllers || {};

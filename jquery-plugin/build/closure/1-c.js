@@ -13,6 +13,7 @@ var init = (function(){
 		,packageJson: null
 		,coreFiles: []
         ,controlsFiles: []
+		,itemControlFiles: []
 		,externs: []
 		,targets: []
 	};
@@ -32,9 +33,10 @@ var init = (function(){
 	//init files list
 	context.coreFiles = context.packageJson['jplist-source-files-core'];
     context.controlsFiles = context.packageJson['jplist-source-files-controls'];
+	context.itemControlFiles = context.packageJson['jplist-source-files-item-controls'];
 	
 	//compile with google closure compiler
-	compiler.compile(context.targets, context.coreFiles.concat(context.controlsFiles), context.externs);
+	compiler.compile(context.targets, context.coreFiles.concat(context.controlsFiles).concat(context.itemControlFiles), context.externs);
 	
 })();
 

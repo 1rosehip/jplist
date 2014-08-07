@@ -80,6 +80,7 @@
 			,storage: new jQuery.fn.jplist.dal.Storage($root, options, observer)
 			
 			,collection: null
+			,itemControls: null
 			,listView: null
 		};
 		
@@ -88,6 +89,15 @@
 		
 		//init collection
 		context.collection = getCollection(context, panel.paths);
+		
+		//get item controls
+		context.itemControls = new jQuery.fn.jplist.ui.list.collections.ItemControlCollection(
+			context.options
+			,context.observer
+			,context.history
+			,context.$root
+			,context.collection
+		);
 		
 		//init events
 		initEvents(context);

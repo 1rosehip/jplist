@@ -16,6 +16,8 @@
 	*/
 	jQuery.fn.jplist.domain.server.models.DataItemModel = function(content, dataType, responseText){
 		
+		var $content;
+		
 		//init properties		
 		this.content = '';
 		this.dataType = dataType;
@@ -30,7 +32,7 @@
 			
 			case 'html':{
 				
-				var $content = jQuery(content);
+				$content = jQuery(content);
 				
 				if($content.length > 0){
 					this.content = $content.html();		
@@ -46,7 +48,7 @@
 			break;
 			
 			case 'xml':{
-				var $content = jQuery(content).find('root');
+				$content = jQuery(content).find('root');
 				
 				this.count = Number($content.attr('count')) || 0;
 				
