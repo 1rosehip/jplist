@@ -82,7 +82,7 @@
 				$order = strtolower($data->order);
 			}
 			
-			($order == "desc") ? "desc" : "asc";
+			$order = ($order == "desc") ? "desc" : "asc";
 			
 			if($query){
 				$query = $query . " " . $order;
