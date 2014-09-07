@@ -238,6 +238,13 @@
 	jQuery.fn.jplist.ui.controls.RadioButtonsFilter = function(context){
 		return new Init(context);
 	};	
-		
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['radio-buttons-filters'] = {
+		className: 'RadioButtonsFilter'
+		,options: {}
+	};		
 })();
 

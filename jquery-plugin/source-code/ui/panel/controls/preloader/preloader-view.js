@@ -54,5 +54,12 @@
 		return new Init(context);
 	};	
 		
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['preloader'] = {
+		className: 'Preloader'
+		,options: {}
+	};
 })();
 

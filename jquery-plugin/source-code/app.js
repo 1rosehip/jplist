@@ -234,148 +234,6 @@
 				,render: null
 			}
 			
-			//panel controls
-			,controlTypes: {
-				
-				'default-sort':{
-					className: 'DefaultSort'
-					,options: {}
-				}
-				
-				,'drop-down':{
-					className: 'Dropdown'
-					,options: {}
-				}
-				
-				,'pagination-info':{
-					className: 'PaginationInfo'
-					,options: {}
-				}
-
-                ,'counter':{
-					className: 'Counter'
-					,options: {
-						ignore: '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+
-					}
-				}
-								
-				,'pagination':{
-					className: 'Pagination'
-					,options: {
-					
-						//paging
-						range: 7
-						,jumpToStart: false
-						
-						//arrows
-						,prevArrow: '&lsaquo;'
-						,nextArrow: '&rsaquo;'
-						,firstArrow: '&laquo;'
-						,lastArrow: '&raquo;'
-					}
-				}	
-				
-				,'reset':{
-					className: 'Reset'
-					,options: {}
-				}
-				
-				,'select':{
-					className: 'Select'
-					,options: {}
-				}
-				
-				,'textbox':{
-					className: 'Textbox' 
-					,options: {
-						eventName: 'keyup'
-						,ignore: '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+							
-					}
-				}
-				
-				,'views':{
-					className: 'Views'
-					,options: {}
-				}
-				
-				,'checkbox-group-filter':{
-					className: 'CheckboxGroupFilter'
-					,options: {}
-				}
-
-                ,'checkbox-text-filter':{
-					className: 'CheckboxTextFilter'
-					,options: {
-                        ignore: '' //regex for the characters to ignore, for example: [^a-zA-Z0-9]+
-                    }
-				}
-				
-				,'button-filter':{
-					className: 'ButtonFilter'
-					,options: {}
-				}
-
-                ,'button-filter-group':{
-					className: 'ButtonFilterGroup'
-					,options: {}
-				}
-
-                ,'button-text-filter':{
-					className: 'ButtonTextFilter'
-					,options: {
-                        ignore: '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+
-                    }
-				}
-				
-				,'button-text-filter-group':{
-					className: 'ButtonTextFilterGroup'
-					,options: {
-                        ignore: '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+
-                    }
-				}
-				
-				,'radio-buttons-filters':{
-					className: 'RadioButtonsFilter'
-					,options: {}
-				}
-
-                ,'range-filter':{
-					className: 'RangeSliderToggleFilter'
-					,options: {}
-				}
-				
-				,'back-button':{
-					className: 'BackButton'
-					,options: {}
-				}
-				
-				,'preloader':{
-					className: 'Preloader'
-					,options: {}
-				}
-			}
-			
-			//item controls
-			,itemControlTypes: {
-				
-				'star-rating':{
-					className: 'StarRating'
-					,options: {
-						render: function(json){
-							
-							var template
-								,html = '';
-							
-							if(window.Handlebars){
-								template = window.Handlebars.compile(jQuery('#star-rating-template').html());
-								html = template(json);
-							}
-							
-							return html;
-						}
-					}
-				}
-			}
 		}, userOptions);
 		
 		//init events - used to save last status
@@ -405,7 +263,11 @@
 		});
 	};
 	
-	//NAMESPACES
+	//PLUGINS AND CONTROLS REGISTRATION ----------------------------
+	jQuery.fn.jplist.controlTypes = {};
+	jQuery.fn.jplist.itemControlTypes = {};
+	
+	//NAMESPACES ---------------------------------------------------
 	
 	/**
 	* Application Layer Namespace

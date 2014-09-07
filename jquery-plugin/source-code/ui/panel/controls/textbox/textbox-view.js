@@ -289,6 +289,16 @@
 	jQuery.fn.jplist.ui.controls.Textbox = function(context){
 		return new Init(context);
 	};	
-		
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['textbox'] = {
+		className: 'Textbox'
+		,options: {
+			eventName: 'keyup'
+			,ignore: '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+							
+		}
+	};	
 })();
 

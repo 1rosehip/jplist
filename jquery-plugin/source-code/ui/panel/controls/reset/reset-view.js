@@ -41,6 +41,13 @@
 	jQuery.fn.jplist.ui.controls.Reset = function(context){
 		return new Init(context);
 	};	
-		
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['reset'] = {
+		className: 'Reset'
+		,options: {}
+	};	
 })();
 

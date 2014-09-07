@@ -588,6 +588,13 @@
 	jQuery.fn.jplist.ui.controls.Dropdown = function(context){
 		return new Init(context);
 	};	
-		
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['drop-down'] = {
+		className: 'Dropdown'
+		,options: {}
+	};		
 })();
 

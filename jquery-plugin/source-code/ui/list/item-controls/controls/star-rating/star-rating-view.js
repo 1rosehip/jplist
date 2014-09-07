@@ -64,5 +64,25 @@
 		return new Init(context);
 	};	
 		
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.itemControlTypes['star-rating'] = {
+		className: 'StarRating'
+		,options: {
+			render: function(json){
+				
+				var template
+					,html = '';
+				
+				if(window.Handlebars){
+					template = window.Handlebars.compile(jQuery('#star-rating-template').html());
+					html = template(json);
+				}
+				
+				return html;
+			}
+		}
+	};	
 })();
 

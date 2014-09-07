@@ -1,2 +1,2 @@
-This DLL files are used for ASP.NET Demo located at:
+These DLL files are used for ASP.NET Demo located at:
 /html/data-sources/asp-net-sql-server folder

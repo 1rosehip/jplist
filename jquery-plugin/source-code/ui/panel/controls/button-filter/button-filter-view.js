@@ -262,6 +262,13 @@
 	jQuery.fn.jplist.ui.controls.ButtonFilter = function(context){
 		return new Init(context);
 	};	
-		
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['button-filter'] = {
+		className: 'ButtonFilter'
+		,options: {}
+	};		
 })();
 

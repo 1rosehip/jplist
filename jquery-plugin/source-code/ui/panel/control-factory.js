@@ -64,7 +64,7 @@
 		}
 		
 		//init control vars
-		controlType = context.options.controlTypes[type];
+		controlType = (context.options.controlTypes && context.options.controlTypes[type]) || jQuery.fn.jplist.controlTypes[type];
 		
 		if(controlType){
 		

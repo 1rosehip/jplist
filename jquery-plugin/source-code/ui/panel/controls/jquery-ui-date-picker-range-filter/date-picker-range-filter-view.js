@@ -339,6 +339,13 @@
 	jQuery.fn.jplist.ui.controls.DatePickerRangeFilter = function(context){
 		return new Init(context);
 	};	
-		
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['date-picker-range-filter'] = {
+		className: 'DatePickerRangeFilter'
+		,options: {}
+	};	
 })();
 

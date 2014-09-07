@@ -344,6 +344,15 @@
 	jQuery.fn.jplist.ui.controls.ButtonTextFilterGroup = function(context){
 		return new Init(context);
 	};	
-		
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['button-text-filter-group'] = {
+		className: 'ButtonTextFilterGroup'
+		,options: {
+			ignore: '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+
+		}
+	};		
 })();
 

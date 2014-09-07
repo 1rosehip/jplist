@@ -258,6 +258,24 @@
 	jQuery.fn.jplist.ui.controls.PaginationView = function($control, options){
 		return new Init($control, options);
 	};	
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['pagination'] = {
+		className: 'Pagination'
+		,options: {
 		
+			//paging
+			range: 7
+			,jumpToStart: false
+			
+			//arrows
+			,prevArrow: '&lsaquo;'
+			,nextArrow: '&rsaquo;'
+			,firstArrow: '&laquo;'
+			,lastArrow: '&raquo;'
+		}
+	};		
 })();
 

@@ -313,6 +313,15 @@
 	jQuery.fn.jplist.ui.controls.CheckboxTextFilter = function(context){
 		return new Init(context);
 	};	
-		
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['checkbox-text-filter'] = {
+		className: 'CheckboxTextFilter'
+		,options: {
+			ignore: '' //regex for the characters to ignore, for example: [^a-zA-Z0-9]+
+		}
+	};	
 })();
 

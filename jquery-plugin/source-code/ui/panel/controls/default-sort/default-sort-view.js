@@ -67,8 +67,7 @@
 	* @constructor
 	* @param {Object} context
 	*/
-	var Init = function(context){
-						
+	var Init = function(context){		
 		return jQuery.extend(this, context);
 	};
 		
@@ -96,6 +95,14 @@
 	*/
 	jQuery.fn.jplist.ui.controls.DefaultSort = function(context){
 		return new Init(context);
+	};
+
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['default-sort'] = {
+		className: 'DefaultSort'
+		,options: {}
 	};	
 		
 })();

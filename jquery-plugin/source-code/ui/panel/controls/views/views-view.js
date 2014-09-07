@@ -247,6 +247,13 @@
 	jQuery.fn.jplist.ui.controls.Views = function(context){
 		return new Init(context);
 	};	
-		
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['views'] = {
+		className: 'Views'
+		,options: {}
+	};	
 })();
 

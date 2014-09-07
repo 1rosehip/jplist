@@ -278,5 +278,12 @@
 		return new Init(context);
 	};	
 		
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['range-filter'] = {
+		className: 'RangeSliderToggleFilter'
+		,options: {}
+	};
 })();
 

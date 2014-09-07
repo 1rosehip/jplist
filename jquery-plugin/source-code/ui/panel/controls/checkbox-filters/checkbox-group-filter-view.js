@@ -309,6 +309,13 @@
 	jQuery.fn.jplist.ui.controls.CheckboxGroupFilter = function(context){
 		return new Init(context);
 	};	
-		
+	
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['checkbox-group-filter'] = {
+		className: 'CheckboxGroupFilter'
+		,options: {}
+	};		
 })();
 

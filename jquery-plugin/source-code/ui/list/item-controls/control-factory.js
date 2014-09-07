@@ -24,7 +24,7 @@
 		type = $control.attr('data-control-type');		
 				
 		//init control vars
-		itemControlType = context.options.itemControlTypes[type];
+		itemControlType = (context.options.itemControlTypes && context.options.itemControlTypes[type]) || jQuery.fn.jplist.itemControlTypes[type];
 		
 		if(itemControlType){
 		

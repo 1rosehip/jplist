@@ -373,5 +373,12 @@
 		return new Init(context);
 	};	
 		
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['button-filter-group'] = {
+		className: 'ButtonFilterGroup'
+		,options: {}
+	};
 })();
 

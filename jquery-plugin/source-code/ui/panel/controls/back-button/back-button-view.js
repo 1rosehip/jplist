@@ -99,5 +99,12 @@
 		return new Init(context);
 	};	
 		
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['back-button'] = {
+		className: 'BackButton'
+		,options: {}
+	};
 })();
 
