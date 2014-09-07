@@ -36,7 +36,7 @@ var init = (function(){
 	context.itemControlFiles = context.packageJson['jplist-source-files-item-controls'];
 	
 	//compile with google closure compiler
-	compiler.compile(context.targets, context.coreFiles.concat(context.controlsFiles).concat(context.itemControlFiles), context.externs);
+	compiler.compile(context.targets, context.coreFiles.concat(context.controlsFiles).concat(context.itemControlFiles), context.externs, true);
 	
 })();
 

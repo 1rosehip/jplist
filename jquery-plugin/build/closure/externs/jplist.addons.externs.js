@@ -174,3 +174,71 @@ jQuery.fn.jplist.services.Path = {};
 */
 jQuery.fn.jplist.services.Path.isPathInList = function(path, pathsList){};
 
+
+//PLUGINS AND CONTROLS REGISTRATION ----------------------------
+jQuery.fn.jplist.controlTypes;
+jQuery.fn.jplist.itemControlTypes;
+
+//NAMESPACES ---------------------------------------------------
+
+/**
+* Application Layer Namespace
+*/
+jQuery.fn.jplist.app;
+jQuery.fn.jplist.app.services;
+jQuery.fn.jplist.app.services.DTOMapperService;
+jQuery.fn.jplist.app.dto;
+/**
+* Domain Layer Namespace
+* @type {Object}
+* @namespace
+*/
+jQuery.fn.jplist.domain;
+
+jQuery.fn.jplist.domain.dom;
+jQuery.fn.jplist.domain.dom.models;
+jQuery.fn.jplist.domain.dom.collections;
+jQuery.fn.jplist.domain.dom.services;
+jQuery.fn.jplist.domain.dom.services.FiltersService;
+jQuery.fn.jplist.domain.dom.services.SortService;
+jQuery.fn.jplist.domain.dom.services.pagination;
+
+jQuery.fn.jplist.domain.server;
+jQuery.fn.jplist.domain.server.models;
+
+/**
+* Infrastructure Layer Namespace
+* @type {Object}
+* @namespace
+*/
+jQuery.fn.jplist.dal;
+jQuery.fn.jplist.dal.services;
+
+/**
+* Presentation Layer Namespace
+* @type {Object}
+* @namespace
+*/
+jQuery.fn.jplist.ui;	
+jQuery.fn.jplist.ui.list;
+jQuery.fn.jplist.ui.list.models;
+jQuery.fn.jplist.ui.list.controllers;
+jQuery.fn.jplist.ui.list.collections;
+jQuery.fn.jplist.ui.list.views;	
+jQuery.fn.jplist.ui.controls;
+jQuery.fn.jplist.ui.itemControls;
+jQuery.fn.jplist.ui.statuses;
+jQuery.fn.jplist.ui.panel;
+jQuery.fn.jplist.ui.panel.controllers;
+jQuery.fn.jplist.ui.panel.collections;
+
+Object.prototype.observer;	
+Object.observer.events.prototype.setStatusesEvent;
+Object.observer.events.prototype.renderStatusesEvent;
+Object.observer.events.prototype.forceRenderStatusesEvent;
+var context;
+context.prototype.history;
+context.history.prototype.popStatus = function(){};
+context.history.prototype.popList = function(){};
+context.history.prototype.getLastStatus = function(){};
+context.history.prototype.getLastList = function(){};

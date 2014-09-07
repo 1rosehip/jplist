@@ -147,7 +147,7 @@
 				if(jQuery.isFunction(control.getStatusByDeepLink)){
 				
 					//set key-value pair
-					status = control.getStatusByDeepLink(param.propName, param.propValue);
+					status = control['getStatusByDeepLink'](param.propName, param.propValue);
 					
 					if(status){
 						newStatuses.push(status);
@@ -191,7 +191,7 @@
 				if(jQuery.isFunction(sameControls[k].setStatus)){
 				
 					//set control status
-					sameControls[k].setStatus(status, isStorage);	
+					sameControls[k]['setStatus'](status, isStorage);	
 				}
 			}
 		}
@@ -217,7 +217,7 @@
 			if(jQuery.isFunction(control.getDeepLink)){
 			
 				//get deep link
-				deepLink = jQuery.trim(control.getDeepLink());
+				deepLink = jQuery.trim(control['getDeepLink']());
 			}
 			
 			//add it to the list
@@ -254,7 +254,7 @@
 			if(jQuery.isFunction(control.getStatus)){
 			
 				//get control status
-				status = control.getStatus(isDefault);
+				status = control['getStatus'](isDefault);
 				
 				//add status to the list
 				if(status){

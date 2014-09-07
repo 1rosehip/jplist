@@ -1,1 +1,1 @@
-node closure/1-c.js
+node closure/all.js

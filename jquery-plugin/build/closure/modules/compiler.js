@@ -78,7 +78,7 @@ var getUpdatedVersion = function(newVersion, fileContent, replaceMacro){
 * @param {Array.<string>} files
 * @param {string} externs 
 */
-var compile = function(targets, files, externs){
+var compile = function(targets, files, externs, ifSetVersion){
 
 	var ClosureCompiler = require('closurecompiler')
 		,version
@@ -91,8 +91,8 @@ var compile = function(targets, files, externs){
 			// Options in the API exclude the "--" prefix
 			compilation_level: "SIMPLE_OPTIMIZATIONS" //WHITESPACE_ONLY, SIMPLE_OPTIMIZATIONS, ADVANCED_OPTIMIZATIONS
 			
-			,create_source_map: '../minified/jplist.min.map'
-			,source_map_format: 'V3'
+			//,create_source_map: '../minified/jplist.min.map'
+			//,source_map_format: 'V3'
 			
 			,warning_level: "VERBOSE" //QUIET | DEFAULT |  VERBOSE
 
@@ -117,13 +117,16 @@ var compile = function(targets, files, externs){
 				//write result to file			
 				//console.log(result);
 				
-				//get version from package.json, increment it and return new version
-				version = getVersion(PACKAGE_JSON_PATH);
+				if(ifSetVersion){
 				
-				if(version != null){
-						
-					//update version in the target file
-					result = getUpdatedVersion(version, result, '##VERSION##');						
+					//get version from package.json, increment it and return new version
+					version = getVersion(PACKAGE_JSON_PATH);
+					
+					if(version != null){
+							
+						//update version in the target file
+						result = getUpdatedVersion(version, result, '##VERSION##');						
+					}
 				}
 				
 				for(var i=0; i<targets.length; i++){
@@ -134,6 +137,12 @@ var compile = function(targets, files, externs){
 					//write file		
 					fs['writeFileSync'](target, result, 'utf8');					
 				}
+				
+				//Press any key to exit
+				console.log('Press any key to exit');
+				process.stdin.setRawMode(true);
+				process.stdin.resume();
+				process.stdin.on('data', process.exit.bind(process, 0));
 			} 
 		}
 	);
