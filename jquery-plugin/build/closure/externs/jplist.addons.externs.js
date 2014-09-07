@@ -188,6 +188,22 @@ jQuery.fn.jplist.app;
 jQuery.fn.jplist.app.services;
 jQuery.fn.jplist.app.services.DTOMapperService;
 jQuery.fn.jplist.app.dto;
+
+/**
+* Status
+* @constructor 
+* @param {?string} name
+* @param {?string} action
+* @param {?string} type
+* @param {Object} data
+* @param {boolean} inStorage - is stored in storage (cookies, localstorage, etc.)
+* @param {boolean} inAnimation - is included in animations
+* @param {boolean} isAnimateToTop - is "animate to top" enabled
+* @param {boolean} inDeepLinking - is deep linking enabled for the given control
+*/
+jQuery.fn.jplist.app.dto.StatusDTO = function(name, action, type, data, inStorage, inAnimation, isAnimateToTop, inDeepLinking){};
+jQuery.fn.jplist.app.dto.StatusDTO.prototype.data;
+
 /**
 * Domain Layer Namespace
 * @type {Object}
@@ -232,13 +248,59 @@ jQuery.fn.jplist.ui.panel;
 jQuery.fn.jplist.ui.panel.controllers;
 jQuery.fn.jplist.ui.panel.collections;
 
+/**
+* Path of dataitem member (for example, defined by data-path and data-type attributes within controls)
+* @param {?string} jqPath - jquery path
+* @param {?string} dataType - data type of the content in this path - text, number, datetime
+* @constructor
+*/
+jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel = function(jqPath, dataType){};
+
+/**
+* DataItem Member got the given path
+* @param {jQueryObject} $element
+* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object	
+* @constructor 
+*/
+jQuery.fn.jplist.domain.dom.models.DataItemMemberModel = function($element, path){};
+
+/**
+* data item - item in list that should be sorted, filtered etc.
+* @constructor
+* @param {jQueryObject} $item - item to add to data array	
+* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+* @param {number} index
+* @class Dataitem - item within jplist container	
+*/
+jQuery.fn.jplist.domain.dom.models.DataItemModel = function($item, paths, index){};
+
+var context;
+
+//options
+context.prototype.options;
+context.options.prototype.delimiter0;
+context.options.prototype.delimiter1;
+context.options.prototype.delimiter2;
+
+//control properties
+context.prototype.isAnimateToTop;
+context.prototype.inDeepLinking;
+context.prototype.inStorage;
+context.prototype.inAnimation;
+
+//observer
 Object.prototype.observer;	
 Object.observer.events.prototype.setStatusesEvent;
 Object.observer.events.prototype.renderStatusesEvent;
 Object.observer.events.prototype.forceRenderStatusesEvent;
-var context;
+context.prototype.observer;	
+context.observer.prototype.events;
+context.observer.events.prototype.statusEvent;
+
+//history
 context.prototype.history;
 context.history.prototype.popStatus = function(){};
 context.history.prototype.popList = function(){};
 context.history.prototype.getLastStatus = function(){};
 context.history.prototype.getLastList = function(){};
+context.history.prototype.addStatus = function(){};
