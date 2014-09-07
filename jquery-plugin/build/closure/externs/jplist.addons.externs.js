@@ -274,6 +274,23 @@ jQuery.fn.jplist.domain.dom.models.DataItemMemberModel = function($element, path
 */
 jQuery.fn.jplist.domain.dom.models.DataItemModel = function($item, paths, index){};
 
+/** 
+* DataItems Collection
+* @constructor 
+* @param {Object} options - jplist user options	
+* @param {Object} observer
+* @param {jQueryObject} $items - initial items to add to the collection
+* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+*/
+jQuery.fn.jplist.domain.dom.collections.DataItemsCollection = function(options, observer, $items, paths){};
+jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataview;
+jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataitems;
+
+//FiltersService
+jQuery.fn.jplist.domain.dom.services.FiltersService.pathFilter;
+jQuery.fn.jplist.domain.dom.services.FiltersService.textFilter;
+jQuery.fn.jplist.domain.dom.services.FiltersService.rangeFilter;
+
 var context;
 
 //options
@@ -281,18 +298,25 @@ context.prototype.options;
 context.options.prototype.delimiter0;
 context.options.prototype.delimiter1;
 context.options.prototype.delimiter2;
+context.options.prototype.delimiter3;
 
 //control properties
 context.prototype.isAnimateToTop;
 context.prototype.inDeepLinking;
 context.prototype.inStorage;
 context.prototype.inAnimation;
+Object.prototype.controlOptions;
+Object.prototype.pagesNumber;
+Object.prototype.prevPage;
+Object.prototype.$root;
 
 //observer
 Object.prototype.observer;	
 Object.observer.events.prototype.setStatusesEvent;
 Object.observer.events.prototype.renderStatusesEvent;
 Object.observer.events.prototype.forceRenderStatusesEvent;
+Object.observer.events.prototype.collectionReadyEvent;
+Object.observer.events.prototype.filterEvent;
 context.prototype.observer;	
 context.observer.prototype.events;
 context.observer.events.prototype.statusEvent;
