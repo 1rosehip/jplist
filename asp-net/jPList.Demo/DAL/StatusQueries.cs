@@ -78,7 +78,7 @@ namespace JPList.DAL
             try
             {
                 //count database items for pagination
-                query = "SELECT count(*) FROM Item " + this.FilterQuery.ToString();
+                query = "SELECT count(*) FROM ItemWebsite " + this.FilterQuery.ToString();
             }
             catch (Exception ex)
             {
@@ -99,7 +99,7 @@ namespace JPList.DAL
 
             try
             {
-                query = "SELECT title, description, image, likes, keyword1, keyword2 FROM Item " + this.FilterQuery.ToString() + " " + this.SortQuery.ToString();
+                query = "SELECT title, description, image, likes, keyword1, keyword2 FROM ItemWebsite " + this.FilterQuery.ToString() + " " + this.SortQuery.ToString();
 
                 if (this.PaginationStatus != null)
                 {
@@ -165,9 +165,28 @@ namespace JPList.DAL
             StringBuilder query = new StringBuilder();
             int startIndex, endIndex;
             string order = " order by id ";
-
+            int numberInt;
+            
             try
             {
+                if (status != null && status.data != null && Int32.TryParse(status.data.number, out numberInt) && count > numberInt)
+                {
+                    startIndex = status.data.currentPage * numberInt;
+                    endIndex = startIndex + numberInt;
+
+                    if (!String.IsNullOrEmpty(this.SortQuery.ToString()))
+                    {
+                        order = this.SortQuery.ToString();
+                    }
+
+                    query.AppendLine(" SELECT * FROM ( SELECT *, ROW_NUMBER() OVER ( " + order + " ) as row FROM ItemWebsite " + this.FilterQuery.ToString() + ") a WHERE row > " + startIndex + " and row <=  " + endIndex);
+                }
+                else
+                {
+                    query.AppendLine(initialQuery);
+                }
+
+                /*
                 if (status != null && status.data != null && count > status.data.number)
                 {
                     startIndex = status.data.currentPage * status.data.number;
@@ -178,12 +197,13 @@ namespace JPList.DAL
                         order = this.SortQuery.ToString();
                     }
 
-                    query.AppendLine(" SELECT * FROM ( SELECT *, ROW_NUMBER() OVER ( " + order + " ) as row FROM Item " + this.FilterQuery.ToString() + ") a WHERE row > " + startIndex + " and row <=  " + endIndex);
+                    query.AppendLine(" SELECT * FROM ( SELECT *, ROW_NUMBER() OVER ( " + order + " ) as row FROM ItemWebsite " + this.FilterQuery.ToString() + ") a WHERE row > " + startIndex + " and row <=  " + endIndex);
                 }
                 else
                 {
                     query.AppendLine(initialQuery);
                 }
+                 * */
             }
             catch (Exception ex)
             {

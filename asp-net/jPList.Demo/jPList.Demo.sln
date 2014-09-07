@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JPList", "JPList\JPList.csproj", "{116D7E91-39C8-42E0-98BC-A551C84E9619}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jPList.Demo", "jPList.Demo.csproj", "{116D7E91-39C8-42E0-98BC-A551C84E9619}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

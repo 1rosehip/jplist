@@ -10,6 +10,7 @@ namespace JPList.Domain.Models
     /// </summary>
     public class StatusDataDTO
     {
+
         #region "Common"
 
         /// <summary>
@@ -58,11 +59,11 @@ namespace JPList.Domain.Models
         #endregion
 
         #region "Pagination"
-
+        
         /// <summary>
-        /// items number
+        /// items number - string value (it could be number or "all")
         /// </summary>
-        public int number { get; set; }
+        public string number { get; set; }
 
         /// <summary>
         /// the current page index
