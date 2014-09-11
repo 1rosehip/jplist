@@ -64,7 +64,17 @@
 		}
 		
 		//init control vars
-		controlType = (context.options.controlTypes && context.options.controlTypes[type]) || jQuery.fn.jplist.controlTypes[type];
+		controlType = {};
+		
+		if(jQuery.fn.jplist.controlTypes[type]){
+			controlType = jQuery.extend(true, {}, controlType, jQuery.fn.jplist.controlTypes[type]);
+		}
+		
+		if(context.options.controlTypes && context.options.controlTypes[type]){
+			controlType =jQuery.extend(true, {}, controlType, context.options.controlTypes[type]);
+		}		
+		
+		//controlType = (context.options.controlTypes && context.options.controlTypes[type]) || jQuery.fn.jplist.controlTypes[type];
 		
 		if(controlType){
 		

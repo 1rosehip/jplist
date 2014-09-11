@@ -77,6 +77,7 @@ var getUpdatedVersion = function(newVersion, fileContent, replaceMacro){
 * @param {Array.<string>} targets
 * @param {Array.<string>} files
 * @param {string} externs 
+* @param {bool} ifSetVersion
 */
 var compile = function(targets, files, externs, ifSetVersion){
 
@@ -153,7 +154,8 @@ var compile = function(targets, files, externs, ifSetVersion){
 * @param {Array.<string>} targets
 * @param {Array.<string>} files
 * @param {string} externs 
+* @param {bool} ifSetVersion
 */
-exports.compile = function(targets, files, externs){
-	compile(targets, files, externs);
+exports.compile = function(targets, files, externs, ifSetVersion){
+	compile(targets, files, externs, ifSetVersion);
 };

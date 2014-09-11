@@ -23,8 +23,18 @@
 		//get control type		
 		type = $control.attr('data-control-type');		
 				
+		itemControlType = {};
+		
+		if(jQuery.fn.jplist.itemControlTypes[type]){
+			itemControlType = jQuery.extend(true, {}, itemControlType, jQuery.fn.jplist.itemControlTypes[type]);
+		}
+		
+		if(context.options.itemControlTypes && context.options.itemControlTypes[type]){
+			itemControlType = jQuery.extend(true, {}, itemControlType, context.options.itemControlTypes[type]);
+		}
+		
 		//init control vars
-		itemControlType = (context.options.itemControlTypes && context.options.itemControlTypes[type]) || jQuery.fn.jplist.itemControlTypes[type];
+		//itemControlType = (context.options.itemControlTypes && context.options.itemControlTypes[type]) || jQuery.fn.jplist.itemControlTypes[type];
 		
 		if(itemControlType){
 		
