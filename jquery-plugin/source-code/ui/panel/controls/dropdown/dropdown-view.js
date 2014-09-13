@@ -451,7 +451,7 @@
 	*/
 	var initEvents = function(context){
 		
-		var dropdowns = jQuery(document).find('[data-control-type="drop-down"]');
+		var dropdowns = jQuery(document).find('[data-control-type="drop-down"], [data-control-type="checkbox-dropdown"]');
 		
 		jQuery(document).click(function(){
 			dropdowns.find('ul').hide();
