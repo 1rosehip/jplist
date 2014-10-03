@@ -1,6 +1,6 @@
-package com.jplist;
+package com.jplist
 
-public class ItemController {
-	
-	def scaffold = Item
+class ItemController {
+
+	static scaffold = Item
 }
