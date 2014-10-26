@@ -98,7 +98,7 @@ npm install jplist
 - [Button Filters](https://jplist.com/togglefiltersexamples/button-filters-input) - filter by jQuery path with BUTTON elements
 - [Button Filters Group](https://jplist.com/togglefiltersexamples/button-filters-span-group) - filter by jQuery path using group of elements like SPAN, INPUT, etc. OR logic inside group, AND logic between different groups
 - [Button Filters Group (Single Mode)](https://jplist.com/togglefiltersexamples/button-filters-span-group-single-mode) - button filters group when only one button can be selected at the same time
-- [Button Filters and Counters](jplist.com/togglefilterspathexamples/button-filters-span) - filter by jQuery path with SPAN elements and counter controls
+- [Button Filters and Counters](https://jplist.com/togglefiltersexamples/button-filters-span-group) - filter by jQuery path with SPAN elements and counter controls
 - [Range Filter](https://jplist.com/togglefiltersexamples/range-filter) - range filter by jQuery path with any element (SPAN, INPUT, etc.)
 - [Checkbox Text Filter](https://jplist.com/togglefiltersexamples/checkbox-text-filter) - filter by checkboxes text values. OR logic inside group, AND logic between different groups
 - [Button Text Filter](https://jplist.com/togglefiltersexamples/button-text-filter) - filter by text using any elements like SPAN, INPUT etc.
