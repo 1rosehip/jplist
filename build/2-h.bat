@@ -1,1 +1,0 @@
-jshint --verbose --config jshint/config.json ../source-code

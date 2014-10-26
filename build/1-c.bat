@@ -1,1 +1,0 @@
-node closure/all.js

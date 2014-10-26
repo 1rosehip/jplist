@@ -1,1 +1,0 @@
-<%@ WebHandler Language="C#" Class="JPList.WEB.JPListHandler" %>

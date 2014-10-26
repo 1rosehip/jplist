@@ -1,0 +1,61 @@
+/**
+* import files
+*/
+@import (inline) "../../../common-sources/css/license.css";
+@import "../../../common-sources/css/helpers.less";
+@import "../../../common-sources/css/vars.less";
+@import "../../../common-sources/css/common.less";
+
+/**
+* pagination
+*/
+.pagination-mixin(){
+
+	.jplist-panel{
+		.jplist-pagination{		
+			cursor:pointer;
+			float: left;
+			line-height: 30px;
+
+			button{
+				display: inline-block;           
+				color: @blue;
+				height: 30px;
+				line-height: 30px;
+				padding: 0 10px;
+			}
+
+			.jplist-current{
+				font-weight: bold;
+				color: @orange;
+			}
+			
+			.jplist-pagingprev,
+			.jplist-pagingmid,
+			.jplist-pagingnext {
+				float:left;
+			}
+			
+			.jplist-pagingprev,
+			.jplist-pagingnext{
+				button{
+					font-size: 20px;
+					font-family: @courier;
+				}
+			}
+		}
+	}
+	
+	.jplist-one-page{
+		display: none;
+	}
+	
+	/**
+	* used in pagination infor when pages number is 0
+	*/
+	.jplist-empty{
+		display: none;
+	}
+}
+
+.pagination-mixin();

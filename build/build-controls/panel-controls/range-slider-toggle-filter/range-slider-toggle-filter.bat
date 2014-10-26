@@ -1,1 +1,0 @@
-node range-slider-toggle-filter.js
