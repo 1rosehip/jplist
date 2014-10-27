@@ -23,7 +23,7 @@
 - [WordPress plugin](https://github.com/no81no/jplist-github-wordpress-plugin)
 - [Groovy, Grails and MySQL](https://github.com/no81no/jplist-grails-groovy)
 - [NodeJS, Express and MySQL](https://github.com/no81no/jplist-nodejs-express)
-- PHP + SQLite
+- [PHP + SQLite] (https://github.com/no81no/jplist/tree/master/jplist-data-sources/php-sqlite)
 
 ### Sorting
 - Ascending and descending sorting
