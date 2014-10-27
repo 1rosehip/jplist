@@ -18,12 +18,12 @@
 - Solid documentation
 
 ### Data Sources
-- PHP + MySQL
-- PHP + SQLite
+- [PHP + MySQL] (https://github.com/no81no/jplist/tree/master/jplist-data-sources/php-mysql)
 - [ASP.NET + Sql Server](https://github.com/no81no/jplist-asp-net)
 - [WordPress plugin](https://github.com/no81no/jplist-github-wordpress-plugin)
 - [Groovy, Grails and MySQL](https://github.com/no81no/jplist-grails-groovy)
 - [NodeJS, Express and MySQL](https://github.com/no81no/jplist-nodejs-express)
+- PHP + SQLite
 
 ### Sorting
 - Ascending and descending sorting
