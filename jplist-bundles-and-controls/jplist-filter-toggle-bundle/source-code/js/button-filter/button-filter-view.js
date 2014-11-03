@@ -12,45 +12,37 @@
 		var selected
 			,data
 			,status
-			,filterType = ''
-			,storageStatus;
-				
-		storageStatus = context.$control.data('storage-status');
+			,filterType = '';
+					
+		if(isDefault){
+			selected = context.$control.attr('data-selected') === 'true';
+		}
+		else{
+			//get selected value
+			selected = context.params.selected;
+		}
 		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
+		if(selected){
+			filterType = 'path';
 		}
-		else{			
-			if(isDefault){
-				selected = context.$control.attr('data-selected') === 'true';
-			}
-			else{
-				//get selected value
-				selected = context.params.selected;
-			}
-			
-			if(selected){
-				filterType = 'path';
-			}
-			
-			data = {
-				path: context.$control.attr('data-path')
-				,filterType: filterType
-				,selected: selected
-			};
-			
-			//init status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
-		}
+		
+		data = {
+			path: context.$control.attr('data-path')
+			,filterType: filterType
+			,selected: selected
+		};
+		
+		//init status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;	
 	};
@@ -142,12 +134,7 @@
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
-		
-		//save storages status
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
-		}
-		
+				
 		//update 'selected' value
 		context.params.selected = status.data.selected;
 		
@@ -178,7 +165,7 @@
 			context.history.addStatus(getStatus(context, false));
 			
 			//trigger force build statuses event
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
 	};
 	

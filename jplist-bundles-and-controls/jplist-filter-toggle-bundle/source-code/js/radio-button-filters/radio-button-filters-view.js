@@ -11,49 +11,39 @@
 		
 		var status = null
 			,data
-			,selected
-			,storageStatus;
+			,selected;
+				
+		if(isDefault){	
 		
-		storageStatus = context.$control.data('storage-status');
-		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
+			//if default, get the initial value
+			selected = context.params.initialSelected || false;
 		}
 		else{
+			selected = context.$control.get(0).checked;
+		}		
 		
-			if(isDefault){	
+		data = {
+			path: context.$control.attr('data-path')
+			,type: 'TextFilter'
+			,filterType: 'path'
+			,selected: selected
+		};		
 			
-				//if default, get the initial value
-				selected = context.params.initialSelected || false;
-			}
-			else{
-				selected = context.$control.get(0).checked;
-			}		
-			
-			data = {
-				path: context.$control.attr('data-path')
-				,type: 'TextFilter'
-				,filterType: 'path'
-				,selected: selected
-			};		
-				
-			if(!selected){
-				data.filterType = '';
-			}
+		if(!selected){
+			data.filterType = '';
+		}
 
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
-			return status;
-		}	
-
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
+		
 		return status;
 	};
 	
@@ -139,11 +129,6 @@
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
 		
-		//save storage status
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
-		}
-		
 		context.$control.get(0).checked = status.data.selected || false;
 	};
 	
@@ -159,7 +144,7 @@
 			context.history.addStatus(getStatus(context, false));
 			
 			//force render statuses event
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
 	};
 	

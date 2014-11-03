@@ -2,52 +2,6 @@
 	'use strict';
 	
 	/**
-	* animate to top
-	* @param {Object} context - jplist panel 'this' object
-	
-	var animateToTop = function(context){
-		
-		var offset;
-		
-		if(context.options.animateToTop !== ''){
-		
-			//set offset
-			if(context.options.animateToTop !== 'auto'){
-				offset = jQuery(context.options.animateToTop).offset().top;
-			}
-			else{
-				offset = context.$root.offset().top;
-			}
-			
-			jQuery('html, body').animate({
-				scrollTop: offset
-			}, context.options.animateToTopDuration);
-		}
-	};
-	*/
-	
-	/**
-	* render callback
-	* @param {Object} context - jplist panel 'this' object
-	* @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} collection
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	* @param {jQueryObject} $dataview
-	*/
-	var renderCallback = function(context, collection, statuses, $dataview){
-		
-		//animate to top
-		//animateToTop(context);
-		
-		//send redraw event
-		context.observer.trigger(context.observer.events.setStatusesEvent, [statuses, collection]);
-		
-		//redraw callback
-		if(jQuery.isFunction(context.options.redrawCallback)){
-			context.options.redrawCallback(collection, $dataview, statuses);
-		}
-	};
-	
-	/**
 	* render html
 	* @param {Object} context
 	* @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} collection
@@ -70,8 +24,10 @@
 			context.$noResults.removeClass('jplist-hidden');
 			context.$itemsBox.addClass('jplist-hidden');
 			
-			//send render callback
-			renderCallback(context, collection, statuses, $dataview);
+			//redraw callback
+			if(jQuery.isFunction(context.options.redrawCallback)){
+				context.options.redrawCallback(collection, $dataview, statuses);
+			}
 		}
 		else{
 			context.$noResults.addClass('jplist-hidden');
@@ -104,9 +60,11 @@
 					,context.options.effect //animation effect
 					,context.timeline //timeline object
 					,function(){
-						
-						//send render callback
-						renderCallback(context, collection, statuses, $dataview);
+												
+						//redraw callback
+						if(jQuery.isFunction(context.options.redrawCallback)){
+							context.options.redrawCallback(collection, $dataview, statuses);
+						}
 					}
 					,context.observer
 				);				
@@ -114,9 +72,11 @@
 			else{			
 				$dataitems.detach();
 				context.$itemsBox.append($dataview);
-				
-				//send render callback
-				renderCallback(context, collection, statuses, $dataview);
+								
+				//redraw callback
+				if(jQuery.isFunction(context.options.redrawCallback)){
+					context.options.redrawCallback(collection, $dataview, statuses);
+				}
 			}
 		}		
 	};	
@@ -128,9 +88,10 @@
 	var initEvents = function(context){
 		
 		/**
-		* on 'render list' event
+		* this event is sent by dataitems collection when the statuses were applied to the collection 
+		* (i.e. sort, filter and pagination is done according new statuses)
 		*/
-		context.observer.on(context.observer.events.renderList, function(e, collection, statuses){
+		context.observer.on(context.observer.events.statusesAppliedToList, function(e, collection, statuses){
 			render(context, collection, statuses);
 		});
 	};

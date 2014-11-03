@@ -8,21 +8,30 @@
 	var initEvents = function(context){	
 		
 		/**
-		* show preloader on render statuses event
+		* show preloader when ready
 		*/
-		context.observer.on(context.observer.events.renderStatusesEvent, function(e){
+		context.observer.on(context.observer.events.statusesAppliedToList, function(e){
+			
+			//show preloader
+			context.$control.addClass('jplist-hide-preloader');
+		});
+		
+		/**
+		* hide preloader on status changes
+		*/
+		context.observer.on(context.observer.events.unknownStatusesChanged, function(event, obj, statuses){
 			
 			//show preloader
 			context.$control.removeClass('jplist-hide-preloader');
 		});
 		
 		/**
-		* hide preloader on html render event
+		* hide preloader on status changes
 		*/
-		context.observer.on(context.observer.events.setStatusesEvent, function(event, obj, statuses){
+		context.observer.on(context.observer.events.knownStatusesChanged, function(event, obj, statuses){
 			
 			//show preloader
-			context.$control.addClass('jplist-hide-preloader');
+			context.$control.removeClass('jplist-hide-preloader');
 		});
 	};
 	

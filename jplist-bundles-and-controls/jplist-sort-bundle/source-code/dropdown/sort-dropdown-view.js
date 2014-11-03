@@ -7,28 +7,6 @@
 	'use strict';		
 		
 	/**
-	* get span with default value
-	* @param {Object} context
-	* @return {jQueryObject} - span with default value
-	*/
-	var getSpanWithDefaultValue = function(context){
-		
-		var $li
-			,$span;
-		
-		$li = context.$control.find('li:has(span[data-default="true"])').eq(0);
-			
-		if($li.length <= 0){
-			$li = context.$control.find('li:eq(0)');
-		}
-		
-		//get span
-		$span = $li.find('span');
-		
-		return $span;
-	};
-	
-	/**
 	* Get control status
 	* @param {Object} context
 	* @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
@@ -41,51 +19,43 @@
 			,$li
 			,$span
 			,dateTimeFormat
-			,ignore
-			,storageStatus;	
-			
-		storageStatus = context.$control.data('storage-status');
+			,ignore;	
 		
-		if(isDefault && storageStatus){			
-			status = storageStatus;			
+		if(isDefault){
+					
+			$li = context.$control.find('li:has(span[data-default="true"])').eq(0);
+			
+			if($li.length <= 0){
+				$li = context.$control.find('li:eq(0)');
+			}
 		}
 		else{
-			if(isDefault){
-						
-				$li = context.$control.find('li:has(span[data-default="true"])').eq(0);
-				
-				if($li.length <= 0){
-					$li = context.$control.find('li:eq(0)');
-				}
-			}
-			else{
-				$li = context.$control.find('.active');
-			}
-			
-			//get span
-			$span = $li.find('span');
-			
-			//init datetime format
-			dateTimeFormat = context.$control.attr('data-datetime-format') || '';
-			
-			//init ignore
-			ignore = context.$control.attr('data-ignore') || '';
-			
-			//init status related data
-			data = new jQuery.fn.jplist.ui.controls.DropdownSortDTO($span.attr('data-path'), $span.attr('data-type'), $span.attr('data-order'), dateTimeFormat, ignore);
-			
-			//create status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);				
+			$li = context.$control.find('.active');
 		}
+		
+		//get span
+		$span = $li.find('span');
+		
+		//init datetime format
+		dateTimeFormat = context.$control.attr('data-datetime-format') || '';
+		
+		//init ignore
+		ignore = context.$control.attr('data-ignore') || '';
+		
+		//init status related data
+		data = new jQuery.fn.jplist.ui.controls.DropdownSortDTO($span.attr('data-path'), $span.attr('data-type'), $span.attr('data-order'), dateTimeFormat, ignore);
+		
+		//create status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;		
 	};
@@ -193,52 +163,30 @@
 	var setStatus = function(context, status, restoredFromStorage){
 				
 		var $li
-			,$span = null
 			,$liList;		
-		
-		//savestorages status
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
-		}
-		
-		if(!context.inStorage && restoredFromStorage){
-			$span = getSpanWithDefaultValue(context);
-		}
 		
 		//get li list
 		$liList = context.$control.find('li');
+						
+		//remove active class
+		$liList.removeClass('active');
 		
-		if(!context.inStorage && restoredFromStorage && $span.length > 0){
-										
-			status.data.path = $span.attr('data-path');
-			status.data.type = $span.attr('data-type');
-			status.data.order = $span.attr('data-order');					
-								
-			//send status event		
-			context.history.addStatus(status);
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
+		//set active class
+		if(status.data.path == 'default'){
+			$li = context.$control.find('li:has([data-path="default"])');
 		}
-		else{					
-			//remove active class
-			$liList.removeClass('active');
-			
-			//set active class
-			if(status.data.path == 'default'){
-				$li = context.$control.find('li:has([data-path="default"])');
-			}
-			else{
-				$li = context.$control.find('li:has([data-path="' + status.data.path + '"][data-type="' + status.data.type + '"][data-order="' + status.data.order + '"])');
-			}
-			
-			if($li.length <= 0){
-				$li = $liList.eq(0);
-			}
-			
-			$li.addClass('active');
-			
-			//update dropdown panel
-			context.$control.find('.jplist-dd-panel').text($li.eq(0).text());	
-		}				
+		else{
+			$li = context.$control.find('li:has([data-path="' + status.data.path + '"][data-type="' + status.data.type + '"][data-order="' + status.data.order + '"])');
+		}
+		
+		if($li.length <= 0){
+			$li = $liList.eq(0);
+		}
+		
+		$li.addClass('active');
+		
+		//update dropdown panel
+		context.$control.find('.jplist-dd-panel').text($li.eq(0).text());	
 	};
 	
 	/**
@@ -269,7 +217,7 @@
 			
 			//send status event		
 			context.history.addStatus(status);			
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
+			context.observer.trigger(context.observer.events.statusChanged, [status]);
 		});
 	};
 	

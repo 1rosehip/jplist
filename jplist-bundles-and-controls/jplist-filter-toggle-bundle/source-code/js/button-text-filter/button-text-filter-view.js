@@ -13,52 +13,43 @@
 			,data
 			,status = null
 			,ignore = ''
-			,value = ''
-			,storageStatus;	
-			
-		storageStatus = context.$control.data('storage-status');
-		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
+			,value = '';	
+									
+		if(context.controlOptions && context.controlOptions.ignore){
+		 
+			//get ignore characters
+			ignore = context.controlOptions.ignore;
 		}
-		else{	
-						
-			if(context.controlOptions && context.controlOptions.ignore){
-			 
-				//get ignore characters
-				ignore = context.controlOptions.ignore;
-			}
-			
-			if(isDefault){
-				selected = context.$control.attr('data-selected') === 'true';
-			}
-			else{
-				//get selected value
-				selected = context.params.selected;
-			}
-			
-			if(selected){
-				value = context.params.dataText;
-			}
-			else{
-				value = '';
-			}
-			
-			//create status related data object
-			data = new jQuery.fn.jplist.ui.controls.ButtonTextFilterDTO(context.params.dataPath, value, ignore, selected);
-			
-			//init status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
-		}		
+		
+		if(isDefault){
+			selected = context.$control.attr('data-selected') === 'true';
+		}
+		else{
+			//get selected value
+			selected = context.params.selected;
+		}
+		
+		if(selected){
+			value = context.params.dataText;
+		}
+		else{
+			value = '';
+		}
+		
+		//create status related data object
+		data = new jQuery.fn.jplist.ui.controls.ButtonTextFilterDTO(context.params.dataPath, value, ignore, selected);
+		
+		//init status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);	
 		
 		return status;
 	};
@@ -146,11 +137,6 @@
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
 		
-		//savestorages status
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
-		}
-				
 		//update 'selected' value
 		context.params.selected = status.data.selected;
 		
@@ -181,8 +167,8 @@
 			context.history.addStatus(getStatus(context, false));
 			
 			//trigger force build statuses event
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
 	};
 	

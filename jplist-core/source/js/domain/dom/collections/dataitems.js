@@ -40,7 +40,7 @@
 			}
 			
 			//trigger filter event
-			context.observer.trigger(context.observer.events.filterEvent, [statuses, context]);
+			context.observer.trigger(context.observer.events.listFiltered, [statuses, context]);
 		}
 	};	
 	
@@ -84,7 +84,7 @@
 			}
 			
 			//trigger pagination event
-			context.observer.trigger(context.observer.events.paginationEvent, [statuses, context]);
+			context.observer.trigger(context.observer.events.listPaginated, [statuses, context]);
 		}
 		
 	};
@@ -110,7 +110,7 @@
 		    jQuery.fn.jplist.domain.dom.services.SortService.doubleSort(actionStatuses, context.dataview);
 			
 			//trigger sort event
-			context.observer.trigger(context.observer.events.sortEvent, [statuses, context]);
+			context.observer.trigger(context.observer.events.listSorted, [statuses, context]);
         }
 	};
 	
@@ -134,7 +134,7 @@
 		pagination(context, statuses);
 						
 		//render list
-		context.observer.trigger(context.observer.events.renderList, [context, statuses]);
+		context.observer.trigger(context.observer.events.statusesAppliedToList, [context, statuses]);
 	};
 	
 	/**
@@ -234,8 +234,8 @@
 		if(index !== -1){
 			context.dataitems.splice(index, 1);
 
-            //trigger del item event
-	        context.observer.trigger(context.observer.events.delItemEvent, [$item, context.dataitems]);
+            //trigger event that data item was removed from the dataitems collection
+	        context.observer.trigger(context.observer.events.dataItemRemoved, [$item, context.dataitems]);
 		}
 	};
 	
@@ -268,8 +268,8 @@
 		//add item dataitems to array
 		context.dataitems.push(dataItem);
 
-        //trigger add item event
-	    context.observer.trigger(context.observer.events.addItemEvent, [dataItem, context.dataitems]);
+        //trigger event that data item was added to the dataitems collection
+	    context.observer.trigger(context.observer.events.dataItemAdded, [dataItem, context.dataitems]);
 	};
 	
 	/**

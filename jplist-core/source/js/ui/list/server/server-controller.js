@@ -55,6 +55,8 @@
 			//add paging object to the paging status
 			pagingStatuses[i].data.paging = paging;			
 		}
+		
+		context.observer.trigger(context.observer.events.statusesAppliedToList, [null, statuses]);
 	};
 		
 	/**
@@ -64,12 +66,11 @@
 	var initEvents = function(context){
 	
 		/**
-		* on view ready
+		* on view ready -> should be changed to 'statuses changed!!!'
 		* @param {Object} event
-		* @param {Object} obj - other context
 		* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 		*/
-		context.observer.on(context.observer.events.renderList, function(event, obj, statuses){
+		context.observer.on(context.observer.events.knownStatusesChanged, function(event, statuses){
 			
 			var ajaxDataType = 'html';
 			

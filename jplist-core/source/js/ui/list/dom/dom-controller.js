@@ -2,33 +2,20 @@
 	'use strict';
 		
 	/**
-	* init events
+	* build statuses
 	* @param {Object} context - jplist controller 'this' object
+	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
-	var initEvents = function(context){
+	var renderStatuses = function(context, statuses){
 		
-		/**
-		* on build statuses event
-		* @param {Object} event
-		* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-		*/
-		context.observer.on(context.observer.events.renderStatusesEvent, function(event, statuses){
+		//save statuses to storage according to user options (if needed)
+		context.storage.save(statuses);
+		
+		if(context.collection){
 			
-			//save statuses to storage according to user options (if needed)
-			context.storage.save(statuses);
-			
-			if(context.collection){
-				
-				//update dataview				
-				context.collection.applyStatuses(statuses);
-			}	
-
-			if(context.options.deepLinking){
-				
-				//if deep linking is enabled -> change url by statuses
-				context.observer.trigger(context.observer.events.changeUrlDeepLinksEvent, []);
-			}
-		});		
+			//update dataview				
+			context.collection.applyStatuses(statuses);
+		}
 	};
 		
 	/**
@@ -52,6 +39,22 @@
 		collection = new jQuery.fn.jplist.domain.dom.collections.DataItemsCollection(context.options, context.observer, $items, panelPaths);
 		
 		return collection;
+	};
+	
+	/**
+	* init events
+	* @param {Object} context - jplist controller 'this' object
+	*/
+	var initEvents = function(context){
+		
+		/**
+		* DOM and server lists send this event when their HTML is rendered
+		* @param {Object} event
+		* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+		*/
+		context.observer.on(context.observer.events.knownStatusesChanged, function(event, statuses){
+			renderStatuses(context, statuses);
+		});		
 	};
 	
 	/**
@@ -96,6 +99,14 @@
 		initEvents(context);
 				
 		return jQuery.extend(this, context);
+	};
+	
+	/**
+	* build statuses
+	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	*/
+	Init.prototype.renderStatuses = function(statuses){
+		renderStatuses(this, statuses);
 	};
 	
 	/**

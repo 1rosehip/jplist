@@ -1,57 +1,6 @@
 (function(){
 	'use strict';
-	
-	/**
-	* animate to top
-	* @param {Object} context - jplist panel 'this' object
-	
-	var animateToTop = function(context){
-		
-		var offset;
-		
-		if(context.options.animateToTop !== ''){
-		
-			//set offset
-			if(context.options.animateToTop !== 'auto'){
-				offset = jQuery(context.options.animateToTop).offset().top;
-			}
-			else{
-				offset = context.$root.offset().top;
-			}
-			
-			jQuery('html, body').animate({
-				scrollTop: offset
-			}, context.options.animateToTopDuration);
-		}
-	};
-	*/
-	
-	/**
-	* render callback
-	* @param {Object} context - jplist panel 'this' object
-	* @param {string} content
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
-	var renderCallback = function(context, content, statuses){
-		
-		//animate to top
-		//animateToTop(context);
-		
-		//send redraw event
-		context.observer.trigger(context.observer.events.setStatusesEvent, [statuses, content]);
-		
-		if(context.options.deepLinking){
-				
-			//if deep linking is enabled -> change url by statuses
-			context.observer.trigger(context.observer.events.changeUrlDeepLinksEvent, []);
-		}
-			
-		//redraw callback
-		if(jQuery.isFunction(context.options.redrawCallback)){
-			context.options.redrawCallback(content, statuses);
-		}
-	};
-	
+
 	/**
 	* build result content
 	* @param {Object} context
@@ -104,9 +53,11 @@
 				,context.options.effect //animation effect
 				,context.timeline //timeline object
 				,function(){
-					
-					//send render callback
-					renderCallback(context, dataItem.content, statuses);
+										
+					//redraw callback
+					if(jQuery.isFunction(context.options.redrawCallback)){
+						context.options.redrawCallback(dataItem.content, statuses);
+					}
 				}
 				,context.observer
 			);		
@@ -122,8 +73,9 @@
 				context.$itemsBox.html(dataItem.content);
 			}
 			
-			//send render callback
-			renderCallback(context, dataItem.content, statuses);
+			if(jQuery.isFunction(context.options.redrawCallback)){
+				context.options.redrawCallback(dataItem.content, statuses);
+			}
 		}
 	};
 	
@@ -134,19 +86,13 @@
 	var initEvents = function(context){
 		
 		/**
-		* on render statuses events
+		* on known statuses change
 		* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 		*/
-		context.observer.on(context.observer.events.renderStatusesEvent, function(event, statuses){
-			
-			//hide items box
-			//context.$itemsBox.addClass('jplist-hidden');
-			
+		context.observer.on(context.observer.events.knownStatusesChanged, function(event, statuses){
+						
 			//hide no results section
 			context.$noResults.addClass('jplist-hidden');
-						
-			//send event to controller that view is ready
-			context.observer.trigger(context.observer.events.renderList, [context, statuses]);			
 		});
 		
 		/**

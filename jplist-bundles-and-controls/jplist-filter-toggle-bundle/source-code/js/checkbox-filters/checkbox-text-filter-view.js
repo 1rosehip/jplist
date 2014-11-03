@@ -12,60 +12,50 @@
 		var data
             ,textGroup = []
 			,status = null
-			,storageStatus
 			,selected;	
-			
-		storageStatus = context.$control.data('storage-status');
-		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
-		}
-		else{	
-			
-			//init text group: get all selected checkbox values
-			context.params.$checkboxes.each(function(index, el){
-					
-				//get checkbox
-				var $cb = jQuery(el)
-					,cbVal;
+						
+		//init text group: get all selected checkbox values
+		context.params.$checkboxes.each(function(index, el){
+				
+			//get checkbox
+			var $cb = jQuery(el)
+				,cbVal;
 
-				if(isDefault){
-					selected = $cb.data('selected-on-start') || false;
-				}
-				else{
-					//get button data
-					selected = $cb.get(0).checked;
-				}				
+			if(isDefault){
+				selected = $cb.data('selected-on-start') || false;
+			}
+			else{
+				//get button data
+				selected = $cb.get(0).checked;
+			}				
 
-				//get checkbox value
-				cbVal = $cb.val();
+			//get checkbox value
+			cbVal = $cb.val();
 
-				if(cbVal && selected){
-					textGroup.push(cbVal);
-				}
-			});			
+			if(cbVal && selected){
+				textGroup.push(cbVal);
+			}
+		});			
 
-			//init status related data
-			data = new jQuery.fn.jplist.ui.controls.CheckboxTextFilterDTO(
-				textGroup
-				,context.params.dataLogic
-				,context.params.dataPath
-				,context.params.ignore
-			);
+		//init status related data
+		data = new jQuery.fn.jplist.ui.controls.CheckboxTextFilterDTO(
+			textGroup
+			,context.params.dataLogic
+			,context.params.dataPath
+			,context.params.ignore
+		);
 
-			//init status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
-
-		}
+		//init status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;
 	};
@@ -210,7 +200,7 @@
 			context.history.addStatus(getStatus(context, false));
 			
 			//render statuses
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
 	};
 	

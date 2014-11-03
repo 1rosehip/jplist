@@ -12,34 +12,28 @@
 		var data
 			,status = null
 			,view = context.params.defaultView;
-			
-		if(isDefault && context.params.storageStatus){			
-			status = context.params.storageStatus;
+					
+		if(isDefault){
+			view = context.params.defaultView;
 		}
 		else{
-			
-			if(isDefault){
-				view = context.params.defaultView;
-			}
-			else{
-				view = context.params.currentView;
-			}
-			
-			//create status related data
-			data = new jQuery.fn.jplist.ui.controls.ViewsDTO(view);
-			
-			//create status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
+			view = context.params.currentView;
 		}
+		
+		//create status related data
+		data = new jQuery.fn.jplist.ui.controls.ViewsDTO(view);
+		
+		//create status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;		
 	};
@@ -104,11 +98,6 @@
 				
 		if(status.data){
 		
-			//savestorages status
-			if(context.inStorage && restoredFromStorage){	
-				context.params.storageStatus = status;
-			}
-			
 			//remove old classes from the root element
 			context.$root.removeClass(context.params.types.join(' '));
 			
@@ -122,7 +111,7 @@
 				context.params.currentView = context.params.defaultView;
 				
 				//force build statuses status event	
-				context.observer.trigger(context.observer.events.statusEvent, [status]);
+				context.observer.trigger(context.observer.events.statusChanged, [status]);
 			}
 			else{			
 				context.$root.addClass(status.data.view);
@@ -153,7 +142,7 @@
 			context.history.addStatus(getStatus(context, false));
 			
 			//force build statuses event			
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
 	};
 	
@@ -167,15 +156,9 @@
 		context.params = {
 			
 			$buttons: context.$control.find('[data-type]')
-			,storageStatus: null
 			,defaultView: context.$control.attr('data-default') || 'list-view'
 			,currentView: context.$control.attr('data-default') || 'list-view'
 			,types: []
-			
-			/*
-			$listBtn: context.$control.find('[data-type="list-view"]')
-			,$gridBtn: context.$control.find('[data-type="grid-view"]')		
-			*/
 		};
 		
 		if(context.params.$buttons.length > 0){		

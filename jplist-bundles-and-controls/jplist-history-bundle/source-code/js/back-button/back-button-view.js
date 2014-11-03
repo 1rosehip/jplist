@@ -21,13 +21,23 @@
 	*/
 	var initEvents = function(context){	
 		
-		//event from controller to panel after html rebuild
-		context.observer.on(context.observer.events.setStatusesEvent, function(event, statusesArray, collection){
-			
-			//refresh button class
+		/**
+		* refresh button class on statuses change
+		*/
+		context.observer.on(context.observer.events.unknownStatusesChanged, function(){			
 			render(context);
 		});
 		
+		/**
+		* refresh button class on statuses change
+		*/
+		context.observer.on(context.observer.events.knownStatusesChanged, function(){
+			render(context);
+		});
+		
+		/**
+		* on control click
+		*/
 		context.$control.on('click', function(){
 		
 			var status
@@ -70,11 +80,11 @@
 					}
 				}
 				
-				context.observer.trigger(context.observer.events.renderStatusesEvent, [statusesList]);
+				context.observer.trigger(context.observer.events.knownStatusesChanged, [statusesList]);
 			}
 			else{
 				//force build statuses event			
-				context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [true]);
+				context.observer.trigger(context.observer.events.unknownStatusesChanged, [true]);
 			}
 			
 			//refresh button class

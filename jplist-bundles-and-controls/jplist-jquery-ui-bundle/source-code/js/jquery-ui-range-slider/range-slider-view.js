@@ -12,42 +12,35 @@
 		var status = null
 			,data
 			,dataPath, min, max, prev, next;
-			//,$uiSlider = context.$control.data('jplist-ui-slider');		
+				
+		//init vars
+		dataPath = context.$control.attr('data-path').toString();		
+		min = context.params.$uiSlider['slider']('option', 'min');
+		max = context.params.$uiSlider['slider']('option', 'max');
 		
-		if(isDefault && context.params.storageStatus){			
-			status = context.params.storageStatus;
+		if(isDefault){			
+			prev = min;
+			next = max;
 		}
 		else{
-		
-			//init vars
-			dataPath = context.$control.attr('data-path').toString();		
-			min = context.params.$uiSlider['slider']('option', 'min');
-			max = context.params.$uiSlider['slider']('option', 'max');
-			
-			if(isDefault){			
-				prev = min;
-				next = max;
-			}
-			else{
-				prev = context.params.$uiSlider['slider']('values', 0);
-				next = context.params.$uiSlider['slider']('values', 1);
-			}
-			
-			//init range slider data transfer object
-			data = new jQuery.fn.jplist.ui.controls.RangeSliderDTO(dataPath, min, max, prev, next);	
-			
-			//create status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
+			prev = context.params.$uiSlider['slider']('values', 0);
+			next = context.params.$uiSlider['slider']('values', 1);
 		}
+		
+		//init range slider data transfer object
+		data = new jQuery.fn.jplist.ui.controls.RangeSliderDTO(dataPath, min, max, prev, next);	
+		
+		//create status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;	
 	};
@@ -145,12 +138,7 @@
 				
 		var prev
 			,next;
-		
-		//save status in storage
-		if(context.inStorage && restoredFromStorage){	
-			context.params.storageStatus = status;	
-		}
-								
+										
 		if(jQuery.isNumeric(status.data.prev) && jQuery.isNumeric(status.data.next)){
 			
 			//get values
@@ -187,7 +175,7 @@
 			context.history.addStatus(getStatus(context, false));
 			
 			//force render statuses event
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
 	};
 	
@@ -219,10 +207,9 @@
 			$uiSlider: context.$control.find('[data-type="ui-slider"]')
 			,$prev: context.$control.find('[data-type="prev-value"]')
 			,$next: context.$control.find('[data-type="next-value"]')
-			,uiSliderFunc: function(){}
-			,uiSetValuesFunc: function(){}
+			,uiSliderFunc: function($uiSlider, $prev, $next){}
+			,uiSetValuesFunc: function($uiSlider, $prev, $next){}
 			,controlOptions: context['controlOptions']
-			,storageStatus: null
 		};
 		
 		//set user defined functions

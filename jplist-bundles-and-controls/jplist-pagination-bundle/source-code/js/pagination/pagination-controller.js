@@ -15,66 +15,57 @@
 			,cpage
 			,itemsPerPage
 			,lastStatus
-			,storageStatus
 			,isJumpToStart = false;
-				
-		storageStatus = context.$control.data('storage-status');
+					
+		//get active button  
+		$button = context.$control.find('button[data-active]').eq(0);
 		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
+		//if no active button -> get first button
+		if($button.length <= 0){
+			$button = context.$control.find('button').eq(0);
+		}
+		
+		//get current page
+		if(isDefault){
+		
+			//by default current page is 0
+			cpage = 0;
 		}
 		else{
+						
+			//parse to number
+			cpage = Number($button.attr('data-number')) || 0;
+		}
+				
+		//if jumpToStart option is enabled and last rebuild action was not pagination -> jump to 0
+		isJumpToStart = (context.$control.attr('data-jump-to-start') === 'true') || context.controlOptions.jumpToStart;
+		
+		if(isJumpToStart){
 			
-			//get active button  
-			$button = context.$control.find('button[data-active]').eq(0);
+			lastStatus = context.history.getLastStatus();
 			
-			//if no active button -> get first button
-			if($button.length <= 0){
-				$button = context.$control.find('button').eq(0);
-			}
-			
-			//get current page
-			if(isDefault){
-			
-				//by default current page is 0
+			if(lastStatus && lastStatus.type !== 'pagination' && lastStatus.type !== 'views'){
 				cpage = 0;
 			}
-			else{
-							
-				//parse to number
-				cpage = Number($button.attr('data-number')) || 0;
-			}
-					
-			//if jumpToStart option is enabled and last rebuild action was not pagination -> jump to 0
-			isJumpToStart = (context.$control.attr('data-jump-to-start') === 'true') || context.controlOptions.jumpToStart;
-			
-			if(isJumpToStart){
-				
-				lastStatus = context.history.getLastStatus();
-				
-				if(lastStatus && lastStatus.type !== 'pagination' && lastStatus.type !== 'views'){
-					cpage = 0;
-				}
-			}
-			
-			//init items per page
-			itemsPerPage = Number(context.$control.attr('data-items-per-page')) || 0;
-			
-			//create status related data
-			data = new jQuery.fn.jplist.ui.controls.PaginationDTO(cpage, itemsPerPage);		
-				
-			//create status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);	
 		}
+		
+		//init items per page
+		itemsPerPage = Number(context.$control.attr('data-items-per-page')) || 0;
+		
+		//create status related data
+		data = new jQuery.fn.jplist.ui.controls.PaginationDTO(cpage, itemsPerPage);		
+			
+		//create status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;			
 	};
@@ -152,29 +143,11 @@
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
-						
-		//save status to storage 
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
-		}
-		
-		if(!context.inStorage && restoredFromStorage){					
-								
-			//update current page
-			status.data.currentPage = 0;
-			
-			//send status event		
-			context.history.addStatus(status);
-			
-			//trigger status event
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
-		}	
-		else{				
-			if(status.data && status.data.paging){
-						
-				//build pager
-				context.params.view.build(status.data.paging);
-			}	
+					
+		if(status.data && status.data.paging){
+					
+			//build pager
+			context.params.view.build(status.data.paging);
 		}
 	};
 	
@@ -205,7 +178,7 @@
 			context.history.addStatus(status);
 			
 			//send status event	
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
+			context.observer.trigger(context.observer.events.statusChanged, [status]);
 		});
 	};
 	

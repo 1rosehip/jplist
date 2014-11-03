@@ -12,58 +12,48 @@
 		var data
 			,textAndPathsGroup = []
 			,status = null
-			,ignore = ''
-			,storageStatus;	
-			
-		storageStatus = context.$control.data('storage-status');
+			,ignore = '';					
 		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
+		if(context.controlOptions && context.controlOptions.ignore){
+		 
+			//get ignore characters
+			ignore = context.controlOptions.ignore;
 		}
-		else{	
-			
-			if(context.controlOptions && context.controlOptions.ignore){
-			 
-				//get ignore characters
-				ignore = context.controlOptions.ignore;
+		
+		context.params.$buttons.each(function(index, el){
+				
+			var $button = jQuery(el)
+				,selected;
+
+			if(isDefault){
+				selected = $button.attr('data-selected') === 'true';
 			}
-			
-			context.params.$buttons.each(function(index, el){
-					
-				var $button = jQuery(el)
-					,selected;
+			else{
+				//get button data
+				selected = $button.data('selected') || false;
+			}		
 
-				if(isDefault){
-					selected = $button.attr('data-selected') === 'true';
-				}
-				else{
-					//get button data
-					selected = $button.data('selected') || false;
-				}		
-
-				textAndPathsGroup.push({
-					selected: selected
-					,text: $button.data('dataText')
-					,path: $button.data('dataPath')
-				});
-			});			
-			
-			//init status related data
-			data = new jQuery.fn.jplist.ui.controls.ButtonTextFilterGroupDTO(textAndPathsGroup, ignore);
-			
-			//init status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
-
-		}
+			textAndPathsGroup.push({
+				selected: selected
+				,text: $button.data('dataText')
+				,path: $button.data('dataPath')
+			});
+		});			
+		
+		//init status related data
+		data = new jQuery.fn.jplist.ui.controls.ButtonTextFilterGroupDTO(textAndPathsGroup, ignore);
+		
+		//init status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;
 	};
@@ -248,7 +238,7 @@
 			context.history.addStatus(getStatus(context, false));
 			
 			//render statuses
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
 	};
 	

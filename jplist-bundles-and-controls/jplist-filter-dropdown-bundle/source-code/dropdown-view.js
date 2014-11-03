@@ -1,28 +1,6 @@
 (function(){
 	'use strict';		
-		
-	/**
-	* get span with default value
-	* @param {Object} context
-	* @return {jQueryObject} - span with default value
-	*/
-	var getSpanWithDefaultValue = function(context){
-		
-		var $li
-			,$span;
-		
-		$li = context.$control.find('li:has(span[data-default="true"])').eq(0);
 			
-		if($li.length <= 0){
-			$li = context.$control.find('li:eq(0)');
-		}
-		
-		//get span
-		$span = $li.find('span');
-		
-		return $span;
-	};
-		
 	/**
 	* Get control status
 	* @param {Object} context
@@ -34,47 +12,37 @@
 		var status = null
 			,data
 			,$li
-			,$span
-			,dateTimeFormat
-			,ignore
-			,storageStatus;	
+			,$span;
 			
-		storageStatus = context.$control.data('storage-status');
-		
-		if(isDefault && storageStatus){			
-			status = storageStatus;			
+		if(isDefault){
+					
+			$li = context.$control.find('li:has(span[data-default="true"])').eq(0);
+			
+			if($li.length <= 0){
+				$li = context.$control.find('li:eq(0)');
+			}
 		}
 		else{
-			if(isDefault){
-						
-				$li = context.$control.find('li:has(span[data-default="true"])').eq(0);
-				
-				if($li.length <= 0){
-					$li = context.$control.find('li:eq(0)');
-				}
-			}
-			else{
-				$li = context.$control.find('.active');
-			}
-			
-			//get span
-			$span = $li.find('span');
-			
-			//create status related data				
-			data = new jQuery.fn.jplist.ui.controls.DropdownFilterDTO($span.attr('data-path'), $span.attr('data-type'));
-			
-			//create status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
+			$li = context.$control.find('.active');
 		}
+		
+		//get span
+		$span = $li.find('span');
+		
+		//create status related data				
+		data = new jQuery.fn.jplist.ui.controls.DropdownFilterDTO($span.attr('data-path'), $span.attr('data-type'));
+		
+		//create status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;		
 	};
@@ -118,8 +86,7 @@
 	var getStatusByDeepLink = function(context, propName, propValue){
 		
 		var isDefault = true
-			,status = null
-			,sections;
+			,status = null;
 		
 		if(context.inDeepLinking){
 		
@@ -179,46 +146,25 @@
 	var setStatus = function(context, status, restoredFromStorage){
 				
 		var $li
-			,$span = null
 			,$liList;		
-		
-		//savestorages status
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
-		}
-		
-		if(!context.inStorage && restoredFromStorage){
-			$span = getSpanWithDefaultValue(context);
-		}
 		
 		//get li list
 		$liList = context.$control.find('li');
 		
-		if(!context.inStorage && restoredFromStorage && $span.length > 0){
-								
-			status.data.path = $span.attr('data-path');
-			status.data.type = $span.attr('data-type');
-			
-			//send status event		
-			context.history.addStatus(status);
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
+		//remove active class
+		$liList.removeClass('active');
+		
+		//set active class
+		$li = context.$control.find('li:has([data-path="' + status.data.path + '"])');
+		
+		if($li.length <= 0){
+			$li = $liList.eq(0);
 		}
-		else{
-			//remove active class
-			$liList.removeClass('active');
-			
-			//set active class
-			$li = context.$control.find('li:has([data-path="' + status.data.path + '"])');
-			
-			if($li.length <= 0){
-				$li = $liList.eq(0);
-			}
-			
-			$li.addClass('active');
-			
-			//update dropdown panel
-			context.$control.find('.jplist-dd-panel').text($li.eq(0).text());	
-		}			
+		
+		$li.addClass('active');
+		
+		//update dropdown panel
+		context.$control.find('.jplist-dd-panel').text($li.eq(0).text());	
 	};
 	
 	/**
@@ -257,7 +203,7 @@
 			
 			//send status event		
 			context.history.addStatus(status);			
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
+			context.observer.trigger(context.observer.events.statusChanged, [status]);
 		});
 	};
 	

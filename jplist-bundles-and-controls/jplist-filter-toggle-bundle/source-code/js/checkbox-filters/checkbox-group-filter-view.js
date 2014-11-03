@@ -12,54 +12,45 @@
 		var data
 			,pathGroup = []
 			,status = null
-			,storageStatus
 			,selected;	
 			
-		storageStatus = context.$control.data('storage-status');
-		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
-		}
-		else{	
-			
-			//init path group
-			context.params.$checkboxes.each(function(index, el){
+		//init path group
+		context.params.$checkboxes.each(function(index, el){
+				
+			//get checkbox
+			var $cb = jQuery(el)
+				,dataPath;
+
+			if(isDefault){
+				selected = $cb.data('selected-on-start') || false;
+			}
+			else{
+				//get button data
+				selected = $cb.get(0).checked;
+			}	
+
+			//get data-path
+			dataPath = $cb.attr('data-path');
+
+			if(selected && dataPath){
+				pathGroup.push(dataPath);
+			}
+		});			
 					
-				//get checkbox
-				var $cb = jQuery(el)
-					,dataPath;
-
-				if(isDefault){
-					selected = $cb.data('selected-on-start') || false;
-				}
-				else{
-					//get button data
-					selected = $cb.get(0).checked;
-				}	
-
-				//get data-path
-				dataPath = $cb.attr('data-path');
-
-				if(selected && dataPath){
-					pathGroup.push(dataPath);
-				}
-			});			
-						
-			//init status related data
-			data = new jQuery.fn.jplist.ui.controls.CheckboxGroupFilterDTO(pathGroup);
-			
-			//init status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
-		}
+		//init status related data
+		data = new jQuery.fn.jplist.ui.controls.CheckboxGroupFilterDTO(pathGroup);
+		
+		//init status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;	
 	};
@@ -215,7 +206,7 @@
 			context.history.addStatus(getStatus(context, false));
 			
 			//render statuses
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
 	};
 	

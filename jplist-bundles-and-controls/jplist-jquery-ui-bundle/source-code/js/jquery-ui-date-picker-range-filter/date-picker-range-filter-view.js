@@ -24,7 +24,7 @@
 		
 			if(jQuery.trim(jQuery(this).val()) === ''){
 				context.history.addStatus(getStatus(context, false));
-				context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+				context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 			}
 		});
 		
@@ -32,14 +32,14 @@
 		
 			if(jQuery.trim(jQuery(this).val()) === ''){
 				context.history.addStatus(getStatus(context, false));
-				context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+				context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 			}
 		});
 		
 		//init options
         options['onSelect'] = function(dateText, inst){
 			context.history.addStatus(getStatus(context, false));
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		};
 		
 		//start datepicker
@@ -62,43 +62,34 @@
 			,dateTimeFormat
 			,prev
 			,next
-			,dataPath
-			,storageStatus;	
-			
-		storageStatus = context.$control.data('storage-status');
+			,dataPath;	
+					
+		//get vars
+		dataPath = context.$control.attr('data-path').toString();
+		dateTimeFormat = context.$control.attr('data-datetime-format').toString();
 		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
-		}
-		else{
+		//get prev/next controls
+		prev = context.$control.data('jplist-datepicker-range-prev');
+		next = context.$control.data('jplist-datepicker-range-next');
 		
-			//get vars
-			dataPath = context.$control.attr('data-path').toString();
-			dateTimeFormat = context.$control.attr('data-datetime-format').toString();
-			
-			//get prev/next controls
-			prev = context.$control.data('jplist-datepicker-range-prev');
-			next = context.$control.data('jplist-datepicker-range-next');
-			
-			if(!isDefault){
-				//get dates from datepickers
-				prevDate = prev['datepicker']('getDate');
-				nextDate = next['datepicker']('getDate');
-			}
-			
-			data = new jQuery.fn.jplist.ui.controls.DatePickerRangeFilterDTO(dataPath, dateTimeFormat, prevDate, nextDate);		
-			
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);	
+		if(!isDefault){
+			//get dates from datepickers
+			prevDate = prev['datepicker']('getDate');
+			nextDate = next['datepicker']('getDate');
 		}
+		
+		data = new jQuery.fn.jplist.ui.controls.DatePickerRangeFilterDTO(dataPath, dateTimeFormat, prevDate, nextDate);		
+		
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 				
 		return status;	
 	};
@@ -229,11 +220,6 @@
 			,nextDate
 			,$prev
 			,$next;
-
-		//savestorages status
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
-		}
 		
 		//get prev/next controls
 		$prev = context.$control.data('jplist-datepicker-range-prev');
@@ -263,7 +249,7 @@
 		}
 	};
 	
-		/**
+	/**
 	* init user defined functions
 	*/
 	var initUserDefinedFunctions = function(context){
@@ -276,7 +262,7 @@
 	};
 	
 	/** 
-	* Dropdown control: sort dropdown, filter dropdown, paging dropdown etc.
+	* jQUery UI date picker range filter
 	* @constructor
 	* @param {Object} context
 	*/

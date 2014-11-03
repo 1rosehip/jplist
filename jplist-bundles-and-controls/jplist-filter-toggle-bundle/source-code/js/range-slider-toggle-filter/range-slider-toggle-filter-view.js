@@ -11,57 +11,49 @@
 		
 		var selected
 			,data
-			,status = null
-			,storageStatus;
+			,status = null;
 		
-		storageStatus = context.$control.data('storage-status');
-		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
+		if(isDefault){
+			selected = context.$control.attr('data-selected') === 'true';
 		}
 		else{
-			if(isDefault){
-				selected = context.$control.attr('data-selected') === 'true';
+			//get selected value
+			selected = context.params.selected;
+		}
+
+		if(context.params.path){
+
+			if(selected){
+				data = {
+					path: context.params.path
+					,type: 'number'
+					,filterType: 'range'
+					,min: 0
+					,max: 0
+					,prev: context.params.prev
+					,next: context.params.next
+					,selected: selected
+				};
 			}
 			else{
-				//get selected value
-				selected = context.params.selected;
+				data = {
+					path: context.params.path
+					,filterType: ''
+					,selected: selected
+				};
 			}
 
-			if(context.params.path){
-
-				if(selected){
-					data = {
-						path: context.params.path
-						,type: 'number'
-						,filterType: 'range'
-						,min: 0
-						,max: 0
-						,prev: context.params.prev
-						,next: context.params.next
-						,selected: selected
-					};
-				}
-				else{
-					data = {
-						path: context.params.path
-						,filterType: ''
-						,selected: selected
-					};
-				}
-
-				//init status
-				status = new jQuery.fn.jplist.app.dto.StatusDTO(
-					context.name
-					,context.action
-					,context.type
-					,data
-					,context.inStorage
-					,context.inAnimation
-					,context.isAnimateToTop
-					,context.inDeepLinking
-				);
-			}
+			//init status
+			status = new jQuery.fn.jplist.app.dto.StatusDTO(
+				context.name
+				,context.action
+				,context.type
+				,data
+				,context.inStorage
+				,context.inAnimation
+				,context.isAnimateToTop
+				,context.inDeepLinking
+			);
 		}
 		
 		return status;		
@@ -194,12 +186,12 @@
 			context.history.addStatus(getStatus(context, false));
 			
 			//trigger force build statuses event
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
 	};
 	
 	/** 
-	* Dropdown control: sort dropdown, filter dropdown, paging dropdown etc.
+	* Range slider toggle filter control
 	* @constructor
 	* @param {Object} context
 	*/

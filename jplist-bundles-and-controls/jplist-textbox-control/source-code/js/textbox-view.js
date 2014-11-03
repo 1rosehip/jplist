@@ -13,48 +13,39 @@
 			,status
 			,dataPath
 			,value
-			,ignore = ''
-			,storageStatus;	
-			
-		storageStatus = context.$control.data('storage-status');
-		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
+			,ignore = '';	
+				
+		//init data-path
+		dataPath = context.$control.attr('data-path');
+				
+		//init value
+		if(isDefault){
+			value = '';
 		}
-		else{	
+		else{
+			value = /** @type{string} */ (context.$control.val());
+		}		
 		
-			//init data-path
-			dataPath = context.$control.attr('data-path');
-					
-			//init value
-			if(isDefault){
-				value = '';
-			}
-			else{
-				value = /** @type{string} */ (context.$control.val());
-			}		
-			
-			if(context.controlOptions && context.controlOptions.ignore){
-			 
-				//get ignore characters
-				ignore = context.controlOptions.ignore;
-			}
-			
-			//create status related data object
-			data = new jQuery.fn.jplist.ui.controls.TextboxDTO(dataPath, value, ignore);
-					
-			//create status object
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
-		}	
+		if(context.controlOptions && context.controlOptions.ignore){
+		 
+			//get ignore characters
+			ignore = context.controlOptions.ignore;
+		}
+		
+		//create status related data object
+		data = new jQuery.fn.jplist.ui.controls.TextboxDTO(dataPath, value, ignore);
+				
+		//create status object
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;			
 	};
@@ -137,32 +128,16 @@
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
-			
-		//savestorages status
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
-		}
 		
-		if(!context.inStorage && restoredFromStorage){
-			
-			status.data.value = '';
-			
-			//send status event	
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
-		}
-		else{
-			if(status.data){
-			
-				if(!status.data.value){
-					status.data.value = '';
-				}
-				
-				//set value
-				context.$control.val(status.data.value);
+		if(status.data){
+		
+			if(!status.data.value){
+				status.data.value = '';
 			}
-		}
-		
-		
+			
+			//set value
+			context.$control.val(status.data.value);
+		}		
 	};
 	
 	/**
@@ -182,7 +157,7 @@
 				//update last status
 				context.history.addStatus(getStatus(context, false));
 			
-				context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+				context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 				
 				return false;
 			});
@@ -200,7 +175,7 @@
 				//update last status
 				context.history.addStatus(getStatus(context, false));
 			
-				context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [false]);
+				context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 			});
 		}		
 	};

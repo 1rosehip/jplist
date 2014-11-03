@@ -16,7 +16,8 @@
 		var dataitem
 			,pathitem
 			,resultDataview = []
-			,pathitemDate;
+			,pathitemDate
+			,currentDate;
 		
 		for(var i=0; i<dataview.length; i++){
 		
@@ -29,18 +30,25 @@
 			//if path is found
 			if(pathitem){
 				
-				if(!year || !month || !day){
-				
+				if(!jQuery.isNumeric(year) || !jQuery.isNumeric(month) || !jQuery.isNumeric(day)){				
 					resultDataview.push(dataitem);	
 				}
 				else{
 				
 					//get date from pathitem (by its text value)
-					pathitemDate = jQuery.fn.jplist.domain.dom.services.SortService.jQuery.fn.jplist.domain.dom.services.HelperService.formatDateTime(pathitem.text, format);
+					pathitemDate = jQuery.fn.jplist.domain.dom.services.HelperService.formatDateTime(pathitem.text, format);
 					
-					if(pathitemDate && typeof pathitemDate.getFullYear === 'function'){
+					if(pathitemDate && jQuery.isFunction(pathitemDate.getFullYear)){
 						
-						if((pathitemDate.getFullYear() === year) && (pathitemDate.getMonth() - 1 === month) && (pathitemDate.getDate() === day)){							
+						//get current date
+						currentDate = new Date(year, month, day);
+						
+						//zero time
+						pathitemDate.setHours(0);
+						pathitemDate.setMinutes(0);
+						pathitemDate.setSeconds(0);
+												
+						if((pathitemDate.getFullYear() === year) && (pathitemDate.getMonth() === month) && (pathitemDate.getDate() === day)){							
 							resultDataview.push(dataitem);	
 						}
 					}

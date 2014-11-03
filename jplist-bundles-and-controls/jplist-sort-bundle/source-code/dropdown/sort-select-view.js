@@ -18,55 +18,46 @@
 			,status = null
 			,dateTimeFormat = ''
 			,ignore = ''
-			,data
-			,storageStatus;	
-			
-		storageStatus = context.$control.data('storage-status');
+			,data;	
+					
+		//get selected option (if default, get option with data-default=true or first option)
+		if(isDefault){
 		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
+			$option = context.$control.find('option[data-default="true"]').eq(0);
+			if($option.length <= 0){
+				$option =  context.$control.find('option').eq(0);
+			}
 		}
 		else{
-		
-			//get selected option (if default, get option with data-default=true or first option)
-			if(isDefault){
-			
-				$option = context.$control.find('option[data-default="true"]').eq(0);
-				if($option.length <= 0){
-					$option =  context.$control.find('option').eq(0);
-				}
-			}
-			else{
-				$option = context.$control.find('option:selected');
-			}
-			
-			//init datetime format
-			dateTimeFormat = context.$control.attr('data-datetime-format') || '';
-			
-			//init ignore
-			ignore = context.$control.attr('data-ignore') || '';
-			
-			//init status related data
-			data = new jQuery.fn.jplist.ui.controls.DropdownSortDTO(
-				$option.attr('data-path')
-				,$option.attr('data-type')
-				,$option.attr('data-order')
-				,dateTimeFormat
-				,ignore
-			);
-			
-			//create status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);
+			$option = context.$control.find('option:selected');
 		}
+		
+		//init datetime format
+		dateTimeFormat = context.$control.attr('data-datetime-format') || '';
+		
+		//init ignore
+		ignore = context.$control.attr('data-ignore') || '';
+		
+		//init status related data
+		data = new jQuery.fn.jplist.ui.controls.DropdownSortDTO(
+			$option.attr('data-path')
+			,$option.attr('data-type')
+			,$option.attr('data-order')
+			,dateTimeFormat
+			,ignore
+		);
+		
+		//create status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;			
 	};
@@ -170,28 +161,16 @@
 				
 		var $option;
 		
-		//savestorages status
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
-		}
-				
-		if(!context.inStorage && restoredFromStorage){				
-			status.data.path = 'default';
-			context.history.addStatus(status);
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
+		//set active class
+		if(status.data.path == 'default'){
+			$option = context.$control.find('option[data-path="' + status.data.path + '"]');
 		}
 		else{
-			//set active class
-			if(status.data.path == 'default'){
-				$option = context.$control.find('option[data-path="' + status.data.path + '"]');
-			}
-			else{
-				$option = context.$control.find('option[data-path="' + status.data.path + '"][data-type="' + status.data.type + '"][data-order="' + status.data.order + '"]');
-			}
-			
-			if($option.length > 0){
-				$option.get(0).selected = true;				
-			}
+			$option = context.$control.find('option[data-path="' + status.data.path + '"][data-type="' + status.data.type + '"][data-order="' + status.data.order + '"]');
+		}
+		
+		if($option.length > 0){
+			$option.get(0).selected = true;				
 		}
 	};
 	
@@ -227,7 +206,7 @@
 			
 			//send status event			
 			context.history.addStatus(status);
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
+			context.observer.trigger(context.observer.events.statusChanged, [status]);
 		});
 	};
 	

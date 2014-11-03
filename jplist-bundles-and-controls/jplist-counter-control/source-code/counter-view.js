@@ -196,14 +196,14 @@
 			* refresh count on every filter action - if data-mode="filter"
 			*/
 			case 'filter':{			
-				
+								
 				/**
 				 * on filter event
 				 * @param {Object} e - event object
 				 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 				 * @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} collection
 				 */
-				context.observer.on(context.observer.events.filterEvent, function(e, statuses, collection){					
+				context.observer.on(context.observer.events.listFiltered, function(e, statuses, collection){	
 					drawCounter(context, collection.dataview);
 				});
 			}
@@ -231,7 +231,7 @@
 		* render counters on items added to the collection (useful in case when counter is the only control on panel)
 		* added on 14.10.2014
 		*/
-		context.observer.on(context.observer.events.addItemEvent, function(e, dataItem, dataitems){
+		context.observer.on(context.observer.events.dataItemAdded, function(e, dataItem, dataitems){
 			drawCounter(context, dataitems);
 		});
 		
@@ -239,7 +239,7 @@
 		* render counters on items deleted to the collection (useful in case when counter is the only control on panel)
 		* added on 14.10.2014
 		*/
-		context.observer.on(context.observer.events.delItemEvent, function(e, $item, dataitems){
+		context.observer.on(context.observer.events.dataItemRemoved, function(e, $item, dataitems){
 			drawCounter(context, dataitems);
 		});
 	};

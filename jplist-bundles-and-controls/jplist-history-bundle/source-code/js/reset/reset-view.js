@@ -10,7 +10,7 @@
 		context.$control.on('click', function(){
 		
 			//force build statuses event			
-			context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [true]);
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [true]);
 		});
 	};
 	

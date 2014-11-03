@@ -11,46 +11,35 @@
 		
 		var $option
 			,status = null
-			,dateTimeFormat = ''
-			,ignore = ''
-			,data
-			,storageStatus;	
-			
-		storageStatus = context.$control.data('storage-status');
+			,data;	
 		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
+		//get selected option (if default, get option with data-default=true or first option)
+		if(isDefault){
+		
+			$option = context.$control.find('option[data-default="true"]').eq(0);
+			
+			if($option.length <= 0){
+				$option =  context.$control.find('option').eq(0);
+			}
 		}
 		else{
-		
-			//get selected option (if default, get option with data-default=true or first option)
-			if(isDefault){
-			
-				$option = context.$control.find('option[data-default="true"]').eq(0);
-				if($option.length <= 0){
-					$option =  context.$control.find('option').eq(0);
-				}
-			}
-			else{
-				$option = context.$control.find('option:selected');
-			}
-			
-			//create status related data				
-			data = new jQuery.fn.jplist.ui.controls.DropdownFilterDTO($option.attr('data-path'), $option.attr('data-type'));
-			
-			//create status
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);	
-		
+			$option = context.$control.find('option:selected');
 		}
+		
+		//create status related data				
+		data = new jQuery.fn.jplist.ui.controls.DropdownFilterDTO($option.attr('data-path'), $option.attr('data-type'));
+		
+		//create status
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 		
 		return status;			
 	};
@@ -94,8 +83,7 @@
 	var getStatusByDeepLink = function(context, propName, propValue){
 		
 		var isDefault = true
-			,status = null
-			,sections;
+			,status = null;
 			
 		if(context.inDeepLinking){
 		
@@ -150,24 +138,12 @@
 	var setStatus = function(context, status, restoredFromStorage){
 				
 		var $option;
+						
+		$option = context.$control.find('option[data-path="' + status.data.path + '"]');
 		
-		//savestorages status
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
+		if($option && $option.length > 0){
+			$option.get(0).selected = true;		
 		}
-				
-		if(!context.inStorage && restoredFromStorage){				
-			status.data.path = 'default';	
-			context.history.addStatus(status);
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
-		}
-		else{					
-			$option = context.$control.find('option[data-path="' + status.data.path + '"]');
-			
-			if($option && $option.length > 0){
-				$option.get(0).selected = true;		
-			}
-		}		
 	};
 	
 	/**
@@ -206,7 +182,7 @@
 			
 			//send status event			
 			context.history.addStatus(status);
-			context.observer.trigger(context.observer.events.statusEvent, [status]);
+			context.observer.trigger(context.observer.events.statusChanged, [status]);
 		});
 	};
 	

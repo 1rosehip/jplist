@@ -158,7 +158,7 @@
 		}
 		
 		//send build statuses event
-		context.observer.trigger(context.observer.events.renderStatusesEvent, [oldStatuses]);
+		context.observer.trigger(context.observer.events.knownStatusesChanged, [oldStatuses]);
 	};
 		
 	/**

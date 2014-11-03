@@ -1,51 +1,6 @@
 (function(){
 	'use strict';	
-	
-	/**
-	* init observer (events object)
-	* @param {jQueryObject} $root
-	* @return {Object} observer
-	*/
-	var initObserver = function($root){
 		
-		var observer = jQuery({});
-		
-		observer.$root = $root;
-		
-		observer.events = {
-			
-			//events
-			renderStatusesEvent: '1' //event from panel to controller: ask to rebuild item container's html
-			,setStatusesEvent: '2' //event from controller to panel after html rebuild
-			,forceRenderStatusesEvent: '3' //event to panel -> panel sends build statuses event
-			,restoreEvent: '4' //event to panel -> restore panel from event data (statuses array) and render html
-			,statusEvent: '5' //event to panel -> get all statuses and merge them with the given status, then render html	
-						
-			//additional action events
-			,sortEvent: '6' //event from controller -> sort action occurred
-			,filterEvent: '7' //event from controller -> filter action occurred
-			,paginationEvent: '8' //event from controller -> pagination action occurred
-			
-			//deep linking events
-			,changeUrlDeepLinksEvent: '9' //event to panel -> get deep links from all panel controls and change url
-			,setDeepLinksEvent: '10' //event to panel -> set panel controls statuses by their deep links
-
-            //collection events
-            ,addItemEvent: '11' //event from collection - items is added to collection
-            ,delItemEvent: '12' //event from collection - items is deleted from collection
-            ,collectionReadyEvent: '13' //event from controller - when collection is ready
-			
-			//animation events
-			,animationStartEvent: '14'
-			,animationStepEvent: '15'
-			,animationCompleteEvent: '16'
-
-			,renderList: '17'
-		};	
-		
-		return observer;
-	};
-	
 	/**
 	* init data source
 	* @param {Object} context
@@ -65,7 +20,7 @@
 			//html data source (dom)
 			case 'html':{
 				
-				new jQuery.fn.jplist.ui.list.controllers.DOMController(
+				context.controller = new jQuery.fn.jplist.ui.list.controllers.DOMController(
 					context.$root
 					,context.options
 					,context.observer
@@ -81,7 +36,7 @@
 				//debug info
 				jQuery.fn.jplist.info(context.options, 'Data Source: ', context.options.dataSource);
 		
-				new jQuery.fn.jplist.ui.list.controllers.ServerController(
+				context.controller = new jQuery.fn.jplist.ui.list.controllers.ServerController(
 					context.$root
 					,context.options
 					,context.observer
@@ -94,64 +49,7 @@
 		
 		
 	};
-	
-	/**
-	* trigger initial event
-	* @param {Object} context
-	*/
-	var triggerInitialEvent = function(context){
 		
-		var storageStatuses = []
-			,isStorageEnabled = false;
-		
-		//if deep links options is enabled
-		if(context.options.deepLinking){
-			
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'Deep linking enabled', '');
-				
-			//try restore panel state from query string
-			context.observer.trigger(context.observer.events.setDeepLinksEvent, []);
-		}
-		else{		
-		
-			isStorageEnabled = (context.options.storage === 'cookies') || ((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported());
-			
-			//check storage
-			if(isStorageEnabled){
-			
-				//debug info
-				jQuery.fn.jplist.info(context.options, 'Storage enabled: ', context.options.storage);
-			
-				if(context.options.storage === 'cookies'){
-					
-					//restore statuses from storage
-					storageStatuses = jQuery.fn.jplist.dal.services.CookiesService.restoreCookies(context.options.storageName);
-				}
-				
-				if((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported()){
-					
-					//restore statuses from storage
-					storageStatuses = jQuery.fn.jplist.dal.services.LocalStorageService.restore(context.options.storageName);
-				}
-				
-				//send redraw event
-				if(storageStatuses.length > 0){
-				
-					context.observer.trigger(context.observer.events.restoreEvent, [storageStatuses]);
-				}
-				else{
-					//send panel redraw event
-					context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [true]);
-				}
-			}
-			else{			
-				//send panel redraw event
-				context.observer.trigger(context.observer.events.forceRenderStatusesEvent, [true]);
-			}
-		}		
-	};
-	
 	/** 
 	* jplist constructor 
 	* @param {Object} userOptions - jplist user options
@@ -161,10 +59,9 @@
 	var Init = function(userOptions, $root){
 		
 		var context = {
-			controller: null
-			,observer: initObserver($root)
-			,events: null
+			observer: null
 			,panel: null
+			,controller: null
 			,$root: $root
 		};
 		
@@ -230,6 +127,9 @@
 			
 		}, userOptions);
 		
+		//init pubsub
+		context.observer = new jQuery.fn.jplist.app.events.PubSub(context.$root, context.options);
+				
 		//init events - used to save last status
 		context.history = new jQuery.fn.jplist.app.History(context.$root, context.options, context.observer);
 				
@@ -240,7 +140,7 @@
 		initDataSource(context);	
 
 		//trigger initial event
-		triggerInitialEvent(context);
+		context.observer['trigger'](context.observer.events.init, []);
 		
 		return jQuery.extend(this, context); 
 	};
@@ -271,6 +171,7 @@
 	jQuery.fn.jplist.app.services = jQuery.fn.jplist.app.services || {};
 	jQuery.fn.jplist.app.services.DTOMapperService = jQuery.fn.jplist.app.services.DTOMapperService || {};
 	jQuery.fn.jplist.app.dto = jQuery.fn.jplist.app.dto || {};
+	jQuery.fn.jplist.app.events = jQuery.fn.jplist.app.events || {};
 	
 	/**
 	* Domain Layer Namespace

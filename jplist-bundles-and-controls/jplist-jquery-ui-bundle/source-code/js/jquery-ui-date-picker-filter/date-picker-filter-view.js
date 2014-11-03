@@ -15,7 +15,7 @@
 			if(jQuery.trim(jQuery(this).val()) === ''){
 			
 				context.history.addStatus(getStatus(context, false));
-				context.observer.trigger(context.observer.events.statusEvent, [getStatus(context, false)]);
+				context.observer.trigger(context.observer.events.statusChanged, [getStatus(context, false)]);
 			}
 		});
 		
@@ -23,21 +23,13 @@
         datePickerOptions['onSelect'] = function(dateText, inst){
 			
 			context.history.addStatus(getStatus(context, false));
-			context.observer.trigger(context.observer.events.statusEvent, [getStatus(context, false)]);
+			context.observer.trigger(context.observer.events.statusChanged, [getStatus(context, false)]);
 		};
 		
 		//start datepicker
 		context.params.datepickerFunc(context.$control, datePickerOptions);
 	};
-	
-	/**
-	* Init control events
-	* @param {Object} context
-	*/
-	var initEvents = function(context){
-	
-	};
-	
+		
 	/**
 	* Get control status
 	* @param {Object} context
@@ -48,34 +40,26 @@
 		
 		var status = null
 			,data = null
-			,currentDate = null
-			,storageStatus;	
-			
-		storageStatus = context.$control.data('storage-status');
-		
-		if(isDefault && storageStatus){			
-			status = storageStatus;
-		}
-		else{				
-			if(!isDefault){
+			,currentDate = null;	
 				
-				//get current datetime from datepicker
-				currentDate = context.$control['datepicker']('getDate');
-			}
+		if(!isDefault){
 			
-			data = new jQuery.fn.jplist.ui.controls.DatePickerFilterDTO(context.params.dataPath, context.params.dateTimeFormat, currentDate);		
-			
-			status = new jQuery.fn.jplist.app.dto.StatusDTO(
-				context.name
-				,context.action
-				,context.type
-				,data
-				,context.inStorage
-				,context.inAnimation
-				,context.isAnimateToTop
-				,context.inDeepLinking
-			);	
+			//get current datetime from datepicker
+			currentDate = context.$control['datepicker']('getDate');
 		}
+		
+		data = new jQuery.fn.jplist.ui.controls.DatePickerFilterDTO(context.params.dataPath, context.params.dateTimeFormat, currentDate);		
+		
+		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+			context.name
+			,context.action
+			,context.type
+			,data
+			,context.inStorage
+			,context.inAnimation
+			,context.isAnimateToTop
+			,context.inDeepLinking
+		);
 				
 		return status;	
 	};
@@ -169,12 +153,7 @@
 	var setStatus = function(context, status, restoredFromStorage){
 				
 		var currentDate;
-		
-		//savestorages status
-		if(context.inStorage && restoredFromStorage){			
-			context.$control.data('storage-status', status);	
-		}
-				
+						
 		if(jQuery.isNumeric(status.data.year) && 
 			jQuery.isNumeric(status.data.month) && 
 			jQuery.isNumeric(status.data.day)){
@@ -219,9 +198,6 @@
 		
 		//render control
 		render(context);
-		
-		//init events
-		initEvents(context);
 		
 		return jQuery.extend(this, context);
 	};
