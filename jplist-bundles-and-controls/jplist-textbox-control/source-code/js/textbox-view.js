@@ -12,8 +12,7 @@
 		var data
 			,status
 			,dataPath
-			,value
-			,ignore = '';	
+			,value;	
 				
 		//init data-path
 		dataPath = context.$control.attr('data-path');
@@ -25,15 +24,9 @@
 		else{
 			value = /** @type{string} */ (context.$control.val());
 		}		
-		
-		if(context.controlOptions && context.controlOptions.ignore){
-		 
-			//get ignore characters
-			ignore = context.controlOptions.ignore;
-		}
-		
+				
 		//create status related data object
-		data = new jQuery.fn.jplist.ui.controls.TextboxDTO(dataPath, value, ignore);
+		data = new jQuery.fn.jplist.ui.controls.TextboxDTO(dataPath, value, context.params.ignore);
 				
 		//create status object
 		status = new jQuery.fn.jplist.app.dto.StatusDTO(
@@ -146,8 +139,6 @@
 	*/
 	var initEvents = function(context){
 		
-		var eventName = 'keyup';
-		
 		if(context.params.$button && context.params.$button.length > 0){
 			
 			context.params.$button.on('click', function(e){
@@ -163,14 +154,8 @@
 			});
 		}
 		else{
-			
-			if(context.controlOptions && context.controlOptions.eventName){
-			 
-				//init event name
-				eventName = context.controlOptions.eventName;
-			}
-			
-			context.$control.on(eventName, function(){	
+						
+			context.$control.on(context.params.eventName, function(){	
 							
 				//update last status
 				context.history.addStatus(getStatus(context, false));
@@ -191,6 +176,8 @@
 			
 			path: context.$control.attr('data-path')
 			,dataButton: context.$control.attr('data-button')
+			,ignore: context.$control.attr('data-ignore') || '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+	
+			,eventName: context.$control.attr('data-event-name') || 'keyup'
 			,$button: null
 		};		
 		
@@ -264,10 +251,7 @@
 	*/
 	jQuery.fn.jplist.controlTypes['textbox'] = {
 		className: 'Textbox'
-		,options: {
-			eventName: 'keyup'
-			,ignore: '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+							
-		}
+		,options: {}
 	};	
 })();
 
