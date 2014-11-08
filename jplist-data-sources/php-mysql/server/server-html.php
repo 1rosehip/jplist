@@ -3,26 +3,6 @@
 	require 'config.php';
 	
 	/**
-	* ensure that the value is allowed to prevent SQL injection
-	* @param {Object} $value - value from array of values
-	* @param {Array.<Object>} $allowed - array of allowed values, for example: array("name", "price", "qty")
-	* @return {Object} secured value
-	
-	function getSecuredValue($value, $allowed){
-			
-		if(!isset($value)){			
-			$value = "";
-		}
-		
-		//search for the give value in the array of allowed values
-		$key = array_search($value, $allowed);
-		
-		//return found value (or first value)
-		return $allowed[$key];
-	}
-	*/
-	
-	/**
 	* get checkbox group filter query
 	* @param {Array.<string>} pathGroup - paths list
 	* @return {string} query
@@ -50,6 +30,9 @@
 			array_push($preparedParams, "$path");
 		}
 		
+		if($query != ""){
+			$query = " (" . $query . ") ";
+		}
 		return $query;
 	}
 	
@@ -347,7 +330,7 @@
 			}
 			
 			//count database items for pagination
-			$query = "SELECT count(*) FROM Item " . $filter . " " . $sort;
+			$query = "SELECT count(ID) FROM ItemWebsite " . $filter . " " . $sort;
 							
 			if(count($preparedParams) > 0){
 				
@@ -367,7 +350,7 @@
 			}
 			
 			//init query with sort and filter
-			$query = "SELECT title, description, image, likes, keyword1, keyword2 FROM Item " . $filter . " " . $sort . " " . $paging;
+			$query = "SELECT title, description, image, likes, keyword1, keyword2 FROM ItemWebsite " . $filter . " " . $sort . " " . $paging;
 			
 			if(count($preparedParams) > 0){
 				
@@ -385,7 +368,7 @@
 			
 			//print html
 			echo(getHTMLWrapper($html, $count));
-			
+						
 			//close the database connection
 			$db = NULL;
 		}

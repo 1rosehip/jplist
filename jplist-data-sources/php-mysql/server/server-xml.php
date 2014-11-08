@@ -30,6 +30,9 @@
 			array_push($preparedParams, "$path");
 		}
 		
+		if($query != ""){
+			$query = " (" . $query . ") ";
+		}
 		return $query;
 	}
 	
@@ -344,7 +347,7 @@
 			}
 			
 			//init query with sort and filter
-			$query = "SELECT title, description, image, likes, keyword1, keyword2 FROM Item " . $filter . " " . $sort . " " . $paging;
+			$query = "SELECT title, description, image, likes, keyword1, keyword2 FROM ItemWebsite " . $filter . " " . $sort . " " . $paging;
 			
 			if(count($preparedParams) > 0){
 				
