@@ -104,7 +104,7 @@
 	* Main Sort
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
-	* @memberOf jQuery.fn.jplist.domain.dom.services.SortService
+	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
 	*/
 	jQuery.fn.jplist.domain.dom.services.SortService.doubleSort = function(statuses, dataview){
 	
@@ -120,6 +120,8 @@
 				return doubleSort(dataitem1, dataitem2, statuses, 0);
 			});
 		}
+		
+		return dataview;
 	};
 	
 })();	

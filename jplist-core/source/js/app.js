@@ -2,6 +2,55 @@
 	'use strict';	
 		
 	/**
+	* API: add data item to the list
+	* @param {*} context
+	* @param {Object} commandData
+	*/
+	var add = function(context, commandData){
+		
+		if(context && 
+			context.controller && 
+			context.controller.collection &&
+			commandData.$item){			
+			
+			//add data item to the collection
+			context.controller.collection.addDataItem(
+				commandData.$item
+				,context.controller.collection.paths
+				,context.controller.collection.dataitems.length
+			);
+			
+			//redraw dataview with the given statuses
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+		}
+	};
+	
+	/**
+	* API: del data item from the list
+	* @param {*} context
+	* @param {Object} commandData
+	*/
+	var del = function(context, commandData){
+		
+		if(context && 
+			context.controller && 
+			context.controller.collection &&
+			commandData.$item){			
+			
+			//add data item to the collection
+			context.controller.collection.delDataitem(
+				commandData.$item
+			);
+			
+			//remove the item
+			commandData.$item.remove();
+			
+			//redraw dataview with the given statuses
+			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+		}
+	};
+	
+	/**
 	* init data source
 	* @param {Object} context
 	*/
@@ -49,7 +98,29 @@
 		
 		
 	};
-		
+	
+	/**
+	* perform API command
+	* @param {*} context
+	* @param {string} command
+	* @param {Object} commandData
+	*/	
+	var performCommand = function(context, command, commandData){
+	
+		switch(command){
+			
+			case 'add':{			
+				add(context, commandData);
+			}
+			break;
+			
+			case 'del':{
+				del(context, commandData);
+			}
+			break;
+		}
+	};
+	
 	/** 
 	* jplist constructor 
 	* @param {Object} userOptions - jplist user options
@@ -69,6 +140,10 @@
 		
 			//enable/disable logging information
 			debug: false
+			
+			//jplist API commands
+			,command: 'init'
+			,commandData: {}
 			
 			//main options
 			,itemsBox: '.list' //items container jQuery path
@@ -152,8 +227,22 @@
 	jQuery.fn.jplist = function(userOptions){
 	
 		return this.each(function(){
-			var context = new Init(userOptions, jQuery(this));
-			jQuery(this).data('jplist', context);
+		
+			var context
+				,$root = jQuery(this);
+			
+			if(userOptions.command && userOptions.command !== 'init'){
+				
+				context = $root.data('jplist');
+				
+				if(context){					
+					performCommand(context, userOptions.command, userOptions.commandData);
+				}
+			}
+			else{
+				context = new Init(userOptions, jQuery(this));
+				$root.data('jplist', context);
+			}			
 		});
 	};
 	

@@ -115,6 +115,7 @@
 		this.html = context['html'];
 		this.jqElement = context['$item'];
 		this.pathitems = context['pathitems'];
+		this.index = context['index'];
 		
 		//methods
 		this.findPathitem = context['findPathitem'];

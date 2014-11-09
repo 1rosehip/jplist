@@ -97,17 +97,51 @@
 	var sort = function(context, statuses){
 		
 		var actionStatuses
-			,statusesCollection;
+			,actionStatus
+			,statusesCollection
+			,statusesAfterGroupExpanding = []
+			,tempStatus;
 		
 		//init statuses collection
 		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, statuses);
 		
 		//get sort statuses		
 		actionStatuses = statusesCollection['getStatusesByAction']('sort', statuses);
-				
+			
         if(actionStatuses.length > 0){
 		
-		    jQuery.fn.jplist.domain.dom.services.SortService.doubleSort(actionStatuses, context.dataview);
+			for(var i=0; i<actionStatuses.length; i++){
+				
+				actionStatus = actionStatuses[i];
+				
+				if(actionStatus && 
+					actionStatus.data && 
+					actionStatus.data['sortGroup'] && 
+					jQuery.isArray(actionStatus.data['sortGroup']) && 
+					actionStatus.data['sortGroup'].length > 0){
+					
+					for(var j=0; j<actionStatus.data['sortGroup'].length; j++){
+						
+						tempStatus = new jQuery.fn.jplist.app.dto.StatusDTO(
+							actionStatus.name
+							,actionStatus.action
+							,actionStatus.type
+							,actionStatus.data['sortGroup'][j]
+							,actionStatus.inStorage
+							,actionStatus.inAnimation
+							,actionStatus.isAnimateToTop
+							,actionStatus.inDeepLinking
+						);
+						
+						statusesAfterGroupExpanding.push(tempStatus);
+					}					
+				}
+				else{
+					statusesAfterGroupExpanding.push(actionStatus);
+				}
+			}
+			
+		    jQuery.fn.jplist.domain.dom.services.SortService.doubleSort(statusesAfterGroupExpanding, context.dataview);
 			
 			//trigger sort event
 			context.observer.trigger(context.observer.events.listSorted, [statuses, context]);
@@ -230,8 +264,9 @@
 		var index;
 		
 		index = indexOf(context, $item);
-		
+			
 		if(index !== -1){
+		
 			context.dataitems.splice(index, 1);
 
             //trigger event that data item was removed from the dataitems collection
@@ -343,6 +378,7 @@
 			
             ,options: options
 			,observer: observer
+			,paths: paths
 		};
 
 		if($items.length > 0){
@@ -489,6 +525,7 @@
 
 		this.dataitems = context['dataitems'];
 		this.dataview = context['dataview'];
+		this.paths = context['paths'];		
 		
 		//methods
 		this.sort = context['sort'];
