@@ -50,6 +50,9 @@
 	<script src="js/jplist.preloader-control.min.js"></script>
 	<link href="css/jplist-preloader-control.min.css" rel="stylesheet" type="text/css" />
 	
+	<!-- filter dropdown control -->
+	<script src="js/jplist.filter-dropdown-bundle.min.js"></script>
+	
 	<script>
 	$('document').ready(function () {
 
@@ -312,6 +315,22 @@
 					id="desc-search-button">
 					<i class="fa fa-search"></i>
 				</button>
+			</div>
+			
+			<!-- filter dropdown control -->
+			<div 
+				class="jplist-drop-down" 
+				data-control-type="filter-drop-down" 
+				data-control-name="category-dropdown-filter" 
+				data-control-action="filter">
+				
+				<ul>
+					<li><span data-path="default">Filter by category</span></li>
+					<li><span data-path=".architecture">Architecture</span></li>
+					<li><span data-path=".christmas">Christmas</span></li>
+					<li><span data-path=".lifestyle">LifeStyle</span></li>
+					<li><span data-path=".nature">Nature</span></li>
+				</ul>
 			</div>
 								
 			<!-- checkbox filters -->
