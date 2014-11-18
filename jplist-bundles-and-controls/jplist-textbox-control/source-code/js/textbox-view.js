@@ -19,7 +19,7 @@
 				
 		//init value
 		if(isDefault){
-			value = '';
+			value = context.$control.attr('value') || '';
 		}
 		else{
 			value = /** @type{string} */ (context.$control.val());

@@ -18,19 +18,15 @@
 		"mysql",
 		"asp.net"
     ],
-    "version": "5.1.38",
+    "version": "5.1.39",
     "author": {
         "name": "Miriam Zusin",
         "url": "http://jplist.com"
     },
 	"licenses": [
 		{
-		  "type": "Free for non-commercial projects",
-		  "url": "http://www.binpress.com/license/read/id/2749/app/2085"
-		},
-		{
-		  "type": "jPList - jQuery Data Grid Controls Commercial License",
-		  "url": "http://www.binpress.com"
+		  "type": "MIT",
+		  "url": "http://opensource.org/licenses/MIT"
 		}
 	  ],
     "bugs": "https://github.com/no81no/jplist/issue",
