@@ -20,7 +20,7 @@
 		context.$control.data('jplist-datepicker-range-next', next);
 		
 		//init empty onchacnge
-		prev.off().change(function(){
+		prev.off('change').change(function(){
 		
 			if(jQuery.trim(jQuery(this).val()) === ''){
 				context.history.addStatus(getStatus(context, false));
@@ -28,7 +28,7 @@
 			}
 		});
 		
-		next.off().change(function(){
+		next.off('change').change(function(){
 		
 			if(jQuery.trim(jQuery(this).val()) === ''){
 				context.history.addStatus(getStatus(context, false));
@@ -164,6 +164,10 @@
 							status.data.prev_year = sections[0];
 							status.data.prev_month = sections[1];
 							status.data.prev_day = sections[2];
+							
+							delete status.data.next_year;
+							delete status.data.next_month;
+							delete status.data.next_day;
 						}
 					}
 					break;
@@ -177,6 +181,10 @@
 							status.data.next_year = sections[0];
 							status.data.next_month = sections[1];
 							status.data.next_day = sections[2];
+							
+							delete status.data.prev_year;
+							delete status.data.prev_month;
+							delete status.data.prev_day;
 						}
 					}
 					break;
