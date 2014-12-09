@@ -179,7 +179,10 @@
 			,ignore: context.$control.attr('data-ignore') || '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+	
 			,eventName: context.$control.attr('data-event-name') || 'keyup'
 			,$button: null
-		};		
+		};
+
+		//set initial value
+		context.$control.val(context.$control.attr('value') || '');
 		
 		if(context.params.dataButton){
 		

@@ -1,9 +1,11 @@
 (function(){
 	'use strict';
 	
+	// ----------------------- HELPERS ----------------------------------
+	
 	/**
 	* animate to top
-	* @param {Object} context - jplist panel 'this' object
+	* @param {Object} context
 	*/
 	var animateToTop = function(context){
 		
@@ -17,6 +19,60 @@
 		}, context.options.animateToTopDuration);
 	};
 	
+	// ----------------------- STICKY -----------------------------------
+	
+	/**
+	* set sticky position
+	* @param {jQueryObject} $stickyEl - sticky element on the panel
+	*/
+	var setStickyPosition = function($stickyEl){
+		
+		var scrollTop = jQuery(window).scrollTop()
+			,top;
+		
+		//get top value
+		top = Number($stickyEl.data('top'));
+		
+		if(!isNaN(top)){
+		
+			if (scrollTop > top){ 
+				$stickyEl.addClass('jplist-sticky');
+			}
+			else{
+				$stickyEl.removeClass('jplist-sticky');
+			}
+		}
+	};
+	
+	/**
+	* init sticky elements
+	* @param {jQueryObject} $sticky - sticky elements on the panel
+	*/
+	var initSticky = function(context, $sticky){
+			
+		$sticky.each(function(){
+			
+			var $stickyEl = jQuery(this)
+				,top = $stickyEl.offset().top;
+			
+			//save top value
+			$stickyEl.data('top', top);
+			
+			//set position first time
+			setStickyPosition($stickyEl);
+		});
+		
+		jQuery(window).scroll(function(){
+			
+			$sticky.each(function(){
+							
+				//set position first time
+				setStickyPosition( jQuery(this));
+			});
+		});
+	};
+	
+	// ----------------------- DEEP LINKS -------------------------------
 	/**
 	* replace hash in url
 	* @param {string} hash
@@ -56,7 +112,7 @@
 	
 	/**
 	* get params from deep link url
-	* @param {Object} context - jplist panel 'this' object
+	* @param {Object} context
 	* @param {string} hash
 	* @return {Array.<Object>} array of params {controlName: '...', propName: '...', propValue: '...'}
 	*/
@@ -109,154 +165,10 @@
 	
 		return params;
 	};
-		
-	/**
-	* set sticky position
-	* @param {jQueryObject} $stickyEl - sticky element on the panel
-	*/
-	var setStickyPosition = function($stickyEl){
-		
-		var scrollTop = jQuery(window).scrollTop()
-			,top;
-		
-		//get top value
-		top = Number($stickyEl.data('top'));
-		
-		if(!isNaN(top)){
-		
-			if (scrollTop > top){ 
-				$stickyEl.addClass('jplist-sticky');
-			}
-			else{
-				$stickyEl.removeClass('jplist-sticky');
-			}
-		}
-	};
-	
-	/**
-	* init sticky elements
-	* @param {jQueryObject} $sticky - sticky elements on the panel
-	*/
-	var initSticky = function(context, $sticky){
-			
-		$sticky.each(function(){
-			
-			var $stickyEl = jQuery(this)
-				,top = $stickyEl.offset().top;
-			
-			//save top value
-			$stickyEl.data('top', top);
-			
-			//set position first time
-			setStickyPosition($stickyEl);
-		});
-		
-		jQuery(window).scroll(function(){
-			
-			$sticky.each(function(){
-							
-				//set position first time
-				setStickyPosition( jQuery(this));
-			});
-		});
-	};
-	
-	/**
-	* set control statuses
-	* @param {Object} context - jplist panel 'this' object
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesArray
-	*/
-	var setControlsStatuses = function(context, statusesArray){
-		
-		var NOT_RESTORED_FROM_COOKIES = false;
-		
-		//set statuses
-		context.controls.setStatuses(statusesArray, NOT_RESTORED_FROM_COOKIES);		
-
-		//save statuses in history
-		context.history.addList(statusesArray);
-	};
-	
-	/**
-	* unknown status / statuses changed
-	* @param {Object} context - jplist panel 'this' object
-	* @param {boolean} isDefault - should it render events by their default statuses
-	*/
-	var unknownStatusesChanged = function(context, isDefault){
-		
-		var statuses;			
-				
-		//get current statuses
-		statuses = context.controls.getStatuses(isDefault);
-		
-		//trigger build statuses event
-		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);
-		
-		if(context.options.deepLinking){
-			changeUrlDeepLinks(context);
-		}
-	};
-	
-	/**
-	* restore controls from storage by statuses
-	* @param {Object} context - jplist panel 'this' object
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesArray
-	*/
-	var restoreControlsByStatuses = function(context, statusesArray){
-		
-		var RESTORED_FROM_COOKIES = true
-			,statusesInStorage = []
-			,statusesNotInStorage = [];
-		
-		for(var i=0; i<statusesArray.length; i++){
-			
-			if(statusesArray[i].inStorage){
-				statusesInStorage.push(statusesArray[i]);
-			}
-			else{
-				statusesNotInStorage.push(statusesArray[i]);
-			}
-		}		
-		
-		//apply set statuses on controls
-		context.controls.setStatuses(statusesInStorage, RESTORED_FROM_COOKIES);		
-		
-		if(statusesInStorage.length > 0){
-			context.observer.trigger(context.observer.events.knownStatusesChanged, [statusesInStorage]);
-		}	
-
-		if(statusesNotInStorage.length > 0){
-			context.observer.trigger(context.observer.events.unknownStatusesChanged, [statusesNotInStorage]);
-		}		
-	};
-	
-	/**
-	* get all statuses and merge them with the given status, then send build statuses event
-	* @param {Object} context - jplist panel 'this' object
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
-	*/
-	var mergeStatuses = function(context, status){
-		
-		var IS_DEFAULT = false
-			,statuses;
-		
-		if(status.isAnimateToTop){
-			animateToTop(context);
-		}
-		
-		statuses = context.controls.merge(IS_DEFAULT, status);
-				
-		//render html by statuses
-		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);	
-
-		if(context.options.deepLinking){
-			changeUrlDeepLinks(context);
-		}
-	};
 	
 	/**
 	* change url according to all controls statuses
-	* @param {Object} context - jplist panel 'this' object
+	* @param {Object} context
 	*/
 	var changeUrlDeepLinks = function(context){
 		
@@ -275,10 +187,10 @@
 			replaceHash(deepLinkUrl);
 		}
 	};
-		
+	
 	/**
 	* set panel controls statuses by their deep links
-	* @param {Object} context - jplist panel 'this' object
+	* @param {Object} context
 	*/
 	var setStatusesByDeepLink = function(context){
 		
@@ -295,40 +207,144 @@
 		
 		if(params.length <= 0){
 			
-			isStorageEnabled = (context.options.storage === 'cookies') || ((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported());
-			
-			//check storage
-			if(isStorageEnabled){
-			
-				if(context.options.storage === 'cookies'){
-					
-					//restore statuses from storage
-					storageStatuses = jQuery.fn.jplist.dal.services.CookiesService.restoreCookies(context.options.storageName);
-				}
-				
-				if((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported()){
-					
-					//restore statuses from storage
-					storageStatuses = jQuery.fn.jplist.dal.services.LocalStorageService.restore(context.options.storageName);
-				}
-				
-				//send redraw event
-				if(storageStatuses.length > 0){				
-					restoreControlsByStatuses(context, storageStatuses);
-				}
-				else{
-					unknownStatusesChanged(context, false);
-				}
-			}
-			else{
-				unknownStatusesChanged(context, false);
-			}				
+			//try set panel controls statuses from storage
+			setStatusesFromStorage(context);
 		}
 		else{				
 			context.controls.setDeepLinks(params);				
 		}			
 	};
+	
+	// ----------------------- STORAGE ----------------------------------
 		
+	/**
+	* set panel controls statuses from storage
+	* @param {Object} context
+	*/
+	var setStatusesFromStorage = function(context){
+		
+		var storageStatuses = [] 
+			,isStorageEnabled;
+		
+		isStorageEnabled = (context.options.storage === 'cookies') || ((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported());
+		
+		//check storage
+		if(isStorageEnabled){
+		
+			//debug info
+			jQuery.fn.jplist.info(context.options, 'Storage enabled: ', context.options.storage);
+		
+			if(context.options.storage === 'cookies'){
+				
+				//restore statuses from storage
+				storageStatuses = jQuery.fn.jplist.dal.services.CookiesService.restoreCookies(context.options.storageName);
+			}
+			
+			if((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported()){
+				
+				//restore statuses from storage
+				storageStatuses = jQuery.fn.jplist.dal.services.LocalStorageService.restore(context.options.storageName);
+			}
+			
+			//send redraw event
+			if(storageStatuses.length > 0){
+				restoreControlsByStatuses(context, storageStatuses);
+			}
+			else{
+				unknownStatusesChanged(context, true);
+			}
+		}
+		else{			
+			unknownStatusesChanged(context, true);
+		}			
+	};
+	
+	// ----------------------- MAIN LOGIC -------------------------------
+	
+	/**
+	* set control statuses
+	* @param {Object} context
+	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesArray
+	*/
+	var setControlsStatuses = function(context, statusesArray){
+		
+		var NOT_RESTORED_FROM_COOKIES = false;
+		
+		//set statuses
+		context.controls.setStatuses(statusesArray, NOT_RESTORED_FROM_COOKIES);		
+
+		//save statuses in history
+		context.history.addList(statusesArray);
+	};
+	
+	/**
+	* unknown status / statuses changed
+	* @param {Object} context
+	* @param {boolean} isDefault - should it render events by their default statuses
+	*/
+	var unknownStatusesChanged = function(context, isDefault){
+		
+		var statuses;			
+				
+		//get current statuses
+		statuses = context.controls.getStatuses(isDefault);
+		
+		//trigger knownStatusesChanged event
+		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);
+		
+		//try change url according to controls statuses
+		changeUrlDeepLinks(context);
+	};
+	
+	/**
+	* restore controls from storage by statuses
+	* @param {Object} context
+	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesArray
+	*/
+	var restoreControlsByStatuses = function(context, statusesArray){
+		
+		var RESTORED_FROM_COOKIES = true
+			,statusesInStorage = [];
+		
+		for(var i=0; i<statusesArray.length; i++){
+			
+			if(statusesArray[i].inStorage){
+				statusesInStorage.push(statusesArray[i]);
+			}
+		}		
+		
+		if(statusesInStorage.length > 0){
+		
+			//apply statusesInStorage on controls
+			context.controls.setStatuses(statusesInStorage, RESTORED_FROM_COOKIES);		
+		
+			context.observer.trigger(context.observer.events.knownStatusesChanged, [statusesInStorage]);
+		}
+	};
+	
+	/**
+	* get all statuses and merge them with the given status, then send build statuses event
+	* @param {Object} context
+	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	*/
+	var mergeStatuses = function(context, status){
+		
+		var IS_DEFAULT = false
+			,statuses;
+		
+		if(status.isAnimateToTop){
+			animateToTop(context);
+		}
+		
+		statuses = context.controls.merge(IS_DEFAULT, status);
+				
+		//render html by statuses
+		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);	
+
+		//try change url according to controls statuses
+		changeUrlDeepLinks(context);
+	};
+			
 	/**
 	* init controls and paths
 	* @param {Object} context
@@ -364,62 +380,8 @@
 	};
 		
 	/**
-	* on plugin init event
-	* @param {Object} context
-	*/
-	var pluginInit = function(context){
-		
-		var storageStatuses = []
-			,isStorageEnabled = false;
-		
-		//if deep links options is enabled
-		if(context.options.deepLinking){
-			
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'Deep linking enabled', '');
-				
-			//try restore panel state from query string
-			setStatusesByDeepLink(context);	
-		}
-		else{	
-			
-			isStorageEnabled = (context.options.storage === 'cookies') || ((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported());
-			
-			//check storage
-			if(isStorageEnabled){
-			
-				//debug info
-				jQuery.fn.jplist.info(context.options, 'Storage enabled: ', context.options.storage);
-			
-				if(context.options.storage === 'cookies'){
-					
-					//restore statuses from storage
-					storageStatuses = jQuery.fn.jplist.dal.services.CookiesService.restoreCookies(context.options.storageName);
-				}
-				
-				if((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported()){
-					
-					//restore statuses from storage
-					storageStatuses = jQuery.fn.jplist.dal.services.LocalStorageService.restore(context.options.storageName);
-				}
-				
-				//send redraw event
-				if(storageStatuses.length > 0){
-					restoreControlsByStatuses(context, storageStatuses);
-				}
-				else{
-					unknownStatusesChanged(context, true);
-				}
-			}
-			else{			
-				unknownStatusesChanged(context, true);
-			}
-		}
-	};
-	
-	/**
 	* init events
-	* @param {Object} context - jplist panel 'this' object
+	* @param {Object} context
 	*/
 	var initEvents = function(context){
 			
@@ -442,7 +404,7 @@
 		});
 		
 		/**
-		* one if control statuses was changed
+		* one of control statuses was changed
 		*/
 		context.observer.on(context.observer.events.unknownStatusesChanged, function(event, isDefault){
 			
@@ -469,6 +431,29 @@
 		context.$root.find(context.options.iosBtnPath).on('click', function(){			
 			jQuery(this).next(context.options.panelPath).toggleClass('jplist-ios-show');
 		});
+	};
+	
+	// ----------------------- ENTRY POINT -------------------------------
+	
+	/**
+	* on plugin init event
+	* @param {Object} context
+	*/
+	var pluginInit = function(context){
+		
+		//if deep links options is enabled
+		if(context.options.deepLinking){
+			
+			//debug info
+			jQuery.fn.jplist.info(context.options, 'Deep linking enabled', '');
+				
+			//try restore panel state from query string
+			setStatusesByDeepLink(context);	
+		}
+		else{	
+			//try set panel controls statuses from storage
+			setStatusesFromStorage(context);
+		}
 	};
 	
 	/**

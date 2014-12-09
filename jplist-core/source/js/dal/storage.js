@@ -8,19 +8,30 @@
 	*/
 	var save = function(context, statuses){
 		
-		//check storage
-		if(context.isStorageEnabled){
+		var statusesToSave = []
+			,status;
 		
+		if(statuses && context.isStorageEnabled){
+		
+			for(var i=0; i<statuses.length; i++){
+				
+				status = statuses[i];
+				
+				if(status.inStorage){
+					statusesToSave.push(status);
+				}
+			}
+			
 			if(context.options.storage === 'cookies'){
 				
 				//save statuses to the storage
-				jQuery.fn.jplist.dal.services.CookiesService.saveCookies(statuses, context.options.storageName, context.options.cookiesExpiration);
+				jQuery.fn.jplist.dal.services.CookiesService.saveCookies(statusesToSave, context.options.storageName, context.options.cookiesExpiration);
 			}
 			
 			if((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported()){
 				
 				//save statuses to the storage
-				jQuery.fn.jplist.dal.services.LocalStorageService.save(statuses, context.options.storageName);
+				jQuery.fn.jplist.dal.services.LocalStorageService.save(statusesToSave, context.options.storageName);
 			}
 		}
 	};

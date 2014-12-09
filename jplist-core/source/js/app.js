@@ -51,6 +51,41 @@
 	};
 	
 	/**
+	* API: get data items
+	* @param {*} context
+	* @param {Object} commandData
+	*/
+	var getDataItems = function(context, commandData){
+		
+		var dataitems = null;
+		
+		if(context.options && context.options.dataSource){
+			switch(context.options.dataSource.type){
+				
+				//html data source (dom)
+				case 'html':{
+					
+					if(context.controller && context.controller.collection){
+						dataitems = context.controller.collection.dataitems;
+					}
+				}
+				break;
+				
+				//server side (html) data source
+				case 'server':{
+					
+					if(context.controller && context.controller.model && context.controller.model.dataItem){
+						dataitems = context.controller.model.dataItem;
+					}
+				}
+				break;
+			}	
+		}
+		
+		return dataitems;
+	};
+	
+	/**
 	* init data source
 	* @param {Object} context
 	*/
@@ -106,7 +141,7 @@
 	* @param {Object} commandData
 	*/	
 	var performCommand = function(context, command, commandData){
-	
+		
 		switch(command){
 			
 			case 'add':{			
@@ -116,6 +151,11 @@
 			
 			case 'del':{
 				del(context, commandData);
+			}
+			break;
+			
+			case 'getDataItems':{
+				return getDataItems(context, commandData);
 			}
 			break;
 		}
@@ -226,24 +266,26 @@
 	*/
 	jQuery.fn.jplist = function(userOptions){
 	
-		return this.each(function(){
-		
-			var context
-				,$root = jQuery(this);
+		if(userOptions.command && userOptions.command !== 'init'){
+						
+			var context;
+				
+			context = this.data('jplist');
 			
-			if(userOptions.command && userOptions.command !== 'init'){
+			if(context){				
+				return performCommand(context, userOptions.command, userOptions.commandData);
+			}	
+		}
+		else{
+			return this.each(function(){
+			
+				var context
+					,$root = jQuery(this);
 				
-				context = $root.data('jplist');
-				
-				if(context){					
-					performCommand(context, userOptions.command, userOptions.commandData);
-				}
-			}
-			else{
-				context = new Init(userOptions, jQuery(this));
-				$root.data('jplist', context);
-			}			
-		});
+				context = new Init(userOptions, $root);
+				$root.data('jplist', context);		
+			});
+		}
 	};
 	
 	//PLUGINS AND CONTROLS REGISTRATION ----------------------------
