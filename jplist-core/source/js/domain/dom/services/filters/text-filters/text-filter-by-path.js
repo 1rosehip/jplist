@@ -38,8 +38,15 @@
 					text2 = jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(text, ignoreRegex);
 					
 					//value.text contains text
+					/*
 					if(text1.indexOf(text2) !== -1){
 						resultDataview.push(dataitem);					
+					}
+					*/
+										
+					//value.text contains text
+					if(jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse(text1, text2)){						
+						resultDataview.push(dataitem);
 					}
 				}
 			}			

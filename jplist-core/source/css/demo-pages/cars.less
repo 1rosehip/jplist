@@ -1,0 +1,88 @@
+
+/**
+* cars demo
+*/
+.cars-demo-mixin(){
+
+    .cars-demo{
+	
+		.model{
+			text-align: center;
+			
+			a{
+				color: #f03800;
+				font-size: 16px;
+				font-weight: normal;
+			}
+		}
+
+		.header{
+			font-weight: bold;
+		}
+
+		.list-item{
+			width: 23%;
+			margin: 0 1% 1% 0;
+			background: #fff;
+			border: 1px solid #dbdbdb;
+			
+			p{
+				margin: 0;
+				padding: 0 10px 10px 10px;
+			}
+			
+			.pic{
+				text-align: center;
+				padding-top: 15px;
+			}
+			
+			.divider{
+				background: #efefef;
+				text-align: center;
+				padding: 3px 0;
+				font-weight: bold;
+				margin-bottom: 10px;
+			}
+		}
+
+		.jplist .list{
+			background: transparent;
+		}
+
+		.top{
+			min-height: 305px;
+		}
+
+		.powertrain{
+			min-height: 180px;
+		}	
+			
+		.jplist-range-slider{
+			margin-top: 16px;
+		}
+	
+	}
+	
+	@media screen and (max-width: 800px) {
+		.cars-demo .jplist .list .list-item{
+			width: 32%;
+		}
+	}
+	
+	@media screen and (max-width: 500px) {
+		.cars-demo .jplist .list .list-item{
+			width: 48%;
+		}
+	}
+
+	@media screen and (max-width: 320px) {
+		.cars-demo .jplist .list .list-item{
+			width: 90%;
+			clear: both;
+			margin: 0 auto 15px auto;
+			float: none;
+		}
+	}
+}
+
+.cars-demo-mixin();

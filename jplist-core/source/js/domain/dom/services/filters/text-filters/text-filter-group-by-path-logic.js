@@ -61,15 +61,24 @@
                                 //remove 'ignore characters' from the text value
                                 formattedTxt = jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(txtValue, ignoreRegex);
 
+								/*
                                 //pathitem text contains text value?
                                 if(pathItemText.indexOf(formattedTxt) !== -1){
                                     resultDataview.push(dataitem);
                                     break;
                                 }
+								*/
+								
+								//pathitem text contains text value?
+								if(jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse(pathItemText, formattedTxt)){
+									resultDataview.push(dataitem);
+									break;
+								}
                             }
                         }
-                        else{  //logic === 'and'
-
+                        else{  
+						
+							//logic === 'and'
                             tempList = [];
 
                             for(txt=0; txt<textGroup.length; txt++){
@@ -79,11 +88,11 @@
 
                                  //remove 'ignore characters' from the text value
                                 formattedTxt = jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(txtValue, ignoreRegex);
-
-                                //pathitem text contains text value?
-                                if(pathItemText.indexOf(formattedTxt) !== -1){
-                                    tempList.push(formattedTxt);
-                                }
+								
+								//pathitem text contains text value?
+								if(jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse(pathItemText, formattedTxt)){
+									tempList.push(formattedTxt);
+								}
                             }
 
                             if(tempList.length === textGroup.length){

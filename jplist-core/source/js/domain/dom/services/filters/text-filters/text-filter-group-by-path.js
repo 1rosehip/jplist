@@ -80,9 +80,16 @@
 								text1 = jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(pathitem.text, ignoreRegex);
 								text2 = jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(textAndPathObj.text, ignoreRegex);
 								
+								/*
 								//value.text contains text
 								if(text1.indexOf(text2) !== -1){
 									includeItem = true;				
+								}
+								*/
+								
+								//value.text contains text
+								if(jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse(text1, text2)){
+									includeItem = true;	
 								}
 							}
 						}
