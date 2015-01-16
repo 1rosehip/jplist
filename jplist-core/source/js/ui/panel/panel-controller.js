@@ -424,6 +424,16 @@
 			
 			mergeStatuses(context, status);
 		});
+		
+		/**
+		* on 'statuses changed by deep links' event
+		*/
+		context.observer.on(context.observer.events.statusesChangedByDeepLinks, function(event, oldStatuses, newStatuses, params){
+
+			if(context.controls){
+				context.controls.statusesChangedByDeepLinks(params);	
+			}			
+		});
 				
 		/**
 		* on ios button click -> toggle next panel

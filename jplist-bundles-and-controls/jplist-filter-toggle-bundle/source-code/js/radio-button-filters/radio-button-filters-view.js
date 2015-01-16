@@ -122,6 +122,17 @@
 	};
 		
 	/**
+	* set statuses by deep links
+	* @param {Object} context
+	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	*/
+	var setByDeepLink = function(context, params){
+	
+		//render statuses again
+		context.observer.trigger(context.observer.events.statusChanged, [getStatus(context, false)]);
+	};
+	
+	/**
 	* Set control status
 	* @param {Object} context
 	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
@@ -146,6 +157,7 @@
 			//force render statuses event
 			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
+		
 	};
 	
 	/** 
@@ -207,6 +219,14 @@
 	*/
 	Init.prototype.setStatus = function(status, restoredFromStorage){
 		setStatus(this, status, restoredFromStorage);
+	};
+	
+	/**
+	* set statuses by deep links
+	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	*/
+	Init.prototype.setByDeepLink = function(params){
+		setByDeepLink(this, params);
 	};
 	
 	/** 

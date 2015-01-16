@@ -133,6 +133,7 @@
 			...prototype.getStatus = function(){};
 			...prototype.getDeepLink = function(){};
 			...prototype.getStatusByDeepLink = function(){};
+			...prototype.setByDeepLink = function(){};
 			...prototype.getPaths = function(){};
 			...prototype.setStatus = function(){};
 			*/

@@ -110,6 +110,29 @@
 	};
 	
 	/**
+	* statuses change per deep links url / params
+	* @param {Object} context
+	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	*/
+	var statusesChangedByDeepLinks = function(context, params){
+		
+		var control;
+				
+		for(var i=0; i<context.controls.length; i++){
+		
+			//get control type
+			control = context.controls[i];
+			
+			//get control 'setByDeepLink' function
+			if(jQuery.isFunction(control['setByDeepLink'])){
+			
+				//add control path to 'paths' array
+				control['setByDeepLink'](params);			
+			}			
+		}
+	};
+	
+	/**
 	* set controls statuses by deep link params
 	* @param {Object} context
 	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
@@ -159,6 +182,9 @@
 		
 		//send build statuses event
 		context.observer.trigger(context.observer.events.knownStatusesChanged, [oldStatuses]);
+		
+		//send 'statuses changed by deep links' event
+		context.observer.trigger(context.observer.events.statusesChangedByDeepLinks, [oldStatuses, newStatuses, params]);
 	};
 		
 	/**
@@ -407,6 +433,14 @@
 	*/
 	Init.prototype.merge = function(isDefault, status){		
 		return merge(this, isDefault, status);
+	};
+	
+	/**
+	* statuses change per deep links url / params
+	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	*/
+	Init.prototype.statusesChangedByDeepLinks = function(params){		
+		statusesChangedByDeepLinks(this, params);
 	};
 	
 	/**
