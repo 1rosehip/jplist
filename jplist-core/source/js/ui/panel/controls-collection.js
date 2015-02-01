@@ -84,6 +84,40 @@
 	};
 
 	/**
+	* get unique controls
+	* @param {Array.<Object>} controls
+	* @return {Array.<Object>}
+	*/
+	var getUniqueControls = function(controls){
+				
+		var uniqueControls = []
+			,control
+			,isUnique;
+		
+		for(var i=0; i<controls.length; i++){
+			
+			control = controls[i];
+			isUnique = true;
+			
+			for(var j=0; j<uniqueControls.length; j++){
+				
+				if(uniqueControls[j].name === control.name &&
+					uniqueControls[j].action === control.action){
+					
+					isUnique = false;
+					break;
+				}
+			}
+			
+			if(isUnique){
+				uniqueControls.push(control);
+			}
+		}
+		
+		return uniqueControls;
+	};
+	
+	/**
 	* Find controls with the same name and action
 	* @param {Object} context
 	* @param {?string} name
@@ -227,12 +261,16 @@
 		var control
 			,url = ''
 			,deepLinksArr = []
-			,deepLink = '';
+			,deepLink = ''
+			,controls;
+			
+		//get unique controls
+		controls = getUniqueControls(context.controls);
 		
-		for(var i=0; i<context.controls.length; i++){
+		for(var i=0; i<controls.length; i++){
 			
 			//get control
-			control = context.controls[i];
+			control = controls[i];
 			
 			if(jQuery.isFunction(control.getDeepLink)){
 			
