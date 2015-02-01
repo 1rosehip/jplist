@@ -138,15 +138,57 @@
 	};
 		
 	/**
+	* set statuses by deep links
+	* @param {Object} context
+	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	*/
+	var setByDeepLink = function(context, params){
+	
+		var param
+			,status;
+		
+		if(params){
+			for(var i=0; i<params.length; i++){
+				
+				param = params[i];
+				
+				if(param['controlName'] === context.name && param['propName'] === 'path' && param['propValue']){
+										
+					context.$control.find('[data-path="' + param['propValue'] + '"]').trigger('click');
+				}
+					
+			}
+		}
+	};
+	
+	/**
 	* Set control status
 	* @param {Object} context
 	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
-				
-		var $li
-			,$liList;		
+		
+		var $btn;
+		
+		if(status && status.data){
+			
+			$btn = context.$control.find(':has([data-path="' + status.data.path + '"])');
+			
+			if($btn && $btn.length > 0){
+				updateSelected(context, $btn);
+			}
+		}
+	};
+	
+	/**
+	* update selected
+	* @param {Object} context
+	* @param {jQueryObject} $li
+	*/
+	var updateSelected = function(context, $li){
+		
+		var $liList;		
 		
 		//get li list
 		$liList = context.$control.find('li');
@@ -154,17 +196,17 @@
 		//remove active class
 		$liList.removeClass('active');
 		
-		//set active class
-		$li = context.$control.find('li:has([data-path="' + status.data.path + '"])');
-		
-		if($li.length <= 0){
+		if(!$li || $li.length <= 0){
 			$li = $liList.eq(0);
 		}
 		
-		$li.addClass('active');
+		if($li.length > 0){
 		
-		//update dropdown panel
-		context.$control.find('.jplist-dd-panel').text($li.eq(0).text());	
+			$li.addClass('active');
+			
+			//update dropdown panel
+			context.$control.find('.jplist-dd-panel').text($li.eq(0).text());	
+		}
 	};
 	
 	/**
@@ -179,27 +221,15 @@
 		context.$control.find('li').off().on('click', function(){
 		
 			var status
-				,data_path
-				,data_number
-				,span;
+				,dataPath
+				,dataNumber
+				,$li = jQuery(this)
+				,$span;
+						
+			//update selected
+			updateSelected(context, $li);
 			
 			status = getStatus(context, false);
-			
-			span = jQuery(this).find('span');
-			data_path = span.attr('data-path');
-			data_number = span.attr('data-number');
-			
-			if(data_path){
-			
-				status.data.path = data_path;
-				status.data.type = span.attr('data-type');
-				status.data.order = span.attr('data-order');				
-			}
-			else{
-				if(data_number){
-					status.data.number = data_number;
-				}
-			}
 			
 			//send status event		
 			context.history.addStatus(status);			
@@ -275,6 +305,14 @@
 	jQuery.fn.jplist.ui.controls.FilterDropdown = function(context){
 		return new Init(context);
 	};	
+	
+	/**
+	* set statuses by deep links
+	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	*/
+	Init.prototype.setByDeepLink = function(params){
+		setByDeepLink(this, params);
+	};
 	
 	/**
 	* static control registration
