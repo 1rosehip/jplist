@@ -301,14 +301,17 @@
 		dataItem = new jQuery.fn.jplist.domain.dom.models.DataItemModel(item, paths, index);
 				
 		//add item dataitems to array
-		context.dataitems.push(dataItem);
+		//context.dataitems.push(dataItem);
+		
+		//insert item into the given index
+		context.dataitems.splice(index, 0, dataItem);
 
         //trigger event that data item was added to the dataitems collection
 	    context.observer.trigger(context.observer.events.dataItemAdded, [dataItem, context.dataitems]);
 	};
 	
 	/**
-	* add ittems to collection
+	* add items to collection
 	* @param {Object} context - jplist controller 'this' object
 	* @param {jQueryObject} $items
 	* @param {number} counter

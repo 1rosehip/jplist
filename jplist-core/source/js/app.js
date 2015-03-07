@@ -8,16 +8,26 @@
 	*/
 	var add = function(context, commandData){
 		
+		var index;
+		
 		if(context && 
 			context.controller && 
 			context.controller.collection &&
-			commandData.$item){			
+			commandData.$item){		
+
+			index = context.controller.collection.dataitems.length;
 			
-			//add data item to the collection
+			//index exists and it's in range
+			if(jQuery.isNumeric(commandData.index) && commandData.index >= 0 && commandData.index <= context.controller.collection.dataitems.length){
+				
+				index = Number(commandData.index);
+			}
+			
+			//add data item to the collection as last item
 			context.controller.collection.addDataItem(
 				commandData.$item
 				,context.controller.collection.paths
-				,context.controller.collection.dataitems.length
+				,index
 			);
 			
 			//redraw dataview with the given statuses
