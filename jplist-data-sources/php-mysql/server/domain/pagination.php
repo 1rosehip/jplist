@@ -63,7 +63,7 @@
 		public function getNumberOfPages(){
 			
 			$count = 0;		
-			$query = "SELECT count(ID) FROM Item ";
+			$query = "SELECT count(ID) FROM " . DB_TABLE . " ";
 						
 			if(count($this->filter->preparedParams) > 0){
 				$query .= " " . $this->filter->filterQuery . " ";
