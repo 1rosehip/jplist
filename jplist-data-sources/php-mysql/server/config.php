@@ -17,6 +17,6 @@ define('DB_PASSWORD', 'root');
 define('DB_HOST', '127.0.0.1');
 
 //MySQL hostname
-define('DB_TABLE', 'item2');
+define('DB_TABLE', 'item');
 
 ?>
