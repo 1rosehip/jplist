@@ -16,16 +16,9 @@
 		//init vars
 		dataPath = context.$control.attr('data-path').toString();		
 		min = context.params.$uiSlider['slider']('option', 'min');
-		max = context.params.$uiSlider['slider']('option', 'max');
-		
-		if(isDefault){			
-			prev = min;
-			next = max;
-		}
-		else{
-			prev = context.params.$uiSlider['slider']('values', 0);
-			next = context.params.$uiSlider['slider']('values', 1);
-		}
+		max = context.params.$uiSlider['slider']('option', 'max');		
+		prev = context.params.$uiSlider['slider']('values', 0);
+		next = context.params.$uiSlider['slider']('values', 1);
 		
 		//init range slider data transfer object
 		data = new jQuery.fn.jplist.ui.controls.RangeSliderDTO(dataPath, min, max, prev, next);	
