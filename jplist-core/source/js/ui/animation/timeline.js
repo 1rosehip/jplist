@@ -104,10 +104,6 @@
 	/**
 	* Play timeline
 	* @param {number} duration - the full time the animation should take, in milliseconds
-	* @public	
-	* @memberOf jQuery.fn.jplist.animation.Timeline#
-	* @name play
-	* @function
 	*/
 	Init.prototype.play = function(duration){
 		play(this, duration);
@@ -115,10 +111,6 @@
 	
 	/**
 	* Stop timeline
-	* @public	
-	* @memberOf jQuery.fn.jplist.animation.Timeline#
-	* @name stop
-	* @function
 	*/
 	Init.prototype.stop = function(){
 		stop(this);

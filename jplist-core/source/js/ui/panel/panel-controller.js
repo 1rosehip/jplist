@@ -73,120 +73,6 @@
 	};
 	
 	// ----------------------- DEEP LINKS -------------------------------
-	/**
-	* replace hash in url
-	* @param {string} hash
-	*/
-	var replaceHash = function(hash){
-	
-		var hashStr = jQuery.trim(hash.replace('#', ''))
-			,href
-			,index;
-		
-		if(hashStr === ''){
-			hashStr = '#';
-		}
-		else{
-			hashStr = '#' + hashStr;
-		}
-		
-		if(window.location.hash !== hashStr){
-		
-			index = window.location.href.indexOf('#');
-			
-			if(index == -1){
-				href = window.location.href + hashStr;
-			}
-			else{
-				href = window.location.href.substring(0, index) + hashStr;
-			}
-			
-			if('replaceState' in window.history){
-				window.history.replaceState('', '', href);
-			}
-			else{
-				window.location.replace(href);		
-			}
-		}
-	};		
-	
-	/**
-	* get params from deep link url
-	* @param {Object} context
-	* @param {string} hash
-	* @return {Array.<Object>} array of params {controlName: '...', propName: '...', propValue: '...'}
-	*/
-	var getParamsFromDeepLinkUrl = function(context, hash){
-		
-		var sections = []
-			,section
-			,params = []
-			,param
-			,pairSections
-			,keySections
-			,key
-			,value;
-		
-		if(context.options.deepLinking && jQuery.trim(hash) !== ''){
-			
-			//get sections
-			sections = hash.split(context.options.delimiter1);
-			
-			for(var i=0; i<sections.length; i++){
-				
-				//get section
-				section = sections[i];
-				
-				//get pair: key + value
-				pairSections = section.split('=');
-				
-				if(pairSections.length === 2){
-					
-					//get pair
-					key = pairSections[0];
-					value = pairSections[1];
-					
-					//get key sections
-					keySections = key.split(context.options.delimiter0);
-					
-					if(keySections.length === 2){
-						
-						param = {
-							controlName: keySections[0]
-							,propName: keySections[1]
-							,propValue: value
-						};
-						
-						params.push(param);
-					}
-				}
-			}
-		}
-	
-		return params;
-	};
-	
-	/**
-	* change url according to all controls statuses
-	* @param {Object} context
-	*/
-	var changeUrlDeepLinks = function(context){
-		
-		var deepLinkUrl = '';
-		
-		if(context.options.deepLinking){
-						
-			//get deep link url
-			deepLinkUrl = context.controls.getDeepLinksUrl();
-			
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'Change Deep links URL according to statuses: ', deepLinkUrl);
-			
-			//set new hash
-			//window.location.hash = deepLinkUrl;
-			replaceHash(deepLinkUrl);
-		}
-	};
 	
 	/**
 	* set panel controls statuses by their deep links
@@ -194,16 +80,15 @@
 	*/
 	var setStatusesByDeepLink = function(context){
 		
-		var hash = window.decodeURIComponent(jQuery.trim(window.location.hash.replace('#', '')))
-			,params
+		var params
 			,isStorageEnabled = false
 			,storageStatuses = [];
 		
 		//set deep links
-		params = getParamsFromDeepLinkUrl(context, hash);
+		params = jQuery.fn.jplist.domain.deeplinks.services.DeepLinksService.getUrlParams(context.options);
 		
 		//debug info
-		jQuery.fn.jplist.info(context.options, 'Set statuses bt deep link: ', params);
+		jQuery.fn.jplist.info(context.options, 'Set statuses by deep link: ', params);
 		
 		if(params.length <= 0){
 			
@@ -292,8 +177,8 @@
 		//trigger knownStatusesChanged event
 		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);
 		
-		//try change url according to controls statuses
-		changeUrlDeepLinks(context);
+		//try change url according to controls statuses		
+		jQuery.fn.jplist.domain.deeplinks.services.DeepLinksService.updateUrlPerControls(context.options, context.controls);
 	};
 	
 	/**
@@ -342,7 +227,7 @@
 		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);	
 
 		//try change url according to controls statuses
-		changeUrlDeepLinks(context);
+		jQuery.fn.jplist.domain.deeplinks.services.DeepLinksService.updateUrlPerControls(context.options, context.controls);
 	};
 			
 	/**

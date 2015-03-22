@@ -219,6 +219,7 @@
 			
 			//deep linking
 			,deepLinking: false
+			,hashStart: '#' //the start of the hash part, for example it may be '#!key='
 			,delimiter0: ':' //this delimiter is placed after the control name 
 			,delimiter1: '|' //this delimiter is placed between key-value pairs
 			,delimiter2: '~' //this delimiter is placed between multiple value of the same key
@@ -331,6 +332,9 @@
 	
 	jQuery.fn.jplist.domain.server = jQuery.fn.jplist.domain.server || {};
 	jQuery.fn.jplist.domain.server.models = jQuery.fn.jplist.domain.server.models || {};
+	
+	jQuery.fn.jplist.domain.deeplinks = jQuery.fn.jplist.domain.deeplinks || {};
+	jQuery.fn.jplist.domain.deeplinks.services = jQuery.fn.jplist.domain.deeplinks.services || {};
 	
 	/**
 	* Infrastructure Layer Namespace
