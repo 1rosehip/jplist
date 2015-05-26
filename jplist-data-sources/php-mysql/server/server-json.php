@@ -61,7 +61,7 @@
 					if($items){
 						foreach($items as $item){
 						
-							$item	= array_map(utf8_encode, $item);
+							$item = array_map('utf8_encode', $item);
 						
 							if($counter > 0){
 								$json .= ",";
