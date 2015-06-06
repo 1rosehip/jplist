@@ -82,40 +82,6 @@
 		
 		return statuses;
 	};
-
-	/**
-	* get unique controls
-	* @param {Array.<Object>} controls
-	* @return {Array.<Object>}
-	*/
-	var getUniqueControls = function(controls){
-				
-		var uniqueControls = []
-			,control
-			,isUnique;
-		
-		for(var i=0; i<controls.length; i++){
-			
-			control = controls[i];
-			isUnique = true;
-			
-			for(var j=0; j<uniqueControls.length; j++){
-				
-				if(uniqueControls[j].name === control.name &&
-					uniqueControls[j].action === control.action){
-					
-					isUnique = false;
-					break;
-				}
-			}
-			
-			if(isUnique){
-				uniqueControls.push(control);
-			}
-		}
-		
-		return uniqueControls;
-	};
 	
 	/**
 	* Find controls with the same name and action
@@ -265,13 +231,13 @@
 			,controls;
 			
 		//get unique controls
-		controls = getUniqueControls(context.controls);
+		controls = context.controls;
 		
 		for(var i=0; i<controls.length; i++){
 			
 			//get control
 			control = controls[i];
-			
+						
 			if(jQuery.isFunction(control.getDeepLink)){
 			
 				//get deep link
@@ -283,7 +249,7 @@
 				deepLinksArr.push(deepLink);
 			}
 		}
-		
+				
 		//init deep links url
 		url = deepLinksArr.join(context.options.delimiter1);
 		

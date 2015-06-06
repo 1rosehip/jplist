@@ -226,6 +226,7 @@
 		//render html by statuses
 		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);	
 
+		
 		//try change url according to controls statuses
 		jQuery.fn.jplist.domain.deeplinks.services.DeepLinksService.updateUrlPerControls(context.options, context.controls);
 	};
