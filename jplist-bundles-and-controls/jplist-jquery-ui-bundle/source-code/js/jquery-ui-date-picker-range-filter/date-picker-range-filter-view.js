@@ -1,4 +1,4 @@
-(function(){
+;(function(){
 	'use strict';		
 		
 	/**
@@ -8,19 +8,21 @@
 	var render = function(context){
 		
 		var options = {}
-			,prev
-			,next;
+			,$prev
+			,$next
+			,prevDefaultDate
+			,nextDefaultDate;
 				
 		//init prev and next input fields
-		prev = context.$control.find('[data-type="prev"]');
-		next = context.$control.find('[data-type="next"]');
+		$prev = context.$control.find('[data-type="prev"]');
+		$next = context.$control.find('[data-type="next"]');
 		
 		//init data
-		context.$control.data('jplist-datepicker-range-prev', prev);
-		context.$control.data('jplist-datepicker-range-next', next);
+		context.$control.data('jplist-datepicker-range-prev', $prev);
+		context.$control.data('jplist-datepicker-range-next', $next);
 		
 		//init empty onchacnge
-		prev.off('change').change(function(){
+		$prev.off('change').change(function(){
 		
 			if(jQuery.trim(jQuery(this).val()) === ''){
 				context.history.addStatus(getStatus(context, false));
@@ -28,7 +30,7 @@
 			}
 		});
 		
-		next.off('change').change(function(){
+		$next.off('change').change(function(){
 		
 			if(jQuery.trim(jQuery(this).val()) === ''){
 				context.history.addStatus(getStatus(context, false));
@@ -41,10 +43,24 @@
 			context.history.addStatus(getStatus(context, false));
 			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		};
+				
+		//start prev datepicker
+		context.params.datepickerFunc($prev, options);
 		
-		//start datepicker
-		context.params.datepickerFunc(prev, options);
-		context.params.datepickerFunc(next, options);
+		//start next datepicker	
+		context.params.datepickerFunc($next, options);
+		
+		prevDefaultDate = $prev.attr('value');
+		
+		if(prevDefaultDate){
+			$prev['datepicker']('setDate', prevDefaultDate);
+		}
+		
+		nextDefaultDate = $next.attr('value');
+		
+		if(nextDefaultDate){
+			$next['datepicker']('setDate', nextDefaultDate);
+		}
 	};
 	
 	/**
@@ -60,8 +76,8 @@
 			,prevDate = null
 			,nextDate = null
 			,dateTimeFormat
-			,prev
-			,next
+			,$prev
+			,$next
 			,dataPath;	
 					
 		//get vars
@@ -69,14 +85,12 @@
 		dateTimeFormat = context.$control.attr('data-datetime-format').toString();
 		
 		//get prev/next controls
-		prev = context.$control.data('jplist-datepicker-range-prev');
-		next = context.$control.data('jplist-datepicker-range-next');
+		$prev = context.$control.data('jplist-datepicker-range-prev');
+		$next = context.$control.data('jplist-datepicker-range-next');
 		
-		if(!isDefault){
-			//get dates from datepickers
-			prevDate = prev['datepicker']('getDate');
-			nextDate = next['datepicker']('getDate');
-		}
+		//get dates from datepickers
+		prevDate = $prev['datepicker']('getDate');
+		nextDate = $next['datepicker']('getDate');
 		
 		data = new jQuery.fn.jplist.ui.controls.DatePickerRangeFilterDTO(dataPath, dateTimeFormat, prevDate, nextDate);		
 		
