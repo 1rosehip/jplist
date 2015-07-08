@@ -1,4 +1,7 @@
-(function(){
+/**
+* DTO Mapper Service
+*/
+;(function(){
 	'use strict';		
 	
 	/** 
@@ -167,23 +170,6 @@
 		);
 	};
 
-	/**
-	* autocomplete dto mapper
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview
-	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview
-	*/
-	jQuery.fn.jplist.app.services.DTOMapperService.filters.autocomplete = function(status, dataview){
-					
-		return jQuery.fn.jplist.domain.dom.services.FiltersService.autocompleteFilter(
-			status.data['latitude']
-			,status.data['longitude']
-			,status.data['name']
-			,dataview
-			,status.data['radius']
-		);
-	};
-	
 	// SORTING
 	
 	/** 

@@ -1,4 +1,7 @@
-(function() {
+/**
+* DataItems Collection
+*/
+;(function() {
 	'use strict';		
 	
 	/**
@@ -16,27 +19,20 @@
 		//init statuses collection
 		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, statuses);
 		
-		//get filter statuses		
-		filterStatuses = statusesCollection['getStatusesByAction']('filter', statuses);
+		//get all filter statuses that have registered filter services		
+		filterStatuses = statusesCollection.getFilterStatuses();
 		
 		if(filterStatuses.length > 0){
-
-			for(var i=0; i<filterStatuses.length; i++){
-
-				//get status
+		
+			for(var i = 0; i<filterStatuses.length; i++){
+				
 				status = filterStatuses[i];
 				
-				if(status && status.data && status.data.filterType){
-									
-					//get filter service
-					filterService = jQuery.fn.jplist.app.services.DTOMapperService.filters[status.data.filterType];
-					
-					if(jQuery.isFunction(filterService)){
-					
-						//modify dataview
-						context.dataview = filterService(status, context.dataview);
-					}
-				}
+				//get filter service
+				filterService = jQuery.fn.jplist.app.services.DTOMapperService.filters[status.data.filterType];
+						
+				//modify dataview
+				context.dataview = filterService(status, context.dataview);
 			}
 			
 			//trigger filter event
@@ -96,52 +92,18 @@
 	*/
 	var sort = function(context, statuses){
 		
-		var actionStatuses
-			,actionStatus
-			,statusesCollection
-			,statusesAfterGroupExpanding = []
-			,tempStatus;
+		var sortStatuses = []
+			,statusesCollection;
 		
 		//init statuses collection
 		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, statuses);
 		
-		//get sort statuses		
-		actionStatuses = statusesCollection['getStatusesByAction']('sort', statuses);
+		//get all sort statuses, expand statuses group if needed		
+		sortStatuses = statusesCollection.getSortStatuses();
 			
-        if(actionStatuses.length > 0){
-		
-			for(var i=0; i<actionStatuses.length; i++){
-				
-				actionStatus = actionStatuses[i];
-				
-				if(actionStatus && 
-					actionStatus.data && 
-					actionStatus.data['sortGroup'] && 
-					jQuery.isArray(actionStatus.data['sortGroup']) && 
-					actionStatus.data['sortGroup'].length > 0){
-					
-					for(var j=0; j<actionStatus.data['sortGroup'].length; j++){
-						
-						tempStatus = new jQuery.fn.jplist.app.dto.StatusDTO(
-							actionStatus.name
-							,actionStatus.action
-							,actionStatus.type
-							,actionStatus.data['sortGroup'][j]
-							,actionStatus.inStorage
-							,actionStatus.inAnimation
-							,actionStatus.isAnimateToTop
-							,actionStatus.inDeepLinking
-						);
-						
-						statusesAfterGroupExpanding.push(tempStatus);
-					}					
-				}
-				else{
-					statusesAfterGroupExpanding.push(actionStatus);
-				}
-			}
+        if(sortStatuses.length > 0){
 			
-		    jQuery.fn.jplist.domain.dom.services.SortService.doubleSort(statusesAfterGroupExpanding, context.dataview);
+		    jQuery.fn.jplist.domain.dom.services.SortService.doubleSort(sortStatuses, context.dataview);
 			
 			//trigger sort event
 			context.observer.trigger(context.observer.events.listSorted, [statuses, context]);
@@ -367,61 +329,56 @@
 	/** 
 	* DataItems Collection
 	* @constructor 
-	* @param {Object} options - jplist user options
+	* @param {Object} options - jplist user options	
 	* @param {Object} observer
-	* @return {Object} - jplist collection	
 	* @param {jQueryObject} $items - initial items to add to the collection
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
 	*/
-	var Init = function(options, observer, $items, paths){
-	
-		var context = {
-			dataitems: []
-			,dataview: []
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection = function(options, observer, $items, paths){
+
+		this.dataitems = [];
+		this.dataview = [];
 			
-            ,options: options
-			,observer: observer
-			,paths: paths
-		};
+        this.options = options;
+		this.observer = observer;
+		this.paths = paths;
 
 		if($items.length > 0){
 		
 			//add ittems to collection
-			addDataItems(context, $items, paths);		
+			addDataItems(this, $items, paths);		
 		}
 		
 		//trigger collection ready event
-		context.observer.trigger(context.observer.events.collectionReadyEvent, [context]);
-		
-		return jQuery.extend(this, context);
+		this.observer.trigger(this.observer.events.collectionReadyEvent, [this]);		
 	};
 	
 	/**
 	* API: apply statuses
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
-	Init.prototype.applyStatuses = function(statuses){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.applyStatuses = function(statuses){
 		applyStatuses(this, statuses);
 	};
 	
 	/**
 	* API: filter dataview	
 	*/
-	Init.prototype.filter = function(statuses){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.filter = function(statuses){
 		filter(this, statuses);
 	};
 	
 	/**
 	* API: sort dataview	
 	*/
-	Init.prototype.sort = function(statuses){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.sort = function(statuses){
 		sort(this, statuses);
 	};
 	
 	/**
 	* API: dataview	pagination
 	*/
-	Init.prototype.pagination = function(statuses){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.pagination = function(statuses){
 		pagination(this, statuses);
 	};
 	
@@ -429,7 +386,7 @@
 	* API: convert dataview to jquery object
 	* @return {jQueryObject}	
 	*/
-	Init.prototype.dataviewToJqueryObject = function(){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataviewToJqueryObject = function(){
 		return dataviewToJqueryObject(this);
 	};
 	
@@ -437,21 +394,21 @@
 	* API: convert dataitems to jquery object
 	* @return {jQueryObject}	
 	*/
-	Init.prototype.dataitemsToJqueryObject = function(){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataitemsToJqueryObject = function(){
 		return dataitemsToJqueryObject(this);
 	};
 	
 	/**
 	* API: reset dataview collection with initial dataitems set	
 	*/
-	Init.prototype.resetDataview = function(){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.resetDataview = function(){
 		resetDataview(this);
 	};
 		
 	/**
 	* API: empty collection
 	*/
-	Init.prototype.empty = function(){	
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.empty = function(){	
 		empty(this);
 	};
 	
@@ -461,7 +418,7 @@
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
 	* @param {number} index	
 	*/
-	Init.prototype.addDataItem = function(item, paths, index){	
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.addDataItem = function(item, paths, index){	
 		addDataItem(this, item, paths, index);
 	};
 	
@@ -470,7 +427,7 @@
 	* @param {jQueryObject} items - jquery items to add
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
 	*/
-	Init.prototype.addDataItems = function(items, paths){		
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.addDataItems = function(items, paths){		
 		addDataItems(this, items, paths);
 	};
 	
@@ -478,7 +435,7 @@
 	* API: searches for jQuery element (item) in the dataitems collection and deletes it
 	* @param {jQueryObject} item - jquery element (item) to delete
 	*/
-	Init.prototype.delDataitem = function(item){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.delDataitem = function(item){
 		delDataitem(this, item);
 	};
 	
@@ -486,7 +443,7 @@
 	* API: searches for jQuery elements (items) in the dataitems collection and deletes them
 	* @param {jQueryObject} items - jquery element to delete
 	*/
-	Init.prototype.delDataitems = function(items){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.delDataitems = function(items){
 		delDataitems(this, items);
 	};
 	
@@ -495,7 +452,7 @@
 	* @param {jQueryObject} item - jquery element to delete
 	* @return {number} - index of dataitem in dataitems array	
 	*/
-	Init.prototype.indexOf = function(item){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.indexOf = function(item){
 		return indexOf(this, item);
 	};
 	
@@ -503,52 +460,8 @@
 	* API: get HTML of the collection in the current state (dataview): with the current filter, sorting etc.
 	* @return {string}
 	*/
-	Init.prototype.dataviewToString = function(){	
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataviewToString = function(){	
 		return dataviewToString(this);
-	};
-	
-	/** 
-	* DataItems Collection
-	* @constructor 
-	* @param {Object} options - jplist user options	
-	* @param {Object} observer
-	* @param {jQueryObject} $items - initial items to add to the collection
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
-	*/
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection = function(options, observer, $items, paths){
-
-		var context;
-		
-		//call constructor
-		context = new Init(options, observer, $items, paths);
-		
-		//properties
-		this.observer = observer;
-        this.options = options;
-
-		this.dataitems = context['dataitems'];
-		this.dataview = context['dataview'];
-		this.paths = context['paths'];		
-		
-		//methods
-		this.sort = context['sort'];
-		this.filter = context['filter'];
-		this.pagination = context['pagination'];
-		this.applyStatuses = context['applyStatuses'];		
-		
-		this.addDataItem = context['addDataItem'];	
-		this.addDataItems = context['addDataItems'];	
-		
-		this.resetDataview = context['resetDataview'];
-		this.indexOf = context['indexOf'];	
-		
-		this.delDataitem = context['delDataitem'];	
-		this.delDataitems = context['delDataitems'];
-		this.empty = context['empty'];
-		
-		this.dataviewToString = context['dataviewToString'];	
-		this.dataviewToJqueryObject = context['dataviewToJqueryObject'];
-		this.dataitemsToJqueryObject = context['dataitemsToJqueryObject'];
 	};
 	
 })();

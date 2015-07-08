@@ -1,9 +1,4 @@
-/**
-* jPList - jQuery Data Grid Controls - http://jplist.com 
-* Free Sort Bundle
-* Copyright 2014 jPList Software. All rights reserved.
-*/
-(function(){
+;(function(){
 	'use strict';		
 		
 	/**
@@ -186,26 +181,25 @@
 		context.$control.on('change', function(){
 		
 			var status
-				,selectedOption
-				,dataPpath;
+				,$selectedOption
+				,dataPath;
 			
 			status = getStatus(context, false);
 			
 			//get selected option
-			selectedOption = jQuery(this).find('option:selected');
+			$selectedOption = jQuery(this).find('option:selected');
 			
 			//get data
-			dataPpath = selectedOption.attr('data-path');
+			dataPath = $selectedOption.attr('data-path');
 			
-			if(dataPpath){
+			if(dataPath){
 			
-				status.data.path = dataPpath;
-				status.data.type = jQuery(this).attr('data-type');
-				status.data.order = jQuery(this).attr('data-order');				
+				status.data.path = dataPath;
+				status.data.type = $selectedOption.attr('data-type');
+				status.data.order = $selectedOption.attr('data-order');				
 			}
 			
-			//send status event			
-			context.history.addStatus(status);
+			//send status event
 			context.observer.trigger(context.observer.events.statusChanged, [status]);
 		});
 	};

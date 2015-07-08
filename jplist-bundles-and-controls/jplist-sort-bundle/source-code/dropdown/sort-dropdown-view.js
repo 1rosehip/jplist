@@ -1,8 +1,3 @@
-/**
-* jPList - jQuery Data Grid Controls - http://jplist.com 
-* Free Sort Bundle
-* Copyright 2014 jPList Software. All rights reserved.
-*/
 (function(){//+
 	'use strict';		
 		
@@ -215,8 +210,7 @@
 				status.data.order = span.attr('data-order');				
 			}
 			
-			//send status event		
-			context.history.addStatus(status);			
+			//send status event	
 			context.observer.trigger(context.observer.events.statusChanged, [status]);
 		});
 	};

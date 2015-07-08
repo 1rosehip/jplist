@@ -38,36 +38,7 @@
 			}
 		}
 	};
-	
-	/** 
-	* Item Control Collection
-	* @constructor 
-	* @param {Object} options - jplist user options
-	* @param {Object} observer
-	* @param {jQuery.fn.jplist.app.History} history
-	* @param {jQueryObject} $root
-	* @return {Object}
-	*/
-	var Init = function(options, observer, history, $root){
-	
-		var context = {
-            options: options
-			,observer: observer
-			,history: history
-			,$root: $root
-			,controls: []
-			,controlFactory: null	
-		};
-				
-		//ini control factory
-		context.controlFactory = new jQuery.fn.jplist.ui.list.ItemControlFactory(options, observer, history, $root);
-		
-		//init controls
-		initControls(context);
-		
-		return jQuery.extend(this, context);
-	};
-		
+			
 	/** 
 	* Item Control Collection
 	* @constructor 
@@ -78,7 +49,19 @@
 	* @return {Object}
 	*/
 	jQuery.fn.jplist.ui.list.collections.ItemControlCollection = function(options, observer, history, $root){	
-		return new Init(options, observer, history, $root);
+	
+		this.options = options;
+		this.observer = observer;
+		this.history = history;
+		this.$root = $root;
+		this.controls = [];
+		this.controlFactory = null;	
+				
+		//ini control factory
+		this.controlFactory = new jQuery.fn.jplist.ui.list.ItemControlFactory(options, observer, history, $root);
+		
+		//init controls
+		initControls(this);
 	};
 	
 })();

@@ -1,0 +1,36 @@
+/**
+* jplist-control
+*/
+.jplist-control-mixin(){
+	float: left;
+	height: 30px;
+	box-shadow: 0px 0px 1px #fff;
+	background: #fff;
+	
+	.border-box-mixin();	
+	border: 1px solid @light-grey5;
+	border-radius: 3px;
+	
+	text-shadow: 1px 1px 1px #fff;	
+	color: @black1;
+}
+
+/**
+* jplist inner control - like label or checkbox inside group
+*/
+.jplist-inner-control-mixin(){
+	float: left;
+	display: inline-block;
+	height: 30px;
+	background: #fff;	
+	.border-box-mixin();
+	color: @black1;
+}
+
+
+/**
+* jplist control gradient
+*/
+.jplist-control-gradient-mixin(){
+	.linear-gradient(#fff, #fff, @light-grey4); //bgcolor, from, to		
+}

@@ -1,4 +1,4 @@
-(function(){
+;(function(){
 	'use strict';
 	
 	/**
@@ -80,57 +80,7 @@
 			}
 		}		
 	};	
-	
-	/**
-	* init events
-	* @param {Object} context
-	*/
-	var initEvents = function(context){
-		
-		/**
-		* this event is sent by dataitems collection when the statuses were applied to the collection 
-		* (i.e. sort, filter and pagination is done according new statuses)
-		*/
-		context.observer.on(context.observer.events.statusesAppliedToList, function(e, collection, statuses){
-			render(context, collection, statuses);
-		});
-	};
-	
-	/**
-	* List View
-	* @constructor 
-	* @param {jQueryObject} $root - jplist jquery element
-	* @param {Object} options - jplist options
-	* @param {Object} observer
-	* @return {Object}
-	* @param {jQuery.fn.jplist.app.History} history	
-	*/
-	var Init = function($root, options, observer, history){
-	
-		var context = {
-			options: options	//user options	
-			,$root: $root //jplist container
-			,observer: observer
-			,history: history
 			
-			,timeline: null
-			,timelineZero: null
-			,$itemsBox: $root.find(options.itemsBox).eq(0)
-			,$noResults: $root.find(options.noResults)
-		};
-		
-		if(context.options.effect){
-			
-			//init timeline
-			context.timeline = new jQuery.fn.jplist.animation.Timeline(context.$root, context.options, context.observer);
-		}
-
-		//init events
-		initEvents(context);
-		
-		return jQuery.extend(this, context);
-	};
-	
 	/**
 	* List View
 	* @constructor 
@@ -140,6 +90,30 @@
 	* @param {jQuery.fn.jplist.app.History} history	
 	*/
 	jQuery.fn.jplist.ui.list.views.DOMView = function($root, options, observer, history){	
-		return new Init($root, options, observer, history);
+	
+		this.options = options;	//user options	
+		this.$root = $root; //jplist container
+		this.observer = observer;
+		this.history = history;
+		
+		this.timeline = null;
+		this.timelineZero = null;
+		this.$itemsBox = $root.find(options.itemsBox).eq(0);
+		this.$noResults = $root.find(options.noResults);
+		
+		if(this.options.effect){
+			
+			//init timeline
+			this.timeline = new jQuery.fn.jplist.animation.Timeline(this.$root, this.options, this.observer);
+		}
+	};
+	
+	/**
+	* render view
+	* @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} collection
+	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	*/
+	jQuery.fn.jplist.ui.list.views.DOMView.prototype.render = function(collection, statuses){
+		render(this, collection, statuses);
 	};
 })();

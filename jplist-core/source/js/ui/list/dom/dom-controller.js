@@ -1,4 +1,4 @@
-(function(){
+;(function(){
 	'use strict';
 		
 	/**
@@ -15,6 +15,9 @@
 			
 			//update dataview				
 			context.collection.applyStatuses(statuses);
+			
+			//render view
+			context.listView.render(context.collection, statuses);
 		}
 	};
 		
@@ -40,75 +43,7 @@
 		
 		return collection;
 	};
-	
-	/**
-	* init events
-	* @param {Object} context - jplist controller 'this' object
-	*/
-	var initEvents = function(context){
-		
-		/**
-		* DOM and server lists send this event when their HTML is rendered
-		* @param {Object} event
-		* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-		*/
-		context.observer.on(context.observer.events.knownStatusesChanged, function(event, statuses){
-			renderStatuses(context, statuses);
-		});		
-	};
-	
-	/**
-	* DOM Constructor
-	* @constructor
-	* @param {jQueryObject} $root - jplist jquery element
-	* @param {Object} options - jplist user options
-	* @param {Object} observer	
-	* @param {jQuery.fn.jplist.ui.panel.controllers.PanelController} panel
-	* @param {jQuery.fn.jplist.app.History} history
-	* @return {Object} context
-	*/
-	var Init = function($root, options, observer, panel, history){
-	
-		var context = {
-			options: options
-			,observer: observer
-			,$root: $root
-			,history: history
-			,storage: new jQuery.fn.jplist.dal.Storage($root, options, observer)
 			
-			,collection: null
-			,itemControls: null
-			,listView: null
-		};
-		
-		//get item controls
-		context.itemControls = new jQuery.fn.jplist.ui.list.collections.ItemControlCollection(
-			context.options
-			,context.observer
-			,context.history
-			,context.$root
-		);
-		
-		//init list view for dom dataitems
-		context.listView = new jQuery.fn.jplist.ui.list.views.DOMView(context.$root, context.options, context.observer, context.history);
-		
-		//init collection
-		context.collection = getCollection(context, panel.paths);
-		
-		//init events
-		initEvents(context);
-				
-		return jQuery.extend(this, context);
-	};
-	
-	/**
-	* build statuses
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
-	Init.prototype.renderStatuses = function(statuses){
-		renderStatuses(this, statuses);
-	};
-	
 	/**
 	* DOM
 	* @constructor 
@@ -120,6 +55,38 @@
 	* @return {Object} - DOM controller
 	*/
 	jQuery.fn.jplist.ui.list.controllers.DOMController = function($root, options, observer, panel, history){
-		return new Init($root, options, observer, panel, history);
+	
+		this.options = options;
+		this.observer = observer;
+		this.$root = $root;
+		this.history = history;
+		this.storage = new jQuery.fn.jplist.dal.Storage($root, options, observer);
+		
+		this.collection = null;
+		this.itemControls = null;
+		this.listView = null;
+		
+		//get item controls
+		this.itemControls = new jQuery.fn.jplist.ui.list.collections.ItemControlCollection(
+			options
+			,observer
+			,history
+			,$root
+		);
+		
+		//init list view for dom dataitems
+		this.listView = new jQuery.fn.jplist.ui.list.views.DOMView($root, options, observer, history);
+		
+		//init dataitems collection
+		this.collection = getCollection(this, panel.paths);		
+	};	
+		
+	/**
+	* build statuses
+	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	*/
+	jQuery.fn.jplist.ui.list.controllers.DOMController.prototype.renderStatuses = function(statuses){
+		renderStatuses(this, statuses);
 	};
+	
 })();

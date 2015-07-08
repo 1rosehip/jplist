@@ -1,8 +1,11 @@
-(function(){
+/**
+* DataItem Member
+*/
+;(function(){
 	'use strict';		
 	
 	/**
-	* DataItem Member got the given path
+	* DataItem Member in the given path
 	* @param {jQueryObject} $element
 	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object	
 	* @constructor 

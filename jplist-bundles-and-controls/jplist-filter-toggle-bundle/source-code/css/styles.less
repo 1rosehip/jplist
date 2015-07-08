@@ -1,0 +1,72 @@
+/**
+* import files
+*/
+@import "../../../themes/core/helpers.less";
+@import "../../../themes/core/vars.less";
+@import "../../../themes/core/common.less";
+
+/**
+* radio filters
+*/
+.radio-filters-mixin(){
+
+    .radio-filters{
+        float: left;
+        margin: 5px 15px 0 0;
+
+        input{
+            vertical-align: baseline;
+        }
+
+        label{
+            margin-right: 10px;
+        }
+    }
+
+    .radio{
+        float: left;
+    }
+}
+
+.jplist-panel{
+
+	/**
+	* used in checkboxes group, text filters group etc.
+	*/
+	.jplist-group{
+		.jplist-control-mixin();
+		margin: 10px 10px 0 0;
+		padding: 0 0 0 5px;
+		height: auto;
+		
+		input, label{
+			height: 28px;
+			line-height: 30px;
+		}
+		
+		ul{
+			list-style: none;
+			padding: 0;
+			margin: 0 0 0 10px;
+			line-height: 28px;
+			
+			li{
+				float: left;
+				margin-right: 15px;					
+				overflow: hidden;
+				height: 28px;
+				line-height: 30px;
+			}
+		}
+	}
+}	
+
+.range-filter-mixin(){
+	
+	[data-control-type="range-filter"]{
+		cursor: pointer;
+	}
+}		
+
+.radio-filters-mixin();
+.range-filter-mixin();

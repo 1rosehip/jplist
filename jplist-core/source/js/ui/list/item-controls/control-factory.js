@@ -83,44 +83,29 @@
 		return control;		
 	};
 	
-	/** 
+	/**
 	* Item Control Factory
-	* @constructor
 	* @param {Object} options
 	* @param {Object} observer
 	* @param {jQuery.fn.jplist.app.History} history
 	* @param {jQueryObject} $root - jplist jquery element
+	* @constructor
 	*/
-	var Init = function(options, observer, history, $root){
-		
-		var context = {
-			options: options
-			,observer: observer
-			,history: history
-			,$root: $root
-		};
-				
-		return jQuery.extend(this, context);
+	jQuery.fn.jplist.ui.list.ItemControlFactory = function(options, observer, history, $root){	
+	
+		this.options = options;
+		this.observer = observer;
+		this.history = history;
+		this.$root = $root;		
 	};
 	
 	/**
 	* create item control
 	* @param {jQueryObject} $control
 	*/
-	Init.prototype.create = function($control){
+	jQuery.fn.jplist.ui.list.ItemControlFactory.prototype.create = function($control){
 		return create(this, $control);
 	};
 	
-	/**
-	* Item Control Factory
-	* @param {Object} options
-	* @param {Object} observer
-	* @param {jQuery.fn.jplist.app.History} history
-	* @param {jQueryObject} $root - jplist jquery element
-	* @constructor
-	*/
-	jQuery.fn.jplist.ui.list.ItemControlFactory = function(options, observer, history, $root){		
-		return new Init(options, observer, history, $root);		
-	};
 })();
 

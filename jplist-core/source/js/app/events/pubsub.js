@@ -1,4 +1,8 @@
-(function(){
+/**
+* jPList Events
+* \core\js\app\events\pubsub.js
+*/
+;(function(){
 	'use strict';
 	
 	/**
@@ -8,8 +12,8 @@
 	* @return {Object}
 	* @constructor 
 	*/
-	var Init = function($root, options){
-		
+	jQuery.fn.jplist.app.events.PubSub = function($root, options){
+	
 		var context = {
 			options: options
 			,$root: $root
@@ -43,18 +47,6 @@
 		};			
 				
 		return jQuery.extend(true, jQuery({}), this, context);
-	};
-	
-	/**
-	* jPList publisher / subscriber - handles application events
-	* @param {jQueryObject} $root - jplist jquery element
-	* @param {Object} options - jplist user options
-	* @return {Object}
-	* @constructor 
-	*/
-	jQuery.fn.jplist.app.events.PubSub = function($root, options){
-	
-		return new Init($root, options);
 	};
 	
 })();

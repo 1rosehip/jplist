@@ -1,4 +1,4 @@
-(function(){
+;(function(){
 	'use strict';
 	
 	// ----------------------- HELPERS ----------------------------------
@@ -85,7 +85,7 @@
 			,storageStatuses = [];
 		
 		//set deep links
-		params = jQuery.fn.jplist.domain.deeplinks.services.DeepLinksService.getUrlParams(context.options);
+		params = jQuery.fn.jplist.dal.services.DeepLinksService.getUrlParams(context.options);
 		
 		//debug info
 		jQuery.fn.jplist.info(context.options, 'Set statuses by deep link: ', params);
@@ -98,6 +98,16 @@
 		else{				
 			context.controls.setDeepLinks(params);				
 		}			
+	};
+	
+	/**
+	* get deep links url according to panel controls
+	* @param {Object} context
+	* @return {string}
+	*/
+	var getDeepLinksURLPerControls = function(context){
+		
+		return context.controls['getDeepLinksUrl']();
 	};
 	
 	// ----------------------- STORAGE ----------------------------------
@@ -151,7 +161,7 @@
 	* @param {Object} context
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesArray
 	*/
-	var setControlsStatuses = function(context, statusesArray){
+	var setStatuses = function(context, statusesArray){
 		
 		var NOT_RESTORED_FROM_COOKIES = false;
 		
@@ -176,9 +186,6 @@
 		
 		//trigger knownStatusesChanged event
 		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);
-		
-		//try change url according to controls statuses		
-		jQuery.fn.jplist.domain.deeplinks.services.DeepLinksService.updateUrlPerControls(context.options, context.controls);
 	};
 	
 	/**
@@ -224,11 +231,7 @@
 		statuses = context.controls.merge(IS_DEFAULT, status);
 				
 		//render html by statuses
-		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);	
-
-		
-		//try change url according to controls statuses
-		jQuery.fn.jplist.domain.deeplinks.services.DeepLinksService.updateUrlPerControls(context.options, context.controls);
+		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);
 	};
 			
 	/**
@@ -266,131 +269,20 @@
 	};
 		
 	/**
-	* init events
+	* statuses are changed by deep link
 	* @param {Object} context
+	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} newStatuses
+	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
 	*/
-	var initEvents = function(context){
-			
-		/**
-		* on plugin init
-		*/
-		context.observer.on(context.observer.events.init, function(event){		
-			pluginInit(context);			
-		});
+	var statusesChangedByDeepLinks = function(context, newStatuses, params){
 		
-		/**
-		* event from controller to panel after html rebuild
-		*/
-		context.observer.on(context.observer.events.statusesAppliedToList, function(event, collection, statusesArray){	
-			
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'panel statusesAppliedToList -> setControlsStatuses: ', statusesArray);
-		
-			setControlsStatuses(context, statusesArray);
-		});
-		
-		/**
-		* one of control statuses was changed
-		*/
-		context.observer.on(context.observer.events.unknownStatusesChanged, function(event, isDefault){
-			
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'panel statusesChanged, isDefault: ', isDefault);
-			
-			unknownStatusesChanged(context, isDefault);
-		});		
-				
-		/**
-		* event to panel -> get all statuses and merge them with the given status, then send build statuses event
-		*/
-		context.observer.on(context.observer.events.statusChanged, function(event, status){	
-
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'panel statusChanged: ', status);
-			
-			mergeStatuses(context, status);
-		});
-		
-		/**
-		* on 'statuses changed by deep links' event
-		*/
-		context.observer.on(context.observer.events.statusesChangedByDeepLinks, function(event, oldStatuses, newStatuses, params){
-
-			if(context.controls){
-				context.controls.statusesChangedByDeepLinks(params);	
-			}			
-		});
-				
-		/**
-		* on ios button click -> toggle next panel
-		*/
-		context.$root.find(context.options.iosBtnPath).on('click', function(){			
-			jQuery(this).next(context.options.panelPath).toggleClass('jplist-ios-show');
-		});
+		if(context.controls){
+			context.controls.statusesChangedByDeepLinks(params);	
+		}	
 	};
 	
-	// ----------------------- ENTRY POINT -------------------------------
-	
-	/**
-	* on plugin init event
-	* @param {Object} context
-	*/
-	var pluginInit = function(context){
+	// ----------------------- ENTRY POINT / API -------------------------------
 		
-		//if deep links options is enabled
-		if(context.options.deepLinking){
-			
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'Deep linking enabled', '');
-				
-			//try restore panel state from query string
-			setStatusesByDeepLink(context);	
-		}
-		else{	
-			//try set panel controls statuses from storage
-			setStatusesFromStorage(context);
-		}
-	};
-	
-	/**
-	* panel constructor
-	* @param {jQueryObject} $root - jplist jquery element
-	* @param {Object} options - jplist options
-	* @param {jQuery.fn.jplist.app.History} history
-	* @param {Object} observer
-	* @return {Object} - panel + this
-	* @constructor 
-	*/
-	var Init = function($root, options, history, observer){
-	
-		var context = {
-			options: options	//user options	
-			,$root: $root //jplist container
-			,history: history
-			,observer: observer
-				
-			,$sticky: null
-			,paths: null //all paths	
-			,controls: null
-		};	
-		
-		//init controls and paths
-		initControlsAndPaths(context);
-		
-		//find sticky elements
-		context.$sticky = context.$root.find('[data-sticky="true"]');
-		
-		//init sticky
-		if(context.$sticky.length > 0){
-			initSticky(context, context.$sticky);
-		}
-		
-		//init events
-		initEvents(context);
-		
-		return jQuery.extend(this, context);
-	};
-	
 	/**
 	* Panel constructor
 	* @param {jQueryObject} $root - jplist jquery element
@@ -400,12 +292,80 @@
 	* @constructor 
 	*/
 	jQuery.fn.jplist.ui.panel.controllers.PanelController = function($root, options, history, observer){
-	
-		var context = new Init($root, options, history, observer);
+			
+		this.options = options;	//user options	
+		this.$root = $root; //jplist container
+		this.history = history;
+		this.observer = observer;
+				
+		this.$sticky = null;
+		this.paths = null; //all paths	
+		this.controls = null;
 		
-		//properties
-		this.paths = context['paths'];
-		this.history = context['history'];
-		this.controls = context['controls'];
+		//init controls and paths
+		initControlsAndPaths(this);
+		
+		//find sticky elements
+		this.$sticky = $root.find('[data-sticky="true"]');
+		
+		//init sticky
+		if(this.$sticky.length > 0){
+			initSticky(this, this.$sticky);
+		}
+	};
+	
+	/**
+	* try restore panel state from query string
+	*/
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.setStatusesByDeepLink = function(){
+		setStatusesByDeepLink(this);
+	};
+	
+	/**
+	* try set panel controls statuses from storage
+	*/
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.setStatusesFromStorage = function(){
+		setStatusesFromStorage(this);
+	};
+
+	/**
+	* set control statuses
+	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	*/
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.setStatuses = function(statuses){
+		setStatuses(this, statuses);
+	};
+	
+	/**
+	* unknown status / statuses changed
+	* @param {boolean} isDefault - should it render events by their default statuses
+	*/
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.unknownStatusesChanged = function(isDefault){
+		unknownStatusesChanged(this, isDefault);
+	};
+
+	/**
+	* get all statuses and merge them with the given status, then send build statuses event
+	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	*/
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.mergeStatuses = function(status){
+		mergeStatuses(this, status);
+	};
+	
+	/**
+	* statuses are changed by deep links
+	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} newStatuses
+	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	*/
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.statusesChangedByDeepLinks = function(newStatuses, params){
+		statusesChangedByDeepLinks(this, newStatuses, params);
+	};
+	
+	/**
+	* get deep links url according to panel controls
+	* @return {string}
+	*/
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.getDeepLinksURLPerControls = function(){
+		return getDeepLinksURLPerControls(this);
 	};
 })();

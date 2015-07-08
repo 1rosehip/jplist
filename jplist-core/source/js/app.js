@@ -1,4 +1,7 @@
-(function(){
+/**
+* jPList App
+*/
+;(function(){
 	'use strict';	
 		
 	/**
@@ -171,6 +174,74 @@
 		}
 	};
 	
+	/**
+	* init application events
+	* @param {*} context
+	*/
+	var initEvents = function(context){
+				
+		//a given list of statuses is changed
+		//@param {Object} event
+		//@param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+		context.observer.on(context.observer.events.knownStatusesChanged, function(event, statuses){
+			
+			context.controller.renderStatuses(statuses);
+		});	
+		
+		/**
+		* a given statuses list was applied
+		*/
+		context.observer.on(context.observer.events.statusesAppliedToList, function(event, collection, statuses){	
+			
+			//debug info
+			jQuery.fn.jplist.info(context.options, 'panel statusesAppliedToList -> setControlsStatuses: ', statuses);
+		
+			context.panel.setStatuses(statuses);
+			
+			//try change url according to controls statuses		
+			jQuery.fn.jplist.dal.services.DeepLinksService.updateUrlPerControls(context.options, context.panel.getDeepLinksURLPerControls());
+		});
+		
+		/**
+		* one of control statuses was changed
+		*/
+		context.observer.on(context.observer.events.unknownStatusesChanged, function(event, isDefault){
+			
+			//debug info
+			jQuery.fn.jplist.info(context.options, 'panel statusesChanged, isDefault: ', isDefault);
+						
+			context.panel.unknownStatusesChanged(isDefault);
+		});		
+		
+		/**
+		* on ios button click -> toggle next panel
+		*/
+		context.$root.find(context.options.iosBtnPath).on('click', function(){			
+			jQuery(this).next(context.options.panelPath).toggleClass('jplist-ios-show');
+		});
+		
+		/**
+		* one of statuses is changed
+		*/
+		context.observer.on(context.observer.events.statusChanged, function(event, status){	
+			
+			//debug info
+			jQuery.fn.jplist.info(context.options, 'panel statusChanged: ', status);
+			
+			//update last status
+			context.history.addStatus(status);
+			
+			context.panel.mergeStatuses(status);
+		});
+		
+		/**
+		* on 'statuses changed by deep links' event
+		*/
+		context.observer.on(context.observer.events.statusesChangedByDeepLinks, function(event, newStatuses, params){
+			context.panel.statusesChangedByDeepLinks(newStatuses, params);					
+		});	
+	};
+	
 	/** 
 	* jplist constructor 
 	* @param {Object} userOptions - jplist user options
@@ -263,9 +334,26 @@
 		context.panel = new jQuery.fn.jplist.ui.panel.controllers.PanelController($root, context.options, context.history, context.observer);
 		
 		//init data source
-		initDataSource(context);	
-
-		//trigger initial event
+		initDataSource(context);
+		
+		//init application events
+		initEvents(context);
+		
+		//if deep links options is enabled
+		if(context.options.deepLinking){
+			
+			//debug info
+			jQuery.fn.jplist.info(context.options, 'Deep linking enabled', '');
+				
+			//try restore panel state from query string
+			context.panel.setStatusesByDeepLink();	
+		}
+		else{	
+			//try set panel controls statuses from storage
+			context.panel.setStatusesFromStorage();
+		}
+		
+		//send 'init' event
 		context.observer['trigger'](context.observer.events.init, []);
 		
 		return jQuery.extend(this, context); 
@@ -299,67 +387,4 @@
 		}
 	};
 	
-	//PLUGINS AND CONTROLS REGISTRATION ----------------------------
-	jQuery.fn.jplist.controlTypes = {};
-	jQuery.fn.jplist.itemControlTypes = {};
-	jQuery.fn.jplist.settings = {};
-	
-	//NAMESPACES ---------------------------------------------------
-	
-	/**
-	* Application Layer Namespace
-	*/
-	jQuery.fn.jplist.app = jQuery.fn.jplist.app || {};
-	jQuery.fn.jplist.app.services = jQuery.fn.jplist.app.services || {};
-	jQuery.fn.jplist.app.services.DTOMapperService = jQuery.fn.jplist.app.services.DTOMapperService || {};
-	jQuery.fn.jplist.app.dto = jQuery.fn.jplist.app.dto || {};
-	jQuery.fn.jplist.app.events = jQuery.fn.jplist.app.events || {};
-	
-	/**
-	* Domain Layer Namespace
-	* @type {Object}
-	* @namespace
-	*/
-	jQuery.fn.jplist.domain = jQuery.fn.jplist.domain || {};
-	
-	jQuery.fn.jplist.domain.dom = jQuery.fn.jplist.domain.dom || {};
-	jQuery.fn.jplist.domain.dom.models = jQuery.fn.jplist.domain.dom.models || {};
-	jQuery.fn.jplist.domain.dom.collections = jQuery.fn.jplist.domain.dom.collections || {};
-	jQuery.fn.jplist.domain.dom.services = jQuery.fn.jplist.domain.dom.services || {};
-	jQuery.fn.jplist.domain.dom.services.FiltersService = jQuery.fn.jplist.domain.dom.services.FiltersService || {};
-	jQuery.fn.jplist.domain.dom.services.SortService = jQuery.fn.jplist.domain.dom.services.SortService || {};
-	jQuery.fn.jplist.domain.dom.services.pagination = jQuery.fn.jplist.domain.dom.services.pagination || {};
-	
-	jQuery.fn.jplist.domain.server = jQuery.fn.jplist.domain.server || {};
-	jQuery.fn.jplist.domain.server.models = jQuery.fn.jplist.domain.server.models || {};
-	
-	jQuery.fn.jplist.domain.deeplinks = jQuery.fn.jplist.domain.deeplinks || {};
-	jQuery.fn.jplist.domain.deeplinks.services = jQuery.fn.jplist.domain.deeplinks.services || {};
-	
-	/**
-	* Infrastructure Layer Namespace
-	* @type {Object}
-	* @namespace
-	*/
-	jQuery.fn.jplist.dal = jQuery.fn.jplist.dal || {};
-	jQuery.fn.jplist.dal.services = jQuery.fn.jplist.dal.services || {};
-	
-	/**
-	* Presentation Layer Namespace
-	* @type {Object}
-	* @namespace
-	*/
-	jQuery.fn.jplist.ui = jQuery.fn.jplist.ui || {};	
-	jQuery.fn.jplist.ui.list = jQuery.fn.jplist.ui.list || {};
-	jQuery.fn.jplist.ui.list.models = jQuery.fn.jplist.ui.list.models || {};
-	jQuery.fn.jplist.ui.list.controllers = jQuery.fn.jplist.ui.list.controllers || {};
-	jQuery.fn.jplist.ui.list.collections = jQuery.fn.jplist.ui.list.collections || {};
-	jQuery.fn.jplist.ui.list.views = jQuery.fn.jplist.ui.list.views || {};	
-	jQuery.fn.jplist.ui.controls = jQuery.fn.jplist.ui.controls || {};
-	jQuery.fn.jplist.ui.itemControls = jQuery.fn.jplist.ui.itemControls || {};
-	jQuery.fn.jplist.ui.statuses = jQuery.fn.jplist.ui.statuses || {};
-	jQuery.fn.jplist.ui.panel = jQuery.fn.jplist.ui.panel || {};
-	jQuery.fn.jplist.ui.panel.controllers = jQuery.fn.jplist.ui.panel.controllers || {};
-	jQuery.fn.jplist.ui.panel.collections = jQuery.fn.jplist.ui.panel.collections || {};
-			
 })();

@@ -205,7 +205,6 @@
 			}
 			
 			//send status event		
-			context.history.addStatus(status);			
 			context.observer.trigger(context.observer.events.statusChanged, [status]);
 		});
 	};

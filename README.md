@@ -18,7 +18,7 @@
 - Solid documentation
 
 ### Data Sources
-- [PHP + MySQL] (https://github.com/no81no/jplist/tree/master/jplist-data-sources/php-mysql)
+- [PHP + MySQL] (https://github.com/no81no/jplist-php-mysql)
 - [ASP.NET + Sql Server](https://github.com/no81no/jplist-asp-net)
 - [WordPress plugin](https://github.com/no81no/jplist-github-wordpress-plugin)
 - [Groovy, Grails and MySQL](https://github.com/no81no/jplist-grails-groovy)

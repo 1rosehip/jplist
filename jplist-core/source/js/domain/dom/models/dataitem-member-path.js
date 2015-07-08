@@ -1,4 +1,7 @@
-(function(){
+/**
+* DataItem Member Path Model
+*/
+;(function(){
 	'use strict';		
 		
 	/**

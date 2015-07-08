@@ -1,4 +1,8 @@
-(function(){
+/**
+* control factory
+* \core\js\ui\panel\control-factory.js
+*/
+;(function(){
 	'use strict';		
 	
 	/**
@@ -104,9 +108,10 @@
 	* create control
 	* @param {Object} context
 	* @param {jQueryObject} $control
+	* @param {jQuery.fn.jplist.ui.panel.collections.ControlsCollection} controlsCollection
 	* @return {Object}
 	*/
-	var create = function(context, $control){
+	var create = function(context, $control, controlsCollection){
 		
 		var control = null
 			,properties;
@@ -121,65 +126,119 @@
 			,observer: context.observer
 			,options: context.options
 			,$root: context.$root
+			,controlsCollection: controlsCollection
 		});
 				
 		if(properties.controlTypeClass && jQuery.isFunction(properties.controlTypeClass)){
 			
 			//init control
 			control = new properties.controlTypeClass(properties);
-			
-			//interface
-			/*
-			...prototype.getStatus = function(){};
-			...prototype.getDeepLink = function(){};
-			...prototype.getStatusByDeepLink = function(){};
-			...prototype.setByDeepLink = function(){};
-			...prototype.getPaths = function(){};
-			...prototype.setStatus = function(){};
-			*/
 		}
 
 		return control;		
 	};
 	
-	/** 
+	/**
 	* Control Factory
-	* @constructor
 	* @param {Object} options
 	* @param {Object} observer
 	* @param {jQuery.fn.jplist.app.History} history
 	* @param {jQueryObject} $root - jplist jquery element
+	* @constructor
 	*/
-	var Init = function(options, observer, history, $root){
-		
-		var context = {
-			options: options
-			,observer: observer
-			,history: history
-			,$root: $root
-		};
-				
-		return jQuery.extend(this, context);
+	jQuery.fn.jplist.ui.panel.ControlFactory = function(options, observer, history, $root){	
+	
+		this.options = options;
+		this.observer = observer;
+		this.history = history;
+		this.$root = $root;
 	};
 	
 	/**
 	* create control
 	* @param {jQueryObject} $control
+	* @param {jQuery.fn.jplist.ui.panel.collections.ControlsCollection} controlsCollection
 	*/
-	Init.prototype.create = function($control){
-		return create(this, $control);
+	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.create = function($control, controlsCollection){
+		return create(this, $control, controlsCollection);
 	};
 	
 	/**
-	* Control Factory
-	* @param {Object} options
-	* @param {Object} observer
-	* @param {jQuery.fn.jplist.app.History} history
-	* @param {jQueryObject} $root - jplist jquery element
-	* @constructor
+	* Get control status
+	* @interface
+	* @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
+	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
 	*/
-	jQuery.fn.jplist.ui.panel.ControlFactory = function(options, observer, history, $root){		
-		return new Init(options, observer, history, $root);		
+	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.getStatus = function(isDefault){
+		return null;
 	};
+	
+	/**
+	* Set control status
+	* @interface
+	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {boolean} restoredFromStorage - is status restored from storage
+	*/
+	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.setStatus = function(status, restoredFromStorage){};
+	
+	/**
+	* Get deep link
+	* @interface
+	* @return {string} deep link
+	*/
+	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.getDeepLink = function(){
+		return '';
+	};
+	
+	/**
+	* get status by deep link
+	* @interface
+	* @param {string} propName - deep link property name
+	* @param {string} propValue - deep link property value
+	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	*/
+	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.getStatusByDeepLink = function(propName, propValue){
+		return null;
+	};
+	
+	/**
+	* Get control paths
+	* @interface
+	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths
+	*/
+	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.getPaths = function(paths){
+		return [];
+	};
+	
+	/**
+	* set statuses by deep links
+	* @interface
+	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	*/
+	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.setByDeepLink = function(params){};
 })();
+
+/*
+	$control
+	$root
+	
+	action
+	name
+	type
+	
+	controlOptions	- control properties
+	controlType	- control properties
+	
+	inAnimation
+	inDeepLinking
+	inStorage
+	isAnimateToTop
+	
+	observer
+	options - user options	
+	paths - empty ??
+	history	
+	
+	params - control specific properties
+*/
 

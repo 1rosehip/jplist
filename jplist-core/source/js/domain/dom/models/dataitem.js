@@ -1,4 +1,7 @@
-(function(){
+/**
+* data item - item in list that should be sorted, filtered etc.
+*/
+;(function(){
 	'use strict';		
 			
 	/**
@@ -60,42 +63,7 @@
 		
 		return pathitems;
 	};
-	
-	/**
-	* dataitem constructor
-	* @param {jQueryObject} $item - item to add to data array
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
-	* @param {number} index
-	* @return {Object} - dataitem + this
-	* @constructor 
-	*/
-	var Init = function($item, paths, index){
-	
-		var context = {
-			html: null
-			,pathitems: []
-			,$item: $item
-			,index: index
-		};	
-				
-		//init vars
-		context.html = jQuery.fn.jplist.domain.dom.services.HelperService.getOuterHtml($item);
-		
-		//init pathitems
-		context.pathitems = getPathitems(context, paths);
-		
-		return jQuery.extend(this, context);
-	};
-	
-	/**
-	* Find pathitem by path (in the pathitems array)
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - pathitem to find
-	* @return {jQuery.fn.jplist.domain.dom.models.DataItemMemberModel}	
-	*/
-	Init.prototype.findPathitem = function(path){
-		return findPathitem(this, path);
-	};
-	
+
 	/**
 	* data item - item in list that should be sorted, filtered etc.
 	* @constructor
@@ -106,19 +74,26 @@
 	*/
 	jQuery.fn.jplist.domain.dom.models.DataItemModel = function($item, paths, index){
 		
-		var context;
+		this.pathitems = [];
+		this.$item = $item;
+		this.jqElement = $item;
+		this.index = index;
+				
+		//init vars
+		this.html = jQuery.fn.jplist.domain.dom.services.HelperService.getOuterHtml($item);
 		
-		//call constructor
-		context = new Init($item, paths, index);
-		
-		//properties
-		this.html = context['html'];
-		this.jqElement = context['$item'];
-		this.pathitems = context['pathitems'];
-		this.index = context['index'];
-		
-		//methods
-		this.findPathitem = context['findPathitem'];
+		//init pathitems
+		this.pathitems = getPathitems(this, paths);
 	};
+		
+	/**
+	* Find pathitem by path (in the pathitems array)
+	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - pathitem to find
+	* @return {jQuery.fn.jplist.domain.dom.models.DataItemMemberModel}	
+	*/
+	jQuery.fn.jplist.domain.dom.models.DataItemModel.prototype.findPathitem = function(path){
+		return findPathitem(this, path);
+	};
+	
 })();
 

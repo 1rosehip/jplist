@@ -180,8 +180,7 @@
 				}
 			}
 			
-			//send status event			
-			context.history.addStatus(status);
+			//send status event
 			context.observer.trigger(context.observer.events.statusChanged, [status]);
 		});
 	};

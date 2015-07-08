@@ -1,0 +1,59 @@
+/**
+* import files
+*/
+@import "../../../themes/core/helpers.less";
+@import "../../../themes/core/vars.less";
+@import "../../../themes/core/common.less";
+
+/**
+* datepicker
+*/
+.datepicker-mixin(){
+
+    .jplist-date-picker-range{
+        float: left;
+        margin-top: 10px;
+		
+       .gap{
+            float: left;
+            display: block;
+            margin-right: 5px;
+       }
+    }
+
+    .date-picker{
+        float: left;
+        border: 1px solid @light-grey5;
+        margin-right: 5px;
+        width: 100px;
+    }
+}
+
+/**
+* range slider
+*/
+.range-slider-mixin(){
+
+    .jplist-range-slider{
+        float: left;
+        margin-top: 15px;
+
+        .value{
+            float: left;
+            margin: 0 15px;
+            font-size: 12px;
+        }
+
+        .ui-slider{
+            float: left;
+            width: 130px;
+        }
+    }
+
+    .ui-slider{
+        margin-top: 5px;
+    }
+}
+
+.datepicker-mixin();
+.range-slider-mixin();

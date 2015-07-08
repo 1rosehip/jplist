@@ -12,10 +12,14 @@
 		//init empty control onchange
 		context.$control.off('change').on('change', function(){
 		
+			var status;
+			
 			if(jQuery.trim(jQuery(this).val()) === ''){
 			
-				context.history.addStatus(getStatus(context, false));
-				context.observer.trigger(context.observer.events.statusChanged, [getStatus(context, false)]);
+				status = getStatus(context, false);
+				
+				context.history.addStatus(status);
+				context.observer.trigger(context.observer.events.statusChanged, [status]);
 			}
 		});
 		

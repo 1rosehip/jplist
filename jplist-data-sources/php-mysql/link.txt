@@ -1,0 +1,1 @@
+jPList ASP.NET with repository moved to https://github.com/no81no/jplist-asp-net

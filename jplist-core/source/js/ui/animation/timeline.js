@@ -70,52 +70,7 @@
 			stop(context);			
 		}
 	};
-		
-	/**
-	* timeline constructor
-	* @constructor
-	* @param {jQueryObject} $scene
-	* @param {Object} options - user options
-	* @param {Object} observer
-	* @return {Object}
-	*/
-	var Init = function($scene, options, observer){
-		
-		var context = {
-			$scene: $scene
-			,options: options
-			,observer: observer
-			
-			,start: null //the time of animation start, start = new Date
-			,progress: 0 // The fraction of animation time that has already passed, calculated on every frame as timePassed/duration. Gradually moves from 0 to 1. For example, value progress = 0.5 means that half of duration time is out.
-			,delay: null //time between frames (in ms, 1/1000 of second)
-			
-			,handler: null
-		};		
-		
-		//init avrs
-		context.delay = 1000/context.options.fps;
-		
-		return jQuery.extend(this, context);
-	};
 	
-	//API:
-	
-	/**
-	* Play timeline
-	* @param {number} duration - the full time the animation should take, in milliseconds
-	*/
-	Init.prototype.play = function(duration){
-		play(this, duration);
-	};	
-	
-	/**
-	* Stop timeline
-	*/
-	Init.prototype.stop = function(){
-		stop(this);
-	};	
-		
 	/**
 	* Timeline
 	* @constructor
@@ -124,7 +79,35 @@
 	* @param {Object} observer
 	*/
 	jQuery.fn.jplist.animation.Timeline = function($scene, options, observer){		
-		return new Init($scene, options, observer);
+		
+		this.$scene = $scene;
+		this.options = options;
+		this.observer = observer;
+		
+		this.start = null; //the time of animation start, start = new Date
+		this.progress = 0; // The fraction of animation time that has already passed, calculated on every frame as timePassed/duration. Gradually moves from 0 to 1. For example, value progress = 0.5 means that half of duration time is out.
+		this.delay = null; //time between frames (in ms, 1/1000 of second)
+		
+		this.handler = null;		
+		
+		//init avrs
+		this.delay = 1000/this.options.fps;
 	};
+	
+	
+	/**
+	* Play timeline
+	* @param {number} duration - the full time the animation should take, in milliseconds
+	*/
+	jQuery.fn.jplist.animation.Timeline.prototype.play = function(duration){
+		play(this, duration);
+	};	
+	
+	/**
+	* Stop timeline
+	*/
+	jQuery.fn.jplist.animation.Timeline.prototype.stop = function(){
+		stop(this);
+	};		
 	
 })();

@@ -84,22 +84,10 @@
 	* @param {Object} context - jplist controller 'this' object
 	*/
 	var initEvents = function(context){
-		
-		/**
-		* on known statuses change
-		* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-		*/
-		context.observer.on(context.observer.events.knownStatusesChanged, function(event, statuses){
-						
-			//hide no results section
-			context.$noResults.addClass('jplist-hidden');
-		});
-		
-		/**
-		* on model changed
-		* @param {jQuery.fn.jplist.domain.server.models.DataItemModel|null} dataItem
-		* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>|null} statuses
-		*/
+				
+		//on model changed
+		//@param {jQuery.fn.jplist.domain.server.models.DataItemModel|null} dataItem
+		//@param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>|null} statuses
 		context.scopeObserver.on(context.scopeObserver.events.modelChanged, function(e, dataItem, statuses){
 			
 			//hide preloader -> rebuild html
@@ -120,51 +108,32 @@
 	* @constructor 
 	* @param {jQueryObject} $root - jplist jquery element
 	* @param {Object} options - jplist options
-	* @param {Object} observer - common observer
-	* @param {Object} scopeObserver - list observer
-	* @param {jQuery.fn.jplist.ui.list.models.DataItemModel} model
-	* @param {jQuery.fn.jplist.app.History} history	
-	* @return {Object}	
-	*/
-	var Init = function($root, options, observer, scopeObserver, model, history){
-	
-		var context = {
-			options: options	//user options	
-			,$root: $root //jplist container
-			,observer: observer
-			,scopeObserver: scopeObserver
-			,model: model
-			,history: history
-			
-			,$itemsBox: $root.find(options.itemsBox).eq(0)
-			,$noResults: $root.find(options.noResults)
-			,$preloader: null
-			,timeline: null
-		};
-		
-		if(context.options.effect){
-			
-			//init timeline
-			context.timeline = new jQuery.fn.jplist.animation.Timeline(context.$root, context.options, context.observer);
-		}
-		
-		//init events
-		initEvents(context);
-		
-		return jQuery.extend(this, context);
-	};
-	
-	/**
-	* Server HTML List View
-	* @constructor 
-	* @param {jQueryObject} $root - jplist jquery element
-	* @param {Object} options - jplist options
 	* @param {Object} observer
 	* @param {Object} scopeObserver	
 	* @param {jQuery.fn.jplist.ui.list.models.DataItemModel} model
 	* @param {jQuery.fn.jplist.app.History} history	
 	*/
-	jQuery.fn.jplist.ui.list.views.ServerView = function($root, options, observer, scopeObserver, model, history){	
-		return new Init($root, options, observer, scopeObserver, model, history);
+	jQuery.fn.jplist.ui.list.views.ServerView = function($root, options, observer, scopeObserver, model, history){
+	
+		this.options = options;	//user options	
+		this.$root = $root; //jplist container
+		this.observer = observer;
+		this.scopeObserver = scopeObserver;
+		this.model = model;
+		this.history = history;
+		
+		this.$itemsBox = $root.find(options.itemsBox).eq(0);
+		this.$noResults = $root.find(options.noResults);
+		this.$preloader = null;
+		this.timeline = null;
+		
+		if(this.options.effect){
+			
+			//init timeline
+			this.timeline = new jQuery.fn.jplist.animation.Timeline(this.$root, this.options, this.observer);
+		}
+		
+		//init events
+		initEvents(this);
 	};
 })();

@@ -1,4 +1,7 @@
-(function() {
+/**
+* DataItem Member Paths Collection
+*/
+;(function() {
 	'use strict';
 	
 	/**
@@ -26,34 +29,7 @@
 		
 		return isInList;
 	};
-	
-	/**
-	* Is 2 paths are equal
-	* @param {Object} context
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path1
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path2
-	* @param {boolean} pathOnly - compare only by data-path
-	* @return {boolean}
-	
-	var isPathsEqual = function(context, path1, path2, pathOnly){
-	
-		var isEqual = false;
 		
-		if(pathOnly){
-			if(path1.jqPath === path2.jqPath){				
-				isEqual = true;
-			}
-		}
-		else{
-			if((path1.jqPath === path2.jqPath) && (path1.dataType === path2.dataType)){				
-				isEqual = true;
-			}
-		}		
-		
-		return isEqual;
-	};
-	*/
-	
 	/**
 	* add path (only unique)
 	* @param {Object} context
@@ -84,25 +60,18 @@
 	* @constructor 
 	* @param {Object} options - jplist user options	
 	* @param {Object} observer
-	* @return {Object}
 	*/
-	var Init = function(options, observer){
-	
-		var context = {			
-            options: options
-			,observer: observer
-			
-			,paths: []
-		};
-		
-		return jQuery.extend(this, context);
+	jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection = function(options, observer){
+		this.options = options;
+		this.observer = observer	;		
+		this.paths = [];
 	};
 	
 	/**
 	* add path (only unique)
 	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path
 	*/
-	Init.prototype.add = function(path){
+	jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection.prototype.add = function(path){
 		add(this, path);
 	};
 	
@@ -110,7 +79,7 @@
 	* add range of paths (only unique)
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths
 	*/
-	Init.prototype.addRange = function(paths){
+	jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection.prototype.addRange = function(paths){
 		addRange(this, paths);
 	};
 	
@@ -119,18 +88,8 @@
 	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path
 	* @return {boolean}
 	*/
-	Init.prototype.isPathInList = function(path){
+	jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection.prototype.isPathInList = function(path){
 		return isPathInList(this, path);
-	};
-	
-	/** 
-	* DataItem Member Paths Collection
-	* @constructor 
-	* @param {Object} options - jplist user options	
-	* @param {Object} observer
-	*/
-	jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection = function(options, observer){
-		return new Init(options, observer);
 	};
 	
 })();

@@ -1,0 +1,38 @@
+/**
+* import files
+*/
+@import "../../../themes/core/helpers.less";
+@import "../../../themes/core/vars.less";
+@import "../../../themes/core/common.less";
+
+/**
+* jplist textbox control
+*/
+.jplist-textbox-control-mixin(){
+
+	.jplist-panel{	
+		.text-filter-box{
+			height: 30px;			
+			float: left;
+			margin: 10px 10px 0 0;
+			
+			.jplist-icon{
+				background: @light-blue1;
+			}
+			
+			.jplist-label{
+				margin: 0;
+				border-right: 0;
+				background: @light-grey;
+			}
+			
+			button{
+				margin: 0;
+				border-left: 0;
+				padding: 0 10px;
+			}
+		}
+	}
+}
+
+.jplist-textbox-control-mixin();

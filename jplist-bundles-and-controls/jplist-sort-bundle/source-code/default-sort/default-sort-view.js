@@ -1,8 +1,3 @@
-/**
-* jPList - jQuery Data Grid Controls - http://jplist.com 
-* Free Sort Bundle
-* Copyright 2014 jPList Software. All rights reserved.
-*/
 (function(){//+
 	'use strict';		
 

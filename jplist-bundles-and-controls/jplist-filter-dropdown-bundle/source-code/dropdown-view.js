@@ -1,4 +1,4 @@
-(function(){
+;(function(){
 	'use strict';		
 			
 	/**
@@ -173,10 +173,10 @@
 		
 		if(status && status.data){
 			
-			$btn = context.$control.find(':has([data-path="' + status.data.path + '"])');
+			$btn = context.$control.find('[data-path="' + status.data.path + '"]');
 			
 			if($btn && $btn.length > 0){
-				updateSelected(context, $btn);
+				updateSelected(context, $btn.parent('li'));
 			}
 		}
 	};
@@ -218,8 +218,8 @@
 		/**
 		* on li click
 		*/
-		context.$control.find('li').off().on('click', function(){
-		
+		context.$control.find('li').off('click').on('click', function(){
+			
 			var status
 				,dataPath
 				,dataNumber
@@ -232,7 +232,6 @@
 			status = getStatus(context, false);
 			
 			//send status event		
-			context.history.addStatus(status);			
 			context.observer.trigger(context.observer.events.statusChanged, [status]);
 		});
 	};
@@ -271,7 +270,7 @@
 	};
 	
 	/**
-	* Get Paths by Deep Link
+	* Get Status by Deep Link
 	* @param {string} propName - deep link property name
 	* @param {string} propValue - deep link property value
 	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
@@ -296,6 +295,14 @@
 	Init.prototype.setStatus = function(status, restoredFromStorage){
 		setStatus(this, status, restoredFromStorage);
 	};
+		
+	/**
+	* set statuses by deep links
+	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	*/
+	Init.prototype.setByDeepLink = function(params){
+		setByDeepLink(this, params);
+	};
 	
 	/** 
 	* Filter Dropdown Control
@@ -305,15 +312,7 @@
 	jQuery.fn.jplist.ui.controls.FilterDropdown = function(context){
 		return new Init(context);
 	};	
-	
-	/**
-	* set statuses by deep links
-	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
-	*/
-	Init.prototype.setByDeepLink = function(params){
-		setByDeepLink(this, params);
-	};
-	
+		
 	/**
 	* static control registration
 	*/

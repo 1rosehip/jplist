@@ -1,0 +1,77 @@
+/**
+* import files
+*/
+@import "../../../themes/core/helpers.less";
+@import "../../../themes/core/vars.less";
+@import "../../../themes/core/common.less";
+
+/**
+* list/grid view control
+*/
+.list-grid-view-mixin(){
+	
+	.jplist-panel{
+	
+		.jplist-views{
+			float: left;
+
+			.jplist-view{
+				.jplist-control-mixin();
+				cursor: pointer;
+				width: 32px;
+			}
+			
+			.jplist-list-view{
+				background: url('../img/icons/list-btn.png') no-repeat 50% 50%;
+			}
+
+			.jplist-grid-view{
+				background: url('../img/icons/grid-btn-disabled.png') no-repeat 50% 50%;
+			}
+			
+			.jplist-thumbs-view{
+				background: url('../img/icons/thumbs-btn-disabled.png') no-repeat 50% 50%;
+			}
+		}		
+	}
+	
+	.jplist-grid-view{
+		.jplist-panel{
+			.jplist-views{
+			   
+			    .jplist-list-view{
+					background: url('../img/icons/list-btn-disabled.png') no-repeat 50% 50%;
+			    }
+
+			    .jplist-grid-view{
+					background: url('../img/icons/grid-btn.png') no-repeat 50% 50%;
+			    }
+				
+				.jplist-thumbs-view{
+					background: url('../img/icons/thumbs-btn-disabled.png') no-repeat 50% 50%;
+				}
+		   }
+	   }
+	}
+	
+	.jplist-thumbs-view{
+		.jplist-panel{
+			.jplist-views{
+			   
+			    .jplist-list-view{
+					background: url('../img/icons/list-btn-disabled.png') no-repeat 50% 50%;
+			    }
+
+			    .jplist-grid-view{
+					background: url('../img/icons/grid-btn-disabled.png') no-repeat 50% 50%;
+			    }
+				
+				.jplist-thumbs-view{
+					background: url('../img/icons/thumbs-btn.png') no-repeat 50% 50%;
+				}
+		   }
+	   }
+	}
+}
+
+.list-grid-view-mixin();

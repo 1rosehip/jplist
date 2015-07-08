@@ -15,8 +15,8 @@
 			,cpage
 			,itemsPerPage
 			,lastStatus
-			,isJumpToStart = false;
-					
+			,isJumpToStart = false;			
+		
 		//get active button  
 		$button = context.$control.find('button[data-active]').eq(0);
 		
@@ -87,7 +87,7 @@
 			status = getStatus(context, isDefault);
 			
 			if(status.data){
-				
+			
 				if(jQuery.isNumeric(status.data.currentPage)){
 					
 					//init deep link
@@ -116,7 +116,7 @@
 		
 		var isDefault = true
 			,status = null;
-		
+			
 		if(context.inDeepLinking){
 		
 			if(propName !== 'currentPage'){
@@ -143,7 +143,7 @@
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
-					
+				
 		if(status.data && status.data.paging){
 					
 			//build pager
@@ -163,19 +163,25 @@
 		context.$control.on('click', 'button', function(){
 			
 			var currentPage
-				,status = null;
+				,status = null
+				,$btn = jQuery(this)
+				,$paginationControls;
 			
 			//get current page number			
-			currentPage = Number(jQuery(this).attr('data-number')) || 0; 
+			currentPage = Number($btn.attr('data-number')) || 0; 
 			
 			//get status
 			status = getStatus(context, false);
 			
 			//update current page
 			status.data.currentPage = currentPage;
-			
-			//update history
-			context.history.addStatus(status);
+						
+			//update active class -> important for deep links
+			$paginationControls = context.$root.find('[data-control-type="pagination"]');
+			$paginationControls.find('button').removeAttr('data-active');
+			$paginationControls.find('button[data-number="' + currentPage + '"]').each(function(){
+				jQuery(this).attr('data-active', true)
+			});
 			
 			//send status event	
 			context.observer.trigger(context.observer.events.statusChanged, [status]);
@@ -188,12 +194,11 @@
 	* @param {Object} context
 	*/
 	var Init = function(context){
-			
+		
 		context.params = {
 			
 			view: new jQuery.fn.jplist.ui.controls.PaginationView(context.$control, context.controlOptions)
 		};
-		
 		
 		//init events
 		initEvents(context);
@@ -236,7 +241,7 @@
 	Init.prototype.setStatus = function(status, restoredFromStorage){
 		setStatus(this, status, restoredFromStorage);
 	};
-	
+			
 	/** 
 	* Pagination control (for example, contains pagination bullets)
 	* @constructor
@@ -246,5 +251,12 @@
 		return new Init(context);
 	};	
 		
+	/**
+	* static control registration
+	*/
+	jQuery.fn.jplist.controlTypes['pagination'] = {
+		className: 'Pagination'
+		,options: {}
+	};
 })();
 
