@@ -19,5 +19,8 @@
         "filtering",
         "search"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "ignore": [
+        "jplist-data-sources"
+    ]
 }
