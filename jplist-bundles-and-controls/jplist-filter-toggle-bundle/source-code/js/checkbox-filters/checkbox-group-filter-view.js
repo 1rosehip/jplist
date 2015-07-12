@@ -234,6 +234,7 @@
 			}
 			
             $cb.data('selected-on-start', selected);
+			$cb.data('mode', $cb.attr('data-mode') || 'contains');
 		});
 				
 		//init events

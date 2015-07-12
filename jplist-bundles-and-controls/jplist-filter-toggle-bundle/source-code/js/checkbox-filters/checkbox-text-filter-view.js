@@ -217,7 +217,7 @@
 			,dataLogic: context.$control.attr('data-logic') || 'or'
 			,ignore: ''
 		};	
-		
+				
 		if(context.controlOptions && context.controlOptions.ignore){
 
 			//get ignore characters

@@ -26,7 +26,7 @@
 		}		
 				
 		//create status related data object
-		data = new jQuery.fn.jplist.ui.controls.TextboxDTO(dataPath, value, context.params.ignore);
+		data = new jQuery.fn.jplist.ui.controls.TextboxDTO(dataPath, value, context.params.ignore, context.params.mode);
 				
 		//create status object
 		status = new jQuery.fn.jplist.app.dto.StatusDTO(
@@ -176,6 +176,7 @@
 			
 			path: context.$control.attr('data-path')
 			,dataButton: context.$control.attr('data-button')
+			,mode: context.$control.attr('data-mode') || 'contains'
 			,ignore: context.$control.attr('data-ignore') || '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+	
 			,eventName: context.$control.attr('data-event-name') || 'keyup'
 			,$button: null

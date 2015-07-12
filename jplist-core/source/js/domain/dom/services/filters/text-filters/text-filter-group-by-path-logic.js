@@ -1,4 +1,4 @@
-(function(){
+;(function(){
 	'use strict';	
 	
 	/**
@@ -9,9 +9,10 @@
     * @param {string} logic - 'or' / 'and'
     * @param {string} dataPath - data-path attribute
     * @param {string} ignoreRegex
+	* @param {string} mode: startsWith, endsWith, contains, advanced
 	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
 	*/
-	jQuery.fn.jplist.domain.dom.services.FiltersService.textGroupFilter = function(textGroup, logic, dataPath, ignoreRegex, dataview){
+	jQuery.fn.jplist.domain.dom.services.FiltersService.textGroupFilter = function(textGroup, logic, dataPath, ignoreRegex, dataview, mode){
 
         var txtValue
 			,dataitem
@@ -106,6 +107,5 @@
 
 		return resultDataview;
     };
-
 	
 })();	

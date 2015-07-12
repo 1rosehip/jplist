@@ -37,6 +37,7 @@
 				selected: selected
 				,text: $button.data('dataText')
 				,path: $button.data('dataPath')
+				,mode: $button.data('dataMode') || 'contains'
 			});
 		});			
 		
@@ -268,6 +269,7 @@
             $button.data('selected', selected);
 			$button.data('dataPath', $button.attr('data-path'));
 			$button.data('dataText', $button.attr('data-text'));
+			$button.data('dataMode', $button.attr('data-mode') || 'contains');
 		});
 		
 		//init events

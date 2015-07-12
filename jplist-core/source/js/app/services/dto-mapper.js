@@ -27,6 +27,7 @@
 			,path
 			,dataview
 			,status.data.ignore
+			,status.data.mode
 		);
 	};
 	
@@ -152,6 +153,7 @@
 			,status.data['path']
 			,status.data['ignoreRegex']
 			,dataview
+			,status.data['mode']
 		);
 	};
 
@@ -167,6 +169,7 @@
 			status.data['textAndPathsGroup']
 			,status.data['ignoreRegex']
 			,dataview
+			,status.data['mode']
 		);
 	};
 

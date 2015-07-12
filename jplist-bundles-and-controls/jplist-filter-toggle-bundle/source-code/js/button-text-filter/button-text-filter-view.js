@@ -37,7 +37,13 @@
 		}
 		
 		//create status related data object
-		data = new jQuery.fn.jplist.ui.controls.ButtonTextFilterDTO(context.params.dataPath, value, ignore, selected);
+		data = new jQuery.fn.jplist.ui.controls.ButtonTextFilterDTO(
+			context.params.dataPath
+			,value
+			,ignore
+			,selected
+			,context.params.dataMode || 'contains'
+		);
 		
 		//init status
 		status = new jQuery.fn.jplist.app.dto.StatusDTO(
@@ -168,7 +174,6 @@
 			
 			//trigger force build statuses event
 			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
-			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});
 	};
 	
@@ -183,6 +188,7 @@
 			selected: context.$control.attr('data-selected') === 'true'
 			,dataPath: context.$control.attr('data-path')
 			,dataText: context.$control.attr('data-text')
+			,dataMode: context.$control.attr('data-mode')
 		};	
 
 		//if deep links options is enabled -> selected is declared in its params
