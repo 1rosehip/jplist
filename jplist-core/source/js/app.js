@@ -5,18 +5,18 @@
 	'use strict';	
 		
 	/**
-	* API: add data item to the list
+	* API: add data item(s) to the list
 	* @param {*} context
 	* @param {Object} commandData
 	*/
 	var add = function(context, commandData){
 		
-		var index;
+		var index
+			,items;
 		
 		if(context && 
 			context.controller && 
-			context.controller.collection &&
-			commandData.$item){		
+			context.controller.collection){	
 
 			index = context.controller.collection.dataitems.length;
 			
@@ -25,13 +25,38 @@
 				
 				index = Number(commandData.index);
 			}
+
+			//add single item
+			if(commandData.$item){
 			
-			//add data item to the collection as last item
-			context.controller.collection.addDataItem(
-				commandData.$item
-				,context.controller.collection.paths
-				,index
-			);
+				//add data item to the collection 
+				context.controller.collection.addDataItem(
+					commandData.$item
+					,context.controller.collection.paths
+					,index
+				);
+			}
+			
+			//add range of items
+			if(commandData.$items){
+				
+				items = commandData.$items;
+				
+				if(jQuery.isArray(commandData.$items)){
+					
+					//array of jquery elements -> jquery object
+					items = jQuery(commandData.$items).map(function(){
+						return this.toArray(); 
+					});
+				}
+				
+				//add range of data items to the collection
+				context.controller.collection.addDataItems(				
+					items
+					,context.controller.collection.paths
+					,index
+				);
+			}
 			
 			//redraw dataview with the given statuses
 			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
@@ -45,18 +70,41 @@
 	*/
 	var del = function(context, commandData){
 		
+		var items;
+		
 		if(context && 
 			context.controller && 
-			context.controller.collection &&
-			commandData.$item){			
+			context.controller.collection){			
 			
-			//add data item to the collection
-			context.controller.collection.delDataitem(
-				commandData.$item
-			);
+			//del single item
+			if(commandData.$item){
+				
+				//del data item from the collection
+				context.controller.collection.delDataitem(commandData.$item);
+				
+				//remove the item
+				commandData.$item.remove();
+			}
 			
-			//remove the item
-			commandData.$item.remove();
+			//del range of items
+			if(commandData.$items){
+				
+				items = commandData.$items;
+				
+				if(jQuery.isArray(commandData.$items)){
+					
+					//array of jquery elements -> jquery object
+					items = jQuery(commandData.$items).map(function(){
+						return this.toArray(); 
+					});
+				}
+				
+				//dek range of items from the collection
+				context.controller.collection.delDataitems(items);
+				
+				//remove the items
+				items.remove();
+			}
 			
 			//redraw dataview with the given statuses
 			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);

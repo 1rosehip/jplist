@@ -120,26 +120,33 @@
 	* @return {string} - outer html
 	*/
 	jQuery.fn.jplist.domain.dom.services.HelperService.getOuterHtml = function(el){
-	
-		var html = '';
-		var attr = el[0].attributes;
-		var inner = el.html();
-		var name = el[0].tagName.toString().toLowerCase();
 		
-		html += '<' + name;
+		var html = ''
+			,attr
+			,inner
+			,name;
 		
-		for(var i=0; i<attr.length; i++){
+		if(el && el[0] && el[0].tagName){
 		
-			if(attr[i].nodeValue){
+			attr = el[0].attributes;
+			inner = el.html();
+			name = el[0].tagName.toString().toLowerCase();
 			
-				html += ' ' + attr[i].nodeName + '=';
-				html += '"' + attr[i].nodeValue + '"';
+			html += '<' + name;
+			
+			for(var i=0; i<attr.length; i++){
+			
+				if(attr[i].nodeValue){
+				
+					html += ' ' + attr[i].nodeName + '=';
+					html += '"' + attr[i].nodeValue + '"';
+				}
 			}
+			
+			html += '>';
+			html += inner;
+			html += '</' + name + '>';
 		}
-		
-		html += '>';
-		html += inner;
-		html += '</' + name + '>';
 		
 		return html;
 	};

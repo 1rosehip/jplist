@@ -226,7 +226,7 @@
 		var index;
 		
 		index = indexOf(context, $item);
-			
+		
 		if(index !== -1){
 		
 			context.dataitems.splice(index, 1);
@@ -239,11 +239,11 @@
 	/**
 	* delete dataitem collection from dataitems array
 	* @param {Object} context	
-	* @param {jQueryObject} items - jquery element to delete
+	* @param {jQueryObject} $items - jquery element to delete
 	*/
-	var delDataitems = function(context, items){
+	var delDataitems = function(context, $items){
 	
-		items.each(function(){			
+		$items.each(function(){			
 			delDataitem(context, jQuery(this));
 		});
 	};
@@ -251,20 +251,17 @@
 	/**
 	* add jquery item to jplist dataitems array
 	* @param {Object} context
-	* @param {jQueryObject} item - item to add to dataitems array
+	* @param {jQueryObject} $item - item to add to dataitems array
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
 	* @param {number} index
 	*/
-	var addDataItem = function(context, item, paths, index){
+	var addDataItem = function(context, $item, paths, index){
 	
 		var dataItem;
 		
 		//create dataitem
-		dataItem = new jQuery.fn.jplist.domain.dom.models.DataItemModel(item, paths, index);
-				
-		//add item dataitems to array
-		//context.dataitems.push(dataItem);
-		
+		dataItem = new jQuery.fn.jplist.domain.dom.models.DataItemModel($item, paths, index);
+						
 		//insert item into the given index
 		context.dataitems.splice(index, 0, dataItem);
 
@@ -276,29 +273,34 @@
 	* add items to collection
 	* @param {Object} context - jplist controller 'this' object
 	* @param {jQueryObject} $items
-	* @param {number} counter
+	* @param {number} i
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+	* @param {number} index
 	*/
-	var addDataItemsHelper = function(context, $items, counter, paths){
+	var addDataItemsHelper = function(context, $items, i, paths, index){
 		
-		var $item;
+		var $item
+			,TEXT_NODE = 3;
 		
-		for(; counter<$items.length; counter++){
+		for(; i<$items.length; i++){
 			
 			//get item
-			$item = $items.eq(counter);
-
-			//add item to the array
-			addDataItem(context, $item, paths, counter);
+			$item = $items.eq(i);
 			
-			//setTimeout is added to improve browser performance
-			/* jshint -W083 */
-			if(counter + 1 < $items.length && counter % 50 === 0){
-				window.setTimeout(function(){
-					addDataItemsHelper(context, $items, counter, paths);
-				}, 0);
+			if($item.get(0).nodeType !== TEXT_NODE){
+			
+				//add item to the array
+				addDataItem(context, $item, paths, index);
+				
+				//setTimeout is added to improve browser performance
+				/* jshint -W083 */
+				if(i + 1 < $items.length && i % 50 === 0){
+					window.setTimeout(function(){
+						addDataItemsHelper(context, $items, i, paths, index);
+					}, 0);
+				}
+				/* jshint +W083 */
 			}
-			/* jshint +W083 */
 		}		
 	};
 	
@@ -307,11 +309,12 @@
 	* @param {Object} context	
 	* @param {jQueryObject} $items - items to add to dataitems array
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+	* @param {number} index
 	*/
-	var addDataItems = function(context, $items, paths){
+	var addDataItems = function(context, $items, paths, index){
 		
-		//add ittems to collection
-		addDataItemsHelper(context, $items, 0, paths);
+		//add items to collection
+		addDataItemsHelper(context, $items, 0, paths, index);
 		
 		//update dataview
 		resetDataview(context);
@@ -346,7 +349,7 @@
 		if($items.length > 0){
 		
 			//add ittems to collection
-			addDataItems(this, $items, paths);		
+			addDataItems(this, $items, paths, 0);		
 		}
 		
 		//trigger collection ready event
@@ -426,9 +429,10 @@
 	* API: convetrs a set of jQuery elements (items) to dataitems and adds them to the dataitems collection	
 	* @param {jQueryObject} items - jquery items to add
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+	* @param {number} index
 	*/
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.addDataItems = function(items, paths){		
-		addDataItems(this, items, paths);
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.addDataItems = function(items, paths, index){		
+		addDataItems(this, items, paths, index);
 	};
 	
 	/**
