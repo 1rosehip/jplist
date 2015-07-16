@@ -1,4 +1,4 @@
-(function(){//+
+;(function(){//+
 	'use strict';		
 		
 	/**
@@ -11,17 +11,24 @@
 		
 		var status = null
 			,data
-			,dataPath, min, max, prev, next;
+			,min, max, prev, next;
 				
-		//init vars
-		dataPath = context.$control.attr('data-path').toString();		
+		//init vars	
 		min = context.params.$uiSlider['slider']('option', 'min');
 		max = context.params.$uiSlider['slider']('option', 'max');		
-		prev = context.params.$uiSlider['slider']('values', 0);
-		next = context.params.$uiSlider['slider']('values', 1);
+		
+		
+		if(isDefault){
+			prev = context.params.defaultPrev;
+			next = context.params.defaultNext;
+		}
+		else{
+			prev = context.params.$uiSlider['slider']('values', 0);
+			next = context.params.$uiSlider['slider']('values', 1);
+		}
 		
 		//init range slider data transfer object
-		data = new jQuery.fn.jplist.ui.controls.RangeSliderDTO(dataPath, min, max, prev, next);	
+		data = new jQuery.fn.jplist.ui.controls.RangeSliderDTO(context.params.dataPath, min, max, prev, next);	
 		
 		//create status
 		status = new jQuery.fn.jplist.app.dto.StatusDTO(
@@ -107,16 +114,12 @@
 	*/
 	var getPaths = function(context, paths){
 	
-		var jqPath
-			,path;
-		
-		//init vars
-		jqPath = context.$control.attr('data-path').toString();
-			
+		var path;
+					
 		//init path
-		if(jqPath){
+		if(context.params.dataPath){
 		   
-			path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(jqPath, 'number');
+			path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(context.params.dataPath, 'number');
 			paths.push(path);
 		}
 	};
@@ -203,6 +206,7 @@
 			,uiSliderFunc: function($uiSlider, $prev, $next){}
 			,uiSetValuesFunc: function($uiSlider, $prev, $next){}
 			,controlOptions: context['controlOptions']
+			,dataPath: context.$control.attr('data-path')
 		};
 		
 		//set user defined functions
@@ -211,6 +215,10 @@
 		//call ui slider functions
 		context.params.uiSliderFunc(context.params.$uiSlider, context.params.$prev, context.params.$next);			
 		context.params.uiSetValuesFunc(context.params.$uiSlider, context.params.$prev, context.params.$next);
+		
+		//save default prev / next values
+		context.params.defaultPrev = context.params.$uiSlider['slider']('values', 0);
+		context.params.defaultNext = context.params.$uiSlider['slider']('values', 1);
 		
 		//init events
 		initEvents(context);
