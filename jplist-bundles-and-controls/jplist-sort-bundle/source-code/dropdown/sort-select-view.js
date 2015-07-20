@@ -2,6 +2,27 @@
 	'use strict';		
 		
 	/**
+	* get additional paths - used for multiple sort
+	* <span data-path="..." data-path-1="..." data-path-2="..."
+	* @param {jQueryObject} $span
+	* @return {Array.<string>} additionalPaths
+	*/
+	var getAdditionalPaths = function($span){
+		
+		var additionalPaths = [];
+		
+		//init additional data-paths used for the multiple sort
+		jQuery.each($span.get(0).attributes, function(key, attr){
+			
+			if(attr.name.indexOf('data-path-') !== -1){				
+				additionalPaths.push(attr.value);
+			}
+		});
+		
+		return additionalPaths;
+	};
+	
+	/**
 	* Get control status
 	* @param {Object} context
 	* @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
@@ -52,6 +73,7 @@
 			,context.inAnimation
 			,context.isAnimateToTop
 			,context.inDeepLinking
+			,getAdditionalPaths($option)
 		);
 		
 		return status;			
@@ -196,7 +218,8 @@
 			
 				status.data.path = dataPath;
 				status.data.type = $selectedOption.attr('data-type');
-				status.data.order = $selectedOption.attr('data-order');				
+				status.data.order = $selectedOption.attr('data-order');	
+				status.data.additionalPaths = getAdditionalPaths($selectedOption);
 			}
 			
 			//send status event

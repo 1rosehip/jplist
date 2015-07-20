@@ -1,4 +1,4 @@
-(function(){
+;(function(){
 	'use strict';	
 	
 	/**
@@ -64,7 +64,8 @@
 	
 		var result = 0
 			,currentStatus
-			,service;
+			,service
+			,tempStatus;
 		
 		//check current status data type
 		if(statuses.length > 0){
@@ -72,14 +73,24 @@
 			//get current status
 			currentStatus = statuses[index];
 			
-			if(currentStatus.data.path != 'default'){
-			
+			if(currentStatus.data.path !== 'default'){
+				
 				service = jQuery.fn.jplist.app.services.DTOMapperService.sort[currentStatus.data.type];
 				
 				if(jQuery.isFunction(service)){				
+					
 					result = service(currentStatus, dataitem1, dataitem2);
-				}				
-				
+					
+					if(result === 0 && jQuery.isArray(currentStatus.data.additionalPaths) && currentStatus.data.additionalPaths.length > 0){
+					
+						for(var i=0; i<currentStatus.data.additionalPaths.length; i++){
+						
+							tempStatus = jQuery.extend(true, {}, currentStatus);							
+							tempStatus.data.path = currentStatus.data.additionalPaths[i];
+							result = service(tempStatus, dataitem1, dataitem2);
+						}					
+					}
+				}
 			}
 			else{
 				result = sortIndex(dataitem1, dataitem2, 'asc');				

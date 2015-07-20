@@ -1,6 +1,27 @@
-(function(){//+
+;(function(){//+
 	'use strict';		
+	
+	/**
+	* get additional paths - used for multiple sort
+	* <span data-path="..." data-path-1="..." data-path-2="..."
+	* @param {jQueryObject} $span
+	* @return {Array.<string>} additionalPaths
+	*/
+	var getAdditionalPaths = function($span){
 		
+		var additionalPaths = [];
+		
+		//init additional data-paths used for the multiple sort
+		jQuery.each($span.get(0).attributes, function(key, attr){
+			
+			if(attr.name.indexOf('data-path-') !== -1){				
+				additionalPaths.push(attr.value);
+			}
+		});
+		
+		return additionalPaths;
+	};
+	
 	/**
 	* Get control status
 	* @param {Object} context
@@ -36,9 +57,16 @@
 		
 		//init ignore
 		ignore = context.$control.attr('data-ignore') || '';
-		
+				
 		//init status related data
-		data = new jQuery.fn.jplist.ui.controls.DropdownSortDTO($span.attr('data-path'), $span.attr('data-type'), $span.attr('data-order'), dateTimeFormat, ignore);
+		data = new jQuery.fn.jplist.ui.controls.DropdownSortDTO(
+			$span.attr('data-path')
+			,$span.attr('data-type')
+			,$span.attr('data-order')
+			,dateTimeFormat
+			,ignore
+			,getAdditionalPaths($span)
+		);
 		
 		//create status
 		status = new jQuery.fn.jplist.app.dto.StatusDTO(
@@ -129,12 +157,12 @@
 	*/
 	var getPaths = function(context, paths){
 	
-		var jqPath
-			,dataType
-			,path;
-			
 		context.$control.find('span').each(function(){
-				
+		
+			var jqPath
+				,dataType
+				,path;
+			
 			//init vars
 			jqPath = jQuery(this).attr('data-path');
 			dataType = jQuery(this).attr('data-type');
@@ -193,21 +221,22 @@
 		/**
 		* on li click
 		*/
-		context.$control.find('li').off().on('click', function(){
+		context.$control.find('li').off('click').on('click', function(){
 		
 			var status
 				,dataPath
-				,span;
+				,$span;
 			
 			status = getStatus(context, false);
 			
-			span = jQuery(this).find('span');
-			dataPath = span.attr('data-path');
+			$span = jQuery(this).find('span');
+			dataPath = $span.attr('data-path');
 			
 			if(dataPath){			
 				status.data.path = dataPath;
-				status.data.type = span.attr('data-type');
-				status.data.order = span.attr('data-order');				
+				status.data.type = $span.attr('data-type');
+				status.data.order = $span.attr('data-order');
+				status.data.additionalPaths = getAdditionalPaths($span);			
 			}
 			
 			//send status event	
