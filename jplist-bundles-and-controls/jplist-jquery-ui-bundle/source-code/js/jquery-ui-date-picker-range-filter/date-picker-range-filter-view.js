@@ -117,7 +117,9 @@
 		
 		var deepLink = ''
 			,status
-			,isDefault = false;
+			,isDefault = false
+			,isPrev
+			,isNext;
 		
 		if(context.inDeepLinking){
 		
@@ -126,25 +128,101 @@
 			
 			if(status.data){
 				
-				if(jQuery.isNumeric(status.data.prev_year) && jQuery.isNumeric(status.data.prev_month) && jQuery.isNumeric(status.data.prev_day)){
-					
-					//init deep link
-					deepLink += context.name + context.options.delimiter0 + 'prev=' + status.data.prev_year + context.options.delimiter2 + status.data.prev_month + context.options.delimiter2 + status.data.prev_day;
-				}
+				isPrev = jQuery.isNumeric(status.data.prev_year) && 
+						 jQuery.isNumeric(status.data.prev_month) && 
+						 jQuery.isNumeric(status.data.prev_day);
+						 
+				isNext = jQuery.isNumeric(status.data.next_year) && 
+						 jQuery.isNumeric(status.data.next_month) && 
+						 jQuery.isNumeric(status.data.next_day);
+						 
+				if(isPrev || isNext){
 				
-				if(jQuery.isNumeric(status.data.next_year) && jQuery.isNumeric(status.data.next_month) && jQuery.isNumeric(status.data.next_day)){
+					//date-picker-range-filter:prev~next=2013~11~1!2015~10~4
+					deepLink += context.name + context.options.delimiter0;
 					
-					if(deepLink !== ''){
-						deepLink += context.options.delimiter1;
+					if(isPrev){
+						deepLink += 'prev';
 					}
 					
-					//init deep link
-					deepLink += context.name + context.options.delimiter0 + 'next=' + status.data.next_year + context.options.delimiter2 + status.data.next_month + context.options.delimiter2 + status.data.next_day;
+					if(isNext){
+					
+						if(isPrev){
+							//added ~
+							deepLink += context.options.delimiter2;
+						}
+						
+						deepLink += 'next';
+					}
+					
+					//added =
+					deepLink += '=';
+					
+					if(isPrev){
+					
+						//2013~11~1
+						deepLink += status.data.prev_year + context.options.delimiter2 + 
+									status.data.prev_month + context.options.delimiter2 + 
+									status.data.prev_day;
+					}
+					
+					if(isNext){
+						
+						if(isPrev){
+							//added !
+							deepLink += context.options.delimiter3;
+						}
+						
+						//2015~10~4
+						deepLink += status.data.next_year + context.options.delimiter2 + 
+									status.data.next_month + context.options.delimiter2 + 
+									status.data.next_day;
+					}
 				}
 			}
 		}
 		
 		return deepLink;
+	};
+	
+	/**
+	* get prev value from deep link
+	* @param {Object} context
+	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {string} propValue
+	*/
+	var getPrevValue = function(context, status, propValue){
+		
+		var sections;
+		
+		sections = propValue.split(context.options.delimiter2);
+		
+		if(sections.length === 3){
+		
+			status.data.prev_year = sections[0];
+			status.data.prev_month = sections[1];
+			status.data.prev_day = sections[2];			
+		}
+	};
+	
+	/**
+	* get next value from deep link
+	* @param {Object} context
+	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {string} propValue
+	*/
+	var getNextValue = function(context, status, propValue){
+		
+		var sections;
+		
+		sections = propValue.split(context.options.delimiter2);
+		
+		if(sections.length === 3){
+		
+			status.data.next_year = sections[0];
+			status.data.next_month = sections[1];
+			status.data.next_day = sections[2];			
+		}
 	};
 	
 	/**
@@ -165,40 +243,40 @@
 			//get status
 			status = getStatus(context, isDefault);
 			
-			if(status.data){
+			delete status.data.next_year;
+			delete status.data.next_month;
+			delete status.data.next_day;
+			delete status.data.prev_year;
+			delete status.data.prev_month;
+			delete status.data.prev_day;
 			
+			if(status.data){ //date-picker-range-filter:prev~next=2013~11~10!2015~10~3
+				
 				switch(propName){
 					
 					case 'prev':{	
 						
-						sections = propValue.split(context.options.delimiter2);
-						
-						if(sections.length === 3){
-						
-							status.data.prev_year = sections[0];
-							status.data.prev_month = sections[1];
-							status.data.prev_day = sections[2];
-							
-							delete status.data.next_year;
-							delete status.data.next_month;
-							delete status.data.next_day;
-						}
+						//value -> 2013~11~10
+						getPrevValue(context, status, propValue);						
 					}
 					break;
 					
 					case 'next':{
 						
-						sections = propValue.split(context.options.delimiter2);
+						//value -> 2015~10~3
+						getNextValue(context, status, propValue);
+					}
+					break;
+					
+					case 'prev~next':{
 						
-						if(sections.length === 3){
+						//value -> 2013~11~10!2015~10~3
+						sections = propValue.split(context.options.delimiter3);
 						
-							status.data.next_year = sections[0];
-							status.data.next_month = sections[1];
-							status.data.next_day = sections[2];
-							
-							delete status.data.prev_year;
-							delete status.data.prev_month;
-							delete status.data.prev_day;
+						if(sections.length === 2){
+						
+							getPrevValue(context, status, sections[0]);
+							getNextValue(context, status, sections[1]);
 						}
 					}
 					break;
