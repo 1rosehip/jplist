@@ -74,7 +74,7 @@
 						case 'equal':{
 							
 							//value.text contains text
-							if(text1 === text2)){						
+							if(text1 === text2){						
 								resultDataview.push(dataitem);
 							}
 							break;
