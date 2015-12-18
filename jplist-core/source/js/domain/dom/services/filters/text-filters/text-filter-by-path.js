@@ -7,7 +7,7 @@
 	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
 	* @param {string} ignoreRegex
-	* @param {string} mode: startsWith, endsWith, contains, advanced
+	* @param {string} mode: startsWith, endsWith, contains, advanced, equal
 	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
 	*/
 	jQuery.fn.jplist.domain.dom.services.FiltersService.textFilter = function(text, path, dataview, ignoreRegex, mode){
@@ -67,6 +67,14 @@
 							
 							//value.text contains text
 							if(jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse(text1, text2)){						
+								resultDataview.push(dataitem);
+							}
+							break;
+						}
+						case 'equal':{
+							
+							//value.text contains text
+							if(text1 === text2)){						
 								resultDataview.push(dataitem);
 							}
 							break;
