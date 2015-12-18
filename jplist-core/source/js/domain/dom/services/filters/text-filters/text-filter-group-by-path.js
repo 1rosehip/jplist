@@ -1,4 +1,4 @@
-;(function(){
+ad;(function(){
 	'use strict';	
 	
 	/**
@@ -6,7 +6,7 @@
 	* @param {Array.<Object>} textAndPathsGroup - list of Objects like {text: '', path: '', selected: true/false}	
 	* @param {string} ignoreRegex
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
-	* @param {string} mode: startsWith, endsWith, contains, advanced
+	* @param {string} mode: startsWith, endsWith, contains, advanced, equal
 	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
 	*/
 	jQuery.fn.jplist.domain.dom.services.FiltersService.textFilterPathGroup = function(textAndPathsGroup, ignoreRegex, dataview, mode){
@@ -19,7 +19,7 @@
 			,resultDataview = []
 			,text1
 			,text2
-			,textAndPathObj
+			,textAndPathObjad
 			,includeItem;
 		
 		//get selected objects and init path objects
@@ -107,6 +107,15 @@
 										//value.text contains text
 										if(jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse(text1, text2)){						
 											includeItem = true;	
+										}
+										break;
+									}
+
+									case 'equal':{
+							
+									//value.text contains text
+										if(text1 === text2){						
+											includeItem = true;
 										}
 										break;
 									}
