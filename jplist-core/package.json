@@ -1,0 +1,29 @@
+{
+  "name": "jplist-core",
+  "version": "5.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "lessc --clean-css source/css/styles.less minified/jplist.core.min.css && uglifyjs source/js/app.js source/js/app/namespaces.js source/js/app/history.js source/js/app/dto/statuses-dto-collection.js source/js/app/dto/status-dto.js source/js/app/events/pubsub.js source/js/app/services/*.js source/js/dal/**/*.js source/js/domain/dom/**/*.js source/js/domain/server/**/*.js source/js/ui/**/*.js -o minified/jplist.core.min.js --source-map minified/jplist.core.min.js.map",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/no81no/jplist.git"
+  },
+  "keywords": [
+    "jplist",
+    "jquery",
+    "plugin"
+  ],
+  "author": "Miriam Zusin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/no81no/jplist/issues"
+  },
+  "homepage": "https://github.com/no81no/jplist#readme",
+  "devDependencies": {
+    "less": "^2.5.3",
+    "uglify-js": "^2.6.1"
+  }
+}
