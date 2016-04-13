@@ -1,0 +1,64 @@
+/**
+* common cart
+*/
+.common-cart-mixin(){
+	
+	.checkout-btn{
+		backrgound: transparent;
+		border: 0;
+		margin: 30px 0 0 0;
+	}
+	
+	.paypal-badges{
+		margin: 30px 0 0 0;
+	}
+	
+	@media only screen and (max-width: 500px){
+		
+		.paypal-badges{
+			width: 100%;
+			text-align: center;
+			
+			img{
+				max-width: 100%;
+			}
+		}
+		
+		.checkout-form{
+			width: 100%;
+			text-align: center;
+		}	
+	}
+}
+
+/**
+* empty cart
+*/
+.empty-cart-mixin(){
+	
+	.empty-cart-img{
+		font-size: 100px;
+		padding: 50px 0 0 0;
+		margin: 0 0 20px 0;
+	}
+	
+	.empty-cart-text{
+		padding: 0 0 80px 0;
+		margin: 0;
+		font-size: 20px;
+	}
+}
+
+/**
+* thank you page
+*/
+.thank-you-page-mixin(){
+
+}
+
+/**
+* mixin calls
+*/
+.common-cart-mixin();
+.empty-cart-mixin();
+.thank-you-page-mixin();

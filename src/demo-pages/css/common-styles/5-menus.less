@@ -1,0 +1,578 @@
+/**
+* top menu
+*/
+.top-menu-mixin(){
+	
+	#top-menu-box{
+		background: @white3;
+		border-bottom: 1px solid @light-grey2;
+		font-family: @lato;		
+	}
+	
+	#top-menu{
+		font-size: 16px;	
+		
+		li{
+			margin: 20px 20px 25px 0;			
+		}
+		
+		a{
+			font-weight: normal;			
+		}
+		
+		.fa{
+			font-size: 21px;
+			vertical-align: text-top;
+			margin-right: 5px;
+		}
+		
+		.bull{
+			color: @grey2;
+		}
+		
+		.active{
+			background: none;
+			
+			a{
+				border: 1px solid @white3;
+				color: @black1;
+				text-shadow: 1px 1px 10px @grey3;
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	}
+
+	@media (max-width: 800px){
+		
+		#top-menu{
+			font-size: 14px;
+		}
+	}
+}
+
+/**
+* lists and menus
+*/
+.lists-mixin(){
+
+	.hmenu{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.hmenu li{
+		float: left;
+	}
+
+	.vmenu{
+		list-style-type: square;
+		margin: 20px;
+		padding: 0 0 0 10px;
+	}
+	
+	.vmenu-2{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+/**
+* arrows menu
+*/
+.arrows-menu-mixin(){
+  .arrows-menu,
+  .arrows-menu-p20{
+	
+		padding: 0 0 0 15px;
+		margin: 0;
+		
+		li{
+			list-style-image:url(@next-icon);
+			padding-left: 5px;
+		}
+
+		.active,
+		.active{
+			color: @orange;
+		}
+
+		.empty{
+			list-style: none;
+		}
+	}
+
+	.arrows-menu-p20{
+		margin-top: 50px;
+
+		li{
+			padding-bottom: 20px;
+		}
+  }	
+}
+
+/**
+* arrows menu with colored triangles
+*/
+.arrows-menu-colored-mixin(){
+	
+	.arrows-menu-colored{
+		
+		padding: 0;
+		margin: 0;
+		list-style: none;
+				
+		li:before{
+			content: '';
+			
+			border-color: transparent @blue;
+			border-style: solid;
+			border-width: 5px 0 5px 8px;
+			
+			display: inline-block;
+			padding-right: 10px;
+			
+			height: 0;
+			width: 0;
+		}
+	}
+	
+}
+
+/**
+* social menu
+*/
+.social-menu-mixin(){
+	#social-menu{
+
+		li{
+			line-height: 45px;
+			padding-left: 15px;
+			font-size: 16px;
+		}
+
+		a{
+			color: @light-grey5;
+		}
+	}
+  
+	@media only screen and (max-width: 1300px){
+		#social-menu{
+			float: left;
+		}
+	}
+}
+
+/**
+* black top left menu
+*/
+.black-top-left-menu(){
+	#black-top-bar-left-menu{	
+		line-height: 45px;
+		margin-right: 20px;
+		
+		a{
+			color: @light-grey5;
+		}
+	}
+}
+
+/**
+* non auth menu
+*/
+.non-auth-menu-mixin(){
+
+    #non-auth-menu{
+		padding: 10px 0;
+		margin: 25px 0 0 0;
+		
+        li{
+            margin:0 0 0 25px;
+			
+			a{
+				font-weight: normal;
+			}
+
+			/*
+            .orange{
+                color: @orange;
+            }
+			*/
+        }
+    }
+	
+	@media only screen and (max-width: 800px){
+			
+		.login-partial.right{
+			float: left;
+			width: 100%;
+			
+			#non-auth-menu{
+				margin: 0;
+			}
+		}
+	}
+	
+	@media only screen and (max-width: 500px){
+			
+		.login-partial.right{
+		
+			#non-auth-menu{		
+				
+				float: left;
+				
+				li{
+					margin-left: 15px;
+				}
+			}
+		}
+	}
+}
+
+
+/**
+* auth menu
+*/
+.auth-menu-mixin(){
+
+    #auth-menu{
+		padding: 10px 0;
+		margin: 25px 0 0 0;
+		
+        li{
+            margin:0 0 0 25px;
+			
+			a{
+				font-weight: normal;
+			}
+        }
+    }
+	
+	@media only screen and (max-width: 800px){
+			
+		.login-partial.right{
+			float: left;
+			width: 100%;
+			
+			#auth-menu{
+				margin: 0;
+			}
+		}
+	}
+	
+	@media only screen and (max-width: 500px){
+			
+		.login-partial.right{
+		
+			#auth-menu{		
+				
+				float: left;
+				
+				li{
+					margin-left: 15px;
+				}
+			}
+		}
+	}
+}
+
+/**
+* grid menu, used on homepage
+*/
+.grid-menu-mixin(){
+	
+	.grid-menu{
+		.grid-menu-row{
+			margin-bottom: 20px;
+			line-height: 30px;
+			
+			.grid-menu-cell{
+				width: 30%;
+				
+				ul{
+					padding: 15px 0;
+					text-align: center;
+				}
+			}
+			
+			.grid-menu-thumb{			
+				margin: 0;
+				padding: 0;			
+				text-align: center;			
+				font-size: 100px;
+			}
+			
+			h2{
+				transition: all 0.25s ease 0s;
+				text-shadow: 1px 1px 10px @grey3;
+				font-weight: normal;
+				font-family: @lato;
+				text-align: center;
+				margin: 15px 0 0 0;
+			}
+			
+			h2:hover{
+				color: @black1;
+				text-shadow: 1px 1px 10px @black1;
+			}
+			
+			a{
+				color: @dark-grey1;
+				transition: all 0.25s ease 0s;
+			}	
+			
+			a:hover{
+				color: @blue;
+			}
+			
+		}
+				
+		@media only screen and (max-width: 500px){
+			.grid-menu-row{
+				.grid-menu-cell{				
+					width: 100%;
+					margin-bottom: 20px;
+				}
+			}
+		}
+		
+
+	}
+	
+	
+}
+
+
+/**
+* white grid menu, used on documentation page
+*/
+.white-grid-menu-mixin(){
+	
+	.white-grid-menu{
+	
+		.grid-menu-row{
+			line-height: 30px;
+			
+			.grid-menu-cell{
+				width: 29%;
+				margin-right: 1%;
+				margin-bottom: 1%;
+				background: #fff;
+				
+				ul{
+					padding: 15px 0;
+					text-align: center;
+				}
+				
+				>a{
+					padding: 15px;
+					display: block;
+					border: 1px solid @light-grey1;
+					color: @dark-grey1;
+					transition: all 0.25s ease 0s;
+				}
+				
+				a:hover{
+					color: @blue;
+				}
+			}
+			
+			.grid-menu-thumb{			
+				margin: 0;
+				padding: 0;			
+				text-align: center;			
+				font-size: 100px;
+			}
+			
+			h2{
+				transition: all 0.25s ease 0s;
+				text-shadow: 1px 1px 10px @grey3;
+				font-weight: normal;
+				font-family: @lato;
+				text-align: center;
+				margin: 15px 0 0 0;
+			}
+			
+			h2:hover{
+				color: @black1;
+				text-shadow: 1px 1px 10px @black1;
+			}
+			
+		}
+		
+		@media only screen and (max-width: 800px){
+
+			.grid-menu-row{
+				.grid-menu-cell{				
+					ul{
+						background: none;
+					}
+				}
+			}
+		}
+		
+		@media only screen and (max-width: 600px){
+
+			.grid-menu-row{
+				.grid-menu-cell{				
+					width: 49%;
+					
+					ul{
+						background: @white2;
+						border-radius: 2px;
+						padding-top: 15px;
+						padding-bottom: 15px;
+					}
+				}
+			}
+		}
+		
+		@media only screen and (max-width: 400px){
+
+			.grid-menu-row{
+				.grid-menu-cell{				
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+
+/**
+* default menu mixin
+*/
+.default-menu-mixin(){
+
+  .default-menu{
+
+      li{
+          margin: 10px 25px 35px 0;
+	      padding: 4px 0;
+		  border: 1px solid transparent;
+
+          a{
+              color: @dark-grey1;
+              text-shadow: 1px 1px 1px #fff;
+			  transition: all 0.25s ease 0s;
+          }
+      }
+
+      li:hover a{
+          color: @black1;
+		  text-shadow: 1px 1px 10px @grey3;
+
+          .orange{
+              color: @orange;
+          }
+      }
+
+      .orange{
+          color: @orange;
+      }
+
+      .active{
+          border-bottom: 1px solid #fff;
+          border-radius: 3px;
+          padding: 0;
+		  
+		  .linear-gradient(#fff, #fff, @light-grey4); //bgcolor, from, to
+
+          a{
+              padding: 3px 15px;
+              border: 1px solid @light-grey5;
+              border-radius: 3px;
+              display:block;
+	          float:left;
+          }
+      }
+  }
+
+  @media only screen and (max-width: 800px){
+
+      #page-content{
+
+          .default-menu{
+              margin-bottom: 15px;
+
+              li{
+                  width: 25%;
+                  margin: 0;
+
+                  a{
+                      padding-left: 15px;
+                  }
+              }
+
+             .active{
+                  border: none;
+                  background: none;
+
+                  a{
+					.linear-gradient(#fff, #fff, @light-grey4); //bgcolor, from, to
+                  }
+             }
+          }
+      }
+  }
+
+  @media only screen and (max-width: 500px){
+      #page-content .default-menu li{
+          width: 50%;
+      }
+	  
+	.default-menu{ 
+		margin-bottom: 20px;
+		
+		li{
+			margin-bottom: 10px;
+		}
+	}
+	  
+  }
+
+  @media only screen and (max-width: 620px){
+      #top-menu{
+          display: none;
+      }
+  }
+
+  @media only screen and (max-width: 930px){
+      #header-box{
+          height:auto
+      }
+  }
+
+}
+
+/**
+* font - awesome list
+*/
+.fa-mixin(){
+	.fa-list-styles{
+		.fa{
+			font-size: 18px;
+			color: @blue1;
+			margin: 0 5px;
+		}
+	}
+}
+
+
+/**
+* mixin calls
+*/
+.lists-mixin();
+.arrows-menu-mixin();
+.social-menu-mixin();
+.default-menu-mixin();
+.non-auth-menu-mixin();
+.fa-mixin();
+.grid-menu-mixin();
+.black-top-left-menu();
+.auth-menu-mixin();
+.arrows-menu-colored-mixin();
+.white-grid-menu-mixin();
+.top-menu-mixin();

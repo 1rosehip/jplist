@@ -1,0 +1,170 @@
+/**
+* cart table
+*/
+.cart-tbl-mixin(){
+
+    .cart-tbl{
+		border: 1px solid @light-grey1;
+		border-collapse: collapse;
+		background: #fff;
+		width: 100%;
+		
+		td, th{
+			border: 1px solid @light-grey1;
+			border-right: 0;
+			border-left: 0;
+			padding: 5px 15px;
+			text-align: center;
+		}
+		
+		.img{
+			font-size: 0;
+			line-height: 0;
+			padding: 15px;
+			width: 120px;
+			
+			img{
+				border: 1px solid @grey3;
+				width: 100px;
+			}
+		}
+		
+		.remove{
+			width: 15px;
+			
+			button{
+				background: transparent;
+				border: 0;
+			}
+			
+			.fa{
+				color: @blue;
+				cursor: pointer;
+			}
+		}
+	}
+	
+	@media only screen and (max-width: 500px){
+		.cart-tbl{
+		
+			.headers{
+				display: none;
+			}
+			
+			td,
+			.img{
+				width: 100%;
+				display: block;
+				float: left;
+				border: 0;
+				padding: 5px 0;
+			}
+			
+			.img{
+				padding-top: 10px;
+			}
+			
+			tr{
+				width: 100%;
+				display: block;
+				float: left;
+				border-bottom: 1px solid @light-grey1;
+			}
+			
+			tr:last-child{
+				border-bottom: 0;
+			}
+			
+			td{
+				.sku-price:before,
+				.qty:before,
+				.total:before{
+					content: attr(data-title);
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
+
+/**
+* settings table
+*/
+.settings-table-mixin(){
+
+    .settings-tbl{
+        border-collapse: collapse;
+        border-left: 1px solid @light-grey2;
+        border-top: 1px solid @light-grey2;
+        margin-bottom: 40px;
+        background: #fff;
+        width: 100%;
+
+        td,
+        th{
+            border-right: 1px solid @light-grey2;
+            border-bottom: 1px solid @light-grey2;
+            padding: 5px 15px;
+            margin: 0;
+        }
+
+        .options{
+            font-weight: bold;
+        }
+
+        .values,
+        .defaults{
+            font-style: italic;
+        }
+    }
+	
+	.settings-tbl.bg-white3{
+		background-color: @white3;
+		border-left: 1px dotted @light-grey2;
+        border-top: 1px dotted @light-grey2;
+		
+		th{
+			background: @white1;
+		}
+		
+		td,
+        th{
+			border-right: 1px dotted @light-grey2;
+            border-bottom: 1px dotted @light-grey2;
+		}
+				
+		.title{
+			background: @white2;
+		}
+	}
+	
+	@media only screen and (max-width: 500px){
+		
+		.settings-tbl{
+			display: block;			
+			
+			tr, td{
+				display: block;
+			}
+			
+			th, thead{
+				display: none;
+			}
+			
+			.title{
+				font-weight: bold;
+				font-size: 14px;
+			}
+		}
+		
+		.settings-tbl.bg-white3{
+			background: #fff;
+		}
+	}
+}
+
+/**
+* mixin calls
+*/
+.cart-tbl-mixin();
+.settings-table-mixin();

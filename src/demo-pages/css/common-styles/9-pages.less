@@ -1,0 +1,168 @@
+/**
+* product page
+*/
+.product-page-mixin(){
+	
+	.product-page{
+		
+		/**
+		* jplist large item
+		*/
+		.jplist-large-item{
+			background: #fff;
+			margin: 0 0 10px 0;
+			font-size: 16px;
+			height: auto;
+			
+			.big-white-btn{
+				padding: 0 15px;
+			}
+			
+			.product-content{
+				margin: 0 2% 0 0;
+				width: 58%;
+			}
+			
+			.product-img{
+				img{
+					width: 100%;
+				}
+			}
+		}
+		
+		@media only screen and (max-width: 800px){
+			.jplist-large-item{
+				
+				.product-content{
+					margin: 0 2% 0 0;
+					width: 52%;
+				}
+			}
+		}
+		
+		@media only screen and (max-width: 500px){
+			.jplist-large-item{
+				
+				.product-content{
+					margin: 0 5%;
+					width: 90%;
+				}
+			}
+		}
+		
+		/**
+		* product dark section
+		*/
+		.product-strip{		
+			background: @light-grey2;			
+			border-top: 1px solid #fff;
+			border-bottom: 1px solid @light-grey2;
+			padding: 25px 0;
+			//box-shadow: 0 0 20px @grey1;
+		}
+		
+		.product-strip-border{
+			border-top: 1px solid #fff;
+		}		
+		
+		/**
+		* product page title
+		*/
+		.product-page-title{
+			border-bottom: 1px solid @light-grey2;
+		}
+		
+		/**
+		* product content
+		*/
+		.product-content{
+			width: 70%;
+			float: left;
+			margin: 0 15%;
+		}
+		
+		@media only screen and (max-width: 550px){
+			
+			.product-content{
+				width: 90%;
+				margin: 0 5%;
+			}
+		}
+		
+		/**
+		* product left section that contains product image
+		*/
+		.product-left-box{
+			text-align: center;			
+			padding: 20px 0;
+			
+			.img{
+				font-size: 0;
+			}
+			
+			img{
+				max-width: 100%;
+				//padding: 20px;				
+				//background: #fff;
+				border: 1px solid @grey3;
+				box-shadow: 0 0 10px @grey3;	
+				border-radius: 3px;
+			}
+			
+			.included-in{
+				margin-top: 30px;
+			}
+		}
+		
+		.product-buy-section{			
+			border-bottom: 1px dotted @blue;
+			
+			.price{
+				font-size: 18px;
+				font-family: @lato;
+			}
+						
+			.download{				
+				font-size: 18px;				
+				font-family: @lato;
+				
+				a{
+					font-weight: normal;
+				}
+			}
+		}
+		
+		/**
+		* product description
+		*/
+		.product-description{
+			ul{
+				margin-bottom: 20px;
+			}
+		}
+		
+		/**
+		* product tabs
+		*/
+		.tabs-nav{
+			margin-top: 30px;
+		}
+		
+		
+		@media only screen and (max-width: 500px){
+			.product-left-box{
+				width: 100%;
+			}
+			
+			.product-right-box{
+				width: 100%;
+				margin: 0;
+			}
+		}
+	}
+}
+
+/**
+* mixin calls
+*/
+.product-page-mixin();

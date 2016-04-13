@@ -1,3 +1,0 @@
-jPList - jQuery Data Grid Controls - http://jplist.com 
-Copyright 2015 jPList Software.
-The MIT License (MIT) http://opensource.org/licenses/MIT

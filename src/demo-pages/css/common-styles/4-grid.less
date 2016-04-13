@@ -1,0 +1,207 @@
+/**
+* boxes
+*/
+.boxes-mixin(){
+
+    .box{
+        float: left;
+        width: 100%;
+    }
+	
+	.box-25{
+        width:25%;
+    }
+
+    .box-30{
+        width:30%;
+    }
+
+    .box-40{
+        width:40%;
+    }
+
+    .box-50{
+        width:50%;
+    }
+
+    .box-55{
+        width:55%;
+    }
+
+    .box-60{
+        width:60%;
+    }
+
+    .box-70{
+        width:70%;
+    }
+
+    .box-100px{
+        width:100px;
+    }
+
+    .box-170px{
+        width:170px;
+    }
+
+    .box-200px{
+        width:200px;
+    }
+	
+	.box-mh-600{
+		min-height: 600px;
+	}
+	
+	.box-max-w-600{
+		min-width: 600px;
+	}
+	
+	@media only screen and (max-width: 500px){
+		.box-max-w-600{
+			max-width: 500px;
+			min-width: inherit;
+		}
+	}
+}
+
+/**
+* centered boxes
+*/
+.centered-boxes-mixin(){
+
+  .center-40{
+      margin:0 auto;
+      width:40%;
+  }
+}
+
+/**
+* text alignment
+*/
+.text-align-mixin(){
+
+  .align-right{
+      text-align:right;
+  }
+
+  .align-center{
+      text-align:center;
+  }
+
+  .align-middle{
+      vertical-align:middle;
+  }
+}
+
+/**
+* float
+*/
+.float-mixin(){
+
+  .left{
+      float:left;
+  }
+
+  .right{
+      float:right;
+  }
+
+  .block{
+	  display:block;
+  }
+
+  .left-block{
+      display:block;
+      float:left;
+  }
+
+}
+
+/**
+* visibility
+*/
+.visibility-mixin(){
+
+  .hidden{
+      display:none;
+  }
+}
+
+/**
+* padding and margings
+*/
+.pm-mixin(){
+
+  .reset-pm{
+      padding:0;
+      margin:0;
+  }
+
+  .reset-pm-bot{
+      padding-bottom:0;
+      margin-bottom:0;
+  }
+
+  .p-tb-20{
+      padding:20px 0;
+      margin:0;
+  }
+
+  .p-lr-20{
+      padding:0 20px;
+      margin:0;
+  }
+
+  .p-lrt-20{
+      padding:20px 20px 0 20px;
+      margin:0;
+  }
+
+  .p20{
+      padding:20px;
+      margin:0;
+  }
+
+  .p40{
+      padding:40px;
+      margin:0;
+  }
+
+  .m-tb-20{
+      padding:0;
+      margin:20px 0;
+  }
+  
+  .p-b-10{
+		padding: 0 0 10px 0;
+		margin: 0;
+  }
+}
+
+/**
+* positions mixin
+*/
+.positions-mixin(){
+	.relative{
+		position: relative;
+	}
+	
+	.absolute{
+		position: absolute;
+	}
+	
+	.overflow-hidden{
+		overflow: hidden;
+	}
+}
+
+/**
+* mixin calls
+*/
+.boxes-mixin();
+.centered-boxes-mixin();
+.text-align-mixin();
+.float-mixin();
+.visibility-mixin();
+.pm-mixin();
+.positions-mixin();

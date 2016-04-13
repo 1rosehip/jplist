@@ -1,0 +1,38 @@
+
+/**
+* demo table
+*/
+.demo-tbl-mixin(){
+   .demo-tbl{
+        background: #fff;
+        width: 100%;
+        float: left;
+        border-collapse: collapse;
+        border-right: 1px solid @light-grey5;
+        border-bottom: 1px solid @light-grey5;
+		margin: 30px 0;
+
+        td,
+        th{
+            border-left: 1px solid @light-grey5;
+            border-top: 1px solid @light-grey5;
+            vertical-align: top;
+            padding: 15px;
+        }
+
+        p{
+            margin:0;
+            padding:0 15px 5px 0;
+        }
+
+       .odd{
+            background: @light-blue1;
+       }
+
+       .even{
+            background: @white1;
+       }
+   }
+}
+
+.demo-tbl-mixin();
