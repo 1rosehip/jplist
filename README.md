@@ -125,7 +125,7 @@ To build **jplist.core.min.js** from sources:
 npm run jscore
 ```
 
-To run **jshint** on jPList core sources:
+To run **jshint** on jPList sources:
 ```
 npm run lint
 ```
