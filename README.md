@@ -143,6 +143,14 @@ To create **jplist.core.min.css** from sources:
 npm run csscore
 ```
 
+To create minified css for any control: 
+```
+lessc -x src/control-folder-name/css/styles.less > dist/css/jplist.control-folder-name.min.css
+
+//for example
+lessc -x src/filter-toggle-bundle/css/styles.less > dist/css/jplist.filter-toggle-bundle.min.css
+```
+
 ##Browser Compatibility
 - Internet Explorer 8+
 - Firefox
