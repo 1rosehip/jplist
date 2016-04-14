@@ -288,9 +288,9 @@
 			$item = $items.eq(i);
 			
 			if($item.get(0).nodeType !== TEXT_NODE){
-			
+			    
 				//add item to the array
-				addDataItem(context, $item, paths, index);
+				addDataItem(context, $item, paths, i);
 				
 				//setTimeout is added to improve browser performance
 				/* jshint -W083 */
@@ -345,7 +345,7 @@
         this.options = options;
 		this.observer = observer;
 		this.paths = paths;
-
+        
 		if($items.length > 0){
 		
 			//add ittems to collection
