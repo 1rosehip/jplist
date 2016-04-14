@@ -118,14 +118,31 @@ npm install jplist
 - [jPList with Fancybox](https://jplist.com/otherexamples/jplist-with-fancybox) - example of jPList with lightbox
 - [Large Amount of Data](https://jplist.com/otherexamples/large-amount-of-data-demo) - demo with 1000 items on the page
 
-###Browser Compatibility
+##Build Sources
+
+To build **jplist.core.min.js** from sources: 
+```
+npm run jscore
+```
+
+To run **jshint** on jPList core sources:
+```
+npm run lint
+```
+
+To create **jplist.core.min.css** from sources: 
+```
+npm run csscore
+```
+
+##Browser Compatibility
 - Internet Explorer 8+
 - Firefox
 - Chrome
 - Safari
 - Opera
 
-###jQuery Compatibility
+##jQuery Compatibility
 - Works with jQuery from [version 1.7](http://code.jquery.com/jquery-1.7.min.js)
 - Works with jQuery 2.x versions
 
