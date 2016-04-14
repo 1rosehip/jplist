@@ -1,0 +1,16 @@
+{
+    "dist": "dist/js/jplist.pagination-bundle.min.js",
+    "src": [
+        "src/pagination-bundle/js/pagination-info/pagination-info-view.js",
+        "src/pagination-bundle/js/pagination/pagination-controller.js",
+        "src/pagination-bundle/js/pagination/pagination-view.js",
+        "src/pagination-bundle/js/pagination/pagination-dto.js",
+        "src/pagination-bundle/js/dropdown/dropdown-view.js",
+        "src/pagination-bundle/js/dropdown/select-view.js",
+        "src/pagination-bundle/js/dropdown/dto/dropdown-pagination-dto.js"           
+    ],
+    "externs": [
+        "build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+        "build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+    ]
+}

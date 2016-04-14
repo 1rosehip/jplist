@@ -1,0 +1,11 @@
+{
+    "dist": "dist/js/jplist.list-grid-view.min.js",
+    "src": [
+        "src/list-grid-view/js/views-view.js",
+        "src/list-grid-view/js/views-dto.js"
+    ],
+    "externs": [
+        "build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+        "build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+    ]
+}

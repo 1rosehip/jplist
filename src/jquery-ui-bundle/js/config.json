@@ -1,0 +1,15 @@
+{
+    "dist": "dist/js/jplist.jquery-ui-bundle.min.js",
+    "src": [
+        "src/jquery-ui-bundle/js/jquery-ui-date-picker-range-filter/date-picker-range-filter-dto.js",
+        "src/jquery-ui-bundle/js/jquery-ui-date-picker-range-filter/date-picker-range-filter-view.js",
+        "src/jquery-ui-bundle/js/jquery-ui-date-picker-filter/date-picker-filter-dto.js",
+        "src/jquery-ui-bundle/js/jquery-ui-date-picker-filter/date-picker-filter-view.js",
+        "src/jquery-ui-bundle/js/jquery-ui-range-slider/range-slider-dto.js",
+        "src/jquery-ui-bundle/js/jquery-ui-range-slider/range-slider-view.js"
+    ],
+    "externs": [
+        "build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+        "build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+    ]
+}

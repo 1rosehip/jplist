@@ -47,7 +47,7 @@
 					,path
 					,dataview
 					,ignore
-					'contains'
+					,'contains'
 				);
 			}
 			break;
