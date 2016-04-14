@@ -130,7 +130,7 @@ To build any control:
 node ./build/closure/compile.js path-to-control-config-file
 
 //for example: 
-node ./build/closure/compile.js src/**textbox-filter**/js/config.json
+node ./build/closure/compile.js src/textbox-filter/js/config.json
 ```
 
 To run **jshint** on jPList sources:
