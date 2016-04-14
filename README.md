@@ -5,7 +5,7 @@
 
 [![GitHub version](https://badge.fury.io/gh/no81no%2Fjplist.svg)](http://badge.fury.io/gh/no81no%2Fjplist)
 
-###Common Features
+###[Common Features](#common-features)
 - Works with any content (tables, lists, div elements etc...)
 - Works with JavaScript templates like Handlebars, Mustache etc.
 - Supports XML + XSLT
@@ -61,7 +61,7 @@ Sample project with **NodeJS**, **Express** and **MySQL** database can fe found 
 npm install jplist
 ```
 
-##Examples
+##[Examples](#examples)
 
 ###Layout Examples
 - [DIVs Layout Demo](https://jplist.com/layoutexamples/div-layout) - demo with DIV elements and all default actions like sort, pagination, etc.
@@ -118,7 +118,7 @@ npm install jplist
 - [jPList with Fancybox](https://jplist.com/otherexamples/jplist-with-fancybox) - example of jPList with lightbox
 - [Large Amount of Data](https://jplist.com/otherexamples/large-amount-of-data-demo) - demo with 1000 items on the page
 
-##Build Sources
+##[Build Sources](#build-sources)
 
 To build **jplist.core.min.js** from sources: 
 ```
@@ -151,18 +151,18 @@ lessc -x src/control-folder-name/css/styles.less > dist/css/jplist.control-folde
 lessc -x src/filter-toggle-bundle/css/styles.less > dist/css/jplist.filter-toggle-bundle.min.css
 ```
 
-##Browser Compatibility
+##[Browser Compatibility](#browser-compat)
 - Internet Explorer 8+
 - Firefox
 - Chrome
 - Safari
 - Opera
 
-##jQuery Compatibility
+##[jQuery Compatibility](jquery-compat)
 - Works with jQuery from [version 1.7](http://code.jquery.com/jquery-1.7.min.js)
 - Works with jQuery 2.x versions
 
-##Links
+##[Links](#links)
 - [Project Home](https://jplist.com)
 - [jPList on Facebook](https://www.facebook.com/jplist)
 - [jPList on Google+](https://plus.google.com/+Jplistjs)
