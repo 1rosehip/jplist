@@ -19,9 +19,9 @@ if(config){
         config.src
         ,{
             // Options in the API exclude the "--" prefix
-            compilation_level: "SIMPLE_OPTIMIZATIONS" //WHITESPACE_ONLY, SIMPLE_OPTIMIZATIONS, ADVANCED_OPTIMIZATIONS
+            compilation_level: 'SIMPLE_OPTIMIZATIONS' //WHITESPACE_ONLY, SIMPLE_OPTIMIZATIONS, ADVANCED_OPTIMIZATIONS
 
-            ,warning_level: "VERBOSE" //QUIET | DEFAULT |  VERBOSE
+            ,warning_level: 'VERBOSE' //QUIET | DEFAULT |  VERBOSE
 
             // Capitalization does not matter 
             //,Formatting: "PRETTY_PRINT"
@@ -30,10 +30,6 @@ if(config){
             ,externs: config.externs
 
             ,process_jquery_primitives: true
-
-            // ^ As you've seen, multiple options with the same name are
-            //   specified using an array.
-            //...
         }
         ,function(error, result) {
             
@@ -41,11 +37,39 @@ if(config){
                 console.log(error);
             }
             
-            console.log('=========================================');
+            console.log('=============================================================================');
             
             if(result){
-                console.log("Creating output file: " + config.dist);
-                fs.writeFileSync(config.dist, result, 'utf8');	
+                
+                //get basic version from package.json
+                var packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8')); 
+                
+                //get additional version
+                var additionalVersion = Number(config.version);
+                
+                if(isNaN(additionalVersion)){
+                    additionalVersion = 0;
+                }
+                else{
+                    additionalVersion++;
+                }
+               
+                //combine versions
+                var version = packageJson.version + '.' + additionalVersion;
+                
+                //read licens.js file
+                var license = fs.readFileSync('src/licenses/license.js', 'utf8');
+                var year = (new Date()).getFullYear();
+                var updateLicense = license.replace('##year##', year).replace('##version##', version);
+                
+                //create output js file
+                console.log('Creating output file: ' + config.dist);
+                fs.writeFileSync(config.dist, updateLicense + result, 'utf8');	
+                
+                //update version in the config file
+                config.version = additionalVersion;
+				var configJson = JSON.stringify(config, null, '\t');
+                fs.writeFileSync(configPath, configJson, 'utf8');	
             }
         }
 
