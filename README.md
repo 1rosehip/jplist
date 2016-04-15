@@ -127,10 +127,15 @@ npm run jscore
 
 To build any control: 
 ```
-node ./build/closure/compile.js path-to-control-config-file
+node ./build/closure/rebuild-js.js path-to-control-config-file
 
 //for example: 
-node ./build/closure/compile.js src/textbox-filter/js/config.json
+node ./build/closure/rebuild-js.js src/textbox-filter/js/config.json
+```
+
+To rebuild jplist.core.min.js and all controls from sources: 
+```
+node ./build/closure/rebuild-js-all.js
 ```
 
 To run **jshint** on jPList sources:

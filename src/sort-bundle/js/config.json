@@ -1,14 +1,15 @@
 {
-    "dist": "dist/js/jplist.sort-bundle.min.js",
-    "src": [
-        "src/sort-bundle/js/default-sort/default-sort-view.js",
-        "src/sort-bundle/js/default-sort/default-sort-dto.js",
-        "src/sort-bundle/js/dropdown/sort-select-view.js",
-        "src/sort-bundle/js/dropdown/sort-dropdown-view.js",
-        "src/sort-bundle/js/dropdown/dto/dropdown-sort-dto.js"       
-    ],
-    "externs": [
-        "build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
-        "build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
-    ]
+	"dist": "dist/js/jplist.sort-bundle.min.js",
+	"src": [
+		"src/sort-bundle/js/default-sort/default-sort-view.js",
+		"src/sort-bundle/js/default-sort/default-sort-dto.js",
+		"src/sort-bundle/js/dropdown/sort-select-view.js",
+		"src/sort-bundle/js/dropdown/sort-dropdown-view.js",
+		"src/sort-bundle/js/dropdown/dto/dropdown-sort-dto.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+		"build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+	],
+	"version": 0
 }
