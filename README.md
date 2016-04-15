@@ -133,7 +133,7 @@ node ./build/closure/rebuild-js.js path-to-control-config-file
 node ./build/closure/rebuild-js.js src/textbox-filter/js/config.json
 ```
 
-To rebuild jplist.core.min.js and all controls from sources: 
+To rebuild jplist.core.min.js and all controls: 
 ```
 node ./build/closure/rebuild-js-all.js
 ```
@@ -146,6 +146,11 @@ npm run lint
 To create **jplist.core.min.css** from sources: 
 ```
 npm run csscore
+```
+
+To create **jplist.demo-pages.min.css** from sources: 
+```
+npm run cssdemo
 ```
 
 To create minified css for any control: 
