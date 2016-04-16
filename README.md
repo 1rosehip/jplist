@@ -118,6 +118,14 @@ npm install jplist
 - [jPList with Fancybox](https://jplist.com/otherexamples/jplist-with-fancybox) - example of jPList with lightbox
 - [Large Amount of Data](https://jplist.com/otherexamples/large-amount-of-data-demo) - demo with 1000 items on the page
 
+##[CDN](#cdn)
+
+jPList is available on **cdnjs**:
+- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js)
+- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css)
+- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css)
+- See full list of available js / css files on [cdnjs](https://cdnjs.com/libraries/jplist)
+
 ##[Build Sources](#build-sources)
 
 To build **jplist.core.min.js** from sources: 
