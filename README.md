@@ -180,7 +180,7 @@ node ./build/closure/get-js-files-list.js src/core/js/config.json --type=files
 //list of github raw urls
 node ./build/closure/get-js-files-list.js src/core/js/config.json --type=github
 
-//for any control, type can be: script, files or github
+//for any control; type can be: script, files or github
 node ./build/closure/get-js-files-list.js src/control-folder-name/js/config.json --type=files
 
 //for example
