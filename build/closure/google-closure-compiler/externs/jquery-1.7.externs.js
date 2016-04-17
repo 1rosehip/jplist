@@ -1073,15 +1073,3 @@ google.maps.geometry.spherical = {};
 google.maps.geometry.spherical.computeDistanceBetween = function(from, to, opt_radius) {};
 
 var JSON;
-
-/**
-* @param {string} text
-* @return {boolean}
-*/
-String.prototype.startsWith = function(text){}
-
-/**
-* @param {string} text
-* @return {boolean}
-*/
-String.prototype.endsWith = function(text){}
