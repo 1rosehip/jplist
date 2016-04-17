@@ -20,7 +20,6 @@
 ### Data Sources
 - [PHP + MySQL] (https://github.com/no81no/jplist-php-mysql)
 - [ASP.NET + Sql Server](https://github.com/no81no/jplist-asp-net)
-- [WordPress plugin](https://github.com/no81no/jplist-github-wordpress-plugin)
 - [Groovy, Grails and MySQL](https://github.com/no81no/jplist-grails-groovy)
 - [NodeJS, Express and MySQL](https://github.com/no81no/jplist-nodejs-express)
 - [PHP + SQLite] (https://github.com/no81no/jplist/tree/master/jplist-data-sources/php-sqlite)
@@ -71,9 +70,6 @@ npm install jplist
 - [UL LI Demo](https://jplist.com/layoutexamples/ul-li) - unordered list demo with all default actions like sort, pagination, etc. Added views control.
 - [Views Control (List, Grid and Thumbs Views)](https://jplist.com/layoutexamples/list-grid) - demo with control that switches between views: list, grid or thumbs
 - [Demo With Sticky Panel](https://jplist.com/layoutexamples/sticky-panel) - demo with sticky panel
-
-### CMS
-- [WordPress Plugin](https://jplist.com/home/jplist-wordpress-version)
 
 ### Data Sources
 - [PHP + MySQL Example](https://jplist.com/datasourcesexamples/php-mysql-demo) - server side demo using PHP and MySQL database
