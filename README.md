@@ -169,6 +169,24 @@ lessc -x src/control-folder-name/css/styles.less > dist/css/jplist.control-folde
 lessc -x src/filter-toggle-bundle/css/styles.less > dist/css/jplist.filter-toggle-bundle.min.css
 ```
 
+To get a list of source files (to be included in HTML or for other purpose):
+```
+//list of sources as HTML scripts
+npm run corefiles
+
+//simple source list
+node ./build/closure/get-js-files-list.js src/core/js/config.json --type=files
+
+//list of github raw urls
+node ./build/closure/get-js-files-list.js src/core/js/config.json --type=github
+
+//for any control, type can be: script, files or github
+node ./build/closure/get-js-files-list.js src/control-folder-name/js/config.json --type=files
+
+//for example
+node ./build/closure/get-js-files-list.js src/filter-dropdown-bundle/js/config.json --type=script
+```
+
 ##[Browser Compatibility](#browser-compat)
 - Internet Explorer 8+
 - Firefox
