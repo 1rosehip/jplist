@@ -180,9 +180,14 @@ node ./build/closure/get-js-files-list.js src/filter-dropdown-bundle/js/config.j
 - Safari
 - Opera
 
-##[jQuery Compatibility](jquery-compat)
+##[jQuery Compatibility](#jquery-compat)
 - Works with jQuery from [version 1.7](http://code.jquery.com/jquery-1.7.min.js)
 - Works with jQuery 2.x versions
+
+##[Donations](#donation)
+If you find jPList useful, please consider making a donation to support project development. Thank you for your help!
+
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N54PFNPQ8ZJSU)
 
 ##[Links](#links)
 - [Project Home](http://jplist.com)
