@@ -50,16 +50,6 @@
 - jQuery UI range slider filter
 - jQuery UI date picker range filter
 
-## NodeJS
-
-Sample project with **NodeJS**, **Express** and **MySQL** database can fe found [here](https://github.com/no81no/jplist/tree/master/nodejs-express). The data is in JSON format, and it's rendered on the client by Handlebars templates. Any other javascript template library can be used instead of Handlebars, for example Mustache templates, Underscore templates etc. 
-
-[NPM package](https://www.npmjs.org/package/jplist)
-
-```
-npm install jplist
-```
-
 ##[Examples](#examples)
 
 ###Layout Examples
