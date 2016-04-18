@@ -183,9 +183,12 @@
 				
 		//get current statuses
 		statuses = context.controls.getStatuses(isDefault);
-		
-		//trigger knownStatusesChanged event
-		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);
+        
+        if(statuses.length > 0){
+            
+            //trigger knownStatusesChanged event
+            context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);
+        }
 	};
 	
 	/**

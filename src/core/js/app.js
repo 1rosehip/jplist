@@ -402,7 +402,7 @@
 		}
 		
 		//send 'init' event
-		context.observer['trigger'](context.observer.events.init, []);
+		context.observer.trigger(context.observer.events.init, []);
 		
 		return jQuery.extend(this, context); 
 	};
