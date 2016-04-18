@@ -151,11 +151,13 @@
 		
 		context.$control.on('change', function(){
 			
+            var status = getStatus(context, false);
+            
 			//add status to the history object
-			context.history.addStatus(getStatus(context, false));
+			context.history.addStatus(status);
 			
 			//force render statuses event
-			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+			context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 		});
 		
 	};
