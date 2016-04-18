@@ -215,7 +215,8 @@
         context.params.$buttons.on('click', function(){
 
 			var $button
-				,selected;
+				,selected
+                ,status;
 
 			//get button
 			$button = jQuery(this);
@@ -236,11 +237,13 @@
 				$button.data('selected', true);
 			}
 
+            status = getStatus(context, false);
+            
 			//save last status in the history
-			context.history.addStatus(getStatus(context, false));
+			context.history.addStatus(status);
 			
 			//render statuses
-			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+			context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 
 		});
 	};
