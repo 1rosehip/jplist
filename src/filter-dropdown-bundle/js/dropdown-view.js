@@ -144,8 +144,7 @@
 	*/
 	var setByDeepLink = function(context, params){
 	
-		var param
-			,status;
+		var param;
 		
 		if(params){
 			for(var i=0; i<params.length; i++){
@@ -221,10 +220,7 @@
 		context.$control.find('li').off('click').on('click', function(){
 			
 			var status
-				,dataPath
-				,dataNumber
-				,$li = jQuery(this)
-				,$span;
+				,$li = jQuery(this);
 						
 			//update selected
 			updateSelected(context, $li);

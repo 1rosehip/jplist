@@ -89,8 +89,7 @@
 	*/
 	var setByDeepLink = function(context, params){
 	
-		var param
-			,status;
+		var param;
 		
 		if(params){
 			for(var i=0; i<params.length; i++){
