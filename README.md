@@ -21,7 +21,6 @@
 - [PHP + MySQL] (https://github.com/no81no/jplist-php-mysql)
 - [ASP.NET + Sql Server](https://github.com/no81no/jplist-asp-net)
 - [NodeJS, Express and MySQL](https://github.com/no81no/jplist-nodejs-express)
-- [PHP + SQLite] (https://github.com/no81no/jplist/tree/master/jplist-data-sources/php-sqlite)
 
 ### Sorting
 - Ascending and descending sorting
