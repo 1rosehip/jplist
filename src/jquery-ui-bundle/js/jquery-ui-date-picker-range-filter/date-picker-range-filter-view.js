@@ -24,24 +24,37 @@
 		//init empty onchacnge
 		$prev.off('change').change(function(){
 		
+            var status;
+            
 			if(jQuery.trim(jQuery(this).val()) === ''){
-				context.history.addStatus(getStatus(context, false));
-				context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+                
+                status = getStatus(context, false);
+                
+				context.history.addStatus(status);
+				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 			}
 		});
 		
 		$next.off('change').change(function(){
 		
+            var status;
+            
 			if(jQuery.trim(jQuery(this).val()) === ''){
-				context.history.addStatus(getStatus(context, false));
-				context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+                
+                status = getStatus(context, false);
+                
+				context.history.addStatus(status);
+				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 			}
 		});
 		
 		//init options
         options['onSelect'] = function(dateText, inst){
-			context.history.addStatus(getStatus(context, false));
-			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+            
+            var status = getStatus(context, false);
+            
+			context.history.addStatus(status);
+			context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 		};
 				
 		//start prev datepicker
