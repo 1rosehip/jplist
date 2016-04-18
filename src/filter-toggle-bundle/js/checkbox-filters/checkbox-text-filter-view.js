@@ -196,11 +196,13 @@
 
 		context.params.$checkboxes.on('change', function(){
 		
+            var status = getStatus(context, false);
+            
 			//save last status in the history
-			context.history.addStatus(getStatus(context, false));
+			context.history.addStatus(status);
 			
 			//render statuses
-			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+			context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 		});
 	};
 	
