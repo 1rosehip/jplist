@@ -145,10 +145,12 @@
 				
 				e.preventDefault();
 				
+                var status = getStatus(context, false);
+                
 				//update last status
-				context.history.addStatus(getStatus(context, false));
+				context.history.addStatus(status);
 			
-				context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 				
 				return false;
 			});
@@ -156,11 +158,13 @@
 		else{
 						
 			context.$control.on(context.params.eventName, function(){	
-							
+					
+                var status = getStatus(context, false);
+                
 				//update last status
-				context.history.addStatus(getStatus(context, false));
+				context.history.addStatus(status);
 			
-				context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 			});
 		}		
 	};
