@@ -21,7 +21,7 @@ var compiler = function(configPath){
                 // Options in the API exclude the "--" prefix
                 compilation_level: 'SIMPLE_OPTIMIZATIONS' //WHITESPACE_ONLY, SIMPLE_OPTIMIZATIONS, ADVANCED_OPTIMIZATIONS
 
-                ,warning_level: 'VERBOSE' //QUIET | DEFAULT |  VERBOSE
+                ,warning_level: 'DEFAULT' //QUIET | DEFAULT |  VERBOSE
 
                 // Capitalization does not matter 
                 //,Formatting: "PRETTY_PRINT"
