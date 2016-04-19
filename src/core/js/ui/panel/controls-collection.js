@@ -241,26 +241,32 @@
 	};
 	
 	/**
-	* get statuses and merge them with the given status
-	* @param {Object} context
-	* @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
-	*/
-	var merge = function(context, isDefault, status){
+	 * get statuses and merge them with the given status
+	 * @param {Object} context
+	 * @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesToMerge
+	 */
+	var merge = function(context, isDefault, statusesToMerge){
 		
 		var statuses
 			,statusesCollection;
-		
-		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, []);		
-		
-		//get current statuses
-		statuses = getStatuses(context, isDefault);
-		
-		for(var i = 0; i<statuses.length; i++){
-			statusesCollection.add(statuses[i], false);
-		}
-		
-		statusesCollection.add(status, true);
+
+        statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, []);
+
+        //get current statuses
+        statuses = getStatuses(context, isDefault);
+
+        for(var i = 0; i<statuses.length; i++){
+            statusesCollection.add(statuses[i], false);
+        }
+
+        if(statusesToMerge){
+
+            for(var j=0; j<statusesToMerge.length; j++){
+
+                statusesCollection.add(statusesToMerge[j], true);
+            }
+        }
 				
 		return statusesCollection.toArray();
 	};
@@ -363,10 +369,10 @@
 	/**
 	* get statuses and merge them with the given status
 	* @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.merge = function(isDefault, status){		
-		return merge(this, isDefault, status);
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.merge = function(isDefault, statuses){
+		return merge(this, isDefault, statuses);
 	};
 	
 	/**

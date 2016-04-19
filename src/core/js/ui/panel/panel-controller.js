@@ -218,23 +218,15 @@
 	};
 	
 	/**
-	* get all statuses and merge them with the given status, then send build statuses event
-	* @param {Object} context
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
-	*/
-	var mergeStatuses = function(context, status){
+	 * get all statuses and merge them with the given statuses, then send build statuses event
+	 * @param {Object} context
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesToMerge
+     * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	 */
+	var mergeStatuses = function(context, statusesToMerge){
 		
-		var IS_DEFAULT = false
-			,statuses;
-		
-		if(status.isAnimateToTop){
-			animateToTop(context);
-		}
-		
-		statuses = context.controls.merge(IS_DEFAULT, status);
-				
-		//render html by statuses
-		context.observer.trigger(context.observer.events.knownStatusesChanged, [statuses]);
+		var IS_DEFAULT = false;
+		return context.controls.merge(IS_DEFAULT, statusesToMerge);
 	};
 			
 	/**
@@ -340,19 +332,21 @@
 	};
 	
 	/**
-	* unknown status / statuses changed
+	* get panel controls statuses
 	* @param {boolean} isDefault - should it render events by their default statuses
+	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.unknownStatusesChanged = function(isDefault){
-		unknownStatusesChanged(this, isDefault);
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.getStatuses = function(isDefault){
+		return this.controls.getStatuses(isDefault);
 	};
 
 	/**
-	* get all statuses and merge them with the given status, then send build statuses event
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
-	*/
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.mergeStatuses = function(status){
-		mergeStatuses(this, status);
+	 * merge give status with the other controls statuses
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+     * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	 */
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.mergeStatuses = function(statuses){
+		return mergeStatuses(this, statuses);
 	};
 	
 	/**

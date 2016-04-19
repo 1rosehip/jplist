@@ -230,64 +230,101 @@
 				
 		//a given list of statuses is changed
 		//@param {Object} event
-		//@param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-		context.observer.on(context.observer.events.knownStatusesChanged, function(event, statuses){
-			
-			context.controller.renderStatuses(statuses);
-		});	
+		//@param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesToMerge
+		context.observer.on(context.observer.events.knownStatusesChanged, function(event, statusesToMerge){
+
+            var mergedStatuses;
+
+            if(statusesToMerge){
+
+                //update history
+                //context.history.addStatus(status);
+
+                /*
+                 if(status.isAnimateToTop){
+                 animateToTop(context);
+                 }
+                 */
+
+                mergedStatuses = context.panel.mergeStatuses(statusesToMerge);
+
+                if(mergedStatuses && mergedStatuses.length > 0){
+
+                    context.controller.renderStatuses(mergedStatuses);
+                }
+            }
+		});
+
+        /**
+         * one or more of control statuses are changed
+         */
+        context.observer.on(context.observer.events.unknownStatusesChanged, function(event, isDefault){
+
+            var statuses;
+
+            //get current statuses
+            statuses = context.panel.getStatuses(isDefault);
+
+            if(statuses.length > 0){
+
+                context.controller.renderStatuses(statuses);
+            }
+        });
+
+        /**
+         * one given status is changed
+         */
+        context.observer.on(context.observer.events.statusChanged, function(event, status){
+
+            var statuses;
+
+            if(status){
+
+                //update history
+                context.history.addStatus(status);
+
+                /*
+                 if(status.isAnimateToTop){
+                 animateToTop(context);
+                 }
+                 */
+
+                statuses = context.panel.mergeStatuses([status]);
+
+                if(statuses && statuses.length > 0){
+
+                    context.controller.renderStatuses(statuses);
+                }
+            }
+        });
 		
 		/**
-		* a given statuses list was applied
-		*/
-		context.observer.on(context.observer.events.statusesAppliedToList, function(event, collection, statuses){	
-			
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'panel statusesAppliedToList -> setControlsStatuses: ', statuses);
+		 * a given statuses were applied to list
+		 */
+		context.observer.on(context.observer.events.statusesAppliedToList, function(event, collection, statuses){
 		
 			context.panel.setStatuses(statuses);
 			
 			//try change url according to controls statuses		
 			jQuery.fn.jplist.dal.services.DeepLinksService.updateUrlPerControls(context.options, context.panel.getDeepLinksURLPerControls());
 		});
-		
-		/**
-		* one of control statuses was changed
-		*/
-		context.observer.on(context.observer.events.unknownStatusesChanged, function(event, isDefault){
-			
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'panel statusesChanged, isDefault: ', isDefault);
-						
-			context.panel.unknownStatusesChanged(isDefault);
-		});		
-		
-		/**
-		* on ios button click -> toggle next panel
-		*/
-		context.$root.find(context.options.iosBtnPath).on('click', function(){			
+
+        /**
+         * statuses were changed by deep links
+         */
+        context.observer.on(context.observer.events.statusesChangedByDeepLinks, function(event, newStatuses, params){
+
+            context.panel.statusesChangedByDeepLinks(newStatuses, params);
+        });
+
+        /**
+		 * on ios button click -> toggle next panel
+		 */
+		context.$root.find(context.options.iosBtnPath).on('click', function(){
+
 			jQuery(this).next(context.options.panelPath).toggleClass('jplist-ios-show');
 		});
-		
-		/**
-		* one of statuses is changed
-		*/
-		context.observer.on(context.observer.events.statusChanged, function(event, status){	
-			
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'panel statusChanged: ', status);
-			
-			//update last status
-			context.history.addStatus(status);
-			
-			context.panel.mergeStatuses(status);
-		});
-		
-		/**
-		* on 'statuses changed by deep links' event
-		*/
-		context.observer.on(context.observer.events.statusesChangedByDeepLinks, function(event, newStatuses, params){
-			context.panel.statusesChangedByDeepLinks(newStatuses, params);					
-		});	
+
 	};
 	
 	/** 
@@ -402,7 +439,7 @@
 		}
 		
 		//send 'init' event
-		context.observer.trigger(context.observer.events.init, []);
+		//context.observer.trigger(context.observer.events.init, []);
 		
 		return jQuery.extend(this, context); 
 	};

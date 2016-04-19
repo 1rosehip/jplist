@@ -76,7 +76,7 @@ Statuses Collection (Data Transfer Objects)
 	* add and merge status
 	* @param {Object} context
 	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
-	* @param {boolean} force - if this status should be prefered on other statuses
+	* @param {boolean} force - if this status should be preferred over other statuses
 	*/
 	var add = function(context, status, force){
 		
