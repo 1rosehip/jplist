@@ -3,7 +3,14 @@
 
 **jPList** is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc). Get started at [jplist.com](http://jplist.com)
 
-###[Common Features](#common-features)
+## Current stable **jPList 5.2.0** version  is available on **cdnjs**:
+
+- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js)
+- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css)
+- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css)
+- See full list of available js / css files on [cdnjs](https://cdnjs.com/libraries/jplist)
+
+## [Common Features](#common-features)
 - Works with any content (tables, lists, div elements etc...)
 - Works with JavaScript templates like Handlebars, Mustache etc.
 - Supports XML + XSLT
@@ -14,15 +21,6 @@
 - Works in all major browsers
 - Annotated source code
 - Solid documentation
-
-##[CDN](#cdn)
-
-Current stable **jPList 5.2.0** version  is available on **cdnjs**:
-
-- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js)
-- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css)
-- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css)
-- See full list of available js / css files on [cdnjs](https://cdnjs.com/libraries/jplist)
 
 ### Sorting
 - Ascending and descending sorting
