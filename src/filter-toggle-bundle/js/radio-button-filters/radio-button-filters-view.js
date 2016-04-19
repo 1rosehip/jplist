@@ -129,7 +129,7 @@
 	var setByDeepLink = function(context, params){
 	
 		//render statuses again
-		context.observer.trigger(context.observer.events.statusChanged, [getStatus(context, false)]);
+		context.observer.trigger(context.observer.events.knownStatusesChanged, [[getStatus(context, false)]]);
 	};
 	
 	/**

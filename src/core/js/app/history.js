@@ -36,6 +36,18 @@
 			context.statusesQueue.shift();
 		}		
 	};
+
+    /**
+     * add statuses to the history
+     * @param {Object} context
+     * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+     */
+    var addStatuses = function(context, statuses){
+
+        for(var i=0; i<statuses.length; i++){
+            addStatus(context, statuses[i]);
+        }
+    };
 	
 	/**
 	* remove the last status from the history and return it
@@ -74,7 +86,7 @@
 	};
 	
 	/**
-	* add list of statuses to the history
+	* add list statuses to the history
 	* @param {Object} context
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} list
 	*/
@@ -132,6 +144,14 @@
 	jQuery.fn.jplist.app.History.prototype.addStatus = function(status){
 		addStatus(this, status);
 	};
+
+    /**
+     * add statuses to the history
+     * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+     */
+    jQuery.fn.jplist.app.History.prototype.addStatuses = function(statuses){
+        addStatuses(this, statuses);
+    };
 	
 	/**
 	* get last status from the history
@@ -156,13 +176,13 @@
 	jQuery.fn.jplist.app.History.prototype.getLastList = function(){
 		return getLastList(this);
 	};
-	
+
 	/**
 	* add list of statuses to the history
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} list
 	*/
-	jQuery.fn.jplist.app.History.prototype.addList = function(list){	
-		addList(this, list);	
+	jQuery.fn.jplist.app.History.prototype.addList = function(list){
+		addList(this, list);
 	};
 	
 	/**

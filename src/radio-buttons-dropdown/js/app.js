@@ -290,7 +290,7 @@
 			context.history.addStatus(getStatus(context, false));
 				
 			//render statuses
-			context.observer.trigger(context.observer.events.statusChanged, [getStatus(context, false)]);
+			context.observer.trigger(context.observer.events.knownStatusesChanged, [[getStatus(context, false)]]);
 		});
 		
 		/**

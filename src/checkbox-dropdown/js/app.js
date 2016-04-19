@@ -283,7 +283,7 @@
 			var status = getStatus(context, false);
 						
 			//render statuses
-			context.observer.trigger(context.observer.events.statusChanged, [status]);
+			context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 		});
 	};
 	

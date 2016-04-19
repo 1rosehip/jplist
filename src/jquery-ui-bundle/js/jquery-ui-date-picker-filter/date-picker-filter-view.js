@@ -19,7 +19,7 @@
 				status = getStatus(context, false);
 				
 				context.history.addStatus(status);
-				context.observer.trigger(context.observer.events.statusChanged, [status]);
+				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 			}
 		});
 		
@@ -27,7 +27,7 @@
         datePickerOptions['onSelect'] = function(dateText, inst){
 			
 			context.history.addStatus(getStatus(context, false));
-			context.observer.trigger(context.observer.events.statusChanged, [getStatus(context, false)]);
+			context.observer.trigger(context.observer.events.knownStatusesChanged, [[getStatus(context, false)]]);
 		};
 		
 		//start datepicker

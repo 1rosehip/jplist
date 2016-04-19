@@ -238,7 +238,7 @@
             if(statusesToMerge){
 
                 //update history
-                //context.history.addStatus(status);
+                context.history.addStatuses(statusesToMerge);
 
                 /*
                  if(status.isAnimateToTop){
@@ -268,33 +268,6 @@
             if(statuses.length > 0){
 
                 context.controller.renderStatuses(statuses);
-            }
-        });
-
-        /**
-         * one given status is changed
-         */
-        context.observer.on(context.observer.events.statusChanged, function(event, status){
-
-            var statuses;
-
-            if(status){
-
-                //update history
-                context.history.addStatus(status);
-
-                /*
-                 if(status.isAnimateToTop){
-                 animateToTop(context);
-                 }
-                 */
-
-                statuses = context.panel.mergeStatuses([status]);
-
-                if(statuses && statuses.length > 0){
-
-                    context.controller.renderStatuses(statuses);
-                }
             }
         });
 		

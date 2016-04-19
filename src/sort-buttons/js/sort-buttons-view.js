@@ -283,7 +283,7 @@
 			status = getStatus(context, false);
 			
 			//start sorting
-			context.observer.trigger(context.observer.events.statusChanged, [status]);
+			context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 		});
 	};
 	

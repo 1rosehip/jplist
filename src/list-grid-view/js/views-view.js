@@ -111,7 +111,7 @@
 				context.params.currentView = context.params.defaultView;
 				
 				//force build statuses status event	
-				context.observer.trigger(context.observer.events.statusChanged, [status]);
+				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 			}
 			else{			
 				context.$root.addClass(status.data.view);
