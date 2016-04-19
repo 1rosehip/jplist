@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>		
-		<title>jplist.core.min.js | jPList - jQuery Data Grid Controls</title>
+		<title>Text Filter | jPList - jQuery Data Grid Controls</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -69,6 +69,10 @@
         <script src="../../../../src/core/js/dal/services/cookies.js"></script>
         <script src="../../../../src/core/js/dal/services/localstorage.js"></script>
         <script src="../../../../src/core/js/dal/services/uri.js"></script>
+        
+        <!-- textbox filter -->
+        <script src="../../../../src/textbox-filter/js/textbox-view.js"></script>
+        <script src="../../../../src/textbox-filter/js/textbox-dto.js"></script>
 	
 		<!-- jPList start -->
 		<script>
@@ -146,7 +150,7 @@
 								<img title="jPList - jQuery Data Grid Controls" alt="jPList - jQuery Data Grid Controls" src="http://jplist.com/content/img/common/rocket.png" />
 								<a title="" href="http://jplist.com">jPList - jQuery Data Grid Controls</a>
 							</p>
-							<h1 class="h1-30-normal">jplist.core.min.js</h1>
+							<h1 class="h1-30-normal">Text Filter</h1>
 						</div>
 
 					</div>
@@ -169,7 +173,26 @@
 					
 					<!-- panel -->
 					<div class="jplist-panel box panel-top">						
-											
+								
+						<!-- filter by title -->
+                        <div class="text-filter-box">
+
+                           <i class="fa fa-pencil jplist-icon"></i>
+
+                           <!--[if lt IE 10]>
+                           <div class="jplist-label">Filter by Title:</div>
+                           <![endif]-->
+
+                           <input 
+                             data-path=".title" 
+                             type="text" 
+                             value="" 
+                             placeholder="Filter by Title" 
+                             data-control-type="textbox" 
+                             data-control-name="title-filter" 
+                             data-control-action="filter"
+                           />
+                        </div>							
 						
 					</div>				 
 					
@@ -903,8 +926,39 @@
 					<div class="box jplist-no-results text-shadow align-center">
 						<p>No results found</p>
 					</div>
-					
-				</div>
+
+                    <!-- ios button: show/hide panel -->
+                    <div class="jplist-ios-button">
+                        <i class="fa fa-sort"></i>
+                        jPList Actions
+                    </div>
+
+                    <!-- panel -->
+                    <div class="jplist-panel box bottom">
+
+                        <!-- filter by title -->
+                        <div class="text-filter-box">
+
+                            <i class="fa fa-pencil jplist-icon"></i>
+
+                            <!--[if lt IE 10]>
+                            <div class="jplist-label">Filter by Title:</div>
+                            <![endif]-->
+
+                            <input
+                                    data-path=".title"
+                                    type="text"
+                                    value=""
+                                    placeholder="Filter by Title"
+                                    data-control-type="textbox"
+                                    data-control-name="title-filter"
+                                    data-control-action="filter"
+                            />
+                        </div>
+
+                    </div>
+
+                </div>
 				
 				<!--<><><><><><><><><><><><><><><><><><><><><><><><><><> DEMO END <><><><><><><><><><><><><><><><><><><><><><><><><><>-->				
 			</div>		
