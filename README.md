@@ -125,6 +125,15 @@ node ./build/closure/rebuild-js.js path-to-control-config-file
 node ./build/closure/rebuild-js.js src/textbox-filter/js/config.json
 ```
 
+To build in verbose mode: 
+```
+//core js
+npm run jscore -- --verb
+
+//control or bundle 
+node ./build/closure/rebuild-js.js src/textbox-filter/js/config.json --verb
+```
+
 To rebuild jplist.core.min.js and all controls: 
 ```
 node ./build/closure/rebuild-js-all.js
