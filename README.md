@@ -17,10 +17,14 @@
 - Annotated source code
 - Solid documentation
 
-### Data Sources
-- [PHP + MySQL] (https://github.com/no81no/jplist-php-mysql)
-- [ASP.NET + Sql Server](https://github.com/no81no/jplist-asp-net)
-- [NodeJS, Express and MySQL](https://github.com/no81no/jplist-nodejs-express)
+##[CDN](#cdn)
+
+Current stable **jPList 5.2.0** version  is available on **cdnjs**:
+
+- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js)
+- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css)
+- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css)
+- See full list of available js / css files on [cdnjs](https://cdnjs.com/libraries/jplist)
 
 ### Sorting
 - Ascending and descending sorting
@@ -47,6 +51,11 @@
 - Counter Controls
 - jQuery UI range slider filter
 - jQuery UI date picker range filter
+
+### Data Sources
+- [PHP + MySQL] (https://github.com/no81no/jplist-php-mysql)
+- [ASP.NET + Sql Server](https://github.com/no81no/jplist-asp-net)
+- [NodeJS, Express and MySQL](https://github.com/no81no/jplist-nodejs-express)
 
 ##[Examples](#examples)
 
@@ -101,14 +110,6 @@
 - [Fade Animation](http://jplist.com/otherexamples/fade-animation) - example page of fade animation in jPList
 - [jPList with Fancybox](http://jplist.com/otherexamples/jplist-with-fancybox) - example of jPList with lightbox
 - [Large Amount of Data](http://jplist.com/otherexamples/large-amount-of-data-demo) - demo with 1000 items on the page
-
-##[CDN](#cdn)
-
-jPList is available on **cdnjs**:
-- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js)
-- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css)
-- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css)
-- See full list of available js / css files on [cdnjs](https://cdnjs.com/libraries/jplist)
 
 ##[Build Sources](#build-sources)
 
