@@ -6,4 +6,5 @@ if(!process.argv || process.argv.length < 3){
 }
 
 var configPath = process.argv[2];
-compile(configPath);
+var additionalArgs = process.argv[3];
+compile(configPath, additionalArgs);

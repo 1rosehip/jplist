@@ -7,7 +7,7 @@
     "dist/css/jplist.core.min.css"
   ],
   "scripts": {
-    "jscore": "node ./build/closure/rebuild-js.js src/core/js/config.json || true",
+    "jscore": "node ./build/closure/rebuild-js.js src/core/js/config.json",
     "lint": "jshint --config build/jshint/config.json src/*/js/*.js || true",
     "csscore": "lessc -x src/core/css/styles.less > dist/css/jplist.core.min.css",
     "cssdemo": "lessc -x src/demo-pages/css/styles.less > dist/css/jplist.demo-pages.min.css",

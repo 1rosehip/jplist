@@ -3,14 +3,20 @@ var closureCompiler = require('closurecompiler');
 
 /**
 * compiler
-* @param {string} configPath - the path to ./src/js-core-or-control/js/config.js file
-*/
-var compiler = function(configPath){
+ * @param {string} configPath - the path to ./src/js-core-or-control/js/config.js file
+ * @param {string} additionalArgs
+ */
+var compiler = function(configPath, additionalArgs){
 
     //load config.js file
     var config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    var warningLevel = 'DEFAULT'; //QUIET | DEFAULT |  VERBOSE
 
     if(config){
+
+        if(additionalArgs && additionalArgs.indexOf('--verb') !== -1){
+            warningLevel = 'VERBOSE';
+        }
 
         //start compilation
         closureCompiler.compile(
@@ -21,7 +27,7 @@ var compiler = function(configPath){
                 // Options in the API exclude the "--" prefix
                 compilation_level: 'SIMPLE_OPTIMIZATIONS' //WHITESPACE_ONLY, SIMPLE_OPTIMIZATIONS, ADVANCED_OPTIMIZATIONS
 
-                ,warning_level: 'DEFAULT' //QUIET | DEFAULT |  VERBOSE
+                ,warning_level: warningLevel
 
                 // Capitalization does not matter 
                 //,Formatting: "PRETTY_PRINT"
@@ -80,6 +86,6 @@ var compiler = function(configPath){
 /**
 * entry point
 */
-module.exports = function(configPath) {
-    compiler(configPath);
+module.exports = function(configPath, additionalArgs) {
+    compiler(configPath, additionalArgs);
 };
