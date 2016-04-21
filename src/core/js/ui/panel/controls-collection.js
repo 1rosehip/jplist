@@ -1,17 +1,16 @@
 /**
 * controls collection
-* \core\js\ui\panel\controls-collection.js
 */
 ;(function() {
 	'use strict';		
 			
 	/**
-	* Find controls with the same name
-	* @param {Object} context
-	* @param {?string} name
-	* @return {Array.<Object>}
-	* @private
-	*/
+	 * Find controls with the same name
+	 * @param {Object} context
+	 * @param {?string} name
+	 * @return {Array.<Object>}
+	 * @private
+	 */
 	var findControlsByName = function(context, name){
 		
 		var sameControls = []
@@ -31,13 +30,13 @@
 	};
 		
 	/**
-	* Find controls with the same name and action
-	* @param {Object} context
-	* @param {?string} name
-	* @param {?string} action
-	* @return {Array.<Object>}
-	* @private
-	*/
+	 * Find controls with the same name and action
+	 * @param {Object} context
+	 * @param {?string} name
+	 * @param {?string} action
+	 * @return {Array.<Object>}
+	 * @private
+	 */
 	var findControlsByNameAction = function(context, name, action){
 		
 		var sameControls = []
@@ -57,10 +56,10 @@
 	};
 	
 	/**
-	* statuses change per deep links url / params
-	* @param {Object} context
-	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
-	*/
+	 * statuses change per deep links url / params
+	 * @param {Object} context
+	 * @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	 */
 	var statusesChangedByDeepLinks = function(context, params){
 		
 		var control;
@@ -80,17 +79,19 @@
 	};
 	
 	/**
-	* set controls statuses by deep link params
-	* @param {Object} context
-	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
-	*/
-	var setDeepLinks = function(context, params){
+	 * set controls statuses by deep link params
+	 * @param {Object} context
+	 * @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+	 */
+	var setDeepLinks = function(context, params, options, observer){
 		
 		var param
 			,controlsWithSameName
 			,control
 			,status
-			,statusesByDeepLinkCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, [])
+			,statusesByDeepLinkCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, [])
 			,isDefault = false
 			,i;
 		
@@ -120,21 +121,21 @@
 		}
 				
 		//send build statuses event
-		context.observer.trigger(context.observer.events.knownStatusesChanged, [statusesByDeepLinkCollection.toArray()]);
+		observer.trigger(observer.events.knownStatusesChanged, [statusesByDeepLinkCollection.toArray()]);
 		
 		//send 'statuses changed by deep links' event
-		context.observer.trigger(context.observer.events.statusesChangedByDeepLinks, [
+		observer.trigger(observer.events.statusesChangedByDeepLinks, [
 			,statusesByDeepLinkCollection.toArray()
 			,params
 		]);	
 	};
 		
 	/**
-	* Set current statuses (for answer event)
-	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	* @param {boolean} isStorage - are statuses restored from storage	
-	*/
+	 * Set current statuses (for answer event)
+	 * @param {Object} context
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 * @param {boolean} isStorage - are statuses restored from storage
+	 */
 	var setStatuses = function(context, statuses, isStorage){
 		
 		var status
@@ -160,11 +161,12 @@
 	};
 	
 	/**
-	* get deep links url from controls
-	* @param {Object} context
-	* @return {string} url
-	*/
-	var getDeepLinksUrl = function(context){
+	 * get deep links url from controls
+	 * @param {Object} context
+	 * @return {string} url
+     * @param {string} delimiter1
+	 */
+	var getDeepLinksUrl = function(context, delimiter1){
 	
 		var control
 			,url = ''
@@ -193,18 +195,20 @@
 		}
 				
 		//init deep links url
-		url = deepLinksArr.join(context.options.delimiter1);
+		url = deepLinksArr.join(delimiter1);
 		
 		return url;
 	};
 	
 	/**
-	* Get current panel statuses
-	* @param {Object} context
-	* @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
-	*/
-	var getStatuses = function(context, isDefault){
+	 * Get current panel statuses
+	 * @param {Object} context
+	 * @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+	 * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	 */
+	var getStatuses = function(context, isDefault, options, observer){
 	
 		var statuses
 			,control
@@ -212,7 +216,7 @@
 			,index
 			,sameNameStatus;			
 		
-		statuses = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, []);
+		statuses = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, []);
 		
 		for(var i=0; i<context.controls.length; i++){
 		
@@ -235,7 +239,7 @@
 		}
 		
 		//debug info
-		jQuery.fn.jplist.info(context.options, 'getStatuses: ', statuses);
+		jQuery.fn.jplist.info(options, 'getStatuses: ', statuses);
 		
 		return statuses.toArray();
 	};
@@ -245,16 +249,18 @@
 	 * @param {Object} context
 	 * @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
 	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesToMerge
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
 	 */
-	var merge = function(context, isDefault, statusesToMerge){
+	var merge = function(context, isDefault, statusesToMerge, options, observer){
 		
 		var statuses
 			,statusesCollection;
 
-        statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, []);
+        statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, []);
 
         //get current statuses
-        statuses = getStatuses(context, isDefault);
+        statuses = getStatuses(context, isDefault, options, observer);
 
         for(var i = 0; i<statuses.length; i++){
             statusesCollection.add(statuses[i], false);
@@ -272,18 +278,20 @@
 	};
 	
 	/**
-	* Get panel paths
-	* @param {Object} context
-	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>}	
-	*/
-	var getPaths = function(context){
+	 * Get panel paths
+	 * @param {Object} context
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+	 * @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>}
+	 */
+	var getPaths = function(context, options, observer){
 	
 		var control
 			,paths = []
 			,pathsCollection;
 		
 		//init empty paths collection
-		pathsCollection = new jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection(context.options, context.observer);
+		pathsCollection = new jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection(options, observer);
 		
 		for(var i=0; i<context.controls.length; i++){
 		
@@ -305,13 +313,24 @@
 	};	
 		
 	/**
-	* add control
-	* @param {Object} context
-	* @param {jQueryObject} $control
-	*/
-	var add = function(context, $control){
-		
-		var control = context.controlFactory.create($control, context);
+	 * add control
+	 * @param {Object} context
+	 * @param {jQueryObject} $control
+     * @param {jQuery.fn.jplist.app.History} history
+     * @param {jQueryObject} $root
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+	 */
+	var add = function(context, $control, history, $root, options, observer){
+
+        var controlFactory
+            ,control;
+
+        //init control factory
+        controlFactory = new jQuery.fn.jplist.ui.panel.ControlFactory(options, observer, history, $root)
+
+        //create control
+        control = controlFactory.create($control, context);
 		
 		if(control){
 			
@@ -319,118 +338,125 @@
 			context.controls.push(control);
 		}
 	};
-	
+
 	/**
-	* get panel controls
-	* @param {Object} context
-	*/
-	var initControls = function(context){
-	
-		var $control;
-		
-		for(var i=0; i<context.$controls.length; i++){
-		
-			//get jquery control
-			$control = context.$controls.eq(i);
-			
-			//add control to the list
-			add(context, $control);
-		}
+	 * get panel controls
+	 * @param {Object} context
+     * @param {jQueryObject} $controls
+     * @param {jQuery.fn.jplist.app.History} history
+     * @param {jQueryObject} $root
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+	 */
+	var addList = function(context, $controls, history, $root, options, observer){
+
+        $controls.each(function(){
+
+            //add control to the list
+            add(context, jQuery(this), history, $root, options, observer);
+        });
 	};
 	
 	/** 
-	* Controls Collection
-	* @constructor 
-	* @param {Object} options - jplist user options	
-	* @param {Object} observer
-	* @param {jQuery.fn.jplist.app.History} history
-	* @param {jQueryObject} $root
-	* @param {jQueryObject} $controls
-	* @return {Object}
-	*/
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection = function(options, observer, history, $root, $controls){	
-	
-		this.options = options;
-		this.observer = observer;
-		this.history = history;
-		this.$root = $root;
-			
-		this.controlFactory = null;
-		this.$controls = $controls;			
+	 * Controls Collection
+	 * @constructor
+	 * @return {Object}
+	 */
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection = function(){
+
 		this.controls = [];
-		
-		//init control factory
-		this.controlFactory = new jQuery.fn.jplist.ui.panel.ControlFactory(options, observer, history, $root);
-		
-		//init controls
-		initControls(this);
 	};
 	
 	/**
-	* get statuses and merge them with the given status
-	* @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.merge = function(isDefault, statuses){
-		return merge(this, isDefault, statuses);
+	 * get statuses and merge them with the given status
+	 * @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+	 */
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.merge = function(isDefault, statuses, options, observer){
+		return merge(this, isDefault, statuses, options, observer);
 	};
 	
 	/**
-	* statuses change per deep links url / params
-	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
-	*/
+	 * statuses change per deep links url / params
+	 * @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+	 */
 	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.statusesChangedByDeepLinks = function(params){		
 		statusesChangedByDeepLinks(this, params);
 	};
 	
 	/**
-	* set controls statuses by deep link params
-	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
-	*/
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.setDeepLinks = function(params){		
-		setDeepLinks(this, params);
+	 * set controls statuses by deep link params
+	 * @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+	 */
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.setDeepLinks = function(params, options, observer){
+		setDeepLinks(this, params, options, observer);
 	};
 	
 	/**
-	* Set current statuses (for answer event)
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	* @param {boolean} isStorage - are statuses restored from storage
-	*/
+	 * Set current statuses (for answer event)
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 * @param {boolean} isStorage - are statuses restored from storage
+	 */
 	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.setStatuses = function(statuses, isStorage){		
 		setStatuses(this, statuses, isStorage);
 	};
 	
 	/**
-	* get deep links url from controls
-	* @return {string} url
-	*/
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.getDeepLinksUrl = function(){
-		return getDeepLinksUrl(this);
+	 * get deep links url from controls
+     * @param {string} delimiter1 (options.delimiter1)
+	 * @return {string} url
+	 */
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.getDeepLinksUrl = function(delimiter1){
+		return getDeepLinksUrl(this, delimiter1);
 	};
 	
 	/**
-	* Get current panel statuses (for build statuses event)
-	* @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
-	*/
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.getStatuses = function(isDefault){
-		return getStatuses(this, isDefault);
+	 * Get current panel statuses (for build statuses event)
+	 * @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+	 * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	 */
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.getStatuses = function(isDefault, options, observer){
+		return getStatuses(this, isDefault, options, observer);
 	};
 	
 	/**
-	* Get panel paths
-	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>}
-	*/
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.getPaths = function(){	
-		return getPaths(this);
+	 * Get panel paths
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+	 * @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>}
+	 */
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.getPaths = function(options, observer){
+		return getPaths(this, options, observer);
 	};
 	
 	/**
-	* add control
-	* @param {jQueryObject} $control
-	*/
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.add = function($control){		
-		add(this, $control);
+	 * add control
+	 * @param {jQueryObject} $control
+     * @param {jQuery.fn.jplist.app.History} history
+     * @param {jQueryObject} $root
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+	 */
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.add = function($control, history, $root, options, observer){
+		add(this, $control, history, $root, options, observer);
 	};
+
+    /**
+     * add control
+     * @param {jQueryObject} $controls
+     * @param {jQuery.fn.jplist.app.History} history
+     * @param {jQueryObject} $root
+     * @param {Object} options - jplist user options
+     * @param {Object} observer
+     */
+    jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.addList = function($controls, history, $root, options, observer){
+        addList(this, $controls, history, $root, options, observer);
+    };
 		
 })();

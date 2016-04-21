@@ -84,13 +84,14 @@
 	};
 	
 	/**
-	* Item Control Factory
-	* @param {Object} options
-	* @param {Object} observer
-	* @param {jQuery.fn.jplist.app.History} history
-	* @param {jQueryObject} $root - jplist jquery element
-	* @constructor
-	*/
+	 * Item Control Factory
+     * Item controls are controls that appears inside data items in the list and not in the controls panels (like star rating control)
+	 * @param {Object} options
+	 * @param {Object} observer
+	 * @param {jQuery.fn.jplist.app.History} history
+	 * @param {jQueryObject} $root - jplist jquery element
+	 * @constructor
+	 */
 	jQuery.fn.jplist.ui.list.ItemControlFactory = function(options, observer, history, $root){	
 	
 		this.options = options;

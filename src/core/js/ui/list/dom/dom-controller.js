@@ -7,10 +7,10 @@
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
 	var renderStatuses = function(context, statuses){
-		
+
 		//save statuses to storage according to user options (if needed)
 		context.storage.save(statuses);
-		
+
 		if(context.collection){
 			
 			//update dataview				
@@ -82,7 +82,7 @@
 	};	
 		
 	/**
-	* build statuses
+	* render statuses
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
 	jQuery.fn.jplist.ui.list.controllers.DOMController.prototype.renderStatuses = function(statuses){

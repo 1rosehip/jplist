@@ -2,10 +2,10 @@
 	'use strict';		
 	
 	/**
-	* add item control to the collection
-	* @param {Object} context
-	* @param {jQueryObject} $itemControl
-	*/
+	 * add item control to the collection
+	 * @param {Object} context
+	 * @param {jQueryObject} $itemControl
+	 */
 	var add = function(context, $itemControl){
 		
 		var control = context.controlFactory.create($itemControl);
@@ -16,38 +16,46 @@
 			context.controls.push(control);
 		}
 	};
-	
+
+    /**
+     * add all item controls found in the given jquery element (box)
+     * @param {Object} context
+     * @param {jQueryObject} $controlsBox
+     */
+    var findAndAdd = function(context, $controlsBox){
+
+        if($controlsBox && $controlsBox.length > 0){
+
+            $controlsBox.find('[data-control-type]').each(function(){
+
+                //add control to the list
+                add(context, jQuery(this));
+            });
+        }
+    };
+
 	/**
-	* get panel controls
-	* @param {Object} context
-	*/
+	 * get panel controls
+	 * @param {Object} context
+	 */
 	var initControls = function(context){
-	
-		var $itemsBox;
 
 		if(context.options && context.options.itemsBox){
-			$itemsBox = context.$root.find(context.options.itemsBox);
-			
-			if($itemsBox.length > 0){
-				
-				$itemsBox.find('[data-control-type]').each(function(){
-					
-					//add control to the list
-					add(context, jQuery(this));
-				});			
-			}
+
+            findAndAdd(context, context.$root.find(context.options.itemsBox));
 		}
 	};
 			
 	/** 
-	* Item Control Collection
-	* @constructor 
-	* @param {Object} options - jplist user options	
-	* @param {Object} observer
-	* @param {jQuery.fn.jplist.app.History} history
-	* @param {jQueryObject} $root
-	* @return {Object}
-	*/
+	 * Item Control Collection
+     * Item controls are controls that appears inside data items in the list and not in the controls panels (like star rating control)
+	 * @constructor
+	 * @param {Object} options - jplist user options
+	 * @param {Object} observer
+	 * @param {jQuery.fn.jplist.app.History} history
+	 * @param {jQueryObject} $root
+	 * @return {Object}
+	 */
 	jQuery.fn.jplist.ui.list.collections.ItemControlCollection = function(options, observer, history, $root){	
 	
 		this.options = options;
@@ -55,11 +63,10 @@
 		this.history = history;
 		this.$root = $root;
 		this.controls = [];
-		this.controlFactory = null;	
 				
 		//ini control factory
 		this.controlFactory = new jQuery.fn.jplist.ui.list.ItemControlFactory(options, observer, history, $root);
-		
+
 		//init controls
 		initControls(this);
 	};

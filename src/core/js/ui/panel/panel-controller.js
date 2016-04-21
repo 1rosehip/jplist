@@ -96,7 +96,7 @@
 			setStatusesFromStorage(context);
 		}
 		else{				
-			context.controls.setDeepLinks(params);				
+			context.controls.setDeepLinks(params, context.options, context.observer);
 		}			
 	};
 	
@@ -107,7 +107,7 @@
 	*/
 	var getDeepLinksURLPerControls = function(context){
 		
-		return context.controls['getDeepLinksUrl']();
+		return context.controls.getDeepLinksUrl(context.options.delimiter1);
 	};
 	
 	// ----------------------- STORAGE ----------------------------------
@@ -182,7 +182,7 @@
 		var statuses;			
 				
 		//get current statuses
-		statuses = context.controls.getStatuses(isDefault);
+		statuses = context.controls.getStatuses(isDefault, context.options, context.observer);
         
         if(statuses.length > 0){
             
@@ -226,7 +226,7 @@
 	var mergeStatuses = function(context, statusesToMerge){
 		
 		var IS_DEFAULT = false;
-		return context.controls.merge(IS_DEFAULT, statusesToMerge);
+		return context.controls.merge(IS_DEFAULT, statusesToMerge, context.options, context.observer);
 	};
 			
 	/**
@@ -243,10 +243,12 @@
 		$panel = context.$root.find(context.options.panelPath);
 		$controls = $panel.find('[data-control-type]');	
 		
-		context.controls = new jQuery.fn.jplist.ui.panel.collections.ControlsCollection(context.options, context.observer, context.history, context.$root, $controls);
+		context.controls = new jQuery.fn.jplist.ui.panel.collections.ControlsCollection();
+
+        context.controls.addList($controls, context.history, context.$root, context.options, context.observer)
 		
 		//get panel paths
-		context.paths = context.controls['getPaths']();
+		context.paths = context.controls.getPaths(context.options, context.observer);
 		
 		//debug info
 		if(jQuery.fn.jplist.logEnabled(context.options)){
@@ -333,11 +335,13 @@
 	
 	/**
 	* get panel controls statuses
-	* @param {boolean} isDefault - should it render events by their default statuses
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.getStatuses = function(isDefault){
-		return this.controls.getStatuses(isDefault);
+	 * @param {boolean} isDefault - should it render events by their default statuses
+     * @param {Object} options
+     * @param {Object} observer
+	 * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 */
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.getStatuses = function(isDefault, options, observer){
+		return this.controls.getStatuses(isDefault, options, observer);
 	};
 
 	/**
