@@ -83,7 +83,7 @@
 			,statusesCollection;
 		
 		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, statuses);
+		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 		
 		//get list of pagination statuses
 		pagingStatuses = statusesCollection['getStatusesByAction']('paging', statuses);

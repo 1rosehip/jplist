@@ -17,7 +17,7 @@
 			,filterService;
 		
 		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, statuses);
+		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 		
 		//get all filter statuses that have registered filter services		
 		filterStatuses = statusesCollection.getFilterStatuses();
@@ -54,7 +54,7 @@
 			,statusesCollection;
 			
 		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, statuses);
+		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 		
 		//get pagination statuses		
 		actionStatuses = statusesCollection['getStatusesByAction']('paging', statuses);
@@ -96,7 +96,7 @@
 			,statusesCollection;
 		
 		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(context.options, context.observer, statuses);
+		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 		
 		//get all sort statuses, expand statuses group if needed		
 		sortStatuses = statusesCollection.getSortStatuses();

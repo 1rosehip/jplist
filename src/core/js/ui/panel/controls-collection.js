@@ -91,7 +91,7 @@
 			,controlsWithSameName
 			,control
 			,status
-			,statusesByDeepLinkCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, [])
+			,statusesByDeepLinkCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection([])
 			,isDefault = false
 			,i;
 		
@@ -216,7 +216,7 @@
 			,index
 			,sameNameStatus;			
 		
-		statuses = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, []);
+		statuses = new jQuery.fn.jplist.app.dto.StatusesDTOCollection([]);
 		
 		for(var i=0; i<context.controls.length; i++){
 		
@@ -257,7 +257,7 @@
 		var statuses
 			,statusesCollection;
 
-        statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, []);
+        statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection([]);
 
         //get current statuses
         statuses = getStatuses(context, isDefault, options, observer);

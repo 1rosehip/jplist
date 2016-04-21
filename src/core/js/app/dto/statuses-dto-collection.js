@@ -116,6 +116,8 @@ Statuses Collection (Data Transfer Objects)
 							if(force){
 								context.statuses[currentStatus.initialIndex] = status;
 							}
+
+                            /*
 							else{
 							
 								//warn ...
@@ -137,7 +139,7 @@ Statuses Collection (Data Transfer Objects)
 										jQuery.fn.jplist.warn(context.options, 'The statuses have the same name, action and type, but different data values', [currentStatus, status, warnProperties]);
 									}
 								}
-							}
+							}*/
 						}
 						else{
 							//merge
@@ -279,15 +281,11 @@ Statuses Collection (Data Transfer Objects)
 	
 	/** 
 	* Statuses Collection
-	* @constructor 
-	* @param {Object} options - jplist user options	
-	* @param {Object} observer
+	* @constructor
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
-	jQuery.fn.jplist.app.dto.StatusesDTOCollection = function(options, observer, statuses){		
-	
-		this.options = options;
-		this.observer = observer;
+	jQuery.fn.jplist.app.dto.StatusesDTOCollection = function(statuses){
+
 		this.statuses = statuses || [];
 	};
 		

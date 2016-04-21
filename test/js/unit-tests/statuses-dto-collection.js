@@ -168,7 +168,7 @@ var statuses = [
 QUnit.test('getStatusesByAction - test 1', function(assert){
 
 	var options = {}, observer = {};	
-	var collection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, statuses);
+	var collection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 	
 	var statusesOfAction = collection.getStatusesByAction('filter');
 	assert.ok(statusesOfAction.length === 8);
@@ -177,7 +177,7 @@ QUnit.test('getStatusesByAction - test 1', function(assert){
 QUnit.test('getStatusesByAction - test 2', function(assert){
 
 	var options = {}, observer = {};	
-	var collection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, statuses);
+	var collection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 	
 	var statusesOfAction = collection.getStatusesByAction('sort');
 	assert.ok(statusesOfAction.length === 1);
@@ -190,7 +190,7 @@ QUnit.test('getStatusesByAction - test 2', function(assert){
 QUnit.test('add - if status has the same name and the same type -> ignore it', function(assert){
 
 	var options = {}, observer = {};	
-	var collection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, statuses);
+	var collection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 	
 	var newStatus = {
 		"action": "paging",
@@ -251,7 +251,7 @@ QUnit.test('add - check if currentPage and number are combined', function(assert
 			"inDeepLinking": true
 		}
 	];
-	var collection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, statuses);
+	var collection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 	
 	var newStatus = {
 		"action": "paging",
@@ -300,7 +300,7 @@ QUnit.test('add - check if currentPage and number are combined', function(assert
 			"inDeepLinking": true
 		}
 	];
-	var collection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, statuses);
+	var collection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 	
 	var newStatus = {
 		"action": "paging",

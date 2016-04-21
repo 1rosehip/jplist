@@ -37,7 +37,7 @@ QUnit.test('1', function(assert){
         }
     ];
 
-    var statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(options, observer, statuses);
+    var statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 
     domController.renderStatuses(statuses);
 
