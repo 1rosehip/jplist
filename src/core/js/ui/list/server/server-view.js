@@ -115,8 +115,7 @@
 	*/
 	jQuery.fn.jplist.ui.list.views.ServerView = function($root, options, observer, scopeObserver, model, history){
 	
-		this.options = options;	//user options	
-		this.$root = $root; //jplist container
+		this.options = options;
 		this.observer = observer;
 		this.scopeObserver = scopeObserver;
 		this.model = model;
@@ -124,13 +123,11 @@
 		
 		this.$itemsBox = $root.find(options.itemsBox).eq(0);
 		this.$noResults = $root.find(options.noResults);
-		this.$preloader = null;
-		this.timeline = null;
 		
 		if(this.options.effect){
 			
 			//init timeline
-			this.timeline = new jQuery.fn.jplist.animation.Timeline(this.$root, this.options, this.observer);
+			this.timeline = new jQuery.fn.jplist.animation.Timeline(this.options.fps, this.observer);
 		}
 		
 		//init events

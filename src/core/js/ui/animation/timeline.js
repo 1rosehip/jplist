@@ -74,14 +74,11 @@
 	/**
 	* Timeline
 	* @constructor
-	* @param {jQueryObject} $scene
-	* @param {Object} options - user options
+	* @param {number} fps
 	* @param {Object} observer
 	*/
-	jQuery.fn.jplist.animation.Timeline = function($scene, options, observer){		
-		
-		this.$scene = $scene;
-		this.options = options;
+	jQuery.fn.jplist.animation.Timeline = function(fps, observer){
+
 		this.observer = observer;
 		
 		this.start = null; //the time of animation start, start = new Date
@@ -91,7 +88,7 @@
 		this.handler = null;		
 		
 		//init avrs
-		this.delay = 1000/this.options.fps;
+		this.delay = 1000/fps;
 	};
 	
 	

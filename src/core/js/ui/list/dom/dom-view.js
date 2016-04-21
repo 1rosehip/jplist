@@ -104,7 +104,7 @@
 		if(this.options.effect){
 			
 			//init timeline
-			this.timeline = new jQuery.fn.jplist.animation.Timeline(this.$root, this.options, this.observer);
+			this.timeline = new jQuery.fn.jplist.animation.Timeline(this.options.fps, this.observer);
 		}
 	};
 	
