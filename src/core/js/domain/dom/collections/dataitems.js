@@ -57,7 +57,7 @@
 		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 		
 		//get pagination statuses		
-		actionStatuses = statusesCollection['getStatusesByAction']('paging', statuses);
+		actionStatuses = statusesCollection.getStatusesByAction('paging', statuses);
 		
 		if(actionStatuses.length > 0){
 		

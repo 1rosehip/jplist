@@ -263,7 +263,7 @@
             var statuses;
 
             //get current statuses
-            statuses = context.panel.getStatuses(isDefault, context.options, context.observer);
+            statuses = context.panel.getStatuses(isDefault);
 
             if(statuses.length > 0){
 

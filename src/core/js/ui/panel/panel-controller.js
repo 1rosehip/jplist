@@ -182,7 +182,7 @@
 		var statuses;			
 				
 		//get current statuses
-		statuses = context.controls.getStatuses(isDefault, context.options, context.observer);
+		statuses = context.controls.getStatuses(isDefault);
         
         if(statuses.length > 0){
             
@@ -226,7 +226,7 @@
 	var mergeStatuses = function(context, statusesToMerge){
 		
 		var IS_DEFAULT = false;
-		return context.controls.merge(IS_DEFAULT, statusesToMerge, context.options, context.observer);
+		return context.controls.merge(IS_DEFAULT, statusesToMerge);
 	};
 			
 	/**
@@ -248,7 +248,7 @@
         context.controls.addList($controls, context.history, context.$root, context.options, context.observer)
 		
 		//get panel paths
-		context.paths = context.controls.getPaths(context.options, context.observer);
+		context.paths = context.controls.getPaths();
 		
 		//debug info
 		if(jQuery.fn.jplist.logEnabled(context.options)){
@@ -336,12 +336,10 @@
 	/**
 	* get panel controls statuses
 	 * @param {boolean} isDefault - should it render events by their default statuses
-     * @param {Object} options
-     * @param {Object} observer
 	 * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	 */
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.getStatuses = function(isDefault, options, observer){
-		return this.controls.getStatuses(isDefault, options, observer);
+	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.getStatuses = function(isDefault){
+		return this.controls.getStatuses(isDefault);
 	};
 
 	/**

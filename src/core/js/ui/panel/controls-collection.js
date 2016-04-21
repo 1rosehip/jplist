@@ -204,11 +204,9 @@
 	 * Get current panel statuses
 	 * @param {Object} context
 	 * @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
-     * @param {Object} options - jplist user options
-     * @param {Object} observer
 	 * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
 	 */
-	var getStatuses = function(context, isDefault, options, observer){
+	var getStatuses = function(context, isDefault){
 	
 		var statuses
 			,control
@@ -238,9 +236,6 @@
 			
 		}
 		
-		//debug info
-		jQuery.fn.jplist.info(options, 'getStatuses: ', statuses);
-		
 		return statuses.toArray();
 	};
 	
@@ -249,10 +244,8 @@
 	 * @param {Object} context
 	 * @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
 	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesToMerge
-     * @param {Object} options - jplist user options
-     * @param {Object} observer
 	 */
-	var merge = function(context, isDefault, statusesToMerge, options, observer){
+	var merge = function(context, isDefault, statusesToMerge){
 		
 		var statuses
 			,statusesCollection;
@@ -260,7 +253,7 @@
         statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection([]);
 
         //get current statuses
-        statuses = getStatuses(context, isDefault, options, observer);
+        statuses = getStatuses(context, isDefault);
 
         for(var i = 0; i<statuses.length; i++){
             statusesCollection.add(statuses[i], false);
@@ -280,18 +273,16 @@
 	/**
 	 * Get panel paths
 	 * @param {Object} context
-     * @param {Object} options - jplist user options
-     * @param {Object} observer
 	 * @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>}
 	 */
-	var getPaths = function(context, options, observer){
+	var getPaths = function(context){
 	
 		var control
 			,paths = []
 			,pathsCollection;
 		
 		//init empty paths collection
-		pathsCollection = new jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection(options, observer);
+		pathsCollection = new jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection();
 		
 		for(var i=0; i<context.controls.length; i++){
 		
@@ -371,11 +362,9 @@
 	 * get statuses and merge them with the given status
 	 * @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
 	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-     * @param {Object} options - jplist user options
-     * @param {Object} observer
 	 */
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.merge = function(isDefault, statuses, options, observer){
-		return merge(this, isDefault, statuses, options, observer);
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.merge = function(isDefault, statuses){
+		return merge(this, isDefault, statuses);
 	};
 	
 	/**
@@ -417,22 +406,17 @@
 	/**
 	 * Get current panel statuses (for build statuses event)
 	 * @param {boolean} isDefault - if true, get default (initial) panel status; else - get current panel status
-     * @param {Object} options - jplist user options
-     * @param {Object} observer
 	 * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
 	 */
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.getStatuses = function(isDefault, options, observer){
-		return getStatuses(this, isDefault, options, observer);
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.getStatuses = function(isDefault){
+		return getStatuses(this, isDefault);
 	};
 	
 	/**
 	 * Get panel paths
-     * @param {Object} options - jplist user options
-     * @param {Object} observer
-	 * @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>}
 	 */
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.getPaths = function(options, observer){
-		return getPaths(this, options, observer);
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.getPaths = function(){
+		return getPaths(this);
 	};
 	
 	/**

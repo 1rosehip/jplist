@@ -57,13 +57,9 @@
 	
 	/** 
 	* DataItem Member Paths Collection
-	* @constructor 
-	* @param {Object} options - jplist user options	
-	* @param {Object} observer
+	* @constructor
 	*/
-	jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection = function(options, observer){
-		this.options = options;
-		this.observer = observer	;		
+	jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection = function(){
 		this.paths = [];
 	};
 	
