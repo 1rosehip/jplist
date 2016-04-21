@@ -123,7 +123,7 @@
 		this.options = options;
 		this.observer = observer;
 		this.history = history;
-		this.storage = new jQuery.fn.jplist.dal.Storage($root, options, observer);
+		this.storage = new jQuery.fn.jplist.dal.Storage(options.storage, options.storageName, options.cookiesExpiration);
 		this.scopeObserver = initScopeObserver(null);
 		this.$root = $root;		
 		this.view = null;

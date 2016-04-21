@@ -22,24 +22,26 @@
 	};
 		
 	/**
-	* create collection of dataitems
-	* @param {Object} context - jplist controller 'this' object
-	* @return {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection}
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} panelPaths - paths objects array
-	*/
-	var getCollection = function(context, panelPaths){
+	 * create collection of dataitems
+	 * @param {Object} context
+     * @param {String} itemsBoxPath
+     * @param {String} itemPath
+	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} panelPaths - paths objects array
+     * @return {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection}
+	 */
+	var getCollection = function(context, itemsBoxPath, itemPath, panelPaths){
 	
 		var collection
 			,$items
 			,$itemsBox;
 			
-		$itemsBox = context.$root.find(context.options.itemsBox).eq(0);
+		$itemsBox = context.$root.find(itemsBoxPath).eq(0);
 		
 		//get items inside items box
-		$items = $itemsBox.find(context.options.itemPath);
+		$items = $itemsBox.find(itemPath);
 		
 		//create new collection
-		collection = new jQuery.fn.jplist.domain.dom.collections.DataItemsCollection(context.options, context.observer, $items, panelPaths);
+		collection = new jQuery.fn.jplist.domain.dom.collections.DataItemsCollection(context.observer, $items, panelPaths);
 		
 		return collection;
 	};
@@ -55,16 +57,16 @@
 	* @return {Object} - DOM controller
 	*/
 	jQuery.fn.jplist.ui.list.controllers.DOMController = function($root, options, observer, panel, history){
-	
-		this.options = options;
+
 		this.observer = observer;
 		this.$root = $root;
-		this.history = history;
-		this.storage = new jQuery.fn.jplist.dal.Storage($root, options, observer);
 		
 		this.collection = null;
 		this.itemControls = null;
 		this.listView = null;
+
+        //init storage
+        this.storage = new jQuery.fn.jplist.dal.Storage(options.storage, options.storageName, options.cookiesExpiration);
 		
 		//get item controls
 		this.itemControls = new jQuery.fn.jplist.ui.list.collections.ItemControlCollection(
@@ -78,7 +80,7 @@
 		this.listView = new jQuery.fn.jplist.ui.list.views.DOMView($root, options, observer, history);
 		
 		//init dataitems collection
-		this.collection = getCollection(this, panel.paths);		
+		this.collection = getCollection(this, options.itemsBox, options.itemPath, panel.paths);
 	};	
 		
 	/**

@@ -96,7 +96,7 @@
 			setStatusesFromStorage(context);
 		}
 		else{				
-			context.controls.setDeepLinks(params, context.options, context.observer);
+			context.controls.setDeepLinks(params, context.observer);
 		}			
 	};
 	

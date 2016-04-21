@@ -331,20 +331,18 @@
 	
 	/** 
 	* DataItems Collection
-	* @constructor 
-	* @param {Object} options - jplist user options	
+	* @constructor
 	* @param {Object} observer
 	* @param {jQueryObject} $items - initial items to add to the collection
 	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
 	*/
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection = function(options, observer, $items, paths){
+	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection = function(observer, $items, paths){
 
 		this.dataitems = [];
 		this.dataview = [];
-			
-        this.options = options;
+        this.paths = paths;
+
 		this.observer = observer;
-		this.paths = paths;
         
 		if($items.length > 0){
 		

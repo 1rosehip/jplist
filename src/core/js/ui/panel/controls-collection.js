@@ -82,10 +82,9 @@
 	 * set controls statuses by deep link params
 	 * @param {Object} context
 	 * @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
-     * @param {Object} options - jplist user options
      * @param {Object} observer
 	 */
-	var setDeepLinks = function(context, params, options, observer){
+	var setDeepLinks = function(context, params, observer){
 		
 		var param
 			,controlsWithSameName
@@ -378,11 +377,10 @@
 	/**
 	 * set controls statuses by deep link params
 	 * @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
-     * @param {Object} options - jplist user options
      * @param {Object} observer
 	 */
-	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.setDeepLinks = function(params, options, observer){
-		setDeepLinks(this, params, options, observer);
+	jQuery.fn.jplist.ui.panel.collections.ControlsCollection.prototype.setDeepLinks = function(params, observer){
+		setDeepLinks(this, params, observer);
 	};
 	
 	/**
