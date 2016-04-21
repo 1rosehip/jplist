@@ -2,7 +2,7 @@
 * Statuses DTO Collection
 * \core\js\app\dto\statuses-dto-collection.js
 */
-QUnit.module('Statuses DTO Collection');
+QUnit.module('Unit Test: Statuses DTO Collection');
 
 var statuses = [
 {

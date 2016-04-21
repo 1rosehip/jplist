@@ -17,11 +17,9 @@
   "author": "Miriam Zusin",
   "license": "MIT",
   "devDependencies": {
-    "casperjs": "^1.1.0",
     "closurecompiler": "1.5.2",
     "jshint": "2.9.1",
-    "less": "2.6.1",
-    "phantomjs-prebuilt": "^2.1.7"
+    "less": "2.6.1"
   },
   "repository": {
     "type": "git",

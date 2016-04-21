@@ -1,7 +1,7 @@
 /**
 * deep links
 */
-QUnit.module('Deep Links');
+QUnit.module('Unit Test: Deep Links');
 	
 /**
 * getUniqueControls - sort

@@ -1,7 +1,7 @@
 /**
 * history
 */
-QUnit.module('History');
+QUnit.module('Unit Test: History');
 	
 /**
 * test 1

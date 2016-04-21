@@ -35,7 +35,7 @@ var helper3ItemsArray = function(jqueryPath, searchText, ignoreRegex){
 /**
 * text filters
 */
-QUnit.module('Text Filters');
+QUnit.module('Unit Test: Text Filters');
 
 /**
 * 3 items, search 'a' in title
@@ -130,7 +130,7 @@ QUnit.test('Search text with special characters, 3 items in array, "[~!@#$%^&*()
 /**
 * text filters: advanced seach
 */
-QUnit.module('Text Filters: Advanced Search');
+QUnit.module('Unit Test: Text Filters: Advanced Search');
 
 QUnit.test('abc eee - not fff -> true', function(assert){
 	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('abc eee', 'not fff');	
