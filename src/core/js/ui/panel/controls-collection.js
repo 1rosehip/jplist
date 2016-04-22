@@ -264,6 +264,32 @@
 				
 		return statusesCollection;
 	};
+
+    /**
+     * Is given path is in the given paths list (compare by jquery path only, data type is ignored)
+     * @param {Array.<jQuery.fn.jplist.PathModel>} paths
+     * @param {jQuery.fn.jplist.PathModel} path
+     * @return {boolean}
+     */
+    var isPathInList = function(paths, path){
+
+        var cpath
+            ,isInList = false
+            ,PATH_ONLY = true;
+
+        for(var i=0; i<paths.length; i++){
+
+            //get path
+            cpath = paths[i];
+
+            if(cpath.isEqual(path, PATH_ONLY)){
+                isInList = true;
+                break;
+            }
+        }
+
+        return isInList;
+    };
 	
 	/**
 	 * Get panel paths
@@ -273,11 +299,8 @@
 	var getPaths = function(context){
 	
 		var control
-			,paths = []
-			,pathsCollection;
-		
-		//init empty paths collection
-		pathsCollection = new jQuery.fn.jplist.PathCollection();
+			,controlsPaths = []
+			,paths = [];
 		
 		for(var i=0; i<context.controls.length; i++){
 		
@@ -287,15 +310,20 @@
 			//get control type paths
 			if(jQuery.isFunction(control.getPaths)){
 			
-				//add control path to 'paths' array
-				control.getPaths(paths);
-				
-				//add paths to the paths collection
-				pathsCollection.addRange(paths);				
+				//add control path to 'controlsPaths' array
+				control.getPaths(controlsPaths);
+
+                for(var j=0; j<controlsPaths.length; j++){
+
+                    if(!isPathInList(paths, controlsPaths[j])){
+
+                        paths.push(controlsPaths[j]);
+                    }
+                };
 			}			
 		}
 		
-		return pathsCollection.paths;
+		return paths;
 	};	
 		
 	/**

@@ -12,7 +12,6 @@
 		"src/core/js/domain/dom/models/dataitem-member.js",
 		"src/core/js/domain/dom/models/dataitem.js",
 		"src/core/js/domain/dom/collections/dataitems.js",
-		"src/core/js/domain/dom/collections/dataitem-member-paths.js",
 		"src/core/js/domain/dom/services/pagination/pagination.js",
 		"src/core/js/domain/dom/services/pagination/pagination-google.js",
 		"src/core/js/domain/dom/services/filters/dateFilter.js",
@@ -54,5 +53,5 @@
 	"externs": [
 		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js"
 	],
-	"version": 141
+	"version": 147
 }
