@@ -5,10 +5,10 @@
 	'use strict';		
 	
 	/**
-	* update collection dataview: filtering
-	* @param {Object} context - jplist controller 'this' object
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
+	 * update collection dataview: filtering
+	 * @param {Object} context - jplist controller 'this' object
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 */
 	var filter = function(context, statuses){
 	
 		var filterStatuses
@@ -41,10 +41,10 @@
 	};	
 	
 	/**
-	* dataview pagination
-	* @param {Object} context - jplist controller 'this' object
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
+	 * dataview pagination
+	 * @param {Object} context - jplist controller 'this' object
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 */
 	var pagination = function(context, statuses){
 		
 		var actionStatuses
@@ -86,10 +86,10 @@
 	};
 	
 	/**
-	* sort dataview
-	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
+	 * sort dataview
+	 * @param {Object} context
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 */
 	var sort = function(context, statuses){
 		
 		var sortStatuses = []
@@ -111,10 +111,11 @@
 	};
 	
 	/**
-	* apply statuses
-	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
+	 * apply statuses
+	 * @param {Object} context
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+     * @return {jQueryObject}
+	 */
 	var applyStatuses = function(context, statuses){
 				
 		//reset dataview
@@ -131,13 +132,15 @@
 						
 		//render list
 		context.observer.trigger(context.observer.events.statusesAppliedToList, [context, statuses]);
+
+        return dataitemsToJqueryObject(context);
 	};
 	
 	/**
-	* dataview toString
-	* @param {Object} context
-	* @return {string}
-	*/
+	 * dataview toString
+	 * @param {Object} context
+	 * @return {string}
+	 */
 	var dataviewToString = function(context){
 	
 		var dataitem
@@ -156,9 +159,9 @@
 	};
 	
 	/**
-	* convert dataview to jquery object
-	* @return {jQueryObject}
-	*/
+	 * convert dataview to jquery object
+	 * @return {jQueryObject}
+	 */
 	var dataviewToJqueryObject = function(context){
 		
 		return jQuery(context.dataview).map(function(index, $element){
@@ -167,9 +170,9 @@
 	};
 	
 	/**
-	* convert dataitems to jquery object
-	* @return {jQueryObject}
-	*/
+	 * convert dataitems to jquery object
+	 * @return {jQueryObject}
+	 */
 	var dataitemsToJqueryObject = function(context){
 		
 		return jQuery(context.dataitems).map(function(index, $element){
@@ -178,19 +181,20 @@
 	};
 		
 	/**
-	* reset dataview: dataview <- dataitems
-	* @param {Object} context
-	*/
+	 * reset dataview: dataview <- dataitems
+	 * @param {Object} context
+	 */
 	var resetDataview = function(context){
+
 		context.dataview = jQuery.merge([], context.dataitems);
 	};
 		
 	/**
-	* find dataitem by its id in dataitems array
-	* @param {Object} context	
-	* @param {jQueryObject} item - item to add to dataitems array
-	* @return {number} - index of dataitem in dataitems array, or -1 if not found
-	*/
+	 * find dataitem by its id in dataitems array
+	 * @param {Object} context
+	 * @param {jQueryObject} item - item to add to dataitems array
+	 * @return {number} - index of dataitem in dataitems array, or -1 if not found
+	 */
 	var indexOf = function(context, item){
 		
 		var dataitem
@@ -217,10 +221,10 @@
 	};
 	
 	/**
-	* delete dataitem from dataitems array
-	* @param {Object} context	
-	* @param {jQueryObject} $item - jquery element to delete
-	*/
+	 * delete dataitem from dataitems array
+	 * @param {Object} context
+	 * @param {jQueryObject} $item - jquery element to delete
+	 */
 	var delDataitem = function(context, $item){
 	
 		var index;
@@ -237,10 +241,10 @@
 	};
 	
 	/**
-	* delete dataitem collection from dataitems array
-	* @param {Object} context	
-	* @param {jQueryObject} $items - jquery element to delete
-	*/
+	 * delete dataitem collection from dataitems array
+	 * @param {Object} context
+	 * @param {jQueryObject} $items - jquery element to delete
+	 */
 	var delDataitems = function(context, $items){
 	
 		$items.each(function(){			
@@ -249,12 +253,12 @@
 	};
 	
 	/**
-	* add jquery item to jplist dataitems array
-	* @param {Object} context
-	* @param {jQueryObject} $item - item to add to dataitems array
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
-	* @param {number} index
-	*/
+	 * add jquery item to jplist dataitems array
+	 * @param {Object} context
+	 * @param {jQueryObject} $item - item to add to dataitems array
+	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {number} index
+	 */
 	var addDataItem = function(context, $item, paths, index){
 	
 		var dataItem;
@@ -270,13 +274,13 @@
 	};
 	
 	/**
-	* add items to collection
-	* @param {Object} context - jplist controller 'this' object
-	* @param {jQueryObject} $items
-	* @param {number} i
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
-	* @param {number} index
-	*/
+	 * add items to collection
+	 * @param {Object} context - jplist controller 'this' object
+	 * @param {jQueryObject} $items
+	 * @param {number} i
+	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {number} index
+	 */
 	var addDataItemsHelper = function(context, $items, i, paths, index){
 		
 		var $item
@@ -305,14 +309,14 @@
 	};
 	
 	/**
-	* add jquery item collection to jplist dataitems array
-	* @param {Object} context	
-	* @param {jQueryObject} $items - items to add to dataitems array
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
-	* @param {number} index
-	*/
+	 * add jquery item collection to jplist dataitems array
+	 * @param {Object} context
+	 * @param {jQueryObject} $items - items to add to dataitems array
+	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {number} index
+	 */
 	var addDataItems = function(context, $items, paths, index){
-		
+
 		//add items to collection
 		addDataItemsHelper(context, $items, 0, paths, index);
 		
@@ -321,21 +325,21 @@
 	};
 	
 	/**
-	* empty collection
-	* @param {Object} context	
-	*/
+	 * empty collection
+	 * @param {Object} context
+	 */
 	var empty = function(context){
 		context.dataitems = [];
 		context.dataview = [];
 	};
 	
 	/** 
-	* DataItems Collection
-	* @constructor
-	* @param {Object} observer
-	* @param {jQueryObject} $items - initial items to add to the collection
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
-	*/
+	 * DataItems Collection
+	 * @constructor
+	 * @param {Object} observer
+	 * @param {jQueryObject} $items - initial items to add to the collection
+	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection = function(observer, $items, paths){
 
 		this.dataitems = [];
@@ -343,7 +347,7 @@
         this.paths = paths;
 
 		this.observer = observer;
-        
+
 		if($items.length > 0){
 		
 			//add ittems to collection
@@ -355,113 +359,114 @@
 	};
 	
 	/**
-	* API: apply statuses
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
+	 * API: apply statuses
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+     * @return {jQueryObject}
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.applyStatuses = function(statuses){
-		applyStatuses(this, statuses);
+		return applyStatuses(this, statuses);
 	};
 	
 	/**
-	* API: filter dataview	
-	*/
+	 * API: filter dataview
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.filter = function(statuses){
 		filter(this, statuses);
 	};
 	
 	/**
-	* API: sort dataview	
-	*/
+	 * API: sort dataview
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.sort = function(statuses){
 		sort(this, statuses);
 	};
 	
 	/**
-	* API: dataview	pagination
-	*/
+	 * API: dataview	pagination
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.pagination = function(statuses){
 		pagination(this, statuses);
 	};
 	
 	/**
-	* API: convert dataview to jquery object
-	* @return {jQueryObject}	
-	*/
+	 * API: convert dataview to jquery object
+	 * @return {jQueryObject}
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataviewToJqueryObject = function(){
 		return dataviewToJqueryObject(this);
 	};
 	
 	/**
-	* API: convert dataitems to jquery object
-	* @return {jQueryObject}	
-	*/
+	 * API: convert dataitems to jquery object
+	 * @return {jQueryObject}
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataitemsToJqueryObject = function(){
 		return dataitemsToJqueryObject(this);
 	};
 	
 	/**
-	* API: reset dataview collection with initial dataitems set	
-	*/
+	 * API: reset dataview collection with initial dataitems set
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.resetDataview = function(){
 		resetDataview(this);
 	};
 		
 	/**
-	* API: empty collection
-	*/
+	 * API: empty collection
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.empty = function(){	
 		empty(this);
 	};
 	
 	/**
-	* API: convetrs jQuery element (item) to dataitem and adds it to the dataitems collection
-	* @param {jQueryObject} item - jquery item to add
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
-	* @param {number} index	
-	*/
+	 * API: convetrs jQuery element (item) to dataitem and adds it to the dataitems collection
+	 * @param {jQueryObject} item - jquery item to add
+	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {number} index
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.addDataItem = function(item, paths, index){	
 		addDataItem(this, item, paths, index);
 	};
 	
 	/**
-	* API: convetrs a set of jQuery elements (items) to dataitems and adds them to the dataitems collection	
-	* @param {jQueryObject} items - jquery items to add
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
-	* @param {number} index
-	*/
+	 * API: convetrs a set of jQuery elements (items) to dataitems and adds them to the dataitems collection
+	 * @param {jQueryObject} items - jquery items to add
+	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {number} index
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.addDataItems = function(items, paths, index){		
 		addDataItems(this, items, paths, index);
 	};
 	
 	/**
-	* API: searches for jQuery element (item) in the dataitems collection and deletes it
-	* @param {jQueryObject} item - jquery element (item) to delete
-	*/
+	 * API: searches for jQuery element (item) in the dataitems collection and deletes it
+	 * @param {jQueryObject} item - jquery element (item) to delete
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.delDataitem = function(item){
 		delDataitem(this, item);
 	};
 	
 	/**
-	* API: searches for jQuery elements (items) in the dataitems collection and deletes them
-	* @param {jQueryObject} items - jquery element to delete
-	*/
+	 * API: searches for jQuery elements (items) in the dataitems collection and deletes them
+	 * @param {jQueryObject} items - jquery element to delete
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.delDataitems = function(items){
 		delDataitems(this, items);
 	};
 	
 	/**
-	* API: searches for dataitem in the collection (by id)
-	* @param {jQueryObject} item - jquery element to delete
-	* @return {number} - index of dataitem in dataitems array	
-	*/
+	 * API: searches for dataitem in the collection (by id)
+	 * @param {jQueryObject} item - jquery element to delete
+	 * @return {number} - index of dataitem in dataitems array
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.indexOf = function(item){
 		return indexOf(this, item);
 	};
 	
 	/**
-	* API: get HTML of the collection in the current state (dataview): with the current filter, sorting etc.
-	* @return {string}
-	*/
+	 * API: get HTML of the collection in the current state (dataview): with the current filter, sorting etc.
+	 * @return {string}
+	 */
 	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataviewToString = function(){	
 		return dataviewToString(this);
 	};

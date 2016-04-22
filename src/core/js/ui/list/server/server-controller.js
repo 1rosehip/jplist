@@ -2,11 +2,12 @@
 	'use strict';
 	
 	/**
-	* build statuses
-	* @param {Object} context - jplist controller 'this' object
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
-	var renderStatuses = function(context, statuses){
+	 * build statuses
+	 * @param {Object} context - jplist controller 'this' object
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+     * @param {jQuery.fn.jplist.app.dto.StatusDTO} lastStatus
+	 */
+	var renderStatuses = function(context, statuses, lastStatus){
 		
 		var ajaxDataType = 'html';
 		
@@ -51,10 +52,10 @@
 	};
 	
 	/**
-	* init list observer (events object)
-	* @param {jQueryObject} $root
-	* @return {Object} observer
-	*/
+	 * init list observer (events object)
+	 * @param {jQueryObject} $root
+	 * @return {Object} observer
+	 */
 	var initScopeObserver = function($root){
 		
 		var observer = jQuery({});
@@ -70,11 +71,11 @@
 	};
 	
 	/**
-	* update statuses with data from server
-	* @param {Object} context
-	* @param {jQuery.fn.jplist.domain.server.models.DataItemModel} dataitem - server data item
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
+	 * update statuses with data from server
+	 * @param {Object} context
+	 * @param {jQuery.fn.jplist.domain.server.models.DataItemModel} dataitem - server data item
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 */
 	var setServerData = function(context, dataitem, statuses){
 	
 		var status
@@ -109,21 +110,21 @@
 	};
 			
 	/**
-	* Server Controller
-	* @constructor 
-	* @param {jQueryObject} $root - jplist root element
-	* @param {Object} options - jplist user options
-	* @param {Object} observer
-	* @param {jQuery.fn.jplist.ui.panel.controllers.PanelController} panel
-	* @param {jQuery.fn.jplist.app.History} history
-	* @return {Object}
-	*/
+	 * Server Controller
+	 * @constructor
+	 * @param {jQueryObject} $root - jplist root element
+	 * @param {Object} options - jplist user options
+	 * @param {Object} observer
+	 * @param {jQuery.fn.jplist.ui.panel.controllers.PanelController} panel
+	 * @param {jQuery.fn.jplist.app.History} history
+	 * @return {Object}
+	 */
 	jQuery.fn.jplist.ui.list.controllers.ServerController = function($root, options, observer, panel, history){	
 	
 		this.options = options;
 		this.observer = observer;
 		this.history = history;
-		this.storage = new jQuery.fn.jplist.dal.Storage(options.storage, options.storageName, options.cookiesExpiration);
+
 		this.scopeObserver = initScopeObserver(null);
 		this.$root = $root;		
 		this.view = null;
@@ -137,10 +138,11 @@
 	};
 	
 	/**
-	* build statuses
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
-	jQuery.fn.jplist.ui.list.controllers.ServerController.prototype.renderStatuses = function(statuses){
-		renderStatuses(this, statuses);
+	 * build statuses
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+     * @param {jQuery.fn.jplist.app.dto.StatusDTO} lastStatus
+	 */
+	jQuery.fn.jplist.ui.list.controllers.ServerController.prototype.renderStatuses = function(statuses, lastStatus){
+		renderStatuses(this, statuses, lastStatus);
 	};
 })();

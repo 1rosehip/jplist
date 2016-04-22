@@ -5,19 +5,29 @@ QUnit.module('Integration Test: Text Filters with Sort Bundle');
 
 QUnit.test('1', function(assert){
 
-    var html = '';
-    html += '<div data-type="jplist-item"><div class="title">aaa</div></div>';
-    html += '<div data-type="jplist-item"><div class="title">bbb</div></div>';
-    html += '<div data-type="jplist-item"><div class="title">ccc</div></div>';
+    var html = '<div id="demo">';
+
+    html += '<div class="list">';
+    html += '<div class="jplist-item"><div class="title">aaa</div></div>';
+    html += '<div class="jplist-item"><div class="title">bbb</div></div>';
+    html += '<div class="jplist-item"><div class="title">ccc</div></div>';
+    html += '</div>';
+    html += '</div>';
 
     var $root = $(html);
-    var options = {};
+
+    var options = {
+        itemsBox: '.list'
+        ,itemPath: '.jplist-item'
+    };
     var observer = new jQuery.fn.jplist.app.events.PubSub($root, options);
-    var panel = {};
-    var history = {};
+    var panelPaths = new jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection();
+
+    var path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel('.title', 'text');
+    panelPaths.add(path);
 
     //create dom controller
-    var domController = new jQuery.fn.jplist.ui.list.controllers.DOMController($root, options, observer, panel, history);
+    var domController = new jQuery.fn.jplist.ui.list.controllers.DOMController($root, options, observer, panelPaths);
 
     var statuses = [
         {
@@ -39,10 +49,12 @@ QUnit.test('1', function(assert){
 
     var statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 
-    domController.renderStatuses(statuses);
+    var collection = new jQuery.fn.jplist.domain.dom.collections.DataItemsCollection(observer, $root.find('.jplist-item'), panelPaths);
+
+    var $dataview = collection.applyStatuses(statuses);
 
     //check that html structure is valid
-    console.log(domController.collection.dataviewToJqueryObject());
+    console.log($dataview.length);
 
     assert.ok(true, '1')
 });

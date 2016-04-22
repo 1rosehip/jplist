@@ -164,22 +164,26 @@
 		
 			//html data source (dom)
 			case 'html':{
+
+                //init collection of controls located inside the list (like star rating)
+                context.itemControls = new jQuery.fn.jplist.ui.list.collections.ItemControlCollection(
+                    context.options
+                    ,context.observer
+                    ,context.history
+                    ,context.$root
+                );
 				
 				context.controller = new jQuery.fn.jplist.ui.list.controllers.DOMController(
 					context.$root
 					,context.options
 					,context.observer
-					,context.panel
-					,context.history
+					,context.panel.paths
 				);
 			}
 			break;
 			
 			//server side (html) data source
 			case 'server':{
-				
-				//debug info
-				jQuery.fn.jplist.info(context.options, 'Data Source: ', context.options.dataSource);
 		
 				context.controller = new jQuery.fn.jplist.ui.list.controllers.ServerController(
 					context.$root
@@ -250,7 +254,10 @@
 
                 if(mergedStatuses && mergedStatuses.length > 0){
 
-                    context.controller.renderStatuses(mergedStatuses);
+                    //save statuses to storage according to user options (if needed)
+                    context.storage.save(mergedStatuses);
+
+                    context.controller.renderStatuses(mergedStatuses, context.history.getLastStatus());
                 }
             }
 		});
@@ -267,7 +274,10 @@
 
             if(statuses.length > 0){
 
-                context.controller.renderStatuses(statuses);
+                //save statuses to storage according to user options (if needed)
+                context.storage.save(statuses);
+
+                context.controller.renderStatuses(statuses, context.history.getLastStatus());
             }
         });
 		
@@ -312,6 +322,7 @@
 			observer: null
 			,panel: null
 			,controller: null
+            ,storage: null
 			,$root: $root
 		};
 		
@@ -390,8 +401,11 @@
 				
 		//init panel
 		context.panel = new jQuery.fn.jplist.ui.panel.controllers.PanelController($root, context.options, context.history, context.observer);
-		
-		//init data source
+
+        //init storage
+        context.storage = new jQuery.fn.jplist.dal.Storage(context.options.storage, context.options.storageName, context.options.cookiesExpiration);
+
+        //init data source
 		initDataSource(context);
 		
 		//init application events

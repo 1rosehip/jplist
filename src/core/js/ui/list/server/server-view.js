@@ -2,11 +2,11 @@
 	'use strict';
 
 	/**
-	* build result content
-	* @param {Object} context
-	* @param {jQuery.fn.jplist.domain.server.models.DataItemModel} dataItem
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	*/
+	 * build result content
+	 * @param {Object} context
+	 * @param {jQuery.fn.jplist.domain.server.models.DataItemModel} dataItem
+	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 */
 	var buildContent = function(context, dataItem, statuses){
 		
 		var lastStatusNotInAnimation = false
@@ -80,9 +80,9 @@
 	};
 	
 	/**
-	* init events
-	* @param {Object} context - jplist controller 'this' object
-	*/
+	 * init events
+	 * @param {Object} context - jplist controller 'this' object
+	 */
 	var initEvents = function(context){
 				
 		//on model changed
@@ -104,15 +104,15 @@
 	};
 	
 	/**
-	* Server HTML List View
-	* @constructor 
-	* @param {jQueryObject} $root - jplist jquery element
-	* @param {Object} options - jplist options
-	* @param {Object} observer
-	* @param {Object} scopeObserver	
-	* @param {jQuery.fn.jplist.ui.list.models.DataItemModel} model
-	* @param {jQuery.fn.jplist.app.History} history	
-	*/
+	 * Server HTML List View
+	 * @constructor
+	 * @param {jQueryObject} $root - jplist jquery element
+	 * @param {Object} options - jplist options
+	 * @param {Object} observer
+	 * @param {Object} scopeObserver
+	 * @param {jQuery.fn.jplist.ui.list.models.DataItemModel} model
+	 * @param {jQuery.fn.jplist.app.History} history
+	 */
 	jQuery.fn.jplist.ui.list.views.ServerView = function($root, options, observer, scopeObserver, model, history){
 	
 		this.options = options;
