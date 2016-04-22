@@ -1,5 +1,5 @@
 var jplist = jQuery.fn.jplist;
-var PubSub = jplist.app.events.PubSub;
+var PubSub = jplist.app.PubSub;
 var DataItemMemberPathModel = jplist.domain.dom.models.DataItemMemberPathModel;
 var Dataitems = jplist.domain.dom.collections.Dataitems;
 

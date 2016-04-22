@@ -394,7 +394,7 @@
 		}, userOptions);
 		
 		//init pubsub
-		context.observer = new jQuery.fn.jplist.app.events.PubSub(context.$root, context.options);
+		context.observer = new jQuery.fn.jplist.app.PubSub(context.$root, context.options);
 				
 		//init events - used to save last status
 		context.history = new jQuery.fn.jplist.app.History(context.$root, context.options, context.observer);
