@@ -42,15 +42,15 @@
 			,pathitem
 			,$element
 			,pathitems = [];
-		
+
 		for(var i=0; i<paths.length; i++){
-				
+
 			//get path object
 			path = paths[i];
-			
+
 			//jquery element
 			$element = context.$item.find(path.jqPath);
-						
+
 			if($element.length > 0){
 			
 				//create pathitem
@@ -73,7 +73,7 @@
 	* @class Dataitem - item within jplist container	
 	*/
 	jQuery.fn.jplist.domain.dom.models.DataItemModel = function($item, paths, index){
-		
+
 		this.pathitems = [];
 		this.$item = $item;
 		this.jqElement = $item;

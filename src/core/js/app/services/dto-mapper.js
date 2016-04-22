@@ -20,8 +20,8 @@
 	*/
 	jQuery.fn.jplist.app.services.DTOMapperService.filters.TextFilter = function(status, dataview){
 		
-		var path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(status.data.path, null); 
-		
+		var path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(status.data.path, null);
+
 		return jQuery.fn.jplist.domain.dom.services.FiltersService.textFilter(
 			status.data.value
 			,path

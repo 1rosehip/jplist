@@ -21,20 +21,20 @@
 		
 		//get all filter statuses that have registered filter services		
 		filterStatuses = statusesCollection.getFilterStatuses();
-		
+
 		if(filterStatuses.length > 0){
-		
+
 			for(var i = 0; i<filterStatuses.length; i++){
 				
 				status = filterStatuses[i];
-				
+
 				//get filter service
 				filterService = jQuery.fn.jplist.app.services.DTOMapperService.filters[status.data.filterType];
-						
+
 				//modify dataview
 				context.dataview = filterService(status, context.dataview);
 			}
-			
+
 			//trigger filter event
 			context.observer.trigger(context.observer.events.listFiltered, [statuses, context]);
 		}
@@ -129,11 +129,11 @@
 				
 		//pagination
 		pagination(context, statuses);
-						
+
 		//render list
 		context.observer.trigger(context.observer.events.statusesAppliedToList, [context, statuses]);
 
-        return dataitemsToJqueryObject(context);
+        return dataviewToJqueryObject(context);
 	};
 	
 	/**
@@ -262,10 +262,10 @@
 	var addDataItem = function(context, $item, paths, index){
 	
 		var dataItem;
-		
+
 		//create dataitem
 		dataItem = new jQuery.fn.jplist.domain.dom.models.DataItemModel($item, paths, index);
-						
+
 		//insert item into the given index
 		context.dataitems.splice(index, 0, dataItem);
 

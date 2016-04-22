@@ -11,24 +11,24 @@
 	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
 	*/
 	jQuery.fn.jplist.domain.dom.services.FiltersService.textFilter = function(text, path, dataview, ignoreRegex, mode){
-	
+
 		var dataitem
 			,pathitem
 			,resultDataview = []
 			,text1
 			,text2;
-		
+
 		//default mode -> contains
 		mode = mode || 'contains';
-		
+
 		for(var i=0; i<dataview.length; i++){
 		
 			//get dataitem
 			dataitem = dataview[i];
-			
+
 			//find value by path
 			pathitem = dataitem.findPathitem(path);
-			
+
 			if(path.jqPath === 'default'){
 				
 				//default drop down choice
@@ -37,10 +37,10 @@
 			else{
 				//if path is found
 				if(pathitem){
-					
+
 					text1 = jQuery.trim(jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(pathitem.text, ignoreRegex));
 					text2 = jQuery.trim(jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(text, ignoreRegex));
-										
+
 					switch(mode){
 						
 						case 'startsWith':{
@@ -81,10 +81,10 @@
 						}
 						
 						default:{
-							
+
 							//value.text contains text
 							if(text1.indexOf(text2) !== -1){
-								resultDataview.push(dataitem);					
+								resultDataview.push(dataitem);
 							}
 							
 							break;
@@ -94,7 +94,7 @@
 				}
 			}			
 		}
-		
+
 		return resultDataview;
 	};
 	

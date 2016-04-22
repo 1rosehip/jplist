@@ -11,6 +11,7 @@ QUnit.test('1', function(assert){
     html += '<div class="jplist-item"><div class="title">aaa</div></div>';
     html += '<div class="jplist-item"><div class="title">bbb</div></div>';
     html += '<div class="jplist-item"><div class="title">ccc</div></div>';
+    html += '<div class="jplist-item"><div class="title">testbb</div></div>';
     html += '</div>';
     html += '</div>';
 
@@ -26,9 +27,6 @@ QUnit.test('1', function(assert){
     var path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel('.title', 'text');
     panelPaths.add(path);
 
-    //create dom controller
-    var domController = new jQuery.fn.jplist.ui.list.controllers.DOMController($root, options, observer, panelPaths);
-
     var statuses = [
         {
             "action": "filter",
@@ -37,7 +35,7 @@ QUnit.test('1', function(assert){
             "data": {
                 "path": ".title",
                 "ignore": "[~!@#$%^&*()+=`'\"/\\_]+",
-                "value": "",
+                "value": "bb",
                 "filterType": "TextFilter"
             },
             "inStorage": true,
@@ -49,13 +47,17 @@ QUnit.test('1', function(assert){
 
     var statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
 
-    var collection = new jQuery.fn.jplist.domain.dom.collections.DataItemsCollection(observer, $root.find('.jplist-item'), panelPaths);
+    var collection = new jQuery.fn.jplist.domain.dom.collections.DataItemsCollection(observer, $root.find('.jplist-item'), [path]);
 
     var $dataview = collection.applyStatuses(statuses);
 
-    //check that html structure is valid
-    console.log($dataview.length);
+    var firstTitle = $dataview.eq(0).find('.title').text();
+    var secondTitle = $dataview.eq(1).find('.title').text();
+    var length = $dataview.length;
 
-    assert.ok(true, '1')
+    //check that html structure is valid
+    assert.ok((firstTitle === 'bbb') &&
+            (secondTitle === 'testbb') &&
+            (length === 2), firstTitle + ' ' + secondTitle + ' ' + length);
 });
 
