@@ -7,7 +7,7 @@
 	/**
 	* Is given path is in the given paths list (compare by jquery path only, data type is ignored)
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path
+	* @param {jQuery.fn.jplist.PathModel} path
 	* @return {boolean}
 	*/
 	var isPathInList = function(context, path){
@@ -33,7 +33,7 @@
 	/**
 	* add path (only unique)
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path
+	* @param {jQuery.fn.jplist.PathModel} path
 	*/
 	var add = function(context, path){
 		
@@ -45,7 +45,7 @@
 	/**
 	* add range of paths (only unique)
 	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
+	* @param {Array.<jQuery.fn.jplist.PathModel>} paths
 	*/
 	var addRange = function(context, paths){
 				
@@ -59,32 +59,32 @@
 	* DataItem Member Paths Collection
 	* @constructor
 	*/
-	jQuery.fn.jplist.DataItemMemberPathCollection = function(){
+	jQuery.fn.jplist.PathCollection = function(){
 		this.paths = [];
 	};
 	
 	/**
 	* add path (only unique)
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path
+	* @param {jQuery.fn.jplist.PathModel} path
 	*/
-	jQuery.fn.jplist.DataItemMemberPathCollection.prototype.add = function(path){
+	jQuery.fn.jplist.PathCollection.prototype.add = function(path){
 		add(this, path);
 	};
 	
 	/**
 	* add range of paths (only unique)
-	* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
+	* @param {Array.<jQuery.fn.jplist.PathModel>} paths
 	*/
-	jQuery.fn.jplist.DataItemMemberPathCollection.prototype.addRange = function(paths){
+	jQuery.fn.jplist.PathCollection.prototype.addRange = function(paths){
 		addRange(this, paths);
 	};
 	
 	/**
 	* Is given path is in the given paths list (compare by jquery path only, data type is ignored)
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path
+	* @param {jQuery.fn.jplist.PathModel} path
 	* @return {boolean}
 	*/
-	jQuery.fn.jplist.DataItemMemberPathCollection.prototype.isPathInList = function(path){
+	jQuery.fn.jplist.PathCollection.prototype.isPathInList = function(path){
 		return isPathInList(this, path);
 	};
 	

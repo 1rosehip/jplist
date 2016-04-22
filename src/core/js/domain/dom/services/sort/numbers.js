@@ -6,7 +6,7 @@
 	* @param {jQuery.fn.jplist.DataItemModel} dataitem1
 	* @param {jQuery.fn.jplist.DataItemModel} dataitem2
 	* @param {string} order - sort order: asc or desc
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {jQuery.fn.jplist.PathModel} path - path object
 	*/
 	jQuery.fn.jplist.SortService.numbersHelper = function(dataitem1, dataitem2, order, path){
 	
@@ -66,7 +66,7 @@
 	/**
 	* Sort numbers api (not used directly in the plugin)
 	* @param {string} order - sort order: asc or desc
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {jQuery.fn.jplist.PathModel} path - path object
 	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
 	* @memberOf jQuery.fn.jplist.SortService
 	*/

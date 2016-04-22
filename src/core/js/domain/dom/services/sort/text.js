@@ -6,7 +6,7 @@
 	* @param {jQuery.fn.jplist.DataItemModel} dataitem1
 	* @param {jQuery.fn.jplist.DataItemModel} dataitem2
 	* @param {string} order - sort order: asc or desc
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {jQuery.fn.jplist.PathModel} path - path object
 	* @param {string} ignore - remove characters regex expression
 	*/
 	jQuery.fn.jplist.SortService.textHelper = function(dataitem1, dataitem2, order, path, ignore){
@@ -59,7 +59,7 @@
 	/**
 	* Sort text api (not used directly in the plugin)
 	* @param {string} order - sort order: asc or desc
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {jQuery.fn.jplist.PathModel} path - path object
 	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
 	* @param {string} ignore - remove characters regex expression
 	* @memberOf jQuery.fn.jplist.SortService

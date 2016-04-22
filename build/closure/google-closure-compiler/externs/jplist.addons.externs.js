@@ -11,13 +11,13 @@ jQuery.fn.jplist.settings = {};
 * @param {?string} dataType - data type of the content in this path - text, number, datetime
 * @constructor
 */
-jQuery.fn.jplist.DataItemMemberPathModel = function(jqPath, dataType){}
+jQuery.fn.jplist.PathModel = function(jqPath, dataType){}
 
 /**
 * data item - item in list that should be sorted, filtered etc.
 * @constructor
 * @param {jQueryObject} $item - item to add to data array	
-* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths - paths objects array
+* @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
 * @param {number} index
 * @class Dataitem - item within jplist container	
 */

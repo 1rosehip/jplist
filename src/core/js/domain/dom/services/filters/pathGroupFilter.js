@@ -27,7 +27,7 @@
 				path = pathGroup[p];
 				
 				//create path object
-				pathObj = new jQuery.fn.jplist.DataItemMemberPathModel(path, null);
+				pathObj = new jQuery.fn.jplist.PathModel(path, null);
 				
 				//add to paths list
 				paths.push(pathObj);

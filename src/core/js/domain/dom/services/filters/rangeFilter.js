@@ -3,7 +3,7 @@
 	
 	/**
 	* rangeFilter - range filter
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {jQuery.fn.jplist.PathModel} path - path object
 	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
 	* @param {number} min
 	* @param {number} max

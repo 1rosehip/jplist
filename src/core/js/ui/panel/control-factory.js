@@ -204,7 +204,7 @@
 	/**
 	 * Get control paths
 	 * @interface
-	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths
 	 */
 	jQuery.fn.jplist.ControlFactory.prototype.getPaths = function(paths){
 		return [];

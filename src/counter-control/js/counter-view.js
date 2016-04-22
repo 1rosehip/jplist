@@ -16,7 +16,7 @@
 			,ignore = '';
 
         //get path object from data
-        path = /** @type {jQuery.fn.jplist.DataItemMemberPathModel|null} */ (context.$control.data('path'));
+        path = /** @type {jQuery.fn.jplist.PathModel|null} */ (context.$control.data('path'));
 		dataType = context.$control.data('dataType');
 		dataText = /** @type {string} */ (context.$control.data('dataText'));	
 		$countValue = context.$control.data('$countValue');
@@ -127,7 +127,7 @@
         if(dataPath){
 
             //get path
-            path = new jQuery.fn.jplist.DataItemMemberPathModel(dataPath, null);
+            path = new jQuery.fn.jplist.PathModel(dataPath, null);
 			context.$control.data('path', path);			
         }
 		
@@ -145,7 +145,7 @@
 	/**
 	* Get control paths
 	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
+	* @param {Array.<jQuery.fn.jplist.PathModel>} paths
 	*/
 	var getPaths = function(context, paths){
 	
@@ -161,7 +161,7 @@
         if(jqPath){
 
             //init path
-            path = new jQuery.fn.jplist.DataItemMemberPathModel(jqPath, dataType);
+            path = new jQuery.fn.jplist.PathModel(jqPath, dataType);
             paths.push(path);
         }
 	};
@@ -263,7 +263,7 @@
 		
 	/**
 	* Get Paths
-	* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
+	* @param {Array.<jQuery.fn.jplist.PathModel>} paths
 	*/
 	Init.prototype.getPaths = function(paths){
 		getPaths(this, paths);

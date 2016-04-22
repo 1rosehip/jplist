@@ -3,7 +3,7 @@
 	
 	/**
 	* pathFilter - filter dataview by path: only items with the given path are allowed
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {jQuery.fn.jplist.PathModel} path - path object
 	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
 	* @return {Array.<jQuery.fn.jplist.DataItemModel>}
 	*/

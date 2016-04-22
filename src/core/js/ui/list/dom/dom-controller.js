@@ -29,7 +29,7 @@
 	 * @param {Object} context
      * @param {String} itemsBoxPath
      * @param {String} itemPath
-	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} panelPaths - paths objects array
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} panelPaths - paths objects array
      * @return {jQuery.fn.jplist.Dataitems}
 	 */
 	var getCollection = function(context, itemsBoxPath, itemPath, panelPaths){
@@ -55,7 +55,7 @@
 	 * @param {jQueryObject} $root - jplist root element
 	 * @param {Object} options - jplist user options
 	 * @param {Object} observer
-	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} panelPaths - paths objects array
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} panelPaths - paths objects array
 	 * @return {Object} - DOM controller
 	 */
 	jQuery.fn.jplist.DOMController = function($root, options, observer, panelPaths){

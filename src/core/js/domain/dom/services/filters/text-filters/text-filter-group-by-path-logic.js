@@ -30,7 +30,7 @@
 		else{
 
             //create path object
-            pathObj = new jQuery.fn.jplist.DataItemMemberPathModel(dataPath, null);
+            pathObj = new jQuery.fn.jplist.PathModel(dataPath, null);
 
 			for(var i=0; i<dataview.length; i++){
 

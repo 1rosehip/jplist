@@ -24,7 +24,7 @@ QUnit.test('Filter bb', function(assert){
         ,itemPath: '.jplist-item'
     };
     var observer = new jplist.PubSub($root, options);
-    var path = new jplist.DataItemMemberPathModel('.title', 'text');
+    var path = new jplist.PathModel('.title', 'text');
 
     var dataitems = new jplist.Dataitems(observer, $root.find('.jplist-item'), [path]);
 

@@ -25,7 +25,7 @@
 	*/
 	jQuery.fn.jplist.DTOMapperService.filters.TextFilter = function(status, dataview){
 		
-		var path = new jQuery.fn.jplist.DataItemMemberPathModel(status.data.path, null);
+		var path = new jQuery.fn.jplist.PathModel(status.data.path, null);
 
 		return jQuery.fn.jplist.FiltersService.textFilter(
 			status.data.value
@@ -44,7 +44,7 @@
 	*/
 	jQuery.fn.jplist.DTOMapperService.filters.path = function(status, dataview){
 		
-		var path = new jQuery.fn.jplist.DataItemMemberPathModel(status.data.path, null);
+		var path = new jQuery.fn.jplist.PathModel(status.data.path, null);
 		
 		return jQuery.fn.jplist.FiltersService.pathFilter(
 			path
@@ -75,7 +75,7 @@
 	*/
 	jQuery.fn.jplist.DTOMapperService.filters.range = function(status, dataview){
 				
-		var path = new jQuery.fn.jplist.DataItemMemberPathModel(status.data.path, null);
+		var path = new jQuery.fn.jplist.PathModel(status.data.path, null);
 		
 		return jQuery.fn.jplist.FiltersService.rangeFilter(
 			path
@@ -95,7 +95,7 @@
 	*/
 	jQuery.fn.jplist.DTOMapperService.filters.date = function(status, dataview){
 				
-		var path = new jQuery.fn.jplist.DataItemMemberPathModel(status.data.path, null);
+		var path = new jQuery.fn.jplist.PathModel(status.data.path, null);
 		
 		return jQuery.fn.jplist.FiltersService.dateFilter(
 			status.data['year']
@@ -115,7 +115,7 @@
 	*/
 	jQuery.fn.jplist.DTOMapperService.filters.dateRange = function(status, dataview){
 				
-		var path = new jQuery.fn.jplist.DataItemMemberPathModel(status.data.path, null);
+		var path = new jQuery.fn.jplist.PathModel(status.data.path, null);
 		
 		return jQuery.fn.jplist.FiltersService.dateRangeFilter(
 			path
@@ -195,7 +195,7 @@
 	*/
 	jQuery.fn.jplist.DTOMapperService.sort.text = function(status, dataitem1, dataitem2){
 		
-		var path = new jQuery.fn.jplist.DataItemMemberPathModel(status.data.path, status.data.type);
+		var path = new jQuery.fn.jplist.PathModel(status.data.path, status.data.type);
 						
 		return jQuery.fn.jplist.SortService.textHelper(
 			dataitem1
@@ -215,7 +215,7 @@
 	*/
 	jQuery.fn.jplist.DTOMapperService.sort.number = function(status, dataitem1, dataitem2){
 		
-		var path = new jQuery.fn.jplist.DataItemMemberPathModel(status.data.path, status.data.type);
+		var path = new jQuery.fn.jplist.PathModel(status.data.path, status.data.type);
 						
 		return jQuery.fn.jplist.SortService.numbersHelper(dataitem1, dataitem2, status.data.order, path);
 	};
@@ -229,7 +229,7 @@
 	*/
 	jQuery.fn.jplist.DTOMapperService.sort.datetime = function(status, dataitem1, dataitem2){
 		
-		var path = new jQuery.fn.jplist.DataItemMemberPathModel(status.data.path, status.data.type);
+		var path = new jQuery.fn.jplist.PathModel(status.data.path, status.data.type);
 						
 		return jQuery.fn.jplist.SortService.datetimeHelper(
 			dataitem1

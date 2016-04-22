@@ -4,7 +4,7 @@
 	/**
 	* textFilter - filter dataview by text in the given jquery path
 	* @param {string} text - filter text
-	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {jQuery.fn.jplist.PathModel} path - path object
 	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
 	* @param {string} ignoreRegex
 	* @param {string} mode: startsWith, endsWith, contains, advanced, equal

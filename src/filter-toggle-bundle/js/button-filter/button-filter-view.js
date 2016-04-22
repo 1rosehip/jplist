@@ -109,7 +109,7 @@
 	/**
 	* Get control paths
 	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
+	* @param {Array.<jQuery.fn.jplist.PathModel>} paths
 	*/
 	var getPaths = function(context, paths){
 	
@@ -122,7 +122,7 @@
 		//init path
 		if(jqPath){
 		
-			path = new jQuery.fn.jplist.DataItemMemberPathModel(jqPath, 'text');
+			path = new jQuery.fn.jplist.PathModel(jqPath, 'text');
 			paths.push(path);
 		}
 	};
@@ -224,7 +224,7 @@
 	
 	/**
 	* Get Paths
-	* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
+	* @param {Array.<jQuery.fn.jplist.PathModel>} paths
 	*/
 	Init.prototype.getPaths = function(paths){
 		getPaths(this, paths);

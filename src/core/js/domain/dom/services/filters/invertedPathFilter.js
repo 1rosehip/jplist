@@ -40,7 +40,7 @@
 					}
 					else{
 						//get data path
-						path = new jQuery.fn.jplist.DataItemMemberPathModel(dataPath, null);
+						path = new jQuery.fn.jplist.PathModel(dataPath, null);
 						
 						//find value by path
 						pathitem = dataitem.findPathitem(path);

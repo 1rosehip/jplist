@@ -12,7 +12,7 @@ var helper3ItemsArray = function(jqueryPath, searchText, ignoreRegex){
 		,resultDataview;
 	
 	//init paths: text, number, datetime
-	paths.push(new jQuery.fn.jplist.DataItemMemberPathModel(jqueryPath, 'text'));
+	paths.push(new jQuery.fn.jplist.PathModel(jqueryPath, 'text'));
 	
 	//init data items
 	dataview.push(new jQuery.fn.jplist.DataItemModel($('<div data-type="jplist-item"><div class="title">aaa</div></div>'), paths, 0));
@@ -22,7 +22,7 @@ var helper3ItemsArray = function(jqueryPath, searchText, ignoreRegex){
 	//text filter
 	resultDataview = jQuery.fn.jplist.FiltersService.textFilter(
 		searchText
-		,new jQuery.fn.jplist.DataItemMemberPathModel(jqueryPath, 'text') //path object
+		,new jQuery.fn.jplist.PathModel(jqueryPath, 'text') //path object
 		,dataview
 		,ignoreRegex
 	);
@@ -97,7 +97,7 @@ QUnit.test('Search non english letters in title, 3 items in array', function(ass
 		,resultDataview;
 	
 	//init paths: text, number, datetime
-	paths.push(new jQuery.fn.jplist.DataItemMemberPathModel('.title', 'text'));
+	paths.push(new jQuery.fn.jplist.PathModel('.title', 'text'));
 	
 	//init data items
 	dataview.push(new jQuery.fn.jplist.DataItemModel($('<div data-type="jplist-item"><div class="title">ребенок</div></div>'), paths, 0));
@@ -107,7 +107,7 @@ QUnit.test('Search non english letters in title, 3 items in array', function(ass
 	//text filter
 	resultDataview = jQuery.fn.jplist.FiltersService.textFilter(
 		'ко'
-		,new jQuery.fn.jplist.DataItemMemberPathModel('.title', 'text') //path object
+		,new jQuery.fn.jplist.PathModel('.title', 'text') //path object
 		,dataview
 		,''
 	);

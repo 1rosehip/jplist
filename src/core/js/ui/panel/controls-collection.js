@@ -268,7 +268,7 @@
 	/**
 	 * Get panel paths
 	 * @param {Object} context
-	 * @return {Array.<jQuery.fn.jplist.DataItemMemberPathModel>}
+	 * @return {Array.<jQuery.fn.jplist.PathModel>}
 	 */
 	var getPaths = function(context){
 	
@@ -277,7 +277,7 @@
 			,pathsCollection;
 		
 		//init empty paths collection
-		pathsCollection = new jQuery.fn.jplist.DataItemMemberPathCollection();
+		pathsCollection = new jQuery.fn.jplist.PathCollection();
 		
 		for(var i=0; i<context.controls.length; i++){
 		
@@ -295,7 +295,7 @@
 			}			
 		}
 		
-		return pathsCollection['paths'];
+		return pathsCollection.paths;
 	};	
 		
 	/**

@@ -244,7 +244,7 @@
 	 * add jquery item to jplist dataitems array
 	 * @param {Object} context
 	 * @param {jQueryObject} $item - item to add to dataitems array
-	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
 	 * @param {number} index
 	 */
 	var addDataItem = function(context, $item, paths, index){
@@ -266,7 +266,7 @@
 	 * @param {Object} context - jplist controller 'this' object
 	 * @param {jQueryObject} $items
 	 * @param {number} i
-	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
 	 * @param {number} index
 	 */
 	var addDataItemsHelper = function(context, $items, i, paths, index){
@@ -300,7 +300,7 @@
 	 * add jquery item collection to jplist dataitems array
 	 * @param {Object} context
 	 * @param {jQueryObject} $items - items to add to dataitems array
-	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
 	 * @param {number} index
 	 */
 	var addDataItems = function(context, $items, paths, index){
@@ -326,7 +326,7 @@
 	 * @constructor
 	 * @param {Object} observer
 	 * @param {jQueryObject} $items - initial items to add to the collection
-	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
 	 */
 	jQuery.fn.jplist.Dataitems = function(observer, $items, paths){
 
@@ -409,7 +409,7 @@
 	/**
 	 * API: convetrs jQuery element (item) to dataitem and adds it to the dataitems collection
 	 * @param {jQueryObject} item - jquery item to add
-	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
 	 * @param {number} index
 	 */
 	jQuery.fn.jplist.Dataitems.prototype.addDataItem = function(item, paths, index){
@@ -419,7 +419,7 @@
 	/**
 	 * API: convetrs a set of jQuery elements (items) to dataitems and adds them to the dataitems collection
 	 * @param {jQueryObject} items - jquery items to add
-	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths - paths objects array
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
 	 * @param {number} index
 	 */
 	jQuery.fn.jplist.Dataitems.prototype.addDataItems = function(items, paths, index){
