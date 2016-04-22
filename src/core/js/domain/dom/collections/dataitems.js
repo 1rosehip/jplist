@@ -17,7 +17,7 @@
 			,filterService;
 		
 		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
+		statusesCollection = new jQuery.fn.jplist.app.dto.Statuses(statuses);
 		
 		//get all filter statuses that have registered filter services		
 		filterStatuses = statusesCollection.getFilterStatuses();
@@ -54,7 +54,7 @@
 			,statusesCollection;
 			
 		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
+		statusesCollection = new jQuery.fn.jplist.app.dto.Statuses(statuses);
 		
 		//get pagination statuses		
 		actionStatuses = statusesCollection.getStatusesByAction('paging', statuses);
@@ -96,7 +96,7 @@
 			,statusesCollection;
 		
 		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
+		statusesCollection = new jQuery.fn.jplist.app.dto.Statuses(statuses);
 		
 		//get all sort statuses, expand statuses group if needed		
 		sortStatuses = statusesCollection.getSortStatuses();
@@ -340,7 +340,7 @@
 	 * @param {jQueryObject} $items - initial items to add to the collection
 	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection = function(observer, $items, paths){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems = function(observer, $items, paths){
 
 		this.dataitems = [];
 		this.dataview = [];
@@ -363,28 +363,28 @@
 	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
      * @return {jQueryObject}
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.applyStatuses = function(statuses){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.applyStatuses = function(statuses){
 		return applyStatuses(this, statuses);
 	};
 	
 	/**
 	 * API: filter dataview
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.filter = function(statuses){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.filter = function(statuses){
 		filter(this, statuses);
 	};
 	
 	/**
 	 * API: sort dataview
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.sort = function(statuses){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.sort = function(statuses){
 		sort(this, statuses);
 	};
 	
 	/**
 	 * API: dataview	pagination
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.pagination = function(statuses){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.pagination = function(statuses){
 		pagination(this, statuses);
 	};
 	
@@ -392,7 +392,7 @@
 	 * API: convert dataview to jquery object
 	 * @return {jQueryObject}
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataviewToJqueryObject = function(){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.dataviewToJqueryObject = function(){
 		return dataviewToJqueryObject(this);
 	};
 	
@@ -400,21 +400,21 @@
 	 * API: convert dataitems to jquery object
 	 * @return {jQueryObject}
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataitemsToJqueryObject = function(){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.dataitemsToJqueryObject = function(){
 		return dataitemsToJqueryObject(this);
 	};
 	
 	/**
 	 * API: reset dataview collection with initial dataitems set
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.resetDataview = function(){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.resetDataview = function(){
 		resetDataview(this);
 	};
 		
 	/**
 	 * API: empty collection
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.empty = function(){	
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.empty = function(){	
 		empty(this);
 	};
 	
@@ -424,7 +424,7 @@
 	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
 	 * @param {number} index
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.addDataItem = function(item, paths, index){	
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.addDataItem = function(item, paths, index){	
 		addDataItem(this, item, paths, index);
 	};
 	
@@ -434,7 +434,7 @@
 	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths - paths objects array
 	 * @param {number} index
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.addDataItems = function(items, paths, index){		
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.addDataItems = function(items, paths, index){		
 		addDataItems(this, items, paths, index);
 	};
 	
@@ -442,7 +442,7 @@
 	 * API: searches for jQuery element (item) in the dataitems collection and deletes it
 	 * @param {jQueryObject} item - jquery element (item) to delete
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.delDataitem = function(item){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.delDataitem = function(item){
 		delDataitem(this, item);
 	};
 	
@@ -450,7 +450,7 @@
 	 * API: searches for jQuery elements (items) in the dataitems collection and deletes them
 	 * @param {jQueryObject} items - jquery element to delete
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.delDataitems = function(items){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.delDataitems = function(items){
 		delDataitems(this, items);
 	};
 	
@@ -459,7 +459,7 @@
 	 * @param {jQueryObject} item - jquery element to delete
 	 * @return {number} - index of dataitem in dataitems array
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.indexOf = function(item){
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.indexOf = function(item){
 		return indexOf(this, item);
 	};
 	
@@ -467,7 +467,7 @@
 	 * API: get HTML of the collection in the current state (dataview): with the current filter, sorting etc.
 	 * @return {string}
 	 */
-	jQuery.fn.jplist.domain.dom.collections.DataItemsCollection.prototype.dataviewToString = function(){	
+	jQuery.fn.jplist.domain.dom.collections.Dataitems.prototype.dataviewToString = function(){	
 		return dataviewToString(this);
 	};
 	

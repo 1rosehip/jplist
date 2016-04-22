@@ -4,7 +4,7 @@
 	/**
 	 * render html
 	 * @param {Object} context
-	 * @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} collection
+	 * @param {jQuery.fn.jplist.domain.dom.collections.Dataitems} collection
 	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
      * @param {jQuery.fn.jplist.app.dto.StatusDTO} lastStatus
      * @return {jQueryObject} $dataview
@@ -114,7 +114,7 @@
 	
 	/**
 	 * render view
-	 * @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} collection
+	 * @param {jQuery.fn.jplist.domain.dom.collections.Dataitems} collection
 	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
      * @param {jQuery.fn.jplist.app.dto.StatusDTO} lastStatus
      * @return {jQueryObject}

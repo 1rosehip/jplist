@@ -284,7 +284,7 @@ Statuses Collection (Data Transfer Objects)
 	* @constructor
 	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
 	*/
-	jQuery.fn.jplist.app.dto.StatusesDTOCollection = function(statuses){
+	jQuery.fn.jplist.app.dto.Statuses = function(statuses){
 
 		this.statuses = statuses || [];
 	};
@@ -294,7 +294,7 @@ Statuses Collection (Data Transfer Objects)
 	* @param {string} action
 	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} 
 	*/
-	jQuery.fn.jplist.app.dto.StatusesDTOCollection.prototype.getStatusesByAction = function(action){
+	jQuery.fn.jplist.app.dto.Statuses.prototype.getStatusesByAction = function(action){
 		return getStatusesByAction(this, action);
 	};
 	
@@ -303,7 +303,7 @@ Statuses Collection (Data Transfer Objects)
 	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
 	* @param {boolean} force - if this status should be prefered on other statuses
 	*/
-	jQuery.fn.jplist.app.dto.StatusesDTOCollection.prototype.add = function(status, force){
+	jQuery.fn.jplist.app.dto.Statuses.prototype.add = function(status, force){
 		return add(this, status, force);
 	};
 	
@@ -312,7 +312,7 @@ Statuses Collection (Data Transfer Objects)
 	* @param {number} index
 	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
 	*/
-	jQuery.fn.jplist.app.dto.StatusesDTOCollection.prototype.get = function(index){		
+	jQuery.fn.jplist.app.dto.Statuses.prototype.get = function(index){		
 		return get(this, index);
 	};
 	
@@ -320,7 +320,7 @@ Statuses Collection (Data Transfer Objects)
 	* get array of statuses
 	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
 	*/	
-	jQuery.fn.jplist.app.dto.StatusesDTOCollection.prototype.toArray = function(){
+	jQuery.fn.jplist.app.dto.Statuses.prototype.toArray = function(){
 		return toArray(this);
 	};
 	
@@ -328,7 +328,7 @@ Statuses Collection (Data Transfer Objects)
 	* get all sort statuses, expand statuses group if needed
 	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
 	*/
-	jQuery.fn.jplist.app.dto.StatusesDTOCollection.prototype.getSortStatuses = function(){
+	jQuery.fn.jplist.app.dto.Statuses.prototype.getSortStatuses = function(){
 		return getSortStatuses(this);
 	};
 	
@@ -336,7 +336,7 @@ Statuses Collection (Data Transfer Objects)
 	* get all filter statuses that have registered filter services
 	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
 	*/
-	jQuery.fn.jplist.app.dto.StatusesDTOCollection.prototype.getFilterStatuses = function(){
+	jQuery.fn.jplist.app.dto.Statuses.prototype.getFilterStatuses = function(){
 		return getFilterStatuses(this);
 	};
 	

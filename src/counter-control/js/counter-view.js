@@ -184,7 +184,7 @@
 				/**
 				 * on add collection item event
 				 * @param {Object} e - event object
-				 * @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} collection
+				 * @param {jQuery.fn.jplist.domain.dom.collections.Dataitems} collection
 				 */
 				context.observer.on(context.observer.events.collectionReadyEvent, function(e, collection){
 					
@@ -202,7 +202,7 @@
 				 * on filter event
 				 * @param {Object} e - event object
 				 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-				 * @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} collection
+				 * @param {jQuery.fn.jplist.domain.dom.collections.Dataitems} collection
 				 */
 				context.observer.on(context.observer.events.listFiltered, function(e, statuses, collection){	
 					drawCounter(context, collection.dataview);
@@ -219,7 +219,7 @@
 				 * bind answer event
 				 * @param {Object} e - event object
 				 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-				 * @param {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection} collection
+				 * @param {jQuery.fn.jplist.domain.dom.collections.Dataitems} collection
 				 */
 				context.observer.on(context.observer.events.setStatusesEvent, function(e, statuses, collection){
 					drawCounter(context, collection.dataview);

@@ -1,9 +1,14 @@
+var jplist = jQuery.fn.jplist;
+var PubSub = jplist.app.events.PubSub;
+var DataItemMemberPathModel = jplist.domain.dom.models.DataItemMemberPathModel;
+var Dataitems = jplist.domain.dom.collections.Dataitems;
+
 /**
  * text filter with sort bundle
  */
 QUnit.module('Integration Test: Text Filters with Sort Bundle');
 
-QUnit.test('1', function(assert){
+QUnit.test('Filter bb', function(assert){
 
     var html = '<div id="demo">';
 
@@ -21,12 +26,12 @@ QUnit.test('1', function(assert){
         itemsBox: '.list'
         ,itemPath: '.jplist-item'
     };
-    var observer = new jQuery.fn.jplist.app.events.PubSub($root, options);
-    var panelPaths = new jQuery.fn.jplist.domain.dom.collections.DataItemMemberPathCollection();
+    var observer = new PubSub($root, options);
+    var path = new DataItemMemberPathModel('.title', 'text');
 
-    var path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel('.title', 'text');
-    panelPaths.add(path);
+    var dataitems = new Dataitems(observer, $root.find('.jplist-item'), [path]);
 
+    //create statuses collection -----------------
     var statuses = [
         {
             "action": "filter",
@@ -45,11 +50,10 @@ QUnit.test('1', function(assert){
         }
     ];
 
-    var statusesCollection = new jQuery.fn.jplist.app.dto.StatusesDTOCollection(statuses);
+    //apply statuses to the dataitems
+    var $dataview = dataitems.applyStatuses(statuses);
 
-    var collection = new jQuery.fn.jplist.domain.dom.collections.DataItemsCollection(observer, $root.find('.jplist-item'), [path]);
-
-    var $dataview = collection.applyStatuses(statuses);
+    //--------------------------------------------------
 
     var firstTitle = $dataview.eq(0).find('.title').text();
     var secondTitle = $dataview.eq(1).find('.title').text();

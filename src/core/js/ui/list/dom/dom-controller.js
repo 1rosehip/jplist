@@ -30,7 +30,7 @@
      * @param {String} itemsBoxPath
      * @param {String} itemPath
 	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} panelPaths - paths objects array
-     * @return {jQuery.fn.jplist.domain.dom.collections.DataItemsCollection}
+     * @return {jQuery.fn.jplist.domain.dom.collections.Dataitems}
 	 */
 	var getCollection = function(context, itemsBoxPath, itemPath, panelPaths){
 	
@@ -44,7 +44,7 @@
 		$items = $itemsBox.find(itemPath);
 
 		//create new collection
-		collection = new jQuery.fn.jplist.domain.dom.collections.DataItemsCollection(context.observer, $items, panelPaths);
+		collection = new jQuery.fn.jplist.domain.dom.collections.Dataitems(context.observer, $items, panelPaths);
 
 		return collection;
 	};
