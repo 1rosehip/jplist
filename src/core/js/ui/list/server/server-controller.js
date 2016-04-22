@@ -80,14 +80,10 @@
 	
 		var status
 			,pagingStatuses
-			,paging
-			,statusesCollection;
-		
-		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.Statuses(statuses);
+			,paging;
 		
 		//get list of pagination statuses
-		pagingStatuses = statusesCollection.getStatusesByAction('paging', statuses);
+		pagingStatuses = jQuery.fn.jplist.StatusesService.getStatusesByAction('paging', statuses);
 		
 		for(var i=0; i<pagingStatuses.length; i++){
 		

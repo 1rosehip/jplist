@@ -13,14 +13,10 @@
 	
 		var filterStatuses
 			,status
-			,statusesCollection
 			,filterService;
-		
-		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.Statuses(statuses);
-		
+
 		//get all filter statuses that have registered filter services		
-		filterStatuses = statusesCollection.getFilterStatuses();
+		filterStatuses = jQuery.fn.jplist.StatusesService.getFilterStatuses(statuses);
 
 		if(filterStatuses.length > 0){
 
@@ -50,14 +46,10 @@
 		var actionStatuses
 			,paging = null
 			,status
-			,currentPage
-			,statusesCollection;
-			
-		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.Statuses(statuses);
+			,currentPage;
 		
 		//get pagination statuses		
-		actionStatuses = statusesCollection.getStatusesByAction('paging', statuses);
+		actionStatuses = jQuery.fn.jplist.StatusesService.getStatusesByAction('paging', statuses);
 		
 		if(actionStatuses.length > 0){
 		
@@ -92,14 +84,10 @@
 	 */
 	var sort = function(context, statuses){
 		
-		var sortStatuses = []
-			,statusesCollection;
-		
-		//init statuses collection
-		statusesCollection = new jQuery.fn.jplist.Statuses(statuses);
+		var sortStatuses = [];
 		
 		//get all sort statuses, expand statuses group if needed		
-		sortStatuses = statusesCollection.getSortStatuses();
+		sortStatuses = jQuery.fn.jplist.StatusesService.getSortStatuses(statuses);
 			
         if(sortStatuses.length > 0){
 			

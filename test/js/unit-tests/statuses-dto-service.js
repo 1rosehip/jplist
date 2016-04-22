@@ -1,6 +1,5 @@
 /**
 * Statuses DTO Collection
-* \core\js\app\dto\statuses-dto-collection.js
 */
 QUnit.module('Unit Test: Statuses DTO Collection');
 
@@ -167,19 +166,17 @@ var statuses = [
 */
 QUnit.test('getStatusesByAction - test 1', function(assert){
 
-	var options = {}, observer = {};	
-	var collection = new jQuery.fn.jplist.Statuses(statuses);
+	var options = {}, observer = {};
 	
-	var statusesOfAction = collection.getStatusesByAction('filter');
+	var statusesOfAction = jQuery.fn.jplist.StatusesService.getStatusesByAction('filter', statuses);
 	assert.ok(statusesOfAction.length === 8);
 });
 
 QUnit.test('getStatusesByAction - test 2', function(assert){
 
-	var options = {}, observer = {};	
-	var collection = new jQuery.fn.jplist.Statuses(statuses);
+	var options = {}, observer = {};
 	
-	var statusesOfAction = collection.getStatusesByAction('sort');
+	var statusesOfAction = jQuery.fn.jplist.StatusesService.getStatusesByAction('sort', statuses);
 	assert.ok(statusesOfAction.length === 1);
 });
 
@@ -189,9 +186,9 @@ QUnit.test('getStatusesByAction - test 2', function(assert){
 */
 QUnit.test('add - if status has the same name and the same type -> ignore it', function(assert){
 
-	var options = {}, observer = {};	
-	var collection = new jQuery.fn.jplist.Statuses(statuses);
-	
+	var options = {}, observer = {};
+	var collection = statuses.slice();
+
 	var newStatus = {
 		"action": "paging",
 		"name": "paging",
@@ -215,10 +212,10 @@ QUnit.test('add - if status has the same name and the same type -> ignore it', f
 		"isAnimateToTop": true,
 		"inDeepLinking": true
 	};
-	
-	collection.add(newStatus, false);
-	
-	assert.ok(collection.statuses[0].data.number == 10);
+
+    jQuery.fn.jplist.StatusesService.add(collection, newStatus, false);
+
+	assert.ok(collection[0].data.number == 10);
 });
 
 /**
@@ -251,7 +248,7 @@ QUnit.test('add - check if currentPage and number are combined', function(assert
 			"inDeepLinking": true
 		}
 	];
-	var collection = new jQuery.fn.jplist.Statuses(statuses);
+	var collection = statuses.slice();
 	
 	var newStatus = {
 		"action": "paging",
@@ -275,9 +272,9 @@ QUnit.test('add - check if currentPage and number are combined', function(assert
 		"isAnimateToTop": true,
 		"inDeepLinking": true
 	};
-	
-	collection.add(newStatus, false);
-	assert.ok(collection.statuses[0].data.paging.currentPage === 1);
+
+    jQuery.fn.jplist.StatusesService.add(collection, newStatus, false);
+	assert.ok(collection[0].data.paging.currentPage === 1);
 });
 
 /**
@@ -300,7 +297,7 @@ QUnit.test('add - check if currentPage and number are combined', function(assert
 			"inDeepLinking": true
 		}
 	];
-	var collection = new jQuery.fn.jplist.Statuses(statuses);
+	var collection = statuses.slice();
 	
 	var newStatus = {
 		"action": "paging",
@@ -314,9 +311,9 @@ QUnit.test('add - check if currentPage and number are combined', function(assert
 		"isAnimateToTop": true,
 		"inDeepLinking": true
 	};
-	
-	collection.add(newStatus, false);
-	assert.ok(collection.statuses[0].data.number === '5' && collection.statuses[0].data.currentPage === '1');
+
+    jQuery.fn.jplist.StatusesService.add(collection, newStatus, false);
+	assert.ok(collection[0].data.number === '5' && collection[0].data.currentPage === '1');
 });
 
 /*

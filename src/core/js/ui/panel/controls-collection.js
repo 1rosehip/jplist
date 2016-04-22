@@ -90,7 +90,7 @@
 			,controlsWithSameName
 			,control
 			,status
-			,statusesByDeepLinkCollection = new jQuery.fn.jplist.Statuses([])
+			,statusesByDeepLinkCollection = []
 			,isDefault = false
 			,i;
 		
@@ -113,18 +113,18 @@
 					status = control['getStatusByDeepLink'](param.propName, param.propValue);
 					
 					if(status){
-						statusesByDeepLinkCollection.add(status, false);
+                        jQuery.fn.jplist.StatusesService.add(statusesByDeepLinkCollection, status, false);
 					}
 				}
 			}
 		}
 				
 		//send build statuses event
-		observer.trigger(observer.events.knownStatusesChanged, [statusesByDeepLinkCollection.toArray()]);
+		observer.trigger(observer.events.knownStatusesChanged, [statusesByDeepLinkCollection]);
 		
 		//send 'statuses changed by deep links' event
 		observer.trigger(observer.events.statusesChangedByDeepLinks, [
-			,statusesByDeepLinkCollection.toArray()
+			,statusesByDeepLinkCollection
 			,params
 		]);	
 	};
@@ -207,13 +207,9 @@
 	 */
 	var getStatuses = function(context, isDefault){
 	
-		var statuses
+		var statuses = []
 			,control
-			,status
-			,index
-			,sameNameStatus;			
-		
-		statuses = new jQuery.fn.jplist.Statuses([]);
+			,status;
 		
 		for(var i=0; i<context.controls.length; i++){
 		
@@ -229,13 +225,13 @@
 				if(status){
 				
 					//add / merge status
-					statuses.add(status, false);
+                    jQuery.fn.jplist.StatusesService.add(statuses, status, false);
 				}
 			}
 			
 		}
 		
-		return statuses.toArray();
+		return statuses;
 	};
 	
 	/**
@@ -249,24 +245,24 @@
 		var statuses
 			,statusesCollection;
 
-        statusesCollection = new jQuery.fn.jplist.Statuses([]);
+        statusesCollection = [];
 
         //get current statuses
         statuses = getStatuses(context, isDefault);
 
         for(var i = 0; i<statuses.length; i++){
-            statusesCollection.add(statuses[i], false);
+            jQuery.fn.jplist.StatusesService.add(statusesCollection, statuses[i], false);
         }
 
         if(statusesToMerge){
 
             for(var j=0; j<statusesToMerge.length; j++){
 
-                statusesCollection.add(statusesToMerge[j], true);
+                jQuery.fn.jplist.StatusesService.add(statusesCollection, statusesToMerge[j], true);
             }
         }
 				
-		return statusesCollection.toArray();
+		return statusesCollection;
 	};
 	
 	/**
