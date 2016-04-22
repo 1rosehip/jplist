@@ -52,11 +52,11 @@
 	 * @constructor
 	 * @param {Object} options - jplist user options
 	 * @param {Object} observer
-	 * @param {jQuery.fn.jplist.app.History} history
+	 * @param {jQuery.fn.jplist.History} history
 	 * @param {jQueryObject} $root
 	 * @return {Object}
 	 */
-	jQuery.fn.jplist.ui.list.collections.ItemControlCollection = function(options, observer, history, $root){	
+	jQuery.fn.jplist.ItemControlCollection = function(options, observer, history, $root){
 	
 		this.options = options;
 		this.observer = observer;
@@ -65,7 +65,7 @@
 		this.controls = [];
 				
 		//ini control factory
-		this.controlFactory = new jQuery.fn.jplist.ui.list.ItemControlFactory(options, observer, history, $root);
+		this.controlFactory = new jQuery.fn.jplist.ItemControlFactory(options, observer, history, $root);
 
 		//init controls
 		initControls(this);

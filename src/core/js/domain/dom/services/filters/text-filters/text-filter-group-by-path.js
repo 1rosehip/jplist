@@ -5,11 +5,11 @@
 	* textFilterPathGroup - filter by the given text value in the group of paths
 	* @param {Array.<Object>} textAndPathsGroup - list of Objects like {text: '', path: '', selected: true/false}	
 	* @param {string} ignoreRegex
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
+	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
 	* @param {string} mode: startsWith, endsWith, contains, advanced, equal
-	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
+	* @return {Array.<jQuery.fn.jplist.DataItemModel>}
 	*/
-	jQuery.fn.jplist.domain.dom.services.FiltersService.textFilterPathGroup = function(textAndPathsGroup, ignoreRegex, dataview, mode){
+	jQuery.fn.jplist.FiltersService.textFilterPathGroup = function(textAndPathsGroup, ignoreRegex, dataview, mode){
 	
 		var path
 			,pathObj
@@ -34,7 +34,7 @@
 				path = textAndPathObj.path;
 				
 				//create path object
-				pathObj = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(path, null);
+				pathObj = new jQuery.fn.jplist.DataItemMemberPathModel(path, null);
 				
 				//add to paths list
 				textAndPathObj['pathObj'] = pathObj;
@@ -77,8 +77,8 @@
 							//if path is found
 							if(pathitem){				
 								
-								text1 = jQuery.trim(jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(pathitem.text, ignoreRegex));
-								text2 = jQuery.trim(jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(textAndPathObj.text, ignoreRegex));
+								text1 = jQuery.trim(jQuery.fn.jplist.HelperService.removeCharacters(pathitem.text, ignoreRegex));
+								text2 = jQuery.trim(jQuery.fn.jplist.HelperService.removeCharacters(textAndPathObj.text, ignoreRegex));
 								
 								switch(textAndPathObj.mode){
 						
@@ -105,7 +105,7 @@
 									case 'advanced':{
 									
 										//value.text contains text
-										if(jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse(text1, text2)){						
+										if(jQuery.fn.jplist.FiltersService.advancedSearchParse(text1, text2)){
 											includeItem = true;	
 										}
 										break;

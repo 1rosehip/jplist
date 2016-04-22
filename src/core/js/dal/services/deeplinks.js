@@ -47,14 +47,14 @@
 	* Deep Links Class
 	* @type {Object} 
 	*/
-	jQuery.fn.jplist.dal.services.DeepLinksService = {};	
+	jQuery.fn.jplist.DeepLinksService = {};
 		
 	/**
 	* get params from deep link url
 	* @param {Object} options
 	* @return {Array.<Object>} array of params {controlName: '...', propName: '...', propValue: '...'}
 	*/
-	jQuery.fn.jplist.dal.services.DeepLinksService.getUrlParams = function(options){
+	jQuery.fn.jplist.DeepLinksService.getUrlParams = function(options){
 		
 		var sections = []
 			,section
@@ -112,7 +112,7 @@
 	* @param {Object} options - user options
 	* @param {string} deepLinkUrl
 	*/
-	jQuery.fn.jplist.dal.services.DeepLinksService.updateUrlPerControls = function(options, deepLinkUrl){
+	jQuery.fn.jplist.DeepLinksService.updateUrlPerControls = function(options, deepLinkUrl){
 		
 		if(options.deepLinking){
 									

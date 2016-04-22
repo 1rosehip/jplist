@@ -4,7 +4,7 @@
 	/**
      * redraw counter value
      * @param {Object} context
-     * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview
+     * @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview
      */
     var drawCounter = function(context, dataview){
 
@@ -16,7 +16,7 @@
 			,ignore = '';
 
         //get path object from data
-        path = /** @type {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel|null} */ (context.$control.data('path')); 
+        path = /** @type {jQuery.fn.jplist.DataItemMemberPathModel|null} */ (context.$control.data('path'));
 		dataType = context.$control.data('dataType');
 		dataText = /** @type {string} */ (context.$control.data('dataText'));	
 		$countValue = context.$control.data('$countValue');
@@ -26,7 +26,7 @@
 			case 'path':{
 				
 				//get dataview
-				list = jQuery.fn.jplist.domain.dom.services.FiltersService.pathFilter(
+				list = jQuery.fn.jplist.FiltersService.pathFilter(
 					path
 					,dataview
 				);
@@ -42,7 +42,7 @@
 				}
 				
 				//get dataview
-				list = jQuery.fn.jplist.domain.dom.services.FiltersService.textFilter(
+				list = jQuery.fn.jplist.FiltersService.textFilter(
 					dataText
 					,path
 					,dataview
@@ -55,7 +55,7 @@
 			case 'range':{
 		
 				//get dataview
-				list = jQuery.fn.jplist.domain.dom.services.FiltersService.rangeFilter(
+				list = jQuery.fn.jplist.FiltersService.rangeFilter(
 					path
 					,dataview
 					,0
@@ -127,7 +127,7 @@
         if(dataPath){
 
             //get path
-            path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(dataPath, null);     
+            path = new jQuery.fn.jplist.DataItemMemberPathModel(dataPath, null);
 			context.$control.data('path', path);			
         }
 		
@@ -145,7 +145,7 @@
 	/**
 	* Get control paths
 	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths
+	* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
 	*/
 	var getPaths = function(context, paths){
 	
@@ -161,7 +161,7 @@
         if(jqPath){
 
             //init path
-            path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(jqPath, dataType);
+            path = new jQuery.fn.jplist.DataItemMemberPathModel(jqPath, dataType);
             paths.push(path);
         }
 	};
@@ -184,7 +184,7 @@
 				/**
 				 * on add collection item event
 				 * @param {Object} e - event object
-				 * @param {jQuery.fn.jplist.domain.dom.collections.Dataitems} collection
+				 * @param {jQuery.fn.jplist.Dataitems} collection
 				 */
 				context.observer.on(context.observer.events.collectionReadyEvent, function(e, collection){
 					
@@ -201,8 +201,8 @@
 				/**
 				 * on filter event
 				 * @param {Object} e - event object
-				 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-				 * @param {jQuery.fn.jplist.domain.dom.collections.Dataitems} collection
+				 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
+				 * @param {jQuery.fn.jplist.Dataitems} collection
 				 */
 				context.observer.on(context.observer.events.listFiltered, function(e, statuses, collection){	
 					drawCounter(context, collection.dataview);
@@ -218,8 +218,8 @@
 				/**
 				 * bind answer event
 				 * @param {Object} e - event object
-				 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-				 * @param {jQuery.fn.jplist.domain.dom.collections.Dataitems} collection
+				 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
+				 * @param {jQuery.fn.jplist.Dataitems} collection
 				 */
 				context.observer.on(context.observer.events.setStatusesEvent, function(e, statuses, collection){
 					drawCounter(context, collection.dataview);
@@ -263,7 +263,7 @@
 		
 	/**
 	* Get Paths
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths
+	* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
 	*/
 	Init.prototype.getPaths = function(paths){
 		getPaths(this, paths);
@@ -274,7 +274,7 @@
 	* @constructor
 	* @param {Object} context
 	*/
-	jQuery.fn.jplist.ui.controls.Counter = function(context){
+	jQuery.fn.jplist.controls.Counter = function(context){
 		return new Init(context);
 	};	
 	

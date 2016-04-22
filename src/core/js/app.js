@@ -166,14 +166,14 @@
 			case 'html':{
 
                 //init collection of controls located inside the list (like star rating)
-                context.itemControls = new jQuery.fn.jplist.ui.list.collections.ItemControlCollection(
+                context.itemControls = new jQuery.fn.jplist.ItemControlCollection(
                     context.options
                     ,context.observer
                     ,context.history
                     ,context.$root
                 );
 				
-				context.controller = new jQuery.fn.jplist.ui.list.controllers.DOMController(
+				context.controller = new jQuery.fn.jplist.DOMController(
 					context.$root
 					,context.options
 					,context.observer
@@ -185,7 +185,7 @@
 			//server side (html) data source
 			case 'server':{
 		
-				context.controller = new jQuery.fn.jplist.ui.list.controllers.ServerController(
+				context.controller = new jQuery.fn.jplist.ServerController(
 					context.$root
 					,context.options
 					,context.observer
@@ -234,7 +234,7 @@
 				
 		//a given list of statuses is changed
 		//@param {Object} event
-		//@param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesToMerge
+		//@param {Array.<jQuery.fn.jplist.StatusDTO>} statusesToMerge
 		context.observer.on(context.observer.events.knownStatusesChanged, function(event, statusesToMerge){
 
             var mergedStatuses;
@@ -289,7 +289,7 @@
 			context.panel.setStatuses(statuses);
 			
 			//try change url according to controls statuses		
-			jQuery.fn.jplist.dal.services.DeepLinksService.updateUrlPerControls(context.options, context.panel.getDeepLinksURLPerControls());
+			jQuery.fn.jplist.DeepLinksService.updateUrlPerControls(context.options, context.panel.getDeepLinksURLPerControls());
 		});
 
         /**
@@ -394,16 +394,16 @@
 		}, userOptions);
 		
 		//init pubsub
-		context.observer = new jQuery.fn.jplist.app.PubSub(context.$root, context.options);
+		context.observer = new jQuery.fn.jplist.PubSub(context.$root, context.options);
 				
 		//init events - used to save last status
-		context.history = new jQuery.fn.jplist.app.History(context.$root, context.options, context.observer);
+		context.history = new jQuery.fn.jplist.History(context.$root, context.options, context.observer);
 				
 		//init panel
-		context.panel = new jQuery.fn.jplist.ui.panel.controllers.PanelController($root, context.options, context.history, context.observer);
+		context.panel = new jQuery.fn.jplist.PanelController($root, context.options, context.history, context.observer);
 
         //init storage
-        context.storage = new jQuery.fn.jplist.dal.Storage(context.options.storage, context.options.storageName, context.options.cookiesExpiration);
+        context.storage = new jQuery.fn.jplist.Storage(context.options.storage, context.options.storageName, context.options.cookiesExpiration);
 
         //init data source
 		initDataSource(context);
@@ -458,5 +458,16 @@
 			});
 		}
 	};
+
+    //PLUGINS AND CONTROLS REGISTRATION ----------------------------
+    jQuery.fn.jplist.controls = jQuery.fn.jplist.controls || {};
+    jQuery.fn.jplist.itemControls = jQuery.fn.jplist.itemControls || {};
+    jQuery.fn.jplist.controlTypes = {};
+    jQuery.fn.jplist.itemControlTypes = {};
+    jQuery.fn.jplist.settings = {};
+
+    //NAMESPACES
+    jQuery.fn.jplist.FiltersService = jQuery.fn.jplist.FiltersService || {};
+    jQuery.fn.jplist.SortService = jQuery.fn.jplist.SortService || {};
 	
 })();

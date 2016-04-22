@@ -10,7 +10,7 @@
 	* @param {string} dateTimeFormat - like {day}.{month}.{year} //{year}, {month}, {day}, {hour}, {min}, {sec}
 	* @param {string} ignore - ignore regex
 	*/
-	jQuery.fn.jplist.ui.controls.DefaultSortDTO = function(dataPath, type, order, dateTimeFormat, ignore){
+	jQuery.fn.jplist.controls.DefaultSortDTO = function(dataPath, type, order, dateTimeFormat, ignore){
 		
 		return {
 			path: dataPath

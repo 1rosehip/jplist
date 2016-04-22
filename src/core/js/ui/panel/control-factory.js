@@ -78,7 +78,7 @@
 		
 			//get control type class
 			if(controlType['className']){				
-				controlTypeClass = jQuery.fn.jplist.ui.controls[controlType['className']];				
+				controlTypeClass = jQuery.fn.jplist.controls[controlType['className']];
 			}
 			
 			//get options
@@ -108,7 +108,7 @@
 	 * create control
 	 * @param {Object} context
 	 * @param {jQueryObject} $control
-	 * @param {jQuery.fn.jplist.ui.panel.collections.ControlsCollection} controlsCollection
+	 * @param {jQuery.fn.jplist.ControlsCollection} controlsCollection
 	 * @return {Object}
 	 */
 	var create = function(context, $control, controlsCollection){
@@ -142,11 +142,11 @@
 	 * Control Factory
 	 * @param {Object} options
 	 * @param {Object} observer
-	 * @param {jQuery.fn.jplist.app.History} history
+	 * @param {jQuery.fn.jplist.History} history
 	 * @param {jQueryObject} $root - jplist jquery element
 	 * @constructor
 	 */
-	jQuery.fn.jplist.ui.panel.ControlFactory = function(options, observer, history, $root){	
+	jQuery.fn.jplist.ControlFactory = function(options, observer, history, $root){
 	
 		this.options = options;
 		this.observer = observer;
@@ -157,9 +157,9 @@
 	/**
 	 * create control
 	 * @param {jQueryObject} $control
-	 * @param {jQuery.fn.jplist.ui.panel.collections.ControlsCollection} controlsCollection
+	 * @param {jQuery.fn.jplist.ControlsCollection} controlsCollection
 	 */
-	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.create = function($control, controlsCollection){
+	jQuery.fn.jplist.ControlFactory.prototype.create = function($control, controlsCollection){
 		return create(this, $control, controlsCollection);
 	};
 	
@@ -167,26 +167,26 @@
 	 * Get control status
 	 * @interface
 	 * @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
-	 * @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	 * @return {jQuery.fn.jplist.StatusDTO}
 	 */
-	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.getStatus = function(isDefault){
+	jQuery.fn.jplist.ControlFactory.prototype.getStatus = function(isDefault){
 		return null;
 	};
 	
 	/**
 	 * Set control status
 	 * @interface
-	 * @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	 * @param {jQuery.fn.jplist.StatusDTO} status
 	 * @param {boolean} restoredFromStorage - is status restored from storage
 	 */
-	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.setStatus = function(status, restoredFromStorage){};
+	jQuery.fn.jplist.ControlFactory.prototype.setStatus = function(status, restoredFromStorage){};
 	
 	/**
 	 * Get deep link
 	 * @interface
 	 * @return {string} deep link
 	 */
-	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.getDeepLink = function(){
+	jQuery.fn.jplist.ControlFactory.prototype.getDeepLink = function(){
 		return '';
 	};
 	
@@ -195,18 +195,18 @@
 	 * @interface
 	 * @param {string} propName - deep link property name
 	 * @param {string} propValue - deep link property value
-	 * @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	 * @return {jQuery.fn.jplist.StatusDTO}
 	 */
-	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.getStatusByDeepLink = function(propName, propValue){
+	jQuery.fn.jplist.ControlFactory.prototype.getStatusByDeepLink = function(propName, propValue){
 		return null;
 	};
 	
 	/**
 	 * Get control paths
 	 * @interface
-	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths
+	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
 	 */
-	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.getPaths = function(paths){
+	jQuery.fn.jplist.ControlFactory.prototype.getPaths = function(paths){
 		return [];
 	};
 	
@@ -215,7 +215,7 @@
 	 * @interface
 	 * @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
 	 */
-	jQuery.fn.jplist.ui.panel.ControlFactory.prototype.setByDeepLink = function(params){};
+	jQuery.fn.jplist.ControlFactory.prototype.setByDeepLink = function(params){};
 })();
 
 /*

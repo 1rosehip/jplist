@@ -7,7 +7,7 @@
 	* @param {number} currentPage
 	* @param {number} itemsPerPage - (should be used only if dropdown 'items per page' is absent)
 	*/
-	jQuery.fn.jplist.ui.controls.PaginationDTO = function(currentPage, itemsPerPage){
+	jQuery.fn.jplist.controls.PaginationDTO = function(currentPage, itemsPerPage){
 		
 		var data = {
 			currentPage: currentPage

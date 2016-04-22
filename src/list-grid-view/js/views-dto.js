@@ -6,7 +6,7 @@
 	* @constructor
 	* @param {string} viewName
 	*/
-	jQuery.fn.jplist.ui.controls.ViewsDTO = function(viewName){
+	jQuery.fn.jplist.controls.ViewsDTO = function(viewName){
 		this.view = viewName;
 	};	
 		

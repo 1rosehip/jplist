@@ -113,7 +113,7 @@
 	* @constructor
 	* @param {Object} context
 	*/
-	jQuery.fn.jplist.ui.controls.BackButton = function(context){
+	jQuery.fn.jplist.controls.BackButton = function(context){
 		return new Init(context);
 	};	
 		

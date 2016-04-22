@@ -12,17 +12,17 @@ var helper3ItemsArray = function(jqueryPath, searchText, ignoreRegex){
 		,resultDataview;
 	
 	//init paths: text, number, datetime
-	paths.push(new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(jqueryPath, 'text'));
+	paths.push(new jQuery.fn.jplist.DataItemMemberPathModel(jqueryPath, 'text'));
 	
 	//init data items
-	dataview.push(new jQuery.fn.jplist.domain.dom.models.DataItemModel($('<div data-type="jplist-item"><div class="title">aaa</div></div>'), paths, 0));
-	dataview.push(new jQuery.fn.jplist.domain.dom.models.DataItemModel($('<div data-type="jplist-item"><div class="title">bbb</div></div>'), paths, 1));
-	dataview.push(new jQuery.fn.jplist.domain.dom.models.DataItemModel($('<div data-type="jplist-item"><div class="title">ccc</div></div>'), paths, 2));
+	dataview.push(new jQuery.fn.jplist.DataItemModel($('<div data-type="jplist-item"><div class="title">aaa</div></div>'), paths, 0));
+	dataview.push(new jQuery.fn.jplist.DataItemModel($('<div data-type="jplist-item"><div class="title">bbb</div></div>'), paths, 1));
+	dataview.push(new jQuery.fn.jplist.DataItemModel($('<div data-type="jplist-item"><div class="title">ccc</div></div>'), paths, 2));
 	
 	//text filter
-	resultDataview = jQuery.fn.jplist.domain.dom.services.FiltersService.textFilter(
+	resultDataview = jQuery.fn.jplist.FiltersService.textFilter(
 		searchText
-		,new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(jqueryPath, 'text') //path object
+		,new jQuery.fn.jplist.DataItemMemberPathModel(jqueryPath, 'text') //path object
 		,dataview
 		,ignoreRegex
 	);
@@ -97,17 +97,17 @@ QUnit.test('Search non english letters in title, 3 items in array', function(ass
 		,resultDataview;
 	
 	//init paths: text, number, datetime
-	paths.push(new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel('.title', 'text'));
+	paths.push(new jQuery.fn.jplist.DataItemMemberPathModel('.title', 'text'));
 	
 	//init data items
-	dataview.push(new jQuery.fn.jplist.domain.dom.models.DataItemModel($('<div data-type="jplist-item"><div class="title">ребенок</div></div>'), paths, 0));
-	dataview.push(new jQuery.fn.jplist.domain.dom.models.DataItemModel($('<div data-type="jplist-item"><div class="title">собака</div></div>'), paths, 1));
-	dataview.push(new jQuery.fn.jplist.domain.dom.models.DataItemModel($('<div data-type="jplist-item"><div class="title">кошка</div></div>'), paths, 2));
+	dataview.push(new jQuery.fn.jplist.DataItemModel($('<div data-type="jplist-item"><div class="title">ребенок</div></div>'), paths, 0));
+	dataview.push(new jQuery.fn.jplist.DataItemModel($('<div data-type="jplist-item"><div class="title">собака</div></div>'), paths, 1));
+	dataview.push(new jQuery.fn.jplist.DataItemModel($('<div data-type="jplist-item"><div class="title">кошка</div></div>'), paths, 2));
 	
 	//text filter
-	resultDataview = jQuery.fn.jplist.domain.dom.services.FiltersService.textFilter(
+	resultDataview = jQuery.fn.jplist.FiltersService.textFilter(
 		'ко'
-		,new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel('.title', 'text') //path object
+		,new jQuery.fn.jplist.DataItemMemberPathModel('.title', 'text') //path object
 		,dataview
 		,''
 	);
@@ -133,52 +133,52 @@ QUnit.test('Search text with special characters, 3 items in array, "[~!@#$%^&*()
 QUnit.module('Unit Test: Text Filters: Advanced Search');
 
 QUnit.test('abc eee - not fff -> true', function(assert){
-	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('abc eee', 'not fff');	
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'not fff');
 	assert.ok(contains === true, 'true');
 });
 
 QUnit.test('abc eee - not abc -> false', function(assert){
-	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('abc eee', 'not abc');	
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'not abc');
 	assert.ok(contains === false, 'false');
 });
 
 QUnit.test('abc eee - abc and eee -> true', function(assert){
-	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('abc eee', 'abc and eee');	
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'abc and eee');
 	assert.ok(contains === true, 'true');
 });
 
 QUnit.test('abc eee ddd - abc and eee -> true', function(assert){
-	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('abc eee ddd', 'abc and eee');	
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc and eee');
 	assert.ok(contains === true, 'true');
 });
 
 QUnit.test('abc eee ddd - abc and fff -> false', function(assert){
-	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('abc eee ddd', 'abc and fff');	
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc and fff');
 	assert.ok(contains === false, 'false');
 });
 
 QUnit.test('abc eee ddd - abc or fff -> true', function(assert){
-	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('abc eee ddd', 'abc or fff');	
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc or fff');
 	assert.ok(contains === true, 'true');
 });
 
 QUnit.test('abc eee ddd - aaa or fff -> false', function(assert){
-	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('abc eee ddd', 'aaa or fff');	
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'aaa or fff');
 	assert.ok(contains === false, 'false');
 });
 
 QUnit.test('... - aaa or calendar and system -> true', function(assert){
-	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('A calendar is a system of organizing days for social, religious, commercial, or administrative purposes. This is done by giving names to periods of time, typically days, weeks, months, and years. The name given to each day is known as a date. Periods in a calendar (such as years and months) are usually, though not necessarily, synchronized with the cycle of the sun or the moon.', 'calendar and system');	
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('A calendar is a system of organizing days for social, religious, commercial, or administrative purposes. This is done by giving names to periods of time, typically days, weeks, months, and years. The name given to each day is known as a date. Periods in a calendar (such as years and months) are usually, though not necessarily, synchronized with the cycle of the sun or the moon.', 'calendar and system');
 	assert.ok(contains === true, 'true');
 });
 
 QUnit.test('... - aaa or calendar and system -> false', function(assert){
-	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.', 'calendar and system');	
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.', 'calendar and system');
 	assert.ok(contains === false, 'false');
 });
 
 QUnit.test('... - aaa or calendar and system -> false', function(assert){
-	var contains = jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse('an arch is a structure that spans a space and supports a load. arches appeared as early as the 2nd millennium bc in mesopotamian brick architecture and their systematic use started with the ancient romans who were the first to apply the technique to a wide range of structures.', 'calendar and system');	
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('an arch is a structure that spans a space and supports a load. arches appeared as early as the 2nd millennium bc in mesopotamian brick architecture and their systematic use started with the ancient romans who were the first to apply the technique to a wide range of structures.', 'calendar and system');
 	assert.ok(contains === false, 'false');
 });
 

@@ -112,14 +112,14 @@
 	* Helper Class
 	* @type {Object} 
 	*/
-	jQuery.fn.jplist.domain.dom.services.HelperService = {};
+	jQuery.fn.jplist.HelperService = {};
 	
 	/**
 	* get outer html
 	* @param {jQueryObject} el - jquery element
 	* @return {string} - outer html
 	*/
-	jQuery.fn.jplist.domain.dom.services.HelperService.getOuterHtml = function(el){
+	jQuery.fn.jplist.HelperService.getOuterHtml = function(el){
 		
 		var html = ''
 			,attr
@@ -157,7 +157,7 @@
 	* @param {string} regex - remove characters regex expression
 	* @return {string}
 	*/
-	jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters = function(text, regex){
+	jQuery.fn.jplist.HelperService.removeCharacters = function(text, regex){
 		
 		var regexExpr;
 		
@@ -178,7 +178,7 @@
 	* @param {string} format
 	* @return {Date}
 	*/
-	jQuery.fn.jplist.domain.dom.services.HelperService.formatDateTime = function(datetime, format){
+	jQuery.fn.jplist.HelperService.formatDateTime = function(datetime, format){
 	
 		var formattedDatetime
 			,replacedFormat

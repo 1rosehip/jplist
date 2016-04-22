@@ -10,7 +10,7 @@
 	* @param {string} dateTimeFormat - like {day}.{month}.{year} //{year}, {month}, {day}, {hour}, {min}, {sec}
 	* @param {string} ignore - ignore regex
 	*/
-	jQuery.fn.jplist.ui.controls.BootSortDropdownDTO = function(dataPath, type, order, dateTimeFormat, ignore){
+	jQuery.fn.jplist.controls.BootSortDropdownDTO = function(dataPath, type, order, dateTimeFormat, ignore){
 		
 		return {
 			path: dataPath

@@ -4,8 +4,8 @@
 	/**
 	 * build result content
 	 * @param {Object} context
-	 * @param {jQuery.fn.jplist.domain.server.models.DataItemModel} dataItem
-	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 * @param {jQuery.fn.jplist.DomainDataItemServerModel} dataItem
+	 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	 */
 	var buildContent = function(context, dataItem, statuses){
 		
@@ -86,8 +86,8 @@
 	var initEvents = function(context){
 				
 		//on model changed
-		//@param {jQuery.fn.jplist.domain.server.models.DataItemModel|null} dataItem
-		//@param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>|null} statuses
+		//@param {jQuery.fn.jplist.DomainDataItemServerModel|null} dataItem
+		//@param {Array.<jQuery.fn.jplist.StatusDTO>|null} statuses
 		context.scopeObserver.on(context.scopeObserver.events.modelChanged, function(e, dataItem, statuses){
 			
 			//hide preloader -> rebuild html
@@ -110,10 +110,10 @@
 	 * @param {Object} options - jplist options
 	 * @param {Object} observer
 	 * @param {Object} scopeObserver
-	 * @param {jQuery.fn.jplist.ui.list.models.DataItemModel} model
-	 * @param {jQuery.fn.jplist.app.History} history
+	 * @param {jQuery.fn.jplist.DataItemServerModel} model
+	 * @param {jQuery.fn.jplist.History} history
 	 */
-	jQuery.fn.jplist.ui.list.views.ServerView = function($root, options, observer, scopeObserver, model, history){
+	jQuery.fn.jplist.ServerView = function($root, options, observer, scopeObserver, model, history){
 	
 		this.options = options;
 		this.observer = observer;

@@ -155,7 +155,7 @@
 	* @param {string} searchText - may contain OR, AND, NOT
 	* @return {boolean} id contains
 	*/
-	jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse = function(itemText, searchText){
+	jQuery.fn.jplist.FiltersService.advancedSearchParse = function(itemText, searchText){
 		
 		var contains = false;
 		

@@ -7,7 +7,7 @@
 	* @param {string} dataPath - textbox data-path attribute
 	* @param {string} type - text, number or datetime
 	*/
-	jQuery.fn.jplist.ui.controls.DropdownFilterDTO = function(dataPath, type){
+	jQuery.fn.jplist.controls.DropdownFilterDTO = function(dataPath, type){
 		
 		return {
 			path: dataPath

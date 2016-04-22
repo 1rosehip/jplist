@@ -20,7 +20,6 @@
     <!--script src="../../dist/js/jplist.core.min.js"></script-->
 
     <script src="../../src/core/js/app.js"></script>
-    <script src="../../src/core/js/app/namespaces.js"></script>
     <script src="../../src/core/js/app/pubsub.js"></script>
     <script src="../../src/core/js/app/dto/status-dto.js"></script>
     <script src="../../src/core/js/app/history.js"></script>
@@ -89,7 +88,7 @@
 
         $('document').ready(function(){
 
-            var pubsub = new jQuery.fn.jplist.app.PubSub();
+            var pubsub = new jQuery.fn.jplist.PubSub();
 
             var triggerFunc = jQuery.fn.trigger;
 

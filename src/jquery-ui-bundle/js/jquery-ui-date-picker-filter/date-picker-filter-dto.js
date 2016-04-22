@@ -8,7 +8,7 @@
 	* @param {string} dateTimeFormat
 	* @param {Date|string} currentDate
 	*/
-	jQuery.fn.jplist.ui.controls.DatePickerFilterDTO = function(dataPath, dateTimeFormat, currentDate){
+	jQuery.fn.jplist.controls.DatePickerFilterDTO = function(dataPath, dateTimeFormat, currentDate){
 		
 		var result = {
 			path: dataPath

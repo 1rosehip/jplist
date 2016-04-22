@@ -32,7 +32,7 @@
 	* @constructor
 	* @param {Object} context
 	*/
-	jQuery.fn.jplist.ui.controls.Reset = function(context){
+	jQuery.fn.jplist.controls.Reset = function(context){
 		return new Init(context);
 	};	
 	

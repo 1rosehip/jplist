@@ -54,7 +54,7 @@
 	* @constructor
 	* @param {Object} context
 	*/
-	jQuery.fn.jplist.ui.itemControls.StarRating = function(context){
+	jQuery.fn.jplist.itemControls.StarRating = function(context){
 		return new Init(context);
 	};	
 		

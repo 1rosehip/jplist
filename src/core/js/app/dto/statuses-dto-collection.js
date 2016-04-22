@@ -7,10 +7,10 @@ Statuses Collection (Data Transfer Objects)
 	/**
 	* Get statuses with the same field: value
 	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	* @param {string} field
 	* @param {string|null} value
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} 
+	* @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	*/
 	var getStatusesByFieldAndValue = function(context, statuses, field, value){
 		
@@ -35,7 +35,7 @@ Statuses Collection (Data Transfer Objects)
 	* Get statuses by action
 	* @param {Object} context
 	* @param {string} action
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} 
+	* @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	*/
 	var getStatusesByAction = function(context, action){
 		
@@ -59,7 +59,7 @@ Statuses Collection (Data Transfer Objects)
 	* get status by index
 	* @param {Object} context
 	* @param {number} index
-	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
 	var get = function(context, index){
 		
@@ -75,7 +75,7 @@ Statuses Collection (Data Transfer Objects)
 	/**
 	* add and merge status
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO} status
 	* @param {boolean} force - if this status should be preferred over other statuses
 	*/
 	var add = function(context, status, force){
@@ -155,7 +155,7 @@ Statuses Collection (Data Transfer Objects)
 	/**
 	* get array of statuses
 	* @param {Object} context
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	* @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	*/	
 	var toArray = function(context){
 		return context.statuses;
@@ -164,7 +164,7 @@ Statuses Collection (Data Transfer Objects)
 	/**
 	* get all sort statuses, expand statuses group if needed
 	* @param {Object} context
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	* @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	*/
 	var getSortStatuses = function(context){
 		
@@ -190,7 +190,7 @@ Statuses Collection (Data Transfer Objects)
 					
 					for(var j=0; j<actionStatus.data['sortGroup'].length; j++){
 						
-						tempStatus = new jQuery.fn.jplist.app.dto.StatusDTO(
+						tempStatus = new jQuery.fn.jplist.StatusDTO(
 							actionStatus.name
 							,actionStatus.action
 							,actionStatus.type
@@ -215,7 +215,7 @@ Statuses Collection (Data Transfer Objects)
 	
 	/**
 	* split statuses list to groups by the given status property
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	* @param {string} property
 	* @return {Object}
 	*/
@@ -244,7 +244,7 @@ Statuses Collection (Data Transfer Objects)
 	/**
 	* get all filter statuses that have registered filter services
 	* @param {Object} context
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	* @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	*/
 	var getFilterStatuses = function(context){
 		
@@ -266,7 +266,7 @@ Statuses Collection (Data Transfer Objects)
 				if(status && status.data && status.data.filterType){
 									
 					//get filter service
-					filterService = jQuery.fn.jplist.app.services.DTOMapperService.filters[status.data.filterType];
+					filterService = jQuery.fn.jplist.DTOMapperService.filters[status.data.filterType];
 					
 					if(jQuery.isFunction(filterService)){
 					
@@ -282,9 +282,9 @@ Statuses Collection (Data Transfer Objects)
 	/** 
 	* Statuses Collection
 	* @constructor
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	*/
-	jQuery.fn.jplist.app.dto.Statuses = function(statuses){
+	jQuery.fn.jplist.Statuses = function(statuses){
 
 		this.statuses = statuses || [];
 	};
@@ -292,51 +292,51 @@ Statuses Collection (Data Transfer Objects)
 	/**
 	* Get statuses by action
 	* @param {string} action
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} 
+	* @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	*/
-	jQuery.fn.jplist.app.dto.Statuses.prototype.getStatusesByAction = function(action){
+	jQuery.fn.jplist.Statuses.prototype.getStatusesByAction = function(action){
 		return getStatusesByAction(this, action);
 	};
 	
 	/**
 	* add status
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO} status
 	* @param {boolean} force - if this status should be prefered on other statuses
 	*/
-	jQuery.fn.jplist.app.dto.Statuses.prototype.add = function(status, force){
+	jQuery.fn.jplist.Statuses.prototype.add = function(status, force){
 		return add(this, status, force);
 	};
 	
 	/**
 	* get status by index
 	* @param {number} index
-	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
-	jQuery.fn.jplist.app.dto.Statuses.prototype.get = function(index){		
+	jQuery.fn.jplist.Statuses.prototype.get = function(index){
 		return get(this, index);
 	};
 	
 	/**
 	* get array of statuses
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	* @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	*/	
-	jQuery.fn.jplist.app.dto.Statuses.prototype.toArray = function(){
+	jQuery.fn.jplist.Statuses.prototype.toArray = function(){
 		return toArray(this);
 	};
 	
 	/**
 	* get all sort statuses, expand statuses group if needed
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	* @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	*/
-	jQuery.fn.jplist.app.dto.Statuses.prototype.getSortStatuses = function(){
+	jQuery.fn.jplist.Statuses.prototype.getSortStatuses = function(){
 		return getSortStatuses(this);
 	};
 	
 	/**
 	* get all filter statuses that have registered filter services
-	* @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	* @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	*/
-	jQuery.fn.jplist.app.dto.Statuses.prototype.getFilterStatuses = function(){
+	jQuery.fn.jplist.Statuses.prototype.getFilterStatuses = function(){
 		return getFilterStatuses(this);
 	};
 	

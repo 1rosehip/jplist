@@ -3,11 +3,11 @@
 	
 	/**
 	* pathFilter - filter dataview by path: only items with the given path are allowed
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
-	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
+	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
+	* @return {Array.<jQuery.fn.jplist.DataItemModel>}
 	*/
-	jQuery.fn.jplist.domain.dom.services.FiltersService.pathFilter = function(path, dataview){
+	jQuery.fn.jplist.FiltersService.pathFilter = function(path, dataview){
 	
 		var dataitem
 			,pathitem

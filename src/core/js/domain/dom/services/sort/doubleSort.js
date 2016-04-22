@@ -3,8 +3,8 @@
 	
 	/**
 	* sort by index of dataitem (by id)
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemModel} dataitem1
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemModel} dataitem2
+	* @param {jQuery.fn.jplist.DataItemModel} dataitem1
+	* @param {jQuery.fn.jplist.DataItemModel} dataitem2
 	* @param {string} order - sort order: asc or desc
 	*/
 	var sortIndex = function(dataitem1, dataitem2, order){
@@ -54,9 +54,9 @@
 	
 	/**
 	* Double Sort (recursive)
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemModel} dataitem1
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemModel} dataitem2
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	* @param {jQuery.fn.jplist.DataItemModel} dataitem1
+	* @param {jQuery.fn.jplist.DataItemModel} dataitem2
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	* @param {number} index - index in the statuses array
 	* @return {number} - -1, 0, 1
 	*/
@@ -75,7 +75,7 @@
 			
 			if(currentStatus.data.path !== 'default'){
 				
-				service = jQuery.fn.jplist.app.services.DTOMapperService.sort[currentStatus.data.type];
+				service = jQuery.fn.jplist.DTOMapperService.sort[currentStatus.data.type];
 				
 				if(jQuery.isFunction(service)){				
 					
@@ -113,11 +113,11 @@
 	
 	/**
 	* Main Sort
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
-	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
+	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
+	* @return {Array.<jQuery.fn.jplist.DataItemModel>}
 	*/
-	jQuery.fn.jplist.domain.dom.services.SortService.doubleSort = function(statuses, dataview){
+	jQuery.fn.jplist.SortService.doubleSort = function(statuses, dataview){
 	
 		var preventSort = false;
 		

@@ -53,7 +53,7 @@
 	* @constructor
 	* @param {Object} context
 	*/
-	jQuery.fn.jplist.ui.controls.Preloader = function(context){
+	jQuery.fn.jplist.controls.Preloader = function(context){
 		return new Init(context);
 	};	
 		

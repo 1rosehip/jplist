@@ -4,11 +4,11 @@
 	/**
 	* data item viewmodel - used in server html list view/controller
 	* @constructor
-	* @param {jQuery.fn.jplist.domain.server.models.DataItemModel|null} dataItem
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>|null} statuses
+	* @param {jQuery.fn.jplist.DomainDataItemServerModel|null} dataItem
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>|null} statuses
 	* @param {Object} scopeObserver - scope observer
 	*/
-	jQuery.fn.jplist.ui.list.models.DataItemModel = function(dataItem, statuses, scopeObserver){
+	jQuery.fn.jplist.DataItemServerModel = function(dataItem, statuses, scopeObserver){
 		
 		this.dataItem = dataItem;
 		this.statuses = statuses;
@@ -17,10 +17,10 @@
 	
 	/**
 	* set data item
-	* @param {jQuery.fn.jplist.domain.server.models.DataItemModel|null} dataItem
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>|null} statuses
+	* @param {jQuery.fn.jplist.DomainDataItemServerModel|null} dataItem
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>|null} statuses
 	*/
-	jQuery.fn.jplist.ui.list.models.DataItemModel.prototype.set = function(dataItem, statuses){
+	jQuery.fn.jplist.DataItemServerModel.prototype.set = function(dataItem, statuses){
 		
 		//update properties
 		this.dataItem = dataItem;

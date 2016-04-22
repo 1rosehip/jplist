@@ -10,18 +10,18 @@
 	* @param {?string} dataType - data type of the content in this path - text, number, datetime
 	* @constructor
 	*/
-	jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel = function(jqPath, dataType){	
+	jQuery.fn.jplist.DataItemMemberPathModel = function(jqPath, dataType){
 		this.jqPath = jqPath;
 		this.dataType = dataType; //string, number, datetime
 	};
 	
 	/**
 	* Is current path equal to the given path
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path
+	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path
 	* @param {boolean} pathOnly - compare only by data-path
 	* @return {boolean}
 	*/
-	jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel.prototype.isEqual = function(path, pathOnly){
+	jQuery.fn.jplist.DataItemMemberPathModel.prototype.isEqual = function(path, pathOnly){
 		
 		var isEqual = false;
 		

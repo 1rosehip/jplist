@@ -13,7 +13,7 @@
 	* @param {boolean} isAnimateToTop - is "animate to top" enabled
 	* @param {boolean} inDeepLinking - is deep linking enabled for the given control
 	*/
-	jQuery.fn.jplist.app.dto.StatusDTO = function(name, action, type, data, inStorage, inAnimation, isAnimateToTop, inDeepLinking){
+	jQuery.fn.jplist.StatusDTO = function(name, action, type, data, inStorage, inAnimation, isAnimateToTop, inDeepLinking){
 			
 		this.action = action; //filter, sort, paging			
 		this.name = name;

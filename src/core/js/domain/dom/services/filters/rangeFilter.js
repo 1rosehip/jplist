@@ -3,15 +3,15 @@
 	
 	/**
 	* rangeFilter - range filter
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
+	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
 	* @param {number} min
 	* @param {number} max
 	* @param {number} prev
 	* @param {number} next
-	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
+	* @return {Array.<jQuery.fn.jplist.DataItemModel>}
 	*/
-	jQuery.fn.jplist.domain.dom.services.FiltersService.rangeFilter = function(path, dataview, min, max, prev, next){
+	jQuery.fn.jplist.FiltersService.rangeFilter = function(path, dataview, min, max, prev, next){
 	
 		var resultDataview = []
 			,dataitem

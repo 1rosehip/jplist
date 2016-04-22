@@ -5,7 +5,7 @@
 	* Get control status
 	* @param {Object} context
 	* @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
-	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
 	var getStatus = function(context, isDefault){
 		
@@ -27,10 +27,10 @@
 		}
 		
 		//create status related data				
-		data = new jQuery.fn.jplist.ui.controls.DropdownFilterDTO($option.attr('data-path'), $option.attr('data-type'));
+		data = new jQuery.fn.jplist.controls.DropdownFilterDTO($option.attr('data-path'), $option.attr('data-type'));
 		
 		//create status
-		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+		status = new jQuery.fn.jplist.StatusDTO(
 			context.name
 			,context.action
 			,context.type
@@ -78,7 +78,7 @@
 	* @param {Object} context
 	* @param {string} propName - deep link property name
 	* @param {string} propValue - deep link property value
-	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
 	var getStatusByDeepLink = function(context, propName, propValue){
 		
@@ -106,7 +106,7 @@
 	/**
 	* Get control paths
 	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths
+	* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
 	*/
 	var getPaths = function(context, paths){
 	
@@ -123,7 +123,7 @@
 			//init path
 			if(jqPath){
 			   
-				path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(jqPath, dataType);
+				path = new jQuery.fn.jplist.DataItemMemberPathModel(jqPath, dataType);
 				paths.push(path);
 			}
 		});
@@ -132,7 +132,7 @@
 	/**
 	* Set control status
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
@@ -201,7 +201,7 @@
 	/**
 	* Get control status
 	* @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
-	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
 	Init.prototype.getStatus = function(isDefault){
 		return getStatus(this, isDefault);
@@ -219,7 +219,7 @@
 	* Get Paths by Deep Link
 	* @param {string} propName - deep link property name
 	* @param {string} propValue - deep link property value
-	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
 	Init.prototype.getStatusByDeepLink = function(propName, propValue){
 		return getStatusByDeepLink(this, propName, propValue);
@@ -227,7 +227,7 @@
 	
 	/**
 	* Get Paths
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} paths
+	* @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} paths
 	*/
 	Init.prototype.getPaths = function(paths){
 		getPaths(this, paths);
@@ -235,7 +235,7 @@
 	
 	/**
 	* Set Status
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	Init.prototype.setStatus = function(status, restoredFromStorage){
@@ -247,7 +247,7 @@
 	* @constructor
 	* @param {Object} context
 	*/
-	jQuery.fn.jplist.ui.controls.FilterSelect = function(context){
+	jQuery.fn.jplist.controls.FilterSelect = function(context){
 		return new Init(context);
 	};	
 	

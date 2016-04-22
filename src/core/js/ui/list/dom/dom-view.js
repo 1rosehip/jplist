@@ -4,9 +4,9 @@
 	/**
 	 * render html
 	 * @param {Object} context
-	 * @param {jQuery.fn.jplist.domain.dom.collections.Dataitems} collection
-	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-     * @param {jQuery.fn.jplist.app.dto.StatusDTO} lastStatus
+	 * @param {jQuery.fn.jplist.Dataitems} collection
+	 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
+     * @param {jQuery.fn.jplist.StatusDTO} lastStatus
      * @return {jQueryObject} $dataview
 	 */
 	var render = function(context, collection, statuses, lastStatus){
@@ -86,7 +86,7 @@
 	 * @param {Object} options - jplist options
 	 * @param {Object} observer
 	 */
-	jQuery.fn.jplist.ui.list.views.DOMView = function($root
+	jQuery.fn.jplist.DOMView = function($root
                                                      ,options
                                                      ,observer
                                                      ,itemsBoxPath
@@ -114,12 +114,12 @@
 	
 	/**
 	 * render view
-	 * @param {jQuery.fn.jplist.domain.dom.collections.Dataitems} collection
-	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-     * @param {jQuery.fn.jplist.app.dto.StatusDTO} lastStatus
+	 * @param {jQuery.fn.jplist.Dataitems} collection
+	 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
+     * @param {jQuery.fn.jplist.StatusDTO} lastStatus
      * @return {jQueryObject}
 	 */
-	jQuery.fn.jplist.ui.list.views.DOMView.prototype.render = function(collection, statuses, lastStatus){
+	jQuery.fn.jplist.DOMView.prototype.render = function(collection, statuses, lastStatus){
 		return render(this, collection, statuses, lastStatus);
 	};
 })();

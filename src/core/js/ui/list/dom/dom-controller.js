@@ -4,8 +4,8 @@
 	/**
 	 * build statuses
 	 * @param {Object} context - jplist controller 'this' object
-	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-     * @param {jQuery.fn.jplist.app.dto.StatusDTO} lastStatus
+	 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
+     * @param {jQuery.fn.jplist.StatusDTO} lastStatus
      * @return {jQueryObject}
 	 */
 	var renderStatuses = function(context, statuses, lastStatus){
@@ -29,8 +29,8 @@
 	 * @param {Object} context
      * @param {String} itemsBoxPath
      * @param {String} itemPath
-	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} panelPaths - paths objects array
-     * @return {jQuery.fn.jplist.domain.dom.collections.Dataitems}
+	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} panelPaths - paths objects array
+     * @return {jQuery.fn.jplist.Dataitems}
 	 */
 	var getCollection = function(context, itemsBoxPath, itemPath, panelPaths){
 	
@@ -44,7 +44,7 @@
 		$items = $itemsBox.find(itemPath);
 
 		//create new collection
-		collection = new jQuery.fn.jplist.domain.dom.collections.Dataitems(context.observer, $items, panelPaths);
+		collection = new jQuery.fn.jplist.Dataitems(context.observer, $items, panelPaths);
 
 		return collection;
 	};
@@ -55,16 +55,16 @@
 	 * @param {jQueryObject} $root - jplist root element
 	 * @param {Object} options - jplist user options
 	 * @param {Object} observer
-	 * @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel>} panelPaths - paths objects array
+	 * @param {Array.<jQuery.fn.jplist.DataItemMemberPathModel>} panelPaths - paths objects array
 	 * @return {Object} - DOM controller
 	 */
-	jQuery.fn.jplist.ui.list.controllers.DOMController = function($root, options, observer, panelPaths){
+	jQuery.fn.jplist.DOMController = function($root, options, observer, panelPaths){
 
 		this.observer = observer;
 		this.$root = $root;
 
 		//init list view for dom dataitems
-		this.listView = new jQuery.fn.jplist.ui.list.views.DOMView(
+		this.listView = new jQuery.fn.jplist.DOMView(
                                         $root
                                         ,options
                                         ,observer
@@ -80,11 +80,11 @@
 		
 	/**
 	 * render statuses
-	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-     * @param {jQuery.fn.jplist.app.dto.StatusDTO} lastStatus
+	 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
+     * @param {jQuery.fn.jplist.StatusDTO} lastStatus
      * @return {jQueryObject}
 	 */
-	jQuery.fn.jplist.ui.list.controllers.DOMController.prototype.renderStatuses = function(statuses, lastStatus){
+	jQuery.fn.jplist.DOMController.prototype.renderStatuses = function(statuses, lastStatus){
 		return renderStatuses(this, statuses, lastStatus);
 	};
 	

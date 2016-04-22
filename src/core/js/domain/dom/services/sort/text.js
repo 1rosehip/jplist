@@ -3,13 +3,13 @@
 	
 	/**
 	* sort text
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemModel} dataitem1
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemModel} dataitem2
+	* @param {jQuery.fn.jplist.DataItemModel} dataitem1
+	* @param {jQuery.fn.jplist.DataItemModel} dataitem2
 	* @param {string} order - sort order: asc or desc
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object
+	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
 	* @param {string} ignore - remove characters regex expression
 	*/
-	jQuery.fn.jplist.domain.dom.services.SortService.textHelper = function(dataitem1, dataitem2, order, path, ignore){
+	jQuery.fn.jplist.SortService.textHelper = function(dataitem1, dataitem2, order, path, ignore){
 		
 		var pathitem1
 			,pathitem2
@@ -59,15 +59,15 @@
 	/**
 	* Sort text api (not used directly in the plugin)
 	* @param {string} order - sort order: asc or desc
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
+	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
 	* @param {string} ignore - remove characters regex expression
-	* @memberOf jQuery.fn.jplist.domain.dom.services.SortService
+	* @memberOf jQuery.fn.jplist.SortService
 	*/
-	jQuery.fn.jplist.domain.dom.services.SortService.text = function(order, path, dataview, ignore){
+	jQuery.fn.jplist.SortService.text = function(order, path, dataview, ignore){
 	
 		dataview.sort(function(dataitem1, dataitem2){
-			return jQuery.fn.jplist.domain.dom.services.SortService.textHelper(dataitem1, dataitem2, order, path, ignore);
+			return jQuery.fn.jplist.SortService.textHelper(dataitem1, dataitem2, order, path, ignore);
 		});
 	};
 	

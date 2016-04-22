@@ -7,10 +7,10 @@
 	/**
 	* DataItem Member in the given path
 	* @param {jQueryObject} $element
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object	
+	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
 	* @constructor 
 	*/
-	jQuery.fn.jplist.domain.dom.models.DataItemMemberModel = function($element, path){
+	jQuery.fn.jplist.DataItemMemberModel = function($element, path){
 		
 		this.$element = $element;
 		this.path = path;

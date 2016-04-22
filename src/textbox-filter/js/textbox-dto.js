@@ -9,7 +9,7 @@
 	* @param {string} ignore - ignore characters regex (defined in javascript in control's options)
 	* @param {string} mode: startsWith, endsWith, contains, advanced
 	*/
-	jQuery.fn.jplist.ui.controls.TextboxDTO = function(dataPath, value, ignore, mode){
+	jQuery.fn.jplist.controls.TextboxDTO = function(dataPath, value, ignore, mode){
 		
 		return {
 			path: dataPath

@@ -249,7 +249,7 @@
 	* @param {jQueryObject} $control
 	* @param {Object} options
 	*/
-	jQuery.fn.jplist.ui.controls.PaginationView = function($control, options){
+	jQuery.fn.jplist.controls.PaginationView = function($control, options){
 		return new Init($control, options);
 	};	
 	

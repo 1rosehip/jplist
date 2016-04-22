@@ -11,7 +11,7 @@
 	* @param {string} ignore - ignore regex
 	* @param {Array.<string>} additionalPaths - used for multiple sort
 	*/
-	jQuery.fn.jplist.ui.controls.DropdownSortDTO = function(dataPath, type, order, dateTimeFormat, ignore, additionalPaths){
+	jQuery.fn.jplist.controls.DropdownSortDTO = function(dataPath, type, order, dateTimeFormat, ignore, additionalPaths){
 		
 		return {
 			path: dataPath

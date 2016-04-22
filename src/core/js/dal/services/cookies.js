@@ -5,7 +5,7 @@
 	* Cookies
 	* @type {Object}
 	*/
-	jQuery.fn.jplist.dal.services.CookiesService = {};
+	jQuery.fn.jplist.CookiesService = {};
 	
 	/**
 	* Set cookie
@@ -13,7 +13,7 @@
 	* @param {string} value - cookie value
 	* @param {number} expiration - cookie expiration in minutes (-1 = cookies expire when browser is closed)
 	*/
-	jQuery.fn.jplist.dal.services.CookiesService.setCookie = function(name, value, expiration){
+	jQuery.fn.jplist.CookiesService.setCookie = function(name, value, expiration){
 	
 		var cValue = escape(value)
 			,exdate = new Date();
@@ -34,7 +34,7 @@
 	* @param {string} cookieName - cookie name
 	* @return {?string}
 	*/
-	jQuery.fn.jplist.dal.services.CookiesService.getCookie = function(cookieName){
+	jQuery.fn.jplist.CookiesService.getCookie = function(cookieName){
 	
 		var x
 			,y
@@ -65,7 +65,7 @@
 	* @param {string} cookieName - cookie name
 	* @param {number} expiration - cookie expiration in minutes (-1 = cookies expire when browser is closed)
 	*/
-	jQuery.fn.jplist.dal.services.CookiesService.saveCookies = function(statuses, cookieName, expiration){
+	jQuery.fn.jplist.CookiesService.saveCookies = function(statuses, cookieName, expiration){
 		
 		var json;
 		
@@ -73,7 +73,7 @@
 		json = JSON.stringify(statuses);
 		
 		//save json in cookies
-		jQuery.fn.jplist.dal.services.CookiesService.setCookie(cookieName, json, expiration);
+		jQuery.fn.jplist.CookiesService.setCookie(cookieName, json, expiration);
 	};
 	
 	/**
@@ -81,13 +81,13 @@
 	* @param {string} cookieName - cookie name
 	* @return {Array.<Object>} - list of status objects
 	*/
-	jQuery.fn.jplist.dal.services.CookiesService.restoreCookies = function(cookieName){
+	jQuery.fn.jplist.CookiesService.restoreCookies = function(cookieName){
 		
 		var json
 			,statuses = [];
 		
 		//get json from cookies
-		json = jQuery.fn.jplist.dal.services.CookiesService.getCookie(cookieName);
+		json = jQuery.fn.jplist.CookiesService.getCookie(cookieName);
 		
 		if(json){
 			

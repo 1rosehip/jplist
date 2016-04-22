@@ -4,13 +4,13 @@
 	/**
 	* textFilter - filter dataview by text in the given jquery path
 	* @param {string} text - filter text
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
+	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
 	* @param {string} ignoreRegex
 	* @param {string} mode: startsWith, endsWith, contains, advanced, equal
-	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
+	* @return {Array.<jQuery.fn.jplist.DataItemModel>}
 	*/
-	jQuery.fn.jplist.domain.dom.services.FiltersService.textFilter = function(text, path, dataview, ignoreRegex, mode){
+	jQuery.fn.jplist.FiltersService.textFilter = function(text, path, dataview, ignoreRegex, mode){
 
 		var dataitem
 			,pathitem
@@ -38,8 +38,8 @@
 				//if path is found
 				if(pathitem){
 
-					text1 = jQuery.trim(jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(pathitem.text, ignoreRegex));
-					text2 = jQuery.trim(jQuery.fn.jplist.domain.dom.services.HelperService.removeCharacters(text, ignoreRegex));
+					text1 = jQuery.trim(jQuery.fn.jplist.HelperService.removeCharacters(pathitem.text, ignoreRegex));
+					text2 = jQuery.trim(jQuery.fn.jplist.HelperService.removeCharacters(text, ignoreRegex));
 
 					switch(mode){
 						
@@ -66,7 +66,7 @@
 						case 'advanced':{
 							
 							//value.text contains text
-							if(jQuery.fn.jplist.domain.dom.services.FiltersService.advancedSearchParse(text1, text2)){						
+							if(jQuery.fn.jplist.FiltersService.advancedSearchParse(text1, text2)){
 								resultDataview.push(dataitem);
 							}
 							break;

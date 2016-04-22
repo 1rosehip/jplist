@@ -2,7 +2,6 @@
 	"dist": "dist/js/jplist.core.min.js",
 	"src": [
 		"src/core/js/app.js",
-		"src/core/js/app/namespaces.js",
 		"src/core/js/app/log.js",
 		"src/core/js/app/pubsub.js",
 		"src/core/js/app/dto/status-dto.js",
@@ -55,5 +54,5 @@
 	"externs": [
 		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js"
 	],
-	"version": 93
+	"version": 131
 }

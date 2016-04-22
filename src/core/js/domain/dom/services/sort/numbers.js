@@ -3,12 +3,12 @@
 	
 	/**
 	* sort numbers
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemModel} dataitem1
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemModel} dataitem2
+	* @param {jQuery.fn.jplist.DataItemModel} dataitem1
+	* @param {jQuery.fn.jplist.DataItemModel} dataitem2
 	* @param {string} order - sort order: asc or desc
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object	
+	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
 	*/
-	jQuery.fn.jplist.domain.dom.services.SortService.numbersHelper = function(dataitem1, dataitem2, order, path){
+	jQuery.fn.jplist.SortService.numbersHelper = function(dataitem1, dataitem2, order, path){
 	
 		var pathitem1
 			,pathitem2
@@ -66,14 +66,14 @@
 	/**
 	* Sort numbers api (not used directly in the plugin)
 	* @param {string} order - sort order: asc or desc
-	* @param {jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel} path - path object
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
-	* @memberOf jQuery.fn.jplist.domain.dom.services.SortService
+	* @param {jQuery.fn.jplist.DataItemMemberPathModel} path - path object
+	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
+	* @memberOf jQuery.fn.jplist.SortService
 	*/
-	jQuery.fn.jplist.domain.dom.services.SortService.numbers = function(order, path, dataview){
+	jQuery.fn.jplist.SortService.numbers = function(order, path, dataview){
 	
 		dataview.sort(function(dataitem1, dataitem2){
-			return jQuery.fn.jplist.domain.dom.services.SortService.numbersHelper(dataitem1, dataitem2, order, path);
+			return jQuery.fn.jplist.SortService.numbersHelper(dataitem1, dataitem2, order, path);
 		});
 	};
 	

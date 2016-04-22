@@ -1,7 +1,4 @@
 var jplist = jQuery.fn.jplist;
-var PubSub = jplist.app.PubSub;
-var DataItemMemberPathModel = jplist.domain.dom.models.DataItemMemberPathModel;
-var Dataitems = jplist.domain.dom.collections.Dataitems;
 
 /**
  * text filter with sort bundle
@@ -26,10 +23,10 @@ QUnit.test('Filter bb', function(assert){
         itemsBox: '.list'
         ,itemPath: '.jplist-item'
     };
-    var observer = new PubSub($root, options);
-    var path = new DataItemMemberPathModel('.title', 'text');
+    var observer = new jplist.PubSub($root, options);
+    var path = new jplist.DataItemMemberPathModel('.title', 'text');
 
-    var dataitems = new Dataitems(observer, $root.find('.jplist-item'), [path]);
+    var dataitems = new jplist.Dataitems(observer, $root.find('.jplist-item'), [path]);
 
     //create statuses collection -----------------
     var statuses = [

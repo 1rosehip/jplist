@@ -263,7 +263,7 @@
 	* @param {jQueryObject} $control
 	* @param {Object} options
 	*/
-	jQuery.fn.jplist.ui.controls.BootstrapPaginationView = function($control, options){
+	jQuery.fn.jplist.controls.BootstrapPaginationView = function($control, options){
 		return new Init($control, options);
 	};	
 })();

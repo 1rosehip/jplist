@@ -34,7 +34,7 @@
 		
 			//get control type class
 			if(itemControlType['className']){				
-				controlTypeClass = jQuery.fn.jplist.ui.itemControls[itemControlType['className']];		
+				controlTypeClass = jQuery.fn.jplist.itemControls[itemControlType['className']];
 			}
 			
 			//get options
@@ -88,11 +88,11 @@
      * Item controls are controls that appears inside data items in the list and not in the controls panels (like star rating control)
 	 * @param {Object} options
 	 * @param {Object} observer
-	 * @param {jQuery.fn.jplist.app.History} history
+	 * @param {jQuery.fn.jplist.History} history
 	 * @param {jQueryObject} $root - jplist jquery element
 	 * @constructor
 	 */
-	jQuery.fn.jplist.ui.list.ItemControlFactory = function(options, observer, history, $root){	
+	jQuery.fn.jplist.ItemControlFactory = function(options, observer, history, $root){
 	
 		this.options = options;
 		this.observer = observer;
@@ -104,7 +104,7 @@
 	* create item control
 	* @param {jQueryObject} $control
 	*/
-	jQuery.fn.jplist.ui.list.ItemControlFactory.prototype.create = function($control){
+	jQuery.fn.jplist.ItemControlFactory.prototype.create = function($control){
 		return create(this, $control);
 	};
 	

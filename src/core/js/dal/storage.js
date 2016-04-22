@@ -7,7 +7,7 @@
 	/**
 	 * save statuses to storage according to user options
 	 * @param {Object} context
-	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	 */
 	var save = function(context, statuses){
 		
@@ -28,13 +28,13 @@
 			if(context.storageType === 'cookies'){
 				
 				//save statuses to the storage
-				jQuery.fn.jplist.dal.services.CookiesService.saveCookies(statusesToSave, context.storageName, context.cookiesExpiration);
+				jQuery.fn.jplist.CookiesService.saveCookies(statusesToSave, context.storageName, context.cookiesExpiration);
 			}
 			
-			if((context.storageType === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported()){
+			if((context.storageType === 'localstorage') && jQuery.fn.jplist.LocalStorageService.supported()){
 				
 				//save statuses to the storage
-				jQuery.fn.jplist.dal.services.LocalStorageService.save(statusesToSave, context.storageName);
+				jQuery.fn.jplist.LocalStorageService.save(statusesToSave, context.storageName);
 			}
 		}
 	};
@@ -47,7 +47,7 @@
      * @param {number} cookiesExpiration
 	 * @return {Object}
 	 */
-	jQuery.fn.jplist.dal.Storage = function(storageType, storageName, cookiesExpiration){
+	jQuery.fn.jplist.Storage = function(storageType, storageName, cookiesExpiration){
 
         this.storageType = storageType;
         this.storageName = storageName;
@@ -57,15 +57,15 @@
 			(storageType === 'cookies') ||
 			(
 				(storageType === 'localstorage') &&
-				jQuery.fn.jplist.dal.services.LocalStorageService.supported()
+				jQuery.fn.jplist.LocalStorageService.supported()
 			);
 	};	
 		
 	/**
 	 * save statuses to storage according to user options
-	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	 */
-	jQuery.fn.jplist.dal.Storage.prototype.save = function(statuses){
+	jQuery.fn.jplist.Storage.prototype.save = function(statuses){
 		save(this, statuses);
 	};
 	

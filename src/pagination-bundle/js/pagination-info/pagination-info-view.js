@@ -4,7 +4,7 @@
 	/**
 	* Set control status
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
@@ -49,7 +49,7 @@
 
 	/**
 	* Set Status
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	Init.prototype.setStatus = function(status, restoredFromStorage){
@@ -61,7 +61,7 @@
 	* @constructor
 	* @param {Object} context
 	*/
-	jQuery.fn.jplist.ui.controls.PaginationInfo = function(context){
+	jQuery.fn.jplist.controls.PaginationInfo = function(context){
 		return new Init(context);
 	};	
 	

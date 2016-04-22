@@ -9,7 +9,7 @@
 	* @param {Date|string} prevDate
 	* @param {Date|string} nextDate
 	*/
-	jQuery.fn.jplist.ui.controls.DatePickerRangeFilterDTO = function(dataPath, dateTimeFormat, prevDate, nextDate){
+	jQuery.fn.jplist.controls.DatePickerRangeFilterDTO = function(dataPath, dateTimeFormat, prevDate, nextDate){
 		
 		var result = {
 			path: dataPath

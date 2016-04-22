@@ -12,7 +12,7 @@
 	* @return {Object}
 	* @constructor 
 	*/
-	jQuery.fn.jplist.app.PubSub = function($root, options){
+	jQuery.fn.jplist.PubSub = function($root, options){
 	
 		var context = {
 			options: options

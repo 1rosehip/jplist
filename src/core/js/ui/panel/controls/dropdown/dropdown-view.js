@@ -107,7 +107,7 @@
 	* @constructor
 	* @param {Object} options
 	* @param {Object} observer
-	* @param {jQuery.fn.jplist.app.History} history
+	* @param {jQuery.fn.jplist.History} history
 	* @param {jQueryObject} $control - control element
 	*/
 	var Init = function(options, observer, history, $control){
@@ -135,11 +135,11 @@
 	* Dropdown Control
 	* @param {Object} options
 	* @param {Object} observer
-	* @param {jQuery.fn.jplist.app.History} history
+	* @param {jQuery.fn.jplist.History} history
 	* @param {jQueryObject} $control - control element
 	* @constructor
 	*/
-	jQuery.fn.jplist.ui.panel.DropdownControl = function(options, observer, history, $control){		
+	jQuery.fn.jplist.DropdownControl = function(options, observer, history, $control){
 		return new Init(options, observer, history, $control);		
 	};
 })();

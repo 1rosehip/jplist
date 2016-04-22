@@ -5,17 +5,17 @@
 	* URI Service
 	* @type {Object}
 	*/
-	jQuery.fn.jplist.dal.services.URIService = {};
+	jQuery.fn.jplist.URIService = {};
 	
 	/**
 	* get data via ajax from the given url
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	* @param {Object} options
 	* @param {Function} okCallback
 	* @param {Function} errorCallback
 	* @param {Function} alwaysCallback
 	*/
-	jQuery.fn.jplist.dal.services.URIService.get = function(statuses, options, okCallback, errorCallback, alwaysCallback){
+	jQuery.fn.jplist.URIService.get = function(statuses, options, okCallback, errorCallback, alwaysCallback){
 		
 		var serverOptions = options.dataSource.server;
 		

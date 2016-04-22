@@ -85,7 +85,7 @@
 			,storageStatuses = [];
 		
 		//set deep links
-		params = jQuery.fn.jplist.dal.services.DeepLinksService.getUrlParams(context.options);
+		params = jQuery.fn.jplist.DeepLinksService.getUrlParams(context.options);
 
 		//debug info
 		jQuery.fn.jplist.info(context.options, 'Set statuses by deep link: ', params);
@@ -121,7 +121,7 @@
 		var storageStatuses = []
 			,isStorageEnabled;
 
-		isStorageEnabled = (context.options.storage === 'cookies') || ((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported());
+		isStorageEnabled = (context.options.storage === 'cookies') || ((context.options.storage === 'localstorage') && jQuery.fn.jplist.LocalStorageService.supported());
 
 		//check storage
 		if(isStorageEnabled){
@@ -132,13 +132,13 @@
 			if(context.options.storage === 'cookies'){
 
 				//restore statuses from storage
-				storageStatuses = jQuery.fn.jplist.dal.services.CookiesService.restoreCookies(context.options.storageName);
+				storageStatuses = jQuery.fn.jplist.CookiesService.restoreCookies(context.options.storageName);
 			}
 
-			if((context.options.storage === 'localstorage') && jQuery.fn.jplist.dal.services.LocalStorageService.supported()){
+			if((context.options.storage === 'localstorage') && jQuery.fn.jplist.LocalStorageService.supported()){
 
 				//restore statuses from storage
-				storageStatuses = jQuery.fn.jplist.dal.services.LocalStorageService.restore(context.options.storageName);
+				storageStatuses = jQuery.fn.jplist.LocalStorageService.restore(context.options.storageName);
 			}
 
 			//send redraw event
@@ -159,7 +159,7 @@
 	/**
 	* set control statuses
 	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesArray
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} statusesArray
 	*/
 	var setStatuses = function(context, statusesArray){
 
@@ -194,7 +194,7 @@
 	/**
 	* restore controls from storage by statuses
 	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesArray
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} statusesArray
 	*/
 	var restoreControlsByStatuses = function(context, statusesArray){
 
@@ -220,8 +220,8 @@
 	/**
 	 * get all statuses and merge them with the given statuses, then send build statuses event
 	 * @param {Object} context
-	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statusesToMerge
-     * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statusesToMerge
+     * @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	 */
 	var mergeStatuses = function(context, statusesToMerge){
 
@@ -243,7 +243,7 @@
 		$panel = context.$root.find(context.options.panelPath);
 		$controls = $panel.find('[data-control-type]');
 
-		context.controls = new jQuery.fn.jplist.ui.panel.collections.ControlsCollection();
+		context.controls = new jQuery.fn.jplist.ControlsCollection();
 
         context.controls.addList($controls, context.history, context.$root, context.options, context.observer)
 
@@ -268,7 +268,7 @@
 	/**
 	* statuses are changed by deep link
 	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} newStatuses
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} newStatuses
 	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
 	*/
 	var statusesChangedByDeepLinks = function(context, newStatuses, params){
@@ -284,11 +284,11 @@
 	* Panel constructor
 	* @param {jQueryObject} $root - jplist jquery element
 	* @param {Object} options - jplist options
-	* @param {jQuery.fn.jplist.app.History} history
+	* @param {jQuery.fn.jplist.History} history
 	* @param {Object} observer
 	* @constructor
 	*/
-	jQuery.fn.jplist.ui.panel.controllers.PanelController = function($root, options, history, observer){
+	jQuery.fn.jplist.PanelController = function($root, options, history, observer){
 
 		this.options = options;	//user options
 		this.$root = $root; //jplist container
@@ -314,49 +314,49 @@
 	/**
 	* try restore panel state from query string
 	*/
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.setStatusesByDeepLink = function(){
+	jQuery.fn.jplist.PanelController.prototype.setStatusesByDeepLink = function(){
 		setStatusesByDeepLink(this);
 	};
 
 	/**
 	* try set panel controls statuses from storage
 	*/
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.setStatusesFromStorage = function(){
+	jQuery.fn.jplist.PanelController.prototype.setStatusesFromStorage = function(){
 		setStatusesFromStorage(this);
 	};
 
 	/**
 	* set control statuses
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	*/
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.setStatuses = function(statuses){
+	jQuery.fn.jplist.PanelController.prototype.setStatuses = function(statuses){
 		setStatuses(this, statuses);
 	};
 
 	/**
 	* get panel controls statuses
 	 * @param {boolean} isDefault - should it render events by their default statuses
-	 * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
+	 * @return {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	 */
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.getStatuses = function(isDefault){
+	jQuery.fn.jplist.PanelController.prototype.getStatuses = function(isDefault){
 		return this.controls.getStatuses(isDefault);
 	};
 
 	/**
 	 * merge give status with the other controls statuses
-	 * @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} statuses
-     * @return {Array.<jQuery.fn.jplist.app.dto.StatusDTO>}
+	 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
+     * @return {Array.<jQuery.fn.jplist.StatusDTO>}
 	 */
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.mergeStatuses = function(statuses){
+	jQuery.fn.jplist.PanelController.prototype.mergeStatuses = function(statuses){
 		return mergeStatuses(this, statuses);
 	};
 
 	/**
 	* statuses are changed by deep links
-	* @param {Array.<jQuery.fn.jplist.app.dto.StatusDTO>} newStatuses
+	* @param {Array.<jQuery.fn.jplist.StatusDTO>} newStatuses
 	* @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
 	*/
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.statusesChangedByDeepLinks = function(newStatuses, params){
+	jQuery.fn.jplist.PanelController.prototype.statusesChangedByDeepLinks = function(newStatuses, params){
 		statusesChangedByDeepLinks(this, newStatuses, params);
 	};
 
@@ -364,7 +364,7 @@
 	* get deep links url according to panel controls
 	* @return {string}
 	*/
-	jQuery.fn.jplist.ui.panel.controllers.PanelController.prototype.getDeepLinksURLPerControls = function(){
+	jQuery.fn.jplist.PanelController.prototype.getDeepLinksURLPerControls = function(){
 		return getDeepLinksURLPerControls(this);
 	};
 })();

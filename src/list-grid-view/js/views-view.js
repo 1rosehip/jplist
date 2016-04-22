@@ -5,7 +5,7 @@
 	* Get control status
 	* @param {Object} context
 	* @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
-	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
 	var getStatus = function(context, isDefault){
 		
@@ -21,10 +21,10 @@
 		}
 		
 		//create status related data
-		data = new jQuery.fn.jplist.ui.controls.ViewsDTO(view);
+		data = new jQuery.fn.jplist.controls.ViewsDTO(view);
 		
 		//create status
-		status = new jQuery.fn.jplist.app.dto.StatusDTO(
+		status = new jQuery.fn.jplist.StatusDTO(
 			context.name
 			,context.action
 			,context.type
@@ -69,7 +69,7 @@
 	* @param {Object} context
 	* @param {string} propName - deep link property name
 	* @param {string} propValue - deep link property value
-	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
 	var getStatusByDeepLink = function(context, propName, propValue){
 		
@@ -91,7 +91,7 @@
 	/**
 	* Set control status
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
@@ -183,7 +183,7 @@
 	/**
 	* Get control status
 	* @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
-	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
 	Init.prototype.getStatus = function(isDefault){
 		return getStatus(this, isDefault);
@@ -201,7 +201,7 @@
 	* Get Paths by Deep Link
 	* @param {string} propName - deep link property name
 	* @param {string} propValue - deep link property value
-	* @return {jQuery.fn.jplist.app.dto.StatusDTO}
+	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
 	Init.prototype.getStatusByDeepLink = function(propName, propValue){
 		return getStatusByDeepLink(this, propName, propValue);
@@ -209,7 +209,7 @@
 	
 	/**
 	* Set Status
-	* @param {jQuery.fn.jplist.app.dto.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	Init.prototype.setStatus = function(status, restoredFromStorage){
@@ -221,7 +221,7 @@
 	* @constructor
 	* @param {Object} context
 	*/
-	jQuery.fn.jplist.ui.controls.Views = function(context){
+	jQuery.fn.jplist.controls.Views = function(context){
 		return new Init(context);
 	};	
 	

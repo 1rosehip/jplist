@@ -6,7 +6,7 @@
 	* @constructor
 	* @param {string} dataPath - data-path attribute
 	*/
-	jQuery.fn.jplist.ui.controls.BootFilterDropdownDTO = function(dataPath){
+	jQuery.fn.jplist.controls.BootFilterDropdownDTO = function(dataPath){
 		
 		return {
 			path: dataPath

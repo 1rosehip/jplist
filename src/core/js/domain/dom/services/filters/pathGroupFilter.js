@@ -4,10 +4,10 @@
 	/**
 	* pathGroupFilter - filter dataview by paths group - used for checkboxes group
 	* @param {Array.<string>} pathGroup - list of paths
-	* @param {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>} dataview - collection dataview
-	* @return {Array.<jQuery.fn.jplist.domain.dom.models.DataItemModel>}
+	* @param {Array.<jQuery.fn.jplist.DataItemModel>} dataview - collection dataview
+	* @return {Array.<jQuery.fn.jplist.DataItemModel>}
 	*/
-	jQuery.fn.jplist.domain.dom.services.FiltersService.pathGroupFilter = function(pathGroup, dataview){
+	jQuery.fn.jplist.FiltersService.pathGroupFilter = function(pathGroup, dataview){
 	
 		var path
 			,pathObj
@@ -27,7 +27,7 @@
 				path = pathGroup[p];
 				
 				//create path object
-				pathObj = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel(path, null);
+				pathObj = new jQuery.fn.jplist.DataItemMemberPathModel(path, null);
 				
 				//add to paths list
 				paths.push(pathObj);

@@ -11,7 +11,7 @@
 	* @param {string} ignore - ignore regex
 	* @param {boolean} isSelected
 	*/
-	jQuery.fn.jplist.ui.controls.SortButtonDTO = function(dataPath, type, order, dateTimeFormat, ignore, isSelected){
+	jQuery.fn.jplist.controls.SortButtonDTO = function(dataPath, type, order, dateTimeFormat, ignore, isSelected){
 		
 		return {
 			path: dataPath
@@ -26,9 +26,9 @@
 	/** 
 	* Sort Buttons Group Data Transfter Object
 	* @constructor
-	* @param {Array.<jQuery.fn.jplist.ui.controls.SortButtonDTO>} sortGroup
+	* @param {Array.<jQuery.fn.jplist.controls.SortButtonDTO>} sortGroup
 	*/
-	jQuery.fn.jplist.ui.controls.SortButtonsGroupDTO = function(sortGroup){
+	jQuery.fn.jplist.controls.SortButtonsGroupDTO = function(sortGroup){
 		
 		return {
 			sortGroup: sortGroup
