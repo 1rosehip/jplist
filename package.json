@@ -19,7 +19,8 @@
   "devDependencies": {
     "closurecompiler": "1.5.2",
     "jshint": "2.9.1",
-    "less": "2.6.1"
+    "less": "2.6.1",
+    "wdio-jasmine-framework": "^0.1.9"
   },
   "repository": {
     "type": "git",
