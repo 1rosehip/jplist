@@ -4,6 +4,7 @@ node_modules
 .DS_Store
 local-access_log
 local-error_log
+errorShots
 
 # Created by https://www.gitignore.io/api/webstorm
 

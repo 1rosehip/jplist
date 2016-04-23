@@ -8,8 +8,17 @@ var assert = require('assert');
 
 describe('if no controls -> it should have the same items order as in the view source', function() {
 
-    //navigate to the 1-core.html
-    browser.url('/test/pages/1-core.html');
+    beforeAll(function(done){
+
+        //navigate to the 1-core.html
+        browser.url('/test/pages/1-core.html');
+        browser.call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
 
     it('first item should have title: Calendar', function(){
 
