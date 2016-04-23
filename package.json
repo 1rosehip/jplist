@@ -12,7 +12,8 @@
     "csscore": "lessc -x src/core/css/styles.less > dist/css/jplist.core.min.css",
     "cssdemo": "lessc -x src/demo-pages/css/styles.less > dist/css/jplist.demo-pages.min.css",
     "corefiles": "node ./build/closure/get-js-files-list.js src/core/js/config.json --type=script || true",
-    "test": "casperjs test ./test/integration-tests/app.js || true"
+    "selenium": "java -jar ./build/selenium/selenium-server-standalone-2.53.0.jar",
+    "test": "./node_modules/.bin/wdio ./test/selenium-tests/wdio.conf.js"
   },
   "author": "Miriam Zusin",
   "license": "MIT",
@@ -20,7 +21,8 @@
     "closurecompiler": "1.5.2",
     "jshint": "2.9.1",
     "less": "2.6.1",
-    "wdio-jasmine-framework": "^0.1.9"
+    "wdio-jasmine-framework": "^0.1.9",
+    "webdriverio": "^4.0.5"
   },
   "repository": {
     "type": "git",
