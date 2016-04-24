@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+    <head>		
+		<title>Range Slider Demo | jPList - jQuery Data Grid Controls</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	    <!-- font libs -->
+		<link href="//fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+		
+		<!-- demo page styles -->
+		<link href="//cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css" rel="stylesheet" type="text/css" />	
+		
+		<!-- jQuery lib -->		
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        
+        <!-- jQuery UI js and css -->
+		<script  src="//code.jquery.com/ui/1.12.0-rc.1/jquery-ui.min.js"></script>
+		<link href="//code.jquery.com/ui/1.12.0-rc.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+		
+		<!-- jPList core js and css  -->
+		<link href="//cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css" rel="stylesheet" type="text/css" />		
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js"></script>
+        
+        <!-- jQuery UI Bundle -->			
+        <link href="//cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.jquery-ui-bundle.min.css" rel="stylesheet" type="text/css" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.jquery-ui-bundle.min.js"></script>
+		
+		<!-- preloader -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.preloader-control.min.js"></script>
+		<link href="//cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.preloader-control.min.css" rel="stylesheet" type="text/css" />
+		
+        <!-- additional demo styles -->
+        <style>
+            .jplist-range-slider .ui-slider{
+                width: 200px;
+            }
+        </style>
+        
+		<script>
+		$('document').ready(function () {
+            
+            /**
+			* user defined functions
+			*/
+			jQuery.fn.jplist.settings = {
+				
+				/**
+				* LIKES: jquery ui range slider
+				*/
+				likesSlider: function ($slider, $prev, $next){
+
+					$slider.slider({
+						min: 0
+						,max: 600
+						,range: true
+						,values: [0, 600]
+						,slide: function (event, ui){
+							$prev.text(ui.values[0] + ' likes');
+							$next.text(ui.values[1] + ' likes');
+						}
+					});
+				}
+				
+				/**
+				* LIKES: jquery ui set values
+				*/
+				,likesValues: function ($slider, $prev, $next){
+					$prev.text($slider.slider('values', 0) + ' likes');
+					$next.text($slider.slider('values', 1) + ' likes');
+				}
+				
+				/**
+				* VIEWS: jquery ui range slider
+				*/
+				,viewsSlider: function ($slider, $prev, $next){
+
+					$slider.slider({
+						min: 0
+						, max: 600
+						, range: true
+						, values: [0, 600]
+						, slide: function (event, ui) {
+							$prev.text(ui.values[0] + ' views');
+							$next.text(ui.values[1] + ' views');
+						}
+					});
+				}
+
+				/**
+				* VIEWS: jquery ui set values
+				*/
+				,viewsValues: function ($slider, $prev, $next){
+					$prev.text($slider.slider('values', 0) + ' views');
+					$next.text($slider.slider('values', 1) + ' views');
+				}
+            };
+            
+			$('#demo').jplist({
+
+				itemsBox: '.list'
+				, itemPath: '.list-item'
+				, panelPath: '.jplist-panel'
+                , debug: true
+
+				//data source
+				, dataSource: {
+
+					type: 'server'
+					, server: {
+
+						//ajax settings
+						ajax: {
+							url: '../../server/server-html.php'
+							, dataType: 'html'
+							, type: 'POST'
+						}
+					}
+				}
+
+			});
+		});
+		</script>
+		
+    </head>
+    <body>
+	
+		<!-- top bar -->
+		<div id="black-top-bar" class="box">
+			<div class="center">			
+				<div class="box">
+
+					<!-- left menu -->
+					<ul id="black-top-bar-left-menu" class="hmenu left iphone-hidden">
+						<li class="glow">
+							<a title="" href="//github.com/no81no/jplist/issues?state=open">
+								<i class="fa fa-asterisk"></i> Request a feature / <i class="fa fa-bug"></i> Report a bug
+							</a>
+						</li>
+					</ul>
+
+					<!-- social menu -->
+					<ul id="social-menu" class="hmenu right">
+						<li class="glow"><a title="" href="//www.facebook.com/jplist"><i class="fa fa-facebook"></i>&nbsp;</a></li>
+						<li class="glow"><a rel="publisher" title="" href="//plus.google.com/+Jplistjs"><i class="fa fa-google-plus"></i></a></li>	
+						<li class="glow"><a title="" href="//twitter.com/jquery_jplist"><i class="fa fa-twitter"></i></a></li>					
+						<li class="glow"><a title="" href="//github.com/no81no/jplist"><i class="fa fa-github"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>	
+				
+		<!-- header -->
+		<header id="header" class="box">
+			<div id="header-box" class="box">
+				<div class="center">			
+					<div class="box">
+
+						<!-- logo -->
+						<div class="align-center text-shadow" id="logo">	
+							<p>
+								<img title="jPList - jQuery Data Grid Controls" alt="jPList - jQuery Data Grid Controls" src="//jplist.com/content/img/common/rocket.png" />
+								<a title="" href="//jplist.com">jPList - jQuery Data Grid Controls</a>
+							</p>
+							<h1 class="h1-30-normal">Range Slider Demo</h1>
+						</div>
+
+					</div>
+				</div>					
+			</div>
+		</header>
+		
+		<!-- main content -->
+		<div class="box">
+			<div class="center">
+				<!--<><><><><><><><><><><><><><><><><><><><><><><><><><> DEMO START <><><><><><><><><><><><><><><><><><><><><><><><><><>-->
+						
+				<div id="demo" class="box jplist">
+									
+					<!-- ios button: show/hide panel -->
+					<div class="jplist-ios-button">
+						<i class="fa fa-sort"></i>
+						jPList Actions
+					</div>
+										
+					<!-- panel -->
+					<div class="jplist-panel box panel-top">						
+
+						<!-- likes range slider -->
+                        <!-- likesSlider and likesValues are user function defined in jQuery.fn.jplist.settings -->
+                        <div 
+                            class="jplist-range-slider"
+                            data-control-type="range-slider" 
+                            data-control-name="range-slider-likes" 
+                            data-control-action="filter"
+                            data-path=".like"
+                            data-slider-func="likesSlider" 
+                            data-setvalues-func="likesValues">
+
+                            <div class="value" data-type="prev-value"></div>
+                            <div class="ui-slider" data-type="ui-slider"></div>
+                            <div class="value" data-type="next-value"></div>
+                        </div>
+                        
+                        <!-- views range slider -->
+                        <!-- viewsSlider and viewsValues are user function defined in jQuery.fn.jplist.settings -->
+                        <div 
+                            class="jplist-range-slider"
+                            data-control-type="range-slider" 
+                            data-control-name="range-slider-views" 
+                            data-control-action="filter"
+                            data-path=".view"
+                            data-slider-func="viewsSlider" 
+                            data-setvalues-func="viewsValues">
+
+                            <div class="value" data-type="prev-value"></div>
+                            <div class="ui-slider" data-type="ui-slider"></div>
+                            <div class="value" data-type="next-value"></div>
+                        </div>
+                        
+						<!-- preloader for data sources -->
+						<div 
+							class="jplist-hide-preloader jplist-preloader"
+							data-control-type="preloader" 
+							data-control-name="preloader" 
+							data-control-action="preloader">
+							<img src="../img/common/ajax-loader-line.gif" alt="Loading..." title="Loading..." />
+						</div>
+
+					</div>
+										 
+					<!-- ajax content here -->   
+					<div class="list box text-shadow"></div>
+										
+					<!-- no result found -->
+					<div class="box jplist-no-results text-shadow align-center jplist-hidden">
+						<p>No results found</p>
+					</div>
+				
+                </div>
+
+				<!--<><><><><><><><><><><><><><><><><><><><><><><><><><> DEMO END <><><><><><><><><><><><><><><><><><><><><><><><><><>-->				
+			</div>		
+		</div>	
+		
+		<!-- footer -->
+		<footer class="box" id="footer">
+			<div class="center">			
+                <div class="box">
+					<p id="footer-content" class="align-center glow">
+						<a href="//jplist.com" title="">Copyright &copy; <script>document.write(new Date().getFullYear())</script> <b>jPList Software</b></a>
+					</p>					
+				</div>
+			</div>
+		</footer>	
+    </body>
+</html>

@@ -20,9 +20,6 @@
 				ajaxDataType = 'html';
 			}	
 		}
-		
-		//save statuses to storage according to user options (if needed)
-		context.storage.save(statuses);			
 					
 		//load data from URL
 		jQuery.fn.jplist.URIService.get(
