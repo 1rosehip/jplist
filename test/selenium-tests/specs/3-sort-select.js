@@ -4,9 +4,8 @@ describe('sort by title asc (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/3-sort-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[1]')
-            .click('(//li[span[@data-path=".title"][@data-order="asc"][@data-type="text"]])[1]')
+        browser.url('/test/pages/3-sort-select.html')
+            .click('(//option[@data-path=".title"][@data-order="asc"][@data-type="text"])[1]')
             .call(done);
     });
 
@@ -47,7 +46,7 @@ describe('sort by title asc (top)', function() {
 
     it('bottom sort should have the same value as the top sort', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('Title A-Z');
+        expect(browser.getValue('(//select[@data-control-type="sort-select"])[2]')).toBe('Title A-Z');
         browser.call(done);
     });
 
@@ -57,9 +56,8 @@ describe('sort by title asc (bottom)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/3-sort-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[2]')
-            .click('(//li[span[@data-path=".title"][@data-order="asc"][@data-type="text"]])[2]')
+        browser.url('/test/pages/3-sort-select.html')
+            .click('(//option[@data-path=".title"][@data-order="asc"][@data-type="text"])[2]')
             .call(done);
     });
 
@@ -98,9 +96,9 @@ describe('sort by title asc (bottom)', function() {
         browser.call(done);
     });
 
-    it('top sort should have the same value as the top bottom', function (done) {
+    it('top sort should have the same value as the bottom sort', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('Title A-Z');
+        expect(browser.getValue('(//select[@data-control-type="sort-select"])[1]')).toBe('Title A-Z');
         browser.call(done);
     });
 
@@ -110,9 +108,8 @@ describe('sort by title desc (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/3-sort-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[1]')
-            .click('(//li[span[@data-path=".title"][@data-order="desc"][@data-type="text"]])[1]')
+        browser.url('/test/pages/3-sort-select.html')
+            .click('(//option[@data-path=".title"][@data-order="desc"][@data-type="text"])[1]')
             .call(done);
     });
 
@@ -153,7 +150,7 @@ describe('sort by title desc (top)', function() {
 
     it('bottom sort should have the same value as the top sort', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('Title Z-A');
+        expect(browser.getValue('(//select[@data-control-type="sort-select"])[2]')).toBe('Title Z-A');
         browser.call(done);
     });
 
@@ -163,9 +160,8 @@ describe('sort by likes number asc (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/3-sort-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[1]')
-            .click('(//li[span[@data-path=".like"][@data-order="asc"][@data-type="number"]])[1]')
+        browser.url('/test/pages/3-sort-select.html')
+            .click('(//option[@data-path=".like"][@data-order="asc"][@data-type="number"])[1]')
             .call(done);
     });
 
@@ -206,7 +202,7 @@ describe('sort by likes number asc (top)', function() {
 
     it('bottom sort should have the same value as the top sort', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('Likes asc');
+        expect(browser.getValue('(//select[@data-control-type="sort-select"])[2]')).toBe('Likes asc');
         browser.call(done);
     });
 
@@ -216,9 +212,8 @@ describe('sort by likes number desc (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/3-sort-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[1]')
-            .click('(//li[span[@data-path=".like"][@data-order="desc"][@data-type="number"]])[1]')
+        browser.url('/test/pages/3-sort-select.html')
+            .click('(//option[@data-path=".like"][@data-order="desc"][@data-type="number"])[1]')
             .call(done);
     });
 
@@ -259,7 +254,7 @@ describe('sort by likes number desc (top)', function() {
 
     it('bottom sort should have the same value as the top sort', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('Likes desc');
+        expect(browser.getValue('(//select[@data-control-type="sort-select"])[2]')).toBe('Likes desc');
         browser.call(done);
     });
 
@@ -269,9 +264,8 @@ describe('sort by date number asc (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/3-sort-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[1]')
-            .click('(//li[span[@data-path=".date"][@data-order="asc"][@data-type="datetime"]])[1]')
+        browser.url('/test/pages/3-sort-select.html')
+            .click('(//option[@data-path=".date"][@data-order="asc"][@data-type="datetime"])[1]')
             .call(done);
     });
 
@@ -312,7 +306,7 @@ describe('sort by date number asc (top)', function() {
 
     it('bottom sort should have the same value as the top sort', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('Date asc');
+        expect(browser.getValue('(//select[@data-control-type="sort-select"])[2]')).toBe('Date asc');
         browser.call(done);
     });
 
@@ -322,9 +316,8 @@ describe('sort by date number desc (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/3-sort-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[1]')
-            .click('(//li[span[@data-path=".date"][@data-order="desc"][@data-type="datetime"]])[1]')
+        browser.url('/test/pages/3-sort-select.html')
+            .click('(//option[@data-path=".date"][@data-order="desc"][@data-type="datetime"])[1]')
             .call(done);
     });
 
@@ -365,10 +358,11 @@ describe('sort by date number desc (top)', function() {
 
     it('bottom sort should have the same value as the top sort', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('Date desc');
+        expect(browser.getValue('(//select[@data-control-type="sort-select"])[2]')).toBe('Date desc');
         browser.call(done);
     });
 
 });
+
 
 
