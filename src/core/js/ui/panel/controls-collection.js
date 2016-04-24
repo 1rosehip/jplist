@@ -251,7 +251,7 @@
         statuses = getStatuses(context, isDefault);
 
         for(var i = 0; i<statuses.length; i++){
-            
+
             jQuery.fn.jplist.StatusesService.add(statusesCollection, statuses[i], false);
         }
 
