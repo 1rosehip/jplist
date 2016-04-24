@@ -1,3 +1,24 @@
+<?php
+	//added standard php/mysql config file with host, user and password info
+	require "../../server/config.php";
+	
+	//models and collections
+	require "../../server/domain/models/filter-result-model.php";
+	require "../../server/domain/collection/filter-result-collection.php";
+	
+	//domain
+	require "../../server/domain/action.php";
+	require "../../server/domain/filtering.php";
+	
+	//controls
+	require "../../server/controls/textbox.php";	
+	require "../../server/controls/checkboxgroupfilter.php";
+	require "../../server/controls/filterdropdown.php";
+	require "../../server/controls/filterselect.php";
+    require "../../server/controls/range-slider.php";	
+    require "../../server/controls/range-filter.php";
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -195,7 +216,7 @@
                             data-path=".title"
                             data-button="#title-search-button"
                             type="text"
-                            value=""
+                            value="arch"
                             placeholder="Filter by Title"
                             data-control-type="textbox"
                             data-control-name="title-filter"
@@ -371,7 +392,149 @@
             </div>
 
             <!-- ajax content here -->
-            <div class="list box text-shadow"></div>
+            <div class="list box text-shadow">
+                   
+                <?php
+
+                    class jPListHTML{
+
+                        /**
+                        * database instance
+                        */
+                        protected $db;
+
+                        /**
+                        * filter
+                        */
+                        protected $filter;
+
+                        /**
+                        * jplist statuses
+                        */
+                        protected $statuses;
+
+                        /**
+                        * execute query and get data from db
+                        * @return {Object} data
+                        */
+                        protected function getData(){
+
+                            $items = null;
+
+                            //init qury
+                            $query = "SELECT title, description, image, likes, viewsnumber, keyword1, keyword2 FROM " . DB_TABLE . " ";
+
+                            if($this->filter->filterQuery){				
+                                $query .= " " . $this->filter->filterQuery . " ";
+                            }
+
+                            if(count($this->filter->preparedParams) > 0){	
+
+                                $stmt = $this->db->prepare($query);
+                                $stmt->execute($this->filter->preparedParams);
+                                $items = $stmt->fetchAll();
+                            }
+                            else{
+                                $items = $this->db->query($query);
+                            }	
+
+                            return $items;
+                        }
+
+                        /**
+                        * get html for one item
+                        * @param {Object} $item
+                        * @return {string} html
+                        */
+                        private function getHTML($item){
+
+                            $html = "";
+
+                            $html .= "<div class='list-item box'>";	
+                            $html .= "	<div class='img left'>";
+                            $html .= "		<img src='" . $item['image'] . "' alt='' title=''/>";
+                            $html .= "	</div>";
+
+                            $html .= "	<div class='block right'>";
+                            $html .= "		<p class='title'>" . $item['title'] . "</p>";
+                            $html .= "		<p class='desc'>" . $item['description'] . "</p>";
+                            $html .= "		<p class='like'>" . $item['likes'] . " Likes</p>";
+                            $html .= "		<p class='views'>" . $item['viewsnumber'] . " Views</p>";
+                            $html .= "		<p class='theme'>" . $item['keyword1'] . ", " . $item['keyword2'] . "</p>";
+                            $html .= "	</div>";
+                            $html .= "</div>";
+
+                            return $html;
+                        }
+
+                        /**
+                        * constructor
+                        */
+                        public function __construct(){
+
+                            $html = "";
+
+                            try{
+                                //get title filter value from the query string
+                                $titleFilterValue = $_GET['title-filter:value'];
+
+                                if(isset($titleFilterValue)){
+
+                                    $statuses = '[{
+                                        "action": "filter",
+                                        "name": "title-filter",
+                                        "type": "textbox",
+                                        "data": {
+                                            "path": ".title",
+                                            "ignore": "",
+                                            "value": "' . $titleFilterValue . '",
+                                            "mode": "contains",
+                                            "filterType": "TextFilter"
+                                        },
+                                        "inStorage": true,
+                                        "inAnimation": true,
+                                        "isAnimateToTop": false,
+                                        "inDeepLinking": true
+                                    }]';
+
+                                    //connect to database 
+                                    $this->db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);	
+
+                                    //decode statuses
+                                    $this->statuses = json_decode($statuses);
+
+                                    //start filter
+                                    $this->filter = new Filter($this->statuses);	
+
+                                    //get html data
+                                    $items = $this->getData();
+
+                                    if($items){
+                                        foreach($items as $item){
+                                            $html .= $this->getHTML($item);					
+                                        }
+                                    }
+
+                                    //print html
+                                    echo($html);
+
+                                    //close the database connection
+                                    $this->db = NULL;
+                                }
+                            }
+                            catch(PDOException $ex){
+                                print "Exception: " . $ex->getMessage();
+                            }
+
+                        }
+                    }
+
+                    /**
+                    * start
+                    */
+                    new jPListHTML();
+                ?>
+            </div>
 
             <!-- no result found -->
             <div class="box jplist-no-results text-shadow align-center jplist-hidden">
@@ -453,5 +616,6 @@
         </div>
     </div>
 </footer>
+ 
 </body>
 </html>
