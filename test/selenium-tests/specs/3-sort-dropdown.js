@@ -53,6 +53,59 @@ describe('sort by title asc (top)', function() {
 
 });
 
+describe('sort by title asc (bottom)', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/2-text-filter-with-sort.html')
+            .click('(//div[@class="jplist-dd-panel"])[2]')
+            .click('(//li[span[@data-path=".title"][@data-order="asc"][@data-type="text"]])[2]')
+            .call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('first item should have title Arch', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[1]')).toBe('Arch');
+        browser.call(done);
+    });
+
+    it('second item should have title Architecture', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[2]')).toBe('Architecture');
+        browser.call(done);
+    });
+
+    it('third item should have title Autumn', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[3]')).toBe('Autumn');
+        browser.call(done);
+    });
+
+    it('item #4 should have title Boats', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[4]')).toBe('Boats');
+        browser.call(done);
+    });
+
+    it('item #5 should have title Books', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[5]')).toBe('Books');
+        browser.call(done);
+    });
+
+    it('top sort should have the same value as the top bottom', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('Title A-Z');
+        browser.call(done);
+    });
+
+});
+
 describe('sort by title desc (top)', function() {
 
     beforeAll(function(done){
