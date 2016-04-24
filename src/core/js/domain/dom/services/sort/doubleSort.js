@@ -69,18 +69,18 @@
 		
 		//check current status data type
 		if(statuses.length > 0){
-			
+
 			//get current status
 			currentStatus = statuses[index];
-			
+
 			if(currentStatus.data.path !== 'default'){
 				
 				service = jQuery.fn.jplist.DTOMapperService.sort[currentStatus.data.type];
-				
+
 				if(jQuery.isFunction(service)){				
 					
 					result = service(currentStatus, dataitem1, dataitem2);
-					
+
 					if(result === 0 && jQuery.isArray(currentStatus.data.additionalPaths) && currentStatus.data.additionalPaths.length > 0){
 					
 						for(var i=0; i<currentStatus.data.additionalPaths.length; i++){
@@ -124,14 +124,15 @@
 		//if sort status only one and it's 'default' -> don't sort, because there is a random div bug in chrome/safari
 		if(statuses.length === 1 && statuses[0] && statuses[0].data && statuses[0].data.path === 'default'){
 			preventSort = true;
-		}	
-		
+		}
+
 		if(!preventSort){
+
 			dataview.sort(function(dataitem1, dataitem2){	
 				return doubleSort(dataitem1, dataitem2, statuses, 0);
 			});
 		}
-		
+
 		return dataview;
 	};
 	

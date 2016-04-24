@@ -90,9 +90,9 @@
 		sortStatuses = jQuery.fn.jplist.StatusesService.getSortStatuses(statuses);
 			
         if(sortStatuses.length > 0){
-			
+
 		    jQuery.fn.jplist.SortService.doubleSort(sortStatuses, context.dataview);
-			
+
 			//trigger sort event
 			context.observer.trigger(context.observer.events.listSorted, [statuses, context]);
         }
@@ -105,7 +105,7 @@
      * @return {jQueryObject}
 	 */
 	var applyStatuses = function(context, statuses){
-				
+
 		//reset dataview
 		resetDataview(context);
 

@@ -128,9 +128,10 @@
      * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
      * @param {string} field
      * @param {string|null} value
+     * @param {bool} keepInitialIndex
      * @return {Array.<jQuery.fn.jplist.StatusDTO>}
      */
-    var getStatusesByFieldAndValue = function(statuses, field, value){
+    var getStatusesByFieldAndValue = function(statuses, field, value, keepInitialIndex){
 
         var resultStatuses = []
             ,status;
@@ -141,7 +142,11 @@
             status = statuses[i];
 
             if(status[field] === value){
-                status.initialIndex = i;
+
+                if(keepInitialIndex) {
+                    status.initialIndex = i;
+                }
+
                 resultStatuses.push(status);
             }
         }
@@ -165,15 +170,14 @@
             statuses.push(status);
         }
         else{
-
-            statusesWithTheSameAction = getStatusesByFieldAndValue(statuses, 'action', status.action);
+            statusesWithTheSameAction = getStatusesByFieldAndValue(statuses, 'action', status.action, true);
 
             if(statusesWithTheSameAction.length === 0){
 
                 statuses.push(status);
             }
             else{
-                statusesWithTheSameActionAndName = getStatusesByFieldAndValue(statusesWithTheSameAction, 'name', status.name);
+                statusesWithTheSameActionAndName = getStatusesByFieldAndValue(statusesWithTheSameAction, 'name', status.name, false);
 
                 if(statusesWithTheSameActionAndName.length === 0){
 
@@ -190,30 +194,6 @@
                             if(force){
                                 statuses[currentStatus.initialIndex] = status;
                             }
-
-                            /*
-                             else{
-
-                             //warn ...
-                             if(currentStatus.data && status.data){
-
-                             shouldWarn = false;
-                             warnProperties = [];
-
-                             jQuery.each(currentStatus.data, function(property, value){
-
-                             if(status[property] !== value){
-                             shouldWarn = true;
-                             warnProperties.push(property + ': ' + status[property] + ' !== ' + value);
-                             }
-                             });
-
-                             if(shouldWarn){
-
-                             jQuery.fn.jplist.warn(context.options, 'The statuses have the same name, action and type, but different data values', [currentStatus, status, warnProperties]);
-                             }
-                             }
-                             }*/
                         }
                         else{
                             //merge

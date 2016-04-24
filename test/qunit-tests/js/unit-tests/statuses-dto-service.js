@@ -297,7 +297,6 @@ QUnit.test('add - check if currentPage and number are combined', function(assert
 			"inDeepLinking": true
 		}
 	];
-	var collection = statuses.slice();
 	
 	var newStatus = {
 		"action": "paging",
@@ -312,8 +311,128 @@ QUnit.test('add - check if currentPage and number are combined', function(assert
 		"inDeepLinking": true
 	};
 
-    jQuery.fn.jplist.StatusesService.add(collection, newStatus, false);
-	assert.ok(collection[0].data.number === '5' && collection[0].data.currentPage === '1');
+    jQuery.fn.jplist.StatusesService.add(statuses, newStatus, false);
+	assert.ok(statuses[0].data.number === '5' && statuses[0].data.currentPage === '1');
+});
+
+QUnit.test('add new textbox filter status (with force) to the existing statuses with sort and filter', function(assert){
+
+    var options = {}, observer = {};
+
+    var collection = [
+        {
+            "action": "sort",
+            "name": "sort",
+            "type": "sort-drop-down",
+            "data": {
+                "order": "desc",
+                "ignore": "",
+                "path": ".title",
+                "type": "text",
+                "dateTimeFormat": "{month}/{day}/{year}"
+            },
+            "inStorage": true,
+            "inAnimation": true,
+            "isAnimateToTop": false,
+            "inDeepLinking": true
+        },
+        {
+            "action": "filter",
+            "name": "title-filter",
+            "type": "textbox",
+            "data": {
+                "path": ".title",
+                "ignore": "[~!@#$%^&*()+=`'\"/\\_]+",
+                "value": "aaa",
+                "filterType": "TextFilter"
+            },
+            "inStorage": true,
+            "inAnimation": true,
+            "isAnimateToTop": false,
+            "inDeepLinking": true
+        }
+    ];
+
+    var newStatus = {
+        "action": "filter",
+        "name": "title-filter",
+        "type": "textbox",
+        "data": {
+            "path": ".title",
+            "ignore": "[~!@#$%^&*()+=`'\"/\\_]+",
+            "value": "bbb",
+            "filterType": "TextFilter"
+        },
+        "inStorage": true,
+        "inAnimation": true,
+        "isAnimateToTop": false,
+        "inDeepLinking": true
+    };
+
+    jQuery.fn.jplist.StatusesService.add(collection, newStatus, true);
+
+    assert.ok(collection.length === 2 && collection[1].data.value === 'bbb');
+});
+
+
+QUnit.test('add new sort status (with force) to the existing statuses with sort and filter', function(assert){
+
+    var options = {}, observer = {};
+
+    var collection = [
+        {
+            "action": "sort",
+            "name": "sort",
+            "type": "sort-drop-down",
+            "data": {
+                "order": "desc",
+                "ignore": "",
+                "path": ".title",
+                "type": "text",
+                "dateTimeFormat": "{month}/{day}/{year}"
+            },
+            "inStorage": true,
+            "inAnimation": true,
+            "isAnimateToTop": false,
+            "inDeepLinking": true
+        },
+        {
+            "action": "filter",
+            "name": "title-filter",
+            "type": "textbox",
+            "data": {
+                "path": ".title",
+                "ignore": "[~!@#$%^&*()+=`'\"/\\_]+",
+                "value": "aaa",
+                "filterType": "TextFilter"
+            },
+            "inStorage": true,
+            "inAnimation": true,
+            "isAnimateToTop": false,
+            "inDeepLinking": true
+        }
+    ];
+
+    var newStatus = {
+        "action": "sort",
+        "name": "sort",
+        "type": "sort-drop-down",
+        "data": {
+            "order": "asc",
+            "ignore": "",
+            "path": ".title",
+            "type": "text",
+            "dateTimeFormat": "{month}/{day}/{year}"
+        },
+        "inStorage": true,
+        "inAnimation": true,
+        "isAnimateToTop": false,
+        "inDeepLinking": true
+    };
+
+    jQuery.fn.jplist.StatusesService.add(collection, newStatus, true);
+
+    assert.ok(collection.length === 2 && collection[0].data.order === 'asc');
 });
 
 /*
