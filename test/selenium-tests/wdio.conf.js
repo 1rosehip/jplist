@@ -11,7 +11,7 @@ exports.config = {
     //
     specs: [
         './test/selenium-tests/specs/**/*.js'
-        //'./test/selenium-tests/specs/2-text-filter-with-sort-dd.js'
+        //'./test/selenium-tests/specs/4-pagination.js'
     ],
     // Patterns to exclude.
     exclude: [
