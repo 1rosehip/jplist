@@ -21,7 +21,7 @@ describe('checkbox path filter with Architecture and Lifestyle', function() {
         browser.call(done);
     });
 
-    it('first item should have title Capital City', function (done) {
+    it('second item should have title Capital City', function (done) {
 
         expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[2]')).toBe('Capital City');
         browser.call(done);
@@ -56,7 +56,7 @@ describe('checkbox path filter with Christmas and Nature', function() {
         browser.call(done);
     });
 
-    it('first item should have title Boats', function (done) {
+    it('second item should have title Boats', function (done) {
 
         expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[2]')).toBe('Boats');
         browser.call(done);
