@@ -52,7 +52,7 @@ describe('select filter by Architecture (top)', function() {
 
 });
 
-describe('dropdown filter by Architecture (bottom)', function() {
+describe('select filter by Architecture (bottom)', function() {
 
     beforeAll(function(done){
 
@@ -104,7 +104,7 @@ describe('dropdown filter by Architecture (bottom)', function() {
 
 });
 
-describe('dropdown filter by Christmas (top)', function() {
+describe('select filter by Christmas (top)', function() {
 
     beforeAll(function(done){
 
@@ -143,8 +143,7 @@ describe('dropdown filter by Christmas (top)', function() {
     });
 });
 
-
-describe('dropdown filter by Food (top)', function() {
+describe('select filter by Food (top)', function() {
 
     beforeAll(function(done){
 
