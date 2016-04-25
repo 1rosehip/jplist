@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Sort Dropdown | jPList - jQuery Data Grid Controls</title>
+    <title>Pagination with Sorting | jPList - jQuery Data Grid Controls</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -11,14 +11,15 @@
 
     <!-- demo page styles -->
     <link href="../../dist/css/jplist.demo-pages.min.css" rel="stylesheet" type="text/css" />
-    <link href="../../dist/css/jplist.textbox-filter.min.css" rel="stylesheet" type="text/css" />
     <link href="../../dist/css/jplist.core.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../dist/css/jplist.pagination-bundle.min.css" rel="stylesheet" type="text/css" />
 
     <!-- jQuery lib -->
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!-- jPList core -->
 
+    <!-- jPList -->
     <script src="../../dist/js/jplist.core.min.js"></script>
+    <script src="../../dist/js/jplist.pagination-bundle.min.js"></script>
     <script src="../../dist/js/jplist.sort-bundle.min.js"></script>
 
     <!-- jPList start -->
@@ -75,7 +76,7 @@
                         <img title="jPList - jQuery Data Grid Controls" alt="jPList - jQuery Data Grid Controls" src="http://jplist.com/content/img/common/rocket.png" />
                         <a title="" href="http://jplist.com">jPList - jQuery Data Grid Controls</a>
                     </p>
-                    <h1 class="h1-30-normal">Sort Dropdown</h1>
+                    <h1 class="h1-30-normal">Pagination with Sorting</h1>
                 </div>
 
             </div>
@@ -99,6 +100,20 @@
             <!-- panel -->
             <div class="jplist-panel box panel-top">
 
+                <div
+                        class="jplist-drop-down"
+                        data-control-type="items-per-page-drop-down"
+                        data-control-name="paging"
+                        data-control-action="paging">
+
+                    <ul>
+                        <li><span data-number="3"> 3 per page </span></li>
+                        <li><span data-number="5" data-default="true"> 5 per page </span></li>
+                        <li><span data-number="10"> 10 per page </span></li>
+                        <li><span data-number="all"> view all </span></li>
+                    </ul>
+                </div>
+
                 <!-- sort dropdown -->
                 <div
                         class="jplist-drop-down"
@@ -118,6 +133,21 @@
                         <li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
                         <li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
                     </ul>
+                </div>
+
+                <div
+                        class="jplist-label"
+                        data-type="Page {current} of {pages}"
+                        data-control-type="pagination-info"
+                        data-control-name="paging"
+                        data-control-action="paging">
+                </div>
+
+                <div
+                        class="jplist-pagination"
+                        data-control-type="pagination"
+                        data-control-name="paging"
+                        data-control-action="paging">
                 </div>
 
             </div>
@@ -853,14 +883,22 @@
                 <p>No results found</p>
             </div>
 
-            <!-- ios button: show/hide panel -->
-            <div class="jplist-ios-button">
-                <i class="fa fa-sort"></i>
-                jPList Actions
-            </div>
-
             <!-- panel -->
-            <div class="jplist-panel box bottom">
+            <div class="jplist-panel box panel-bottom">
+
+                <div
+                        class="jplist-drop-down"
+                        data-control-type="items-per-page-drop-down"
+                        data-control-name="paging"
+                        data-control-action="paging">
+
+                    <ul>
+                        <li><span data-number="3"> 3 per page </span></li>
+                        <li><span data-number="5" data-default="true"> 5 per page </span></li>
+                        <li><span data-number="10"> 10 per page </span></li>
+                        <li><span data-number="all"> view all </span></li>
+                    </ul>
+                </div>
 
                 <!-- sort dropdown -->
                 <div
@@ -881,6 +919,22 @@
                         <li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
                         <li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
                     </ul>
+                </div>
+
+                <div
+                        class="jplist-label"
+                        data-type="{start} - {end} of {all}"
+                        data-control-type="pagination-info"
+                        data-control-name="paging"
+                        data-control-action="paging">
+                </div>
+
+                <div
+                        class="jplist-pagination"
+                        data-control-type="pagination"
+                        data-control-name="paging"
+                        data-control-action="paging"
+                        data-control-animate-to-top="true">
                 </div>
 
             </div>

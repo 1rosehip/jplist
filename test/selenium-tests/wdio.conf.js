@@ -11,7 +11,7 @@ exports.config = {
     //
     specs: [
         './test/selenium-tests/specs/**/*.js'
-        //'./test/selenium-tests/specs/4-pagination-items-per-page.js'
+        //'./test/selenium-tests/specs/4-pagination-with-sort.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -36,6 +36,7 @@ exports.config = {
     capabilities: [{
         browserName: 'firefox'
     }],
+    maxInstances: 3,
     //
     // ===================
     // Test Configurations
