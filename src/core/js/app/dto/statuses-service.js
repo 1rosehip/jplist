@@ -128,7 +128,7 @@
      * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
      * @param {string} field
      * @param {string|null} value
-     * @param {bool} keepInitialIndex
+     * @param {boolean} keepInitialIndex
      * @return {Array.<jQuery.fn.jplist.StatusDTO>}
      */
     var getStatusesByFieldAndValue = function(statuses, field, value, keepInitialIndex){

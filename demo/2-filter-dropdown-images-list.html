@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+    <title>Dropdown Filter with Images List | jPList - jQuery Data Grid Controls</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- font libs -->
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- demo page styles -->
+    <link href="../dist/css/jplist.demo-pages.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- additional demo styles -->
+    <style>
+        .jplist .list{
+            background: transparent;
+        }
+
+        .jplist .list img{
+            margin: 0 15px 15px 0;
+            border: 3px solid #fff;
+            box-sizing: border-box;
+            float: left;
+        }
+    </style>
+
+    <!-- jQuery lib -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- jPList core js and css  -->
+    <link href="../dist/css/jplist.core.min.css" rel="stylesheet" type="text/css" />
+    <script src="../dist/js/jplist.core.min.js"></script>
+
+    <!-- filter dropdown bundle -->
+    <script src="../dist/js/jplist.filter-dropdown-bundle.min.js"></script>
+
+    <!-- jPList start -->
+    <script>
+        $('document').ready(function(){
+
+            $('#demo').jplist({
+                itemsBox: '.list'
+                ,itemPath: 'img'
+                ,panelPath: '.jplist-panel'
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+<!-- top bar -->
+<div id="black-top-bar" class="box">
+    <div class="center">
+        <div class="box">
+
+            <!-- left menu -->
+            <ul id="black-top-bar-left-menu" class="hmenu left iphone-hidden">
+                <li class="glow">
+                    <a title="" href="https://github.com/no81no/jplist/issues?state=open">
+                        <i class="fa fa-asterisk"></i> Request a feature / <i class="fa fa-bug"></i> Report a bug
+                    </a>
+                </li>
+            </ul>
+
+            <!-- social menu -->
+            <ul id="social-menu" class="hmenu right">
+                <li class="glow"><a title="" href="https://www.facebook.com/jplist"><i class="fa fa-facebook"></i>&nbsp;</a></li>
+                <li class="glow"><a rel="publisher" title="" href="https://plus.google.com/+Jplistjs"><i class="fa fa-google-plus"></i></a></li>
+                <li class="glow"><a title="" href="https://twitter.com/jquery_jplist"><i class="fa fa-twitter"></i></a></li>
+                <li class="glow"><a title="" href="https://github.com/no81no/jplist"><i class="fa fa-github"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- header -->
+<header id="header" class="box">
+    <div id="header-box" class="box">
+        <div class="center">
+            <div class="box">
+
+                <!-- logo -->
+                <div class="align-center text-shadow" id="logo">
+                    <p>
+                        <img title="jPList - jQuery Data Grid Controls" alt="jPList - jQuery Data Grid Controls" src="http://jplist.com/content/img/common/rocket.png" />
+                        <a title="" href="http://jplist.com">jPList - jQuery Data Grid Controls</a>
+                    </p>
+                    <h1 class="h1-30-normal">Dropdown Filter with Images List</h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- main content -->
+<div class="box">
+    <div class="center">
+        <!--<><><><><><><><><><><><><><><><><><><><><><><><><><> DEMO START <><><><><><><><><><><><><><><><><><><><><><><><><><>-->
+
+        <div id="demo" class="box jplist" style="margin: 20px 0 50px 0">
+
+            <!-- ios button: show/hide panel -->
+            <div class="jplist-ios-button">
+                <i class="fa fa-sort"></i>
+                jPList Actions
+            </div>
+
+            <!-- panel-->
+            <div class="jplist-panel box panel-top">
+
+                <div
+                        class="jplist-drop-down"
+                        data-control-type="filter-drop-down"
+                        data-control-name="category-filter"
+                        data-control-action="filter">
+                    <ul>
+                        <li><span data-path="default">Filter by category</span></li>
+                        <li><span data-path=".architecture">Architecture</span></li>
+                        <li><span data-path=".christmas">Christmas</span></li>
+                        <li><span data-path=".food">Food</span></li>
+                        <li><span data-path=".nature">Nature</span></li>
+                        <li><span data-path=".other">Other</span></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- data -->
+            <div class="list box text-shadow">
+
+                <img src="img/thumbs/arch-2.jpg" alt="" title="" class="architecture"/>
+                <img src="img/thumbs/autumn-1.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/boats-1.jpg" alt="" title="" class="other"/>
+                <img src="img/thumbs/arch-1.jpg" alt="" title="" class="architecture"/>
+                <img src="img/thumbs/book-1.jpg" alt="" title="" class="other"/>
+                <img src="img/thumbs/business-1.jpg" alt="" title="" class="other"/>
+                <img src="img/thumbs/car-1.jpg" alt="" title="" class="other"/>
+                <img src="img/thumbs/christmas-3.jpg" alt="" title="" class="christmas"/>
+                <img src="img/thumbs/city-1.jpg" alt="" title=""  class="other"/>
+                <img src="img/thumbs/city-2.jpg" alt="" title="" class="architecture"/>
+                <img src="img/thumbs/coffee-grass.jpg" alt="" title="" class="food"/>
+                <img src="img/thumbs/coins.jpg" alt="" title="" class="other"/>
+                <img src="img/thumbs/crayons.jpg" alt="" title="" class="other"/>
+                <img src="img/thumbs/cupcakes.jpg" alt="" title="" class="food"/>
+                <img src="img/thumbs/eggs-nest.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/flower-1.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/flower-2.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/christmas-2.jpg" alt="" title="" class="christmas"/>
+                <img src="img/thumbs/flower-3.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/fountain.jpg" alt="" title="" class="other"/>
+                <img src="img/thumbs/leaves.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/lichterman.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/christmas-1.jpg" alt="" title="" class="christmas"/>
+                <img src="img/thumbs/pinecone.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/river-1.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/river-2.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/sunset-1.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/tree.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/winter-1.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/winter-2.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/winter-sun.jpg" alt="" title="" class="nature"/>
+                <img src="img/thumbs/woodstump.jpg" alt="" title="" class="nature"/>
+            </div>
+
+            <div class="box jplist-hidden text-shadow align-center">
+                <p>No results found</p>
+            </div>
+
+        </div>
+
+        <!--<><><><><><><><><><><><><><><><><><><><><><><><><><> DEMO END <><><><><><><><><><><><><><><><><><><><><><><><><><>-->
+    </div>
+</div>
+
+<!-- footer -->
+<footer class="box" id="footer">
+    <div class="center">
+        <div class="box">
+            <p id="footer-content" class="align-center glow">
+                <a href="http://jplist.com" title="">Copyright &copy; <script>document.write(new Date().getFullYear())</script> <b>jPList Software</b></a>
+            </p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

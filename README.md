@@ -185,7 +185,7 @@ node ./build/closure/get-js-files-list.js src/filter-dropdown-bundle/js/config.j
 - Opera
 
 ##[jQuery Compatibility](#jquery-compat)
-- Works with jQuery from [version 1.7](http://code.jquery.com/jquery-1.7.min.js)
+- Works with jQuery from [version 1.8](http://code.jquery.com/jquery-1.8.0.min.js)
 - Works with jQuery 2.x versions
 
 ##[Donations](#donation)

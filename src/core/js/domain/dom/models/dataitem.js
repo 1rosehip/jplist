@@ -49,7 +49,7 @@
 			path = paths[i];
 
 			//jquery element
-			$element = context.$item.find(path.jqPath);
+			$element = context.$item.find(path.jqPath).addBack(path.jqPath);
 
 			if($element.length > 0){
 			
