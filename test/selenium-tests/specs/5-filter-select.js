@@ -1,12 +1,11 @@
 var assert = require('assert');
 
-describe('dropdown filter by Architecture (top)', function() {
+describe('select filter by Architecture (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/5-filter-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[1]')
-            .click('(//li[span[@data-path=".architecture"]])[1]')
+        browser.url('/test/pages/5-filter-select.html')
+            .click('(//option[@data-path=".architecture"])[1]')
             .call(done);
     });
 
@@ -45,9 +44,9 @@ describe('dropdown filter by Architecture (top)', function() {
         browser.call(done);
     });
 
-    it('bottom filter should have the same value as the top filter', function (done) {
+    it('bottom sort should have the same value as the top sort', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('Architecture');
+        expect(browser.getValue('(//select[@data-control-type="filter-select"])[2]')).toBe('Architecture');
         browser.call(done);
     });
 
@@ -57,9 +56,8 @@ describe('dropdown filter by Architecture (bottom)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/5-filter-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[2]')
-            .click('(//li[span[@data-path=".architecture"]])[2]')
+        browser.url('/test/pages/5-filter-select.html')
+            .click('(//option[@data-path=".architecture"])[2]')
             .call(done);
     });
 
@@ -98,9 +96,9 @@ describe('dropdown filter by Architecture (bottom)', function() {
         browser.call(done);
     });
 
-    it('top filter should have the same value as the top bottom', function (done) {
+    it('bottom sort should have the same value as the top sort', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('Architecture');
+        expect(browser.getValue('(//select[@data-control-type="filter-select"])[1]')).toBe('Architecture');
         browser.call(done);
     });
 
@@ -110,9 +108,8 @@ describe('dropdown filter by Christmas (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/5-filter-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[1]')
-            .click('(//li[span[@data-path=".christmas"]])[1]')
+        browser.url('/test/pages/5-filter-select.html')
+            .click('(//option[@data-path=".christmas"])[1]')
             .call(done);
     });
 
@@ -141,7 +138,7 @@ describe('dropdown filter by Christmas (top)', function() {
 
     it('bottom filter should have the same value as the top filter', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('Christmas');
+        expect(browser.getValue('(//select[@data-control-type="filter-select"])[2]')).toBe('Christmas');
         browser.call(done);
     });
 });
@@ -151,9 +148,8 @@ describe('dropdown filter by Food (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/5-filter-dropdown.html')
-            .click('(//div[@class="jplist-dd-panel"])[1]')
-            .click('(//li[span[@data-path=".food"]])[1]')
+        browser.url('/test/pages/5-filter-select.html')
+            .click('(//option[@data-path=".food"])[1]')
             .call(done);
     });
 
@@ -176,7 +172,7 @@ describe('dropdown filter by Food (top)', function() {
 
     it('bottom filter should have the same value as the top filter', function (done) {
 
-        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('Food');
+        expect(browser.getValue('(//select[@data-control-type="filter-select"])[2]')).toBe('Food');
         browser.call(done);
     });
 });
