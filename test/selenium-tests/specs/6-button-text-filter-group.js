@@ -4,9 +4,9 @@ describe('button path filter group with Architecture and Lifestyle', function() 
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/6-button-path-filter-group.html')
-            .click('(//span[@data-path=".architecture"])[1]')
-            .click('(//span[@data-path=".lifestyle"])[1]')
+        browser.url('/test/pages/6-button-text-filter-group.html')
+            .click('(//span[@data-text="architecture"])[1]')
+            .click('(//span[@data-text="lifestyle"])[1]')
             .call(done);
     });
 
@@ -33,9 +33,9 @@ describe('button path filter group with Christmas and Nature', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/6-button-path-filter-group.html')
-            .click('(//span[@data-path=".christmas"])[1]')
-            .click('(//span[@data-path=".nature"])[1]')
+        browser.url('/test/pages/6-button-text-filter-group.html')
+            .click('(//span[@data-text="christmas"])[1]')
+            .click('(//span[@data-text="nature"])[1]')
             .call(done);
     });
 
@@ -56,9 +56,9 @@ describe('button path filter group with Lifestyle and Nature', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/6-button-path-filter-group.html')
-            .click('(//span[@data-path=".lifestyle"])[1]')
-            .click('(//span[@data-path=".nature"])[1]')
+        browser.url('/test/pages/6-button-text-filter-group.html')
+            .click('(//span[@data-text="lifestyle"])[1]')
+            .click('(//span[@data-text="nature"])[1]')
             .call(done);
     });
 
