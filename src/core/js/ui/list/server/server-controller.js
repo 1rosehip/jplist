@@ -108,11 +108,10 @@
 	 * @param {jQueryObject} $root - jplist root element
 	 * @param {Object} options - jplist user options
 	 * @param {Object} observer
-	 * @param {jQuery.fn.jplist.PanelController} panel
 	 * @param {jQuery.fn.jplist.History} history
 	 * @return {Object}
 	 */
-	jQuery.fn.jplist.ServerController = function($root, options, observer, panel, history){
+	jQuery.fn.jplist.ServerController = function($root, options, observer, history){
 	
 		this.options = options;
 		this.observer = observer;

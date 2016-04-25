@@ -320,6 +320,22 @@
 		context.dataitems = [];
 		context.dataview = [];
 	};
+
+    /**
+     * add new panel paths
+     * @param {Object} context
+     * @param {Array.<jQuery.fn.jplist.PathModel>} newPanelPaths - new paths objects array
+     */
+    var addPaths = function(context, newPanelPaths){
+
+        for(var i=0; i<context.dataitems.length; i++){
+
+            context.dataitems[i].addPaths(newPanelPaths);
+        }
+
+        //update dataview
+        resetDataview(context);
+    };
 	
 	/** 
 	 * DataItems Collection
@@ -345,6 +361,14 @@
 		//trigger collection ready event
 		this.observer.trigger(this.observer.events.collectionReadyEvent, [this]);		
 	};
+
+    /**
+     * add new panel paths
+     * @param {Array.<jQuery.fn.jplist.PathModel>} newPanelPaths - new paths objects array
+     */
+    jQuery.fn.jplist.Dataitems.prototype.addPaths = function(newPanelPaths){
+        addPaths(this, newPanelPaths);
+    };
 	
 	/**
 	 * API: apply statuses

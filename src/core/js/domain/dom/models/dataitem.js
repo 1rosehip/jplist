@@ -5,11 +5,11 @@
 	'use strict';		
 			
 	/**
-	* find pathitem by path in the given dataitem (in the pathitems array)
-	* @param {Object} context - jplist dataitem 'this' object
-	* @param {jQuery.fn.jplist.PathModel} path - pathitem to find
-	* @return {jQuery.fn.jplist.DataItemMemberModel}
-	*/
+	 * find pathitem by path in the given dataitem (in the pathitems array)
+	 * @param {Object} context
+	 * @param {jQuery.fn.jplist.PathModel} path - pathitem to find
+	 * @return {jQuery.fn.jplist.DataItemMemberModel}
+	 */
 	var findPathitem = function(context, path){
 	
 		var resultPathitem = null
@@ -31,11 +31,11 @@
 	};
 	
 	/**
-	* get pathitems by paths 
-	* @param {Object} context - jplist dataitem 'this' object
-	* @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
-	* @return {Array.<jQuery.fn.jplist.DataItemMemberModel>}
-	*/
+	 * get pathitems by paths
+	 * @param {Object} context
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
+	 * @return {Array.<jQuery.fn.jplist.DataItemMemberModel>}
+	 */
 	var getPathitems = function(context, paths){
 	
 		var path
@@ -64,14 +64,24 @@
 		return pathitems;
 	};
 
+    /**
+     * add new paths to the dataitem
+     * @param {Object} context
+     * @param {Array.<jQuery.fn.jplist.PathModel>} paths
+     */
+    var addPaths = function(context, paths){
+
+        context.pathitems = context.pathitems.concat(getPathitems(context, paths));
+    };
+
 	/**
-	* data item - item in list that should be sorted, filtered etc.
-	* @constructor
-	* @param {jQueryObject} $item - item to add to data array	
-	* @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
-	* @param {number} index
-	* @class Dataitem - item within jplist container	
-	*/
+	 * data item - item in list that should be sorted, filtered etc.
+	 * @constructor
+	 * @param {jQueryObject} $item - item to add to data array
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths - paths objects array
+	 * @param {number} index
+	 * @class Dataitem - item within jplist container
+	 */
 	jQuery.fn.jplist.DataItemModel = function($item, paths, index){
 
 		this.pathitems = [];
@@ -87,13 +97,21 @@
 	};
 		
 	/**
-	* Find pathitem by path (in the pathitems array)
-	* @param {jQuery.fn.jplist.PathModel} path - pathitem to find
-	* @return {jQuery.fn.jplist.DataItemMemberModel}
-	*/
+	 * Find pathitem by path (in the pathitems array)
+	 * @param {jQuery.fn.jplist.PathModel} path - pathitem to find
+	 * @return {jQuery.fn.jplist.DataItemMemberModel}
+	 */
 	jQuery.fn.jplist.DataItemModel.prototype.findPathitem = function(path){
 		return findPathitem(this, path);
 	};
+
+    /**
+     * add new paths to the dataitem
+     * @param {Array.<jQuery.fn.jplist.PathModel>} paths
+     */
+    jQuery.fn.jplist.DataItemModel.prototype.addPaths = function(paths){
+        addPaths(this, paths);
+    };
 	
 })();
 

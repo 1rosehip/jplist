@@ -2,7 +2,23 @@
 * jPList App
 */
 ;(function(){
-	'use strict';	
+	'use strict';
+
+    /**
+     * API: add new control
+     * @param {*} context
+     * @param {Object} commandData
+     */
+    var addControl = function(context, commandData){
+
+        if(context &&
+            context.panel &&
+            context.controller) {
+
+            context.panel.addControl(commandData.$control);
+            context.controller.addPaths(context.panel.paths);
+        }
+    };
 
 	/**
 	* API: add data item(s) to the list
@@ -189,7 +205,6 @@
 					context.$root
 					,context.options
 					,context.observer
-					,context.panel
 					,context.history
 				);
 			}
@@ -223,6 +238,11 @@
 				return getDataItems(context, commandData);
 			}
 			break;
+
+            case 'addControl':{
+                addControl(context, commandData);
+            }
+                break;
 		}
 	};
 	
@@ -424,9 +444,6 @@
 			//try set panel controls statuses from storage
 			context.panel.setStatusesFromStorage();
 		}
-		
-		//send 'init' event
-		//context.observer.trigger(context.observer.events.init, []);
 		
 		return jQuery.extend(this, context); 
 	};

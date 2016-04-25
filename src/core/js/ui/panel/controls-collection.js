@@ -335,6 +335,7 @@
      * @param {jQueryObject} $root
      * @param {Object} options - jplist user options
      * @param {Object} observer
+     * @return {Object}
 	 */
 	var add = function(context, $control, history, $root, options, observer){
 
@@ -352,6 +353,8 @@
 			//add to the list
 			context.controls.push(control);
 		}
+
+        return control;
 	};
 
 	/**
@@ -437,6 +440,7 @@
 	
 	/**
 	 * Get panel paths
+     * @return {Array.<jQuery.fn.jplist.PathModel>}
 	 */
 	jQuery.fn.jplist.ControlsCollection.prototype.getPaths = function(){
 		return getPaths(this);

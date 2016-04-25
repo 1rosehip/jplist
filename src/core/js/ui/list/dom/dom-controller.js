@@ -3,7 +3,7 @@
 		
 	/**
 	 * build statuses
-	 * @param {Object} context - jplist controller 'this' object
+	 * @param {Object} context
 	 * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
      * @param {jQuery.fn.jplist.StatusDTO} lastStatus
      * @return {jQueryObject}
@@ -23,6 +23,15 @@
 
         return $dataview;
 	};
+
+    /**
+     * add new panel paths
+     * @param {Object} context
+     * @param {Array.<jQuery.fn.jplist.PathModel>} newPanelPaths - new paths objects array
+     */
+    var addPaths = function(context, newPanelPaths){
+        context.collection.addPaths(newPanelPaths);
+    };
 		
 	/**
 	 * create collection of dataitems
@@ -87,5 +96,13 @@
 	jQuery.fn.jplist.DOMController.prototype.renderStatuses = function(statuses, lastStatus){
 		return renderStatuses(this, statuses, lastStatus);
 	};
+
+    /**
+     * add new panel paths
+     * @param {Array.<jQuery.fn.jplist.PathModel>} newPanelPaths - paths objects array
+     */
+    jQuery.fn.jplist.DOMController.prototype.addPaths = function(newPanelPaths){
+        addPaths(this, newPanelPaths);
+    };
 	
 })();

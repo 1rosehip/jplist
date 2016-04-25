@@ -158,6 +158,7 @@
 	 * create control
 	 * @param {jQueryObject} $control
 	 * @param {jQuery.fn.jplist.ControlsCollection} controlsCollection
+     * @return {Object}
 	 */
 	jQuery.fn.jplist.ControlFactory.prototype.create = function($control, controlsCollection){
 		return create(this, $control, controlsCollection);
