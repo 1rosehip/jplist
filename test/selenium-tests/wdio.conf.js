@@ -11,7 +11,7 @@ exports.config = {
     //
     specs: [
         './test/selenium-tests/specs/**/*.js'
-        //'./test/selenium-tests/specs/6-checkbox-path-filter.js'
+        //'./test/selenium-tests/specs/4-pagination-items-per-page.js'
     ],
     // Patterns to exclude.
     exclude: [

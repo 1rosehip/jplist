@@ -89,7 +89,6 @@ describe('range slider toggle filter with Likes: 50 - 100 an Prices: 30+', funct
 
 });
 
-
 describe('range slider toggle filter with Views: 20 - 200 an Prices: 30+', function() {
 
     beforeAll(function(done){

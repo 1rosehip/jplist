@@ -1,10 +1,12 @@
 var assert = require('assert');
 
+// ----------------- 5 items per page TOP ------------------
+
 describe('click on page #3 (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/4-pagination.html')
+        browser.url('/test/pages/4-pagination-items-per-page.html')
             .click('(//button[@data-type="page"][@data-number="2"])[1]')
             .call(done);
     });
@@ -25,7 +27,7 @@ describe('click on the "next" button (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/4-pagination.html')
+        browser.url('/test/pages/4-pagination-items-per-page.html')
             .click('(//button[@data-type="next"])[1]')
             .call(done);
     });
@@ -76,7 +78,7 @@ describe('click on the "last" button (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/4-pagination.html')
+        browser.url('/test/pages/4-pagination-items-per-page.html')
             .click('(//button[@data-type="last"])[1]')
             .call(done);
     });
@@ -116,7 +118,7 @@ describe('click on "prev" button (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/4-pagination.html')
+        browser.url('/test/pages/4-pagination-items-per-page.html')
             .click('(//button[@data-type="page"][@data-number="1"])[1]')
             .click('(//button[@data-type="prev"])[1]')
             .call(done);
@@ -168,7 +170,7 @@ describe('click on "prev" button (top)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/4-pagination.html')
+        browser.url('/test/pages/4-pagination-items-per-page.html')
             .click('(//button[@data-type="page"][@data-number="1"])[1]')
             .click('(//button[@data-type="first"])[1]')
             .call(done);
@@ -216,13 +218,13 @@ describe('click on "prev" button (top)', function() {
     });
 });
 
-// -------------- BOTTOM -----------------
+// -------------- 5 items per page BOTTOM -----------------
 
 describe('click on page #3 (bottom)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/4-pagination.html')
+        browser.url('/test/pages/4-pagination-items-per-page.html')
             .click('(//button[@data-type="page"][@data-number="2"])[2]')
             .call(done);
     });
@@ -243,7 +245,7 @@ describe('click on the "next" button (bottom)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/4-pagination.html')
+        browser.url('/test/pages/4-pagination-items-per-page.html')
             .click('(//button[@data-type="next"])[2]')
             .call(done);
     });
@@ -294,7 +296,7 @@ describe('click on the "last" button (bottom)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/4-pagination.html')
+        browser.url('/test/pages/4-pagination-items-per-page.html')
             .click('(//button[@data-type="last"])[2]')
             .call(done);
     });
@@ -334,7 +336,7 @@ describe('click on "prev" button (bottom)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/4-pagination.html')
+        browser.url('/test/pages/4-pagination-items-per-page.html')
             .click('(//button[@data-type="page"][@data-number="1"])[2]')
             .click('(//button[@data-type="prev"])[2]')
             .call(done);
@@ -386,7 +388,7 @@ describe('click on "prev" button (bottom)', function() {
 
     beforeAll(function(done){
 
-        browser.url('/test/pages/4-pagination.html')
+        browser.url('/test/pages/4-pagination-items-per-page.html')
             .click('(//button[@data-type="page"][@data-number="1"])[2]')
             .click('(//button[@data-type="first"])[1]')
             .call(done);
@@ -433,3 +435,151 @@ describe('click on "prev" button (bottom)', function() {
         browser.call(done);
     });
 });
+
+// ----------------- 3 items per page TOP ------------------
+
+describe('select 3 items per page (top)', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/4-pagination-items-per-page.html')
+            .click('(//div[@class="jplist-dd-panel"])[1]')
+            .click('(//li[span[@data-number="3"]])[1]')
+            .call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('number of items on the page should be 3', function(){
+
+        var boxes = browser.elements('//div[@class="list-item box"]');
+        expect(boxes.value.length).toBe(3);
+    });
+});
+
+// ----------------- 3 items per page BOTTOM ------------------
+
+describe('select 3 items per page (bottom)', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/4-pagination-items-per-page.html')
+            .click('(//div[@class="jplist-dd-panel"])[2]')
+            .click('(//li[span[@data-number="3"]])[2]')
+            .call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('number of items on the page should be 3', function(){
+
+        var boxes = browser.elements('//div[@class="list-item box"]');
+        expect(boxes.value.length).toBe(3);
+    });
+});
+
+
+// ----------------- 10 items per page TOP ------------------
+
+describe('select 10 items per page (top)', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/4-pagination-items-per-page.html')
+            .click('(//div[@class="jplist-dd-panel"])[1]')
+            .click('(//li[span[@data-number="10"]])[1]')
+            .call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('number of items on the page should be 10', function(){
+
+        var boxes = browser.elements('//div[@class="list-item box"]');
+        expect(boxes.value.length).toBe(10);
+    });
+});
+
+// ----------------- 10 items per page BOTTOM ------------------
+
+describe('select 10 items per page (bottom)', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/4-pagination-items-per-page.html')
+            .click('(//div[@class="jplist-dd-panel"])[2]')
+            .click('(//li[span[@data-number="10"]])[2]')
+            .call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('number of items on the page should be 10', function(){
+
+        var boxes = browser.elements('//div[@class="list-item box"]');
+        expect(boxes.value.length).toBe(10);
+    });
+});
+
+
+
+// ----------------- ALL items TOP ------------------
+
+describe('select all items per page (top)', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/4-pagination-items-per-page.html')
+            .click('(//div[@class="jplist-dd-panel"])[1]')
+            .click('(//li[span[@data-number="all"]])[1]')
+            .call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('number of items on the page should be 33', function(){
+
+        var boxes = browser.elements('//div[@class="list-item box"]');
+        expect(boxes.value.length).toBe(33);
+    });
+});
+
+// ----------------- All items BOTTOM ------------------
+
+describe('select all items per page (bottom)', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/4-pagination-items-per-page.html')
+            .click('(//div[@class="jplist-dd-panel"])[2]')
+            .click('(//li[span[@data-number="all"]])[2]')
+            .call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('number of items on the page should be 33', function(){
+
+        var boxes = browser.elements('//div[@class="list-item box"]');
+        expect(boxes.value.length).toBe(33);
+    });
+});
+
