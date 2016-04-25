@@ -460,6 +460,129 @@ describe('select 3 items per page (top)', function() {
     });
 });
 
+describe('select 3 items per page and click on page #4 (top)', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/4-pagination-items-per-page.html')
+            .click('(//div[@class="jplist-dd-panel"])[1]')
+            .click('(//li[span[@data-number="3"]])[1]')
+            .click('(//button[@data-type="page"][@data-number="3"])[1]')
+            .call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('number of items on the page should be 3', function(){
+
+        var boxes = browser.elements('//div[@class="list-item box"]');
+        expect(boxes.value.length).toBe(3);
+    });
+
+    it('item #1 should have title The Christmas Toy', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[1]')).toBe('The Christmas Toy');
+        browser.call(done);
+    });
+
+    it('item #2 should have title Christmas Tree', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[2]')).toBe('Christmas Tree');
+        browser.call(done);
+    });
+
+    it('item #3 should have title City', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[3]')).toBe('City');
+        browser.call(done);
+    });
+});
+
+describe('select 3 items per page and click on tje "next" page (top)', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/4-pagination-items-per-page.html')
+            .click('(//div[@class="jplist-dd-panel"])[1]')
+            .click('(//li[span[@data-number="3"]])[1]')
+            .click('(//button[@data-type="next"])[1]')
+            .call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('number of items on the page should be 3', function(){
+
+        var boxes = browser.elements('//div[@class="list-item box"]');
+        expect(boxes.value.length).toBe(3);
+    });
+
+    it('item #1 should have title Boats', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[1]')).toBe('Boats');
+        browser.call(done);
+    });
+
+    it('item #2 should have title Arch', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[2]')).toBe('Arch');
+        browser.call(done);
+    });
+
+    it('item #3 should have title Books', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[3]')).toBe('Books');
+        browser.call(done);
+    });
+});
+
+describe('select 3 items per page and click on tje "last" page (top)', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/4-pagination-items-per-page.html')
+            .click('(//div[@class="jplist-dd-panel"])[1]')
+            .click('(//li[span[@data-number="3"]])[1]')
+            .click('(//button[@data-type="last"])[1]')
+            .call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('number of items on the page should be 3', function(){
+
+        var boxes = browser.elements('//div[@class="list-item box"]');
+        expect(boxes.value.length).toBe(3);
+    });
+
+    it('item #1 should have title Seesaw', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[1]')).toBe('Seesaw');
+        browser.call(done);
+    });
+
+    it('item #2 should have title Winter Sun', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[2]')).toBe('Winter Sun');
+        browser.call(done);
+    });
+
+    it('item #3 should have title Wood', function (done) {
+
+        expect(browser.getText('(//div[@class="list-item box"]//p[@class="title"])[3]')).toBe('Wood');
+        browser.call(done);
+    });
+});
+
 // ----------------- 3 items per page BOTTOM ------------------
 
 describe('select 3 items per page (bottom)', function() {
