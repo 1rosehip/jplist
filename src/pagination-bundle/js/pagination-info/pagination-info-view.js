@@ -4,21 +4,37 @@
 	/**
 	* Set control status
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO|Array.<jQuery.fn.jplist.StatusDTO>} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
 				
 		var pagingObj
 			,infoType;
-		
-		pagingObj = status.data.paging;
+
+        if(jQuery.isArray(status)){
+
+            for(var i=0; i<status.length; i++){
+
+                if(status[i].data && status[i].data.paging){
+
+                    pagingObj = status[i].data.paging;
+                }
+            }
+        }
+        else{
+            if(status.data) {
+                pagingObj = status.data.paging;
+            }
+        }
 			
 		if(!pagingObj || pagingObj.pagesNumber <= 0){
+
 			context.$control.html('');
 			context.$control.addClass('jplist-empty');
 		}
 		else{
+
 			//remove empty class
 			context.$control.removeClass('jplist-empty');
 			

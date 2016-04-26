@@ -70,10 +70,10 @@
 			control = context.controls[i];
 			
 			//get control 'setByDeepLink' function
-			if(jQuery.isFunction(control['setByDeepLink'])){
+			if(jQuery.isFunction(control.setByDeepLink)){
 			
 				//add control path to 'paths' array
-				control['setByDeepLink'](params);			
+				control.setByDeepLink(params);
 			}			
 		}
 	};
@@ -138,25 +138,65 @@
 	var setStatuses = function(context, statuses, isStorage){
 		
 		var status
-			,sameControls;
-		
-		for(var i=0; i<statuses.length; i++){
-		
-			//get status
-			status = statuses[i];
-			
-			//get controls group (with the status.name and status.action)
-			sameControls = findControlsByNameAction(context, status.name, status.action);
-			
-			for(var k=0; k<sameControls.length; k++){
-			
-				if(jQuery.isFunction(sameControls[k].setStatus)){
-				
-					//set control status
-					sameControls[k]['setStatus'](status, isStorage);	
-				}
-			}
-		}
+			,sameControls
+            ,statusMapping = []
+            ,map
+            ,isAdded;
+
+        //place the statuses with the same name and action in one group
+        for(var i=0; i<statuses.length; i++) {
+
+            //get status
+            status = statuses[i];
+
+            isAdded = false;
+
+            for(var j=0; j<statusMapping.length; j++){
+
+                if(statusMapping[j].name === status.name && statusMapping[j].action === status.action){
+
+                    isAdded = true;
+                    statusMapping[j].statuses.push(status);
+                }
+            }
+
+            if(!isAdded){
+
+                statusMapping.push({
+                    name: status.name
+                    ,action: status.action
+                    ,statuses: [status]
+                });
+            }
+        }
+
+        for(var j=0; j<statusMapping.length; j++){
+
+            map = statusMapping[j];
+
+            if(map.statuses && map.statuses.length > 0){
+
+                //get controls group (with the status.name and status.action)
+                sameControls = findControlsByNameAction(context, map.statuses[0].name, map.statuses[0].action);
+
+                for(var k=0; k<sameControls.length; k++){
+
+                    if(jQuery.isFunction(sameControls[k].setStatus)){
+
+                        if(map.statuses.length > 1){
+
+                            //set control status
+                            sameControls[k].setStatus(map.statuses, isStorage);
+                        }
+                        else{
+                            //set control status
+                            sameControls[k].setStatus(map.statuses[0], isStorage);
+                        }
+
+                    }
+                }
+            }
+        }
 	};
 	
 	/**
@@ -219,7 +259,7 @@
 			if(jQuery.isFunction(control.getStatus)){
 			
 				//get control status
-				status = control['getStatus'](isDefault);
+				status = control.getStatus(isDefault);
 				
 				//add status to the list
 				if(status){

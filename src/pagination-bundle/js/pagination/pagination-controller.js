@@ -94,7 +94,7 @@
 					deepLink = context.name + context.options.delimiter0 + 'currentPage=' + status.data.currentPage;
 				}
 				
-				if(jQuery.isNumeric(status.data.number)){
+				if(jQuery.isNumeric(status.data.number) || status.data.number === 'all'){
 					
 					//init deep link
 					deepLink = context.name + context.options.delimiter0 + 'number=' + status.data.number;
@@ -139,15 +139,33 @@
 	/**
 	* Set control status
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO|Array.<jQuery.fn.jplist.StatusDTO>} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
-				
-		if(status.data && status.data.paging){
+
+        var pagingObj;
+
+        if(jQuery.isArray(status)){
+
+            for(var i=0; i<status.length; i++){
+
+                if(status[i].data && status[i].data.paging){
+
+                    pagingObj = status[i].data.paging;
+                }
+            }
+        }
+        else{
+            if(status.data) {
+                pagingObj = status.data.paging;
+            }
+        }
+
+		if(pagingObj){
 					
 			//build pager
-			context.params.view.build(status.data.paging);
+			context.params.view.build(pagingObj);
 		}
 	};
 	

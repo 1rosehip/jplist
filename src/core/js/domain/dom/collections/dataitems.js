@@ -46,32 +46,51 @@
 		var actionStatuses
 			,paging = null
 			,status
-			,currentPage;
-		
+			,currentPage = 0
+            ,itemsPerPage = 0;
+
 		//get pagination statuses		
 		actionStatuses = jQuery.fn.jplist.StatusesService.getStatusesByAction('paging', statuses);
-		
+
 		if(actionStatuses.length > 0){
-		
+
 			for(var i=0; i<actionStatuses.length; i++){
 			
 				//get pagination status
 				status = actionStatuses[i];
-				
-				//init current page
-				currentPage = status.data.currentPage || 0;
-				
-				//create paging object
-				paging = new jQuery.fn.jplist.PaginationService(currentPage, status.data.number, context.dataview.length);
-				
-				//add paging object to the paging status
-				actionStatuses[i].data.paging = paging;
 
-				//update dataview
-				context.dataview = jQuery.fn.jplist.FiltersService.pagerFilter(paging, context.dataview);
+                if(status.data){
+
+                    if(jQuery.isNumeric(status.data.currentPage)){
+
+                        //init current page
+                        currentPage = status.data.currentPage;
+                    }
+
+                    if(jQuery.isNumeric(status.data.number) || status.data.number === 'all'){
+
+                        //init current page
+                        itemsPerPage = status.data.number;
+                    }
+                }
 			}
-			
-			//trigger pagination event
+
+            //create paging object
+            paging = new jQuery.fn.jplist.PaginationService(currentPage, itemsPerPage, context.dataview.length);
+
+            //add paging object to the paging status
+            for(var j=0; j<actionStatuses.length; j++){
+
+                if(actionStatuses[j].data) {
+
+                    actionStatuses[j].data.paging = paging;
+                }
+            }
+
+            //update dataview
+            context.dataview = jQuery.fn.jplist.FiltersService.pagerFilter(paging, context.dataview);
+
+            //trigger pagination event
 			context.observer.trigger(context.observer.events.listPaginated, [statuses, context]);
 		}
 		

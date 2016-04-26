@@ -125,26 +125,50 @@
 	/**
 	* Set control status
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO|Array.<jQuery.fn.jplist.StatusDTO>} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
 				
-		var $btn = null;
+		var $btn = null
+            ,path = 'default'
+            ,itemsPerPage = 0;
+
+        if(jQuery.isArray(status)){
+
+            for(var i=0; i<status.length; i++){
+
+                if(status[i].data){
+
+                    if(status[i].data.path) {
+                        path = status[i].data.path;
+                    };
+
+                    if(jQuery.isNumeric(status[i].data.number) || status[i].data.number === 'all')
+                    itemsPerPage = status[i].data.number;
+                }
+            }
+        }
+        else{
+            if(status.data && status[i].data.path && (jQuery.isNumeric(status.data.number) || status.data.number === 'all')) {
+                path = status.data.path;
+                itemsPerPage = status.data.number;
+            }
+        }
 		
 		//remove selected attributes
 		context.params.$buttons.attr('data-jplist-selected', false);
 		
 		//set active button
-		if(status.data.path == 'default'){
+		if(path == 'default'){
 			$btn = getDefaultButton(context);
 		}
 		else{
-			if(status.data.number === 'all'){
+			if(itemsPerPage === 'all'){
 				$btn = context.params.$buttons.filter('[data-number="all"]');
 			}
 			else{
-				$btn = context.params.$buttons.filter('[data-number="' + status.data.number + '"]');
+				$btn = context.params.$buttons.filter('[data-number="' + itemsPerPage + '"]');
 			}
 		}
 		

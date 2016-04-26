@@ -140,34 +140,57 @@
 	/**
 	* Set control status
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO|Array.<jQuery.fn.jplist.StatusDTO>} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
 				
 		var $li
-			,$liList;		
-		
-		//get li list
-		$liList = context.$control.find('li');
-					
-		//remove active class
-		$liList.removeClass('active');
-		
-		//set active class
-		$li = context.$control.find('li:has([data-number="' + status.data.number + '"])');
-		if($li.length === 0){
-			$li = context.$control.find('li:has([data-number="all"])');
-		}
-		
-		if($li.length <= 0){
-			$li = $liList.eq(0);
-		}
-		
-		$li.addClass('active');
-		
-		//update dropdown panel
-		context.$control.find('.jplist-dd-panel').text($li.eq(0).text());
+			,$liList
+            ,itemsPerPageNumber;
+
+        if(jQuery.isArray(status)){
+
+            for(var i=0; i<status.length; i++){
+
+                if(status[i].data && status[i].data.number){
+
+                    itemsPerPageNumber = status[i].data.number;
+                }
+            }
+        }
+        else{
+            if(status.data) {
+                itemsPerPageNumber = status.data.number;
+            }
+        }
+
+        if(jQuery.isNumeric(itemsPerPageNumber)){
+
+
+            //get li list
+            $liList = context.$control.find('li');
+
+            //remove active class
+            $liList.removeClass('active');
+
+            //set active class
+            $li = context.$control.find('li:has([data-number="' + itemsPerPageNumber + '"])');
+
+            if($li.length === 0){
+                $li = context.$control.find('li:has([data-number="all"])');
+            }
+
+            if($li.length <= 0){
+                $li = $liList.eq(0);
+            }
+
+            $li.addClass('active');
+
+            //update dropdown panel
+            context.$control.find('.jplist-dd-panel').text($li.eq(0).text());
+        }
+
 	};
 	
 	/**

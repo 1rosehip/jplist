@@ -61,7 +61,7 @@
 			
 			if(status.data){
 			
-				if(jQuery.isNumeric(status.data.number)){
+				if(jQuery.isNumeric(status.data.number) || status.data.number === 'all'){
 					
 					//init deep link
 					deepLink = context.name + context.options.delimiter0 + 'number=' + status.data.number;
@@ -131,19 +131,40 @@
 	/**
 	* Set control status
 	* @param {Object} context
-	* @param {jQuery.fn.jplist.StatusDTO} status
+	* @param {jQuery.fn.jplist.StatusDTO|Array.<jQuery.fn.jplist.StatusDTO>} status
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
 				
-		var $option;
-						
-		$option = context.$control.find('option[data-number="' + status.data.number + '"]');
-		
-		if($option.length === 0){
-			$option = context.$control.find('option[data-number="all"]');
-		}
-		$option.get(0).selected = true;
+		var $option
+            ,itemsPerPageNumber;
+
+        if(jQuery.isArray(status)){
+
+            for(var i=0; i<status.length; i++){
+
+                if(status[i].data && status[i].data.number){
+
+                    itemsPerPageNumber = status[i].data.number;
+                }
+            }
+        }
+        else{
+            if(status.data) {
+                itemsPerPageNumber = status.data.number;
+            }
+        }
+
+        if(jQuery.isNumeric(itemsPerPageNumber)) {
+
+            $option = context.$control.find('option[data-number="' + itemsPerPageNumber + '"]');
+
+            if ($option.length === 0) {
+                $option = context.$control.find('option[data-number="all"]');
+            }
+
+            $option.get(0).selected = true;
+        }
 	};
 	
 	/**

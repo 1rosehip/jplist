@@ -164,9 +164,12 @@
 
         var currentStatus
             ,statusesWithTheSameAction
-            ,statusesWithTheSameActionAndName;
+            ,statusesWithTheSameActionAndName
+            ,statusAlreadyExists;
 
         if(statuses.length === 0){
+
+            //the statuses list os empty
             statuses.push(status);
         }
         else{
@@ -174,6 +177,7 @@
 
             if(statusesWithTheSameAction.length === 0){
 
+                //all statuses have different actions
                 statuses.push(status);
             }
             else{
@@ -181,25 +185,44 @@
 
                 if(statusesWithTheSameActionAndName.length === 0){
 
+                    //there are statuses with the same action, but all names are different
+                    //for example it could be checkbox filters and radio buttons filters
                     statuses.push(status);
                 }
                 else{
 
+                    statusAlreadyExists = false;
+
+                    //there are statuses with the same action and name
                     for(var i = 0; i<statusesWithTheSameActionAndName.length; i++){
 
                         currentStatus = statusesWithTheSameActionAndName[i];
 
                         if(currentStatus.type === status.type){
 
+                            statusAlreadyExists = true;
+
+                            //if type is the same - the statuses are identical
+                            //it could be the same control in the top and bottom panels
                             if(force){
                                 statuses[currentStatus.initialIndex] = status;
                             }
                         }
                         else{
+
+                            //the same name and action, but different type
+                            //it could be pagination control and items per page dropdown control
+                            //statuses.push(status);
+
                             //merge
-                            statuses[currentStatus.initialIndex] = jQuery.extend(true, {}, currentStatus, status);
-                            statuses[currentStatus.initialIndex].type = 'combined';
+                            //statuses[currentStatus.initialIndex] = jQuery.extend(true, {}, currentStatus, status);
+                            //statuses[currentStatus.initialIndex].type = 'combined';
                         }
+                    }
+
+                    if(!statusAlreadyExists){
+
+                        statuses.push(status);
                     }
                 }
             }
