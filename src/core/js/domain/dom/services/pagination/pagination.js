@@ -32,7 +32,7 @@
 		
 		var itemsOnPageNumber;
 		
-		if(itemsOnPage === null){
+		if(!jQuery.isNumeric(itemsOnPage)){
 			
 			//if items on page is not number, set items on page = items number
 			itemsOnPageNumber = itemsNumber;

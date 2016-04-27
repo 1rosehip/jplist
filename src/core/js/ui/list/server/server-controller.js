@@ -77,27 +77,48 @@
 	
 		var status
 			,pagingStatuses
-			,paging;
+			,paging
+            ,currentPage = 0
+            ,itemsPerPage = 0;
 		
 		//get list of pagination statuses
 		pagingStatuses = jQuery.fn.jplist.StatusesService.getStatusesByAction('paging', statuses);
-		
-		for(var i=0; i<pagingStatuses.length; i++){
-		
-			//get pagination status
-			status = pagingStatuses[i];
-			
-			//init current page
-			if(!status.data.currentPage){
-				status.data.currentPage = 0;
-			}
-			
-			//create paging object
-			paging = new jQuery.fn.jplist.PaginationService(status.data.currentPage, status.data.number, dataitem.count);
-			
-			//add paging object to the paging status
-			pagingStatuses[i].data.paging = paging;			
-		}
+
+        if(pagingStatuses.length > 0){
+
+            for(var i=0; i<pagingStatuses.length; i++){
+
+                //get pagination status
+                status = pagingStatuses[i];
+
+                if(status.data){
+
+                    if(jQuery.isNumeric(status.data.currentPage)){
+
+                        //init current page
+                        currentPage = status.data.currentPage;
+                    }
+
+                    if(jQuery.isNumeric(status.data.number) || status.data.number === 'all'){
+
+                        //init current page
+                        itemsPerPage = status.data.number;
+                    }
+                }
+            }
+
+            //create paging object
+            paging = new jQuery.fn.jplist.PaginationService(currentPage, itemsPerPage, dataitem.count);
+
+            //add paging object to the paging status
+            for(var j=0; j<pagingStatuses.length; j++){
+
+                if(pagingStatuses[j].data) {
+
+                    pagingStatuses[j].data.paging = paging;
+                }
+            }
+        }
 		
 		context.observer.trigger(context.observer.events.statusesAppliedToList, [null, statuses]);
 	};

@@ -66,9 +66,13 @@
 			$query = "SELECT count(ID) FROM " . DB_TABLE . " ";
 						
 			if(count($this->filter->preparedParams) > 0){
+                
 				$query .= " " . $this->filter->filterQuery . " ";
-				$stmt = $this->db->prepare($query);				
+                
+				$stmt = $this->db->prepare($query);		
+                
 				$stmt->execute($this->filter->preparedParams);
+                
 				$count = $stmt->fetchColumn();	
 			}
 			else{
@@ -102,22 +106,25 @@
 			$number = 0;
 						
 			if(count($this->paginationStatuses) > 0){
+                
+                foreach($this->paginationStatuses as $key => $value){
+
+                    $data = $value->data;
+                    
+                    if(isset($data)){
+                        
+                        if(is_numeric($data->currentPage)){
+                            $currentPage = intval($data->currentPage);
+                        }
+
+                        if(is_numeric($data->number)){
+                            $number = intval($data->number);
+                        }
+                    }
+                }
 				
-				$data = $this->paginationStatuses[0]->data;
-					
-				if(isset($data)){
-					
-					if(is_numeric($data->currentPage)){
-						$currentPage = intval($data->currentPage);
-					}
-					
-					if(is_numeric($data->number)){
-						$number = intval($data->number);
-					}				
-					
-					if($this->numberOfPages > $data->number){
-						$query = "LIMIT " . $currentPage * $number . ", " . $number;
-					}
+				if($number > 0 && $this->numberOfPages > $data->number){
+				    $query = "LIMIT " . $currentPage * $number . ", " . $number;
 				}
 			}		
 			
