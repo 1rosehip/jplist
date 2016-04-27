@@ -30,7 +30,7 @@
 		var status = null
 			,$btn
 			,data;	
-		
+
 		if(isDefault){
 		
 			$btn = getDefaultButton(context);
@@ -131,48 +131,39 @@
 	var setStatus = function(context, status, restoredFromStorage){
 				
 		var $btn = null
-            ,path = 'default'
             ,itemsPerPage = 0;
 
         if(jQuery.isArray(status)){
 
             for(var i=0; i<status.length; i++){
 
-                if(status[i].data){
+                if(status[i].data && (jQuery.isNumeric(status[i].data.number) || status[i].data.number === 'all')){
 
-                    if(status[i].data.path) {
-                        path = status[i].data.path;
-                    };
-
-                    if(jQuery.isNumeric(status[i].data.number) || status[i].data.number === 'all')
                     itemsPerPage = status[i].data.number;
                 }
             }
         }
         else{
-            if(status.data && status[i].data.path && (jQuery.isNumeric(status.data.number) || status.data.number === 'all')) {
-                path = status.data.path;
+            if(status.data && (jQuery.isNumeric(status.data.number) || status.data.number === 'all')) {
+
                 itemsPerPage = status.data.number;
             }
         }
-		
+
 		//remove selected attributes
 		context.params.$buttons.attr('data-jplist-selected', false);
-		
+
 		//set active button
-		if(path == 'default'){
+		if(itemsPerPage === 0){
+
 			$btn = getDefaultButton(context);
 		}
 		else{
-			if(itemsPerPage === 'all'){
-				$btn = context.params.$buttons.filter('[data-number="all"]');
-			}
-			else{
-				$btn = context.params.$buttons.filter('[data-number="' + itemsPerPage + '"]');
-			}
+            $btn = context.params.$buttons.filter('[data-number="' + itemsPerPage + '"]');
 		}
 		
 		if($btn.length > 0){
+
 			$btn.attr('data-jplist-selected', true);
 			
 			//update selected text
@@ -198,6 +189,7 @@
 			e.preventDefault();
 			
 			status = getStatus(context, false);
+
 			dataNumber = jQuery(this).attr('data-number');
 			
 			if(dataNumber){

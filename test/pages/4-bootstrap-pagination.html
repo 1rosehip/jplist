@@ -30,7 +30,7 @@
         }
 
         .center-block{
-            width: 290px;
+            width: 415px;
             margin: 20px auto;
             background: #fff;
             border: 1px solid #ddd;
@@ -158,7 +158,7 @@
                             data-control-type="boot-pagination"
                             data-control-name="paging"
                             data-control-action="paging"
-                            data-range="3"
+                            data-range="7"
                             data-mode="google-like">
                     </ul>
                 </div>
@@ -919,6 +919,78 @@
 
                         <p class="like">25 Likes</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jplist bottom panel -->
+    <div class="container jplist-panel">
+        <div class="center-block">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <!-- pagination info label -->
+                    <div
+                            class="pull-left jplist-pagination-info"
+                            data-type="<strong>Page {current} of {pages}</strong><br/> <small>{start} - {end} of {all}</small>"
+                            data-control-type="pagination-info"
+                            data-control-name="paging"
+                            data-control-action="paging"></div>
+
+                    <!-- items per page dropdown -->
+                    <div
+                            class="dropdown pull-left jplist-items-per-page"
+                            data-control-type="boot-items-per-page-dropdown"
+                            data-control-name="paging"
+                            data-control-action="paging">
+
+                        <button
+                                class="btn btn-primary dropdown-toggle"
+                                type="button"
+                                data-toggle="dropdown"
+                                id="dropdown-menu-2"
+                                aria-expanded="true">
+                            <span data-type="selected-text">Items per Page</span>
+                            <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-menu-2">
+
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#" data-number="3">3 per page</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#" data-number="5" data-default="true">5 per page</a>
+                            </li>
+
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#" data-number="10">10 per page</a>
+                            </li>
+
+                            <li role="presentation" class="divider"></li>
+
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#" data-number="all">View All</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <!-- bootstrap pagination control -->
+                    <ul
+                            class="pagination pull-left jplist-pagination"
+                            data-control-type="boot-pagination"
+                            data-control-name="paging"
+                            data-control-action="paging"
+                            data-range="7"
+                            data-mode="google-like">
+                    </ul>
                 </div>
             </div>
         </div>
