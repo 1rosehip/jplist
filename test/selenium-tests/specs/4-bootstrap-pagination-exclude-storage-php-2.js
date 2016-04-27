@@ -6,14 +6,14 @@ var assert = require('assert');
  - and then refresh page,
  per page will reset
  */
-describe('select items per page 10, click on page #2, refresh page (top)', function() {
+describe('select items per page 10, click on page #2, refresh page (bottom)', function() {
 
     beforeAll(function(done){
 
         browser.url('http://jplist.local/test/pages/4-bootstrap-pagination-exclude-storage-php-mysql.php')
-            .click('//button[@id="dropdown-menu-1"]')
-            .click('(//a[@data-number="10"])[1]')
-            .click('(//li[@data-type="page"][@data-number="1"])[1]')
+            .click('//button[@id="dropdown-menu-2"]')
+            .click('(//a[@data-number="10"])[2]')
+            .click('(//li[@data-type="page"][@data-number="1"])[2]')
             .refresh()
             .call(done);
     });
@@ -25,13 +25,13 @@ describe('select items per page 10, click on page #2, refresh page (top)', funct
 
     it('pagination should return to the page 1', function(done){
 
-        expect(browser.getText('(//li[@class="jplist-current active"])[1]')).toBe('1');
+        expect(browser.getText('(//li[@class="jplist-current active"])[2]')).toBe('1');
         browser.call(done);
     });
 
     it('items per page should remain 10', function(done){
 
-        expect(browser.getText('(//button[@id="dropdown-menu-1"]/span[@data-type="selected-text"])[1]')).toBe('10 per page');
+        expect(browser.getText('(//button[@id="dropdown-menu-2"]/span[@data-type="selected-text"])[1]')).toBe('10 per page');
         browser.call(done);
     });
 

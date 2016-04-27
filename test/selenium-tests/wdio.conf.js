@@ -11,8 +11,7 @@ exports.config = {
     //
     specs: [
         './test/selenium-tests/specs/**/*.js'
-        //'./test/selenium-tests/specs/4-bootstrap-pagination.js',
-        //'./test/selenium-tests/specs/4-bootstrap-pagination-localstorage.js'
+        //'./test/selenium-tests/specs/4-bootstrap-pagination-php-mysql.js'
     ],
     // Patterns to exclude.
     exclude: [

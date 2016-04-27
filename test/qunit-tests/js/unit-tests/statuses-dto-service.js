@@ -221,7 +221,7 @@ QUnit.test('add - if status has the same name and the same type -> ignore it', f
 /**
 * add 
 * the extend merges  data.paging objects too (because they are not arrays)
-*/
+
 QUnit.test('add - check if currentPage and number are combined', function(assert){
 
 	var options = {}, observer = {};	
@@ -276,10 +276,11 @@ QUnit.test('add - check if currentPage and number are combined', function(assert
     jQuery.fn.jplist.StatusesService.add(collection, newStatus, false);
 	assert.ok(collection[0].data.paging.currentPage === 1);
 });
+ */
 
 /**
 * add 
-*/
+
 QUnit.test('add - check if currentPage and number are combined', function(assert){
 
 	var options = {}, observer = {};	
@@ -314,6 +315,7 @@ QUnit.test('add - check if currentPage and number are combined', function(assert
     jQuery.fn.jplist.StatusesService.add(statuses, newStatus, false);
 	assert.ok(statuses[0].data.number === '5' && statuses[0].data.currentPage === '1');
 });
+ */
 
 QUnit.test('add new textbox filter status (with force) to the existing statuses with sort and filter', function(assert){
 
