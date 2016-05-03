@@ -10,9 +10,10 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        //'./test/selenium-tests/specs/**/*.js'
-        './test/selenium-tests/specs/4-pagination-deep-links.js'
-        ,'./test/selenium-tests/specs/4-pagination-deep-links-2.js'
+        './test/selenium-tests/specs/**/*.js'
+        //'./test/selenium-tests/specs/4-pagination-deep-links.js'
+        //,'./test/selenium-tests/specs/4-pagination-deep-links-2.js'
+        //'./test/selenium-tests/specs/7-deep-links-items-per-page-and-pagination.js'
     ],
     // Patterns to exclude.
     exclude: [

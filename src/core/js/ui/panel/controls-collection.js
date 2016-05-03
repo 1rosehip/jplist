@@ -110,7 +110,7 @@
 				if(jQuery.isFunction(control.getStatusByDeepLink)){
 				
 					//set key-value pair
-					status = control['getStatusByDeepLink'](param.propName, param.propValue);
+					status = control.getStatusByDeepLink(param.propName, param.propValue);
 					
 					if(status){
                         jQuery.fn.jplist.StatusesService.add(statusesByDeepLinkCollection, status, false);

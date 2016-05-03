@@ -18,7 +18,7 @@ describe('deep links initial state', function() {
         //browser.pause(1000);
         var url = browser.getUrl();
 
-        expect(url).toBe('http://jplist.local/test/pages/4-pagination-deep-links.html#paging:number=5');
+        expect(url).toBe('http://jplist.local/test/pages/4-pagination-deep-links.html#paging:currentPage=0|paging:number=5');
     });
 
     it('the number of items on the page should be as in deep link', function(){
@@ -29,7 +29,8 @@ describe('deep links initial state', function() {
 
     it('url should change after clicking on the page 2', function(){
 
-        browser.click('(//button[@data-type="page"][@data-number="1"])[1]')
-        expect(url).toBe('http://jplist.local/test/pages/4-pagination-deep-links.html#paging:number=5|paging:currentPage=1');
+        browser.click('(//button[@data-type="page"][@data-number="1"])[1]');
+        var url = browser.getUrl();
+        expect(url).toBe('http://jplist.local/test/pages/4-pagination-deep-links.html#paging:currentPage=1|paging:number=5');
     });
 });
