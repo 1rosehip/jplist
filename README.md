@@ -111,6 +111,7 @@
 
 #### Create minified JS files: ####
 
+
 To create **jplist.core.min.js** from sources: 
 ```
 npm run jscore
