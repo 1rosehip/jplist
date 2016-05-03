@@ -107,39 +107,48 @@
 - [jPList with Fancybox](http://jplist.com/otherexamples/jplist-with-fancybox) - example of jPList with lightbox
 - [Large Amount of Data](http://jplist.com/otherexamples/large-amount-of-data-demo) - demo with 1000 items on the page
 
-##[Build Sources](#build-sources)
+## [Working with Sources](#build-sources)
 
-To build **jplist.core.min.js** from sources: 
+#### Create minified JS files: ####
+
+To create **jplist.core.min.js** from sources: 
 ```
 npm run jscore
 ```
 
-To build any control: 
+Enable verbose mode:
+```
+npm run jscore -- --verb
+```
+
+To create any **minified** bundle or control: 
 ```
 node ./build/closure/rebuild-js.js path-to-control-config-file
+```
 
-//for example: 
+For example: 
+```
 node ./build/closure/rebuild-js.js src/textbox-filter/js/config.json
 ```
 
-To build in verbose mode: 
+Enable **verbose** mode: 
 ```
-//core js
-npm run jscore -- --verb
-
-//control or bundle 
 node ./build/closure/rebuild-js.js src/textbox-filter/js/config.json --verb
 ```
 
-To rebuild jplist.core.min.js and all controls: 
+To rebuild **jplist.core.min.js** and **all** controls: 
 ```
 node ./build/closure/rebuild-js-all.js
 ```
+
+#### Lint: ####
 
 To run **jshint** on jPList sources:
 ```
 npm run lint
 ```
+
+#### Create minified CSS files: ####
 
 To create **jplist.core.min.css** from sources: 
 ```
@@ -151,13 +160,17 @@ To create **jplist.demo-pages.min.css** from sources:
 npm run cssdemo
 ```
 
-To create minified css for any control: 
+To create minified css for any **control** or **bundle**: 
 ```
 lessc -x src/control-folder-name/css/styles.less > dist/css/jplist.control-folder-name.min.css
+```
 
-//for example
+For example:
+```
 lessc -x src/filter-toggle-bundle/css/styles.less > dist/css/jplist.filter-toggle-bundle.min.css
 ```
+
+#### List of source files: ####
 
 To get a list of source files (to be included in HTML or for other purpose):
 ```
@@ -176,6 +189,26 @@ node ./build/closure/get-js-files-list.js src/control-folder-name/js/config.json
 //for example
 node ./build/closure/get-js-files-list.js src/filter-dropdown-bundle/js/config.json --type=script
 ```
+
+#### Integration Tests: ####
+
+jPList uses selenium to run integration tests. Also the root folder should be configured as **jplist-php.local** website. PHP / MySQL should be configured to test the relevant pages.
+```
+npm install
+```
+
+Run selenium server:
+```
+npm run selenium
+```
+
+Run the tests:
+```
+npm test
+```
+
+#### Unit Tests: ####
+jPList uses **qunit** for the unit testing. It could be run in the browser using **/test/qunit-tests/index.html**.
 
 ##[Browser Compatibility](#browser-compat)
 - Internet Explorer 8+
