@@ -245,8 +245,41 @@
                 break;
 		}
 	};
-	
-	/**
+
+    /**
+     * animate to top
+     * @param {*} context
+     * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
+     */
+    var animateToTop = function(context, statuses){
+
+        var offset
+            ,shouldAnimate = false;
+
+        if(statuses){
+
+            for(var i=0; i<statuses.length; i++){
+
+                if(statuses[i].isAnimateToTop){
+
+                    shouldAnimate = true;
+                    break;
+                }
+            }
+
+            if(shouldAnimate){
+
+                //set offset
+                offset = jQuery(context.options.animateToTop).offset().top;
+
+                jQuery('html, body').animate({
+                    scrollTop: offset
+                }, context.options.animateToTopDuration);
+            }
+        }
+    };
+
+    /**
 	* init application events
 	* @param {*} context
 	*/
@@ -264,12 +297,6 @@
                 //update history
                 context.history.addStatuses(statusesToMerge);
 
-                /*
-                 if(status.isAnimateToTop){
-                 animateToTop(context);
-                 }
-                 */
-
                 mergedStatuses = context.panel.mergeStatuses(statusesToMerge);
 
                 if(mergedStatuses && mergedStatuses.length > 0){
@@ -278,6 +305,9 @@
                     context.storage.save(mergedStatuses);
 
                     context.controller.renderStatuses(mergedStatuses, context.history.getLastStatus());
+
+                    //animate to top if needed
+                    animateToTop(context, statusesToMerge);
                 }
             }
 		});
@@ -298,6 +328,9 @@
                 context.storage.save(statuses);
 
                 context.controller.renderStatuses(statuses, context.history.getLastStatus());
+
+                //animate to top if needed
+                //animateToTop(context, statuses);
             }
         });
 		

@@ -1,24 +1,6 @@
 ;(function(){
 	'use strict';
-	
-	// ----------------------- HELPERS ----------------------------------
-	
-	/**
-	* animate to top
-	* @param {Object} context
-	*/
-	var animateToTop = function(context){
-		
-		var offset;
-				
-		//set offset
-		offset = jQuery(context.options.animateToTop).offset().top;
-		
-		jQuery('html, body').animate({
-			scrollTop: offset
-		}, context.options.animateToTopDuration);
-	};
-	
+
 	// ----------------------- STICKY -----------------------------------
 	
 	/**
