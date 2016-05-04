@@ -58,14 +58,19 @@
 
 				items = commandData.$items;
 
-				if(!jQuery.isArray(commandData.$items)){
+				if(!jQuery.isArray(items)){
 
-                    //add data item to the collection
-                    context.controller.collection.addDataItem(
-                        items
-                        ,context.controller.collection.paths
-                        ,index
-                    );
+                    items = items.find(context.options.itemPath).addBack(context.options.itemPath);
+
+                    jQuery(items.get().reverse()).each(function(){
+
+                        //add data item to the collection
+                        context.controller.collection.addDataItem(
+                            jQuery(this)
+                            ,context.controller.collection.paths
+                            ,index
+                        );
+                    });
 				}
                 else{
                     for(var i=items.length-1; i>=0; i--){

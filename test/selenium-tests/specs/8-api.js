@@ -502,3 +502,94 @@ describe('add array of items dynamically at index 1 - check their position', fun
     });
 
 });
+
+// -------- ADD A GROUP OF ITEMS -----------------
+
+describe('add a group of items dynamically - check items number', function() {
+
+    beforeAll(function(done){
+
+        browser.url('/test/pages/1-mixed.html');
+
+        browser.execute(function() {
+
+            // browser context - you may not access client or console
+
+            var $items = $(
+                '<div class="list-item box">\
+                    <div class="img left">\
+                        <img title="" alt="" src="../../demo/img/thumbs/book-1.jpg">\
+                    </div>\
+                    <div class="block right">\
+                        <p class="date">03/15/2012</p>\
+                        <p class="title">New Added Item #1</p>\
+                        <p class="desc">New Item Description</p>\
+                        <p class="like">100 Likes</p>\
+                        <p class="theme">\
+                            <span class="architecture">Lifestyle</span>\
+                        </p>\
+                    </div>\
+                </div>\
+                <div class="list-item box">\
+                    <div class="img left">\
+                        <img title="" alt="" src="../../demo/img/thumbs/book-1.jpg">\
+                    </div>\
+                    <div class="block right">\
+                        <p class="date">03/15/2012</p>\
+                        <p class="title">New Added Item #2</p>\
+                        <p class="desc">New Item Description</p>\
+                        <p class="like">100 Likes</p>\
+                        <p class="theme">\
+                            <span class="architecture">Lifestyle</span>\
+                        </p>\
+                    </div>\
+                </div>\
+                <div class="list-item box">\
+                    <div class="img left">\
+                        <img title="" alt="" src="../../demo/img/thumbs/book-1.jpg">\
+                    </div>\
+                    <div class="block right">\
+                        <p class="date">03/15/2012</p>\
+                        <p class="title">New Added Item #3</p>\
+                        <p class="desc">New Item Description</p>\
+                        <p class="like">100 Likes</p>\
+                        <p class="theme">\
+                            <span class="architecture">Lifestyle</span>\
+                        </p>\
+                    </div>\
+                </div>'
+            );
+
+            //add item to jPList collection in the given index
+            $('#demo').jplist({
+                command: 'add'
+                ,commandData: {
+                    $items: $items
+                    ,index: 0
+                }
+            });
+        });
+
+        browser.call(done);
+    });
+
+    afterAll(function(done){
+
+        browser.end(done);
+    });
+
+    it('items number should be 19', function (done) {
+
+        expect(browser.getText('(//div[@data-control-type="pagination-info"])[1]')).toBe('1 - 10 of 19');
+        browser.call(done);
+    });
+
+});
+
+// -------- DELETE AND ITEM ----------------------
+
+//--------- DELETE ARRAY OF ITEMS ----------------
+
+//--------- DELETE A GROUP OF ITEMS --------------
+
+
