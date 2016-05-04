@@ -15,6 +15,7 @@ describe('click on page #2, select items per page 10, refresh page (top)', funct
             .click('(//div[@class="jplist-dd-panel"])[1]')
             .click('(//li[span[@data-number="10"]])[1]')
             .refresh()
+            .pause(500)
             .call(done);
     });
 

@@ -15,6 +15,7 @@ describe('select items per page 10, click on page #2, refresh page (top)', funct
             .click('(//li[span[@data-number="10"]])[1]')
             .click('(//button[@data-type="page"][@data-number="1"])[1]')
             .refresh()
+            .pause(500)
             .call(done);
     });
 

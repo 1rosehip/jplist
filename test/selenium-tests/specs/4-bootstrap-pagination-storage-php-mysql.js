@@ -7,6 +7,7 @@ describe('click on page #2 (top)', function() {
         browser.url('http://jplist.local/test/pages/4-bootstrap-pagination-storage-php-mysql.php')
             .click('(//li[@data-type="page"][@data-number="1"])[1]/a')
             .refresh()
+            .pause(500)
             .call(done);
     });
 
@@ -65,6 +66,7 @@ describe('click on page #3 (bottom)', function() {
         browser.url('http://jplist.local/test/pages/4-bootstrap-pagination-storage-php-mysql.php')
             .click('(//li[@data-type="page"][@data-number="2"])[2]/a')
             .refresh()
+            .pause(500)
             .call(done);
     });
 

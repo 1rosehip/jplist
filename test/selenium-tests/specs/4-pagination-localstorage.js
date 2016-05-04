@@ -7,6 +7,7 @@ describe('click on page #2 (top)', function() {
         browser.url('/test/pages/4-pagination-localstorage.html')
             .click('(//button[@data-type="page"][@data-number="1"])[1]')
             .refresh()
+            .pause(500)
             .call(done);
     });
 
@@ -65,6 +66,7 @@ describe('click on page #3 (bottom)', function() {
         browser.url('/test/pages/4-pagination-localstorage.html')
             .click('(//button[@data-type="page"][@data-number="2"])[2]')
             .refresh()
+            .pause(500)
             .call(done);
     });
 

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Mixed with Deep Links | jPList - jQuery Data Grid Controls</title>
+    <title>Mixed | jPList - jQuery Data Grid Controls</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -17,7 +17,56 @@
 
     <!-- jPList core js and css  -->
     <link href="../../dist/css/jplist.core.min.css" rel="stylesheet" type="text/css" />
-    <script src="../../dist/js/jplist.core.min.js"></script>
+    <!--script src="../../dist/js/jplist.core.min.js"></script-->
+
+    <script src="../../src/core/js/app.js"></script>
+    <script src="../../src/core/js/app/log.js"></script>
+    <script src="../../src/core/js/app/pubsub.js"></script>
+    <script src="../../src/core/js/app/history.js"></script>
+    <script src="../../src/core/js/app/dto/status-dto.js"></script>
+    <script src="../../src/core/js/app/dto/statuses-service.js"></script>
+    <script src="../../src/core/js/app/dto/dto-mapper-service.js"></script>
+    <script src="../../src/core/js/domain/dom/models/dataitem-member-path.js"></script>
+    <script src="../../src/core/js/domain/dom/models/dataitem-member.js"></script>
+    <script src="../../src/core/js/domain/dom/models/dataitem.js"></script>
+    <script src="../../src/core/js/domain/dom/collections/dataitems.js"></script>
+    <script src="../../src/core/js/domain/dom/services/pagination/pagination.js"></script>
+    <script src="../../src/core/js/domain/dom/services/pagination/pagination-google.js"></script>
+    <script src="../../src/core/js/domain/dom/services/filters/dateFilter.js"></script>
+    <script src="../../src/core/js/domain/dom/services/filters/dateRangeFilter.js"></script>
+    <script src="../../src/core/js/domain/dom/services/filters/pagerFilter.js"></script>
+    <script src="../../src/core/js/domain/dom/services/filters/pathFilter.js"></script>
+    <script src="../../src/core/js/domain/dom/services/filters/pathGroupFilter.js"></script>
+    <script src="../../src/core/js/domain/dom/services/filters/rangeFilter.js"></script>
+    <script src="../../src/core/js/domain/dom/services/filters/text-filters/advanced-search.js"></script>
+    <script src="../../src/core/js/domain/dom/services/filters/text-filters/text-filter-group-by-path-logic.js"></script>
+    <script src="../../src/core/js/domain/dom/services/filters/text-filters/text-filter-by-path.js"></script>
+    <script src="../../src/core/js/domain/dom/services/filters/text-filters/text-filter-group-by-path.js"></script>
+    <script src="../../src/core/js/domain/dom/services/sort/datetime.js"></script>
+    <script src="../../src/core/js/domain/dom/services/sort/numbers.js"></script>
+    <script src="../../src/core/js/domain/dom/services/sort/text.js"></script>
+    <script src="../../src/core/js/domain/dom/services/sort/doubleSort.js"></script>
+    <script src="../../src/core/js/domain/dom/services/helper.js"></script>
+    <script src="../../src/core/js/dal/services/deeplinks.js"></script>
+    <script src="../../src/core/js/domain/server/models/dataitem.js"></script>
+    <script src="../../src/core/js/ui/animation/animation.js"></script>
+    <script src="../../src/core/js/ui/animation/timeline.js"></script>
+    <script src="../../src/core/js/ui/animation/effects/fade.js"></script>
+    <script src="../../src/core/js/ui/list/dom/dom-view.js"></script>
+    <script src="../../src/core/js/ui/list/dom/dom-controller.js"></script>
+    <script src="../../src/core/js/ui/list/server/server-controller.js"></script>
+    <script src="../../src/core/js/ui/list/server/server-view.js"></script>
+    <script src="../../src/core/js/ui/list/server/server-model.js"></script>
+    <script src="../../src/core/js/ui/list/item-controls/control-factory.js"></script>
+    <script src="../../src/core/js/ui/list/item-controls/controls-collection.js"></script>
+    <script src="../../src/core/js/ui/panel/panel-controller.js"></script>
+    <script src="../../src/core/js/ui/panel/control-factory.js"></script>
+    <script src="../../src/core/js/ui/panel/controls-collection.js"></script>
+    <script src="../../src/core/js/ui/panel/controls/dropdown/dropdown-view.js"></script>
+    <script src="../../src/core/js/dal/storage.js"></script>
+    <script src="../../src/core/js/dal/services/cookies.js"></script>
+    <script src="../../src/core/js/dal/services/localstorage.js"></script>
+    <script src="../../src/core/js/dal/services/uri.js"></script>
 
     <!-- jPList sort bundle -->
     <script src="../../dist/js/jplist.sort-bundle.min.js"></script>
@@ -47,8 +96,70 @@
                 itemsBox: '.list'
                 ,itemPath: '.list-item'
                 ,panelPath: '.jplist-panel'
-                ,deepLinking: true
-        });
+            });
+
+            /*
+            var items = [];
+
+            items.push($(
+                    '<div class="list-item box">\
+                        <div class="img left">\
+                            <img title="" alt="" src="../../demo/img/thumbs/book-1.jpg">\
+                        </div>\
+                        <div class="block right">\
+                            <p class="date">03/15/2012</p>\
+                            <p class="title">New Added Item #1</p>\
+                            <p class="desc">New Item Description</p>\
+                            <p class="like">100 Likes</p>\
+                            <p class="theme">\
+                                <span class="architecture">Lifestyle</span>\
+                            </p>\
+                        </div>\
+                    </div>'
+            ));
+
+            items.push($(
+                    '<div class="list-item box">\
+                        <div class="img left">\
+                            <img title="" alt="" src="../../demo/img/thumbs/book-1.jpg">\
+                        </div>\
+                        <div class="block right">\
+                            <p class="date">03/15/2012</p>\
+                            <p class="title">New Added Item #2</p>\
+                            <p class="desc">New Item Description</p>\
+                            <p class="like">100 Likes</p>\
+                            <p class="theme">\
+                                <span class="architecture">Lifestyle</span>\
+                            </p>\
+                        </div>\
+                    </div>'
+            ));
+
+            items.push($(
+                    '<div class="list-item box">\
+                        <div class="img left">\
+                            <img title="" alt="" src="../../demo/img/thumbs/book-1.jpg">\
+                        </div>\
+                        <div class="block right">\
+                            <p class="date">03/15/2012</p>\
+                            <p class="title">New Added Item #3</p>\
+                            <p class="desc">New Item Description</p>\
+                            <p class="like">100 Likes</p>\
+                            <p class="theme">\
+                                <span class="architecture">Lifestyle</span>\
+                            </p>\
+                        </div>\
+                    </div>'
+            ));
+
+            //add item to jPList collection in the given index
+            $('#demo').jplist({
+                command: 'add'
+                ,commandData: {
+                    $items: items
+                    ,index: 0
+                }
+            });*/
         });
     </script>
 
@@ -92,7 +203,7 @@
                         <img title="jPList - jQuery Data Grid Controls" alt="jPList - jQuery Data Grid Controls" src="http://jplist.com/content/img/common/rocket.png" />
                         <a title="" href="http://jplist.com">jPList - jQuery Data Grid Controls</a>
                     </p>
-                    <h1 class="h1-30-normal">Mixed with Deep Links</h1>
+                    <h1 class="h1-30-normal">Mixed</h1>
                 </div>
 
             </div>
@@ -164,7 +275,7 @@
                         <li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
                         <li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
                         <li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
-                        <li><span data-path=".like" data-order="asc" data-type="number" data-default="true">Likes asc</span></li>
+                        <li><span data-path=".like" data-order="asc" data-type="number">Likes asc</span></li>
                         <li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
                         <li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
                         <li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
@@ -259,7 +370,7 @@
                 <!-- pagination results -->
                 <div
                         class="jplist-label"
-                        data-type="Page {current} of {pages}"
+                        data-type="{start} - {end} of {all}"
                         data-control-type="pagination-info"
                         data-control-name="paging"
                         data-control-action="paging">
@@ -633,7 +744,7 @@
                         <li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
                         <li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
                         <li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
-                        <li><span data-path=".like" data-order="asc" data-type="number" data-default="true">Likes asc</span></li>
+                        <li><span data-path=".like" data-order="asc" data-type="number">Likes asc</span></li>
                         <li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
                         <li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
                         <li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>

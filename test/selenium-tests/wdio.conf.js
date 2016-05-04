@@ -11,10 +11,39 @@ exports.config = {
     //
     specs: [
         './test/selenium-tests/specs/**/*.js'
-        //'./test/selenium-tests/specs/4-pagination-deep-links.js'
-        //,'./test/selenium-tests/specs/4-pagination-deep-links-2.js'
-        //'./test/selenium-tests/specs/7-deep-links-items-per-page-and-pagination.js'
     ],
+
+    suites: {
+
+        //wdio ./test/selenium-tests/wdio.conf.js --suite=api
+        api: [
+            './test/selenium-tests/specs/8-api.js'
+        ]
+
+        //wdio ./test/selenium-tests/wdio.conf.js --suite=bootpaging
+        ,bootpaging: [
+            './test/selenium-tests/specs/4-bootstrap-pagination.js'
+            ,'./test/selenium-tests/specs/4-bootstrap-pagination-exclude-localstorage.js'
+            ,'./test/selenium-tests/specs/4-bootstrap-pagination-exclude-localstorage-2.js'
+            ,'./test/selenium-tests/specs/4-bootstrap-pagination-exclude-storage-php.js'
+            ,'./test/selenium-tests/specs/4-bootstrap-pagination-exclude-storage-php-2.js'
+            ,'./test/selenium-tests/specs/4-bootstrap-pagination-localstorage.js'
+            ,'./test/selenium-tests/specs/4-bootstrap-pagination-php-mysql.js'
+            ,'./test/selenium-tests/specs/4-bootstrap-pagination-storage-php-mysql.js'
+        ]
+
+        //wdio ./test/selenium-tests/wdio.conf.js --suite=paging
+        ,paging: [
+            './test/selenium-tests/specs/4-pagination.js'
+            ,'./test/selenium-tests/specs/4-pagination-deep-links.js'
+            ,'./test/selenium-tests/specs/4-pagination-deep-links-2.js'
+            ,'./test/selenium-tests/specs/4-pagination-exclude-localstorage.js'
+            ,'./test/selenium-tests/specs/4-pagination-exclude-localstorage-2.js'
+            ,'./test/selenium-tests/specs/4-pagination-items-per-page.js'
+            ,'./test/selenium-tests/specs/4-pagination-localstorage.js'
+            ,'./test/selenium-tests/specs/4-pagination-with-sort.js'
+        ]
+    },
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -64,7 +93,7 @@ exports.config = {
     baseUrl: 'http://jplist.local',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 90000,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response

@@ -29,13 +29,13 @@
 		
 		var index
 			,items;
-		
+
 		if(context && 
 			context.controller && 
 			context.controller.collection){	
 
 			index = context.controller.collection.dataitems.length;
-			
+
 			//index exists and it's in range
 			if(jQuery.isNumeric(commandData.index) && commandData.index >= 0 && commandData.index <= context.controller.collection.dataitems.length){
 				
@@ -44,7 +44,7 @@
 
 			//add single item
 			if(commandData.$item){
-			
+
 				//add data item to the collection 
 				context.controller.collection.addDataItem(
 					commandData.$item
@@ -52,26 +52,32 @@
 					,index
 				);
 			}
-			
+
 			//add range of items
 			if(commandData.$items){
-				
+
 				items = commandData.$items;
-				
-				if(jQuery.isArray(commandData.$items)){
-					
-					//array of jquery elements -> jquery object
-					items = jQuery(commandData.$items).map(function(){
-						return this.toArray(); 
-					});
+
+				if(!jQuery.isArray(commandData.$items)){
+
+                    //add data item to the collection
+                    context.controller.collection.addDataItem(
+                        items
+                        ,context.controller.collection.paths
+                        ,index
+                    );
 				}
-				
-				//add range of data items to the collection
-				context.controller.collection.addDataItems(				
-					items
-					,context.controller.collection.paths
-					,index
-				);
+                else{
+                    for(var i=items.length-1; i>=0; i--){
+
+                        //add data item to the collection
+                        context.controller.collection.addDataItem(
+                            items[i]
+                            ,context.controller.collection.paths
+                            ,index
+                        );
+                    }
+                }
 			}
 			
 			//redraw dataview with the given statuses

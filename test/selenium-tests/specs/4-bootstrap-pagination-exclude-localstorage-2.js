@@ -15,6 +15,7 @@ describe('select items per page 10, click on page #2, refresh page (bottom)', fu
             .click('(//a[@data-number="10"])[2]')
             .click('(//li[@data-type="page"][@data-number="1"])[2]')
             .refresh()
+            .pause(500)
             .call(done);
     });
 
