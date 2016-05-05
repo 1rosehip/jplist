@@ -10,7 +10,7 @@
 - [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css)
 - See full list of available js / css files on [cdnjs](https://cdnjs.com/libraries/jplist)
 
-## [Common Features](#common-features)
+## [Common Features](#common-features) <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/clip.png" align="right">
 - Works with any content (tables, lists, div elements etc...)
 - Works with JavaScript templates like Handlebars, Mustache etc.
 - Supports XML + XSLT
