@@ -49,7 +49,7 @@
 - jQuery UI date picker range filter
 
 ### Data Sources
-- [PHP + MySQL] (https://github.com/no81no/jplist-php-mysql)
+- [PHP + MySQL] (https://github.com/no81no/jplist/tree/master/server)
 - [ASP.NET + Sql Server](https://github.com/no81no/jplist-asp-net)
 - [NodeJS, Express and MySQL](https://github.com/no81no/jplist-nodejs-express)
 
