@@ -53,9 +53,9 @@
 - [ASP.NET + Sql Server](https://github.com/no81no/jplist-asp-net)
 - [NodeJS, Express and MySQL](https://github.com/no81no/jplist-nodejs-express)
 
-##[Examples](#examples)
+## [Examples](#examples) <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/jplist.png" align="right">
 
-### Layout Examples <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/edit.png" align="right">
+### Layout Examples 
 - [DIVs Layout Demo](http://jplist.com/layoutexamples/div-layout) - demo with DIV elements and all default actions like sort, pagination, etc.
 - [Table Demo 1](http://jplist.com/layoutexamples/table-1) - demo with all default actions like sort, pagination, etc. in TABLE
 - [Table Demo 2](http://jplist.com/layoutexamples/table-2) - table with header and alternating rows with different colors
@@ -72,7 +72,7 @@
 - [ASP.NET and SQL Server Demo](http://jplist.com/datasourcesexamples/asp-net-sql-server-demo) - server side demo using ASP.NET and SQL Server database
 - [PHP + SQLite Example](http://jplist.com/datasourcesexamples/php-sqlite-demo) - server side demo using PHP and SQLite database
 
-### Controls Examples <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/jplist.png" align="right">
+### Controls Examples 
 - [Dropdown Filters With UL/LI](http://jplist.com/controlsexamples/drop-down-filters-ul-li) - filter by jQuery path dropdown with UL/LI layout
 - [Dropdown Filters With SELECT](http://jplist.com/controlsexamples/drop-down-filters-select) - filter by jQuery path dropdown with SELECT layout
 - [Double Sort Demo](http://jplist.com/controlsexamples/double-sort) - example with double sorting
@@ -107,7 +107,7 @@
 - [jPList with Fancybox](http://jplist.com/otherexamples/jplist-with-fancybox) - example of jPList with lightbox
 - [Large Amount of Data](http://jplist.com/otherexamples/large-amount-of-data-demo) - demo with 1000 items on the page
 
-## [Working with Sources](#build-sources) <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/settings.png" align="right">
+## [Working with Sources](#build-sources) <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/edit.png" align="right">
 
 #### Create minified JS files: ####
 
