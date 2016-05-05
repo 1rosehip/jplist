@@ -55,9 +55,7 @@
 
 ##[Examples](#examples)
 
-![Layout Examples](https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/edit.png)
-
-###Layout Examples
+### Layout Examples <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/edit.png" align="right" >
 - [DIVs Layout Demo](http://jplist.com/layoutexamples/div-layout) - demo with DIV elements and all default actions like sort, pagination, etc.
 - [Table Demo 1](http://jplist.com/layoutexamples/table-1) - demo with all default actions like sort, pagination, etc. in TABLE
 - [Table Demo 2](http://jplist.com/layoutexamples/table-2) - table with header and alternating rows with different colors
@@ -66,8 +64,6 @@
 - [Views Control (List, Grid and Thumbs Views)](http://jplist.com/layoutexamples/list-grid) - demo with control that switches between views: list, grid or thumbs
 - [Demo With Sticky Panel](http://jplist.com/layoutexamples/sticky-panel) - demo with sticky panel
 
-![Layout Examples](https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/data.png)
-
 ### Data Sources
 - [PHP + MySQL Example](http://jplist.com/datasourcesexamples/php-mysql-demo) - server side demo using PHP and MySQL database
 - [PHP + MySQL + JSON + Handlebars Example](http://jplist.com/datasourcesexamples/php-mysql-json-handlebars-demo) - server side demo using PHP, MySQL database with JSON format and Handlebars Template
@@ -75,8 +71,6 @@
 - [PHP + MySQL + XML + XSLT Example](http://jplist.com/datasourcesexamples/php-mysql-xml-xslt-demo) - server side demo using PHP, MySQL database with XML format and XSLT Template				
 - [ASP.NET and SQL Server Demo](http://jplist.com/datasourcesexamples/asp-net-sql-server-demo) - server side demo using ASP.NET and SQL Server database
 - [PHP + SQLite Example](http://jplist.com/datasourcesexamples/php-sqlite-demo) - server side demo using PHP and SQLite database
-
-![Layout Examples](https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/jplist.png)
 
 ###Controls Examples
 - [Dropdown Filters With UL/LI](http://jplist.com/controlsexamples/drop-down-filters-ul-li) - filter by jQuery path dropdown with UL/LI layout
