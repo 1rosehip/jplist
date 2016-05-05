@@ -1,4 +1,4 @@
-# ![jPList - jQuery Data Grid Controls](https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/rocket.png) [jPList - jQuery Data Grid Controls](http://jplist.com)
+# ![jPList - jQuery Data Grid Controls](https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/rocket-50.png) [jPList - jQuery Data Grid Controls](http://jplist.com)
 
 
 **jPList** is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc). Get started at [jplist.com](http://jplist.com)
@@ -54,6 +54,8 @@
 - [NodeJS, Express and MySQL](https://github.com/no81no/jplist-nodejs-express)
 
 ##[Examples](#examples)
+
+[Layout Examples](https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/edit.png)
 
 ###Layout Examples
 - [DIVs Layout Demo](http://jplist.com/layoutexamples/div-layout) - demo with DIV elements and all default actions like sort, pagination, etc.
