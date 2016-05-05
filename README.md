@@ -210,7 +210,7 @@ npm test
 #### Unit Tests: ####
 jPList uses **qunit** for the unit testing. It could be run in the browser using **/test/qunit-tests/index.html**.
 
-##[Browser Compatibility](#browser-compat)
+## [Browser Compatibility](#browser-compat) <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/puzzle.png" align="right">
 - Internet Explorer 8+
 - Firefox
 - Chrome
