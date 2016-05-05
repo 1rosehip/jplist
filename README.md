@@ -97,7 +97,7 @@
 - [Range Slider](http://jplist.com/jqueryuiexamples/range-slider) - jQuery UI range slider
 - [Date Picker Filter](http://jplist.com/jqueryuiexamples/date-picker-range-filter) - jQuery UI date picker
 
-###DateTime Examples
+### DateTime Examples <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/changelog.png" align="right" >
 - [DateTime 1](http://jplist.com/datetimeexamples/datetime-1) - {day}.{month}.{year}
 - [DateTime 2](http://jplist.com/datetimeexamples/datetime-2) - {month} {day}, {year} {hour}:{min}:{sec}
 - [DateTime 3](http://jplist.com/datetimeexamples/datetime-3) - {month} {day}, {year}
