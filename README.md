@@ -1,4 +1,4 @@
-# ![jPList - jQuery Data Grid Controls](http://jplist.com/content/img/common/rocket-50.png) [jPList - jQuery Data Grid Controls](http://jplist.com)
+# ![jPList - jQuery Data Grid Controls](https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/rocket.png) [jPList - jQuery Data Grid Controls](http://jplist.com)
 
 
 **jPList** is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc). Get started at [jplist.com](http://jplist.com)
