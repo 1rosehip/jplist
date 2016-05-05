@@ -173,7 +173,7 @@ lessc -x src/filter-toggle-bundle/css/styles.less > dist/css/jplist.filter-toggl
 #### List of source files: ####
 
 To get a list of source files (to be included in HTML or for other purpose):
-```
+```js
 //list of sources as HTML scripts
 npm run corefiles
 
