@@ -2,6 +2,7 @@
 
 
 **jPList** is a flexible jQuery plugin for sorting, pagination and filtering of any HTML structure (DIVs, UL/LI, tables, etc). Get started at [jplist.com](http://jplist.com)
+<img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/jplist-controls.png" align="center">
 
 ## Current stable **jPList 5.2.0** version  is available on **cdnjs**:
 
