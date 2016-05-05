@@ -64,7 +64,7 @@
 - [Views Control (List, Grid and Thumbs Views)](http://jplist.com/layoutexamples/list-grid) - demo with control that switches between views: list, grid or thumbs
 - [Demo With Sticky Panel](http://jplist.com/layoutexamples/sticky-panel) - demo with sticky panel
 
-### Data Sources <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/data.png" align="right">
+### Data Sources 
 - [PHP + MySQL Example](http://jplist.com/datasourcesexamples/php-mysql-demo) - server side demo using PHP and MySQL database
 - [PHP + MySQL + JSON + Handlebars Example](http://jplist.com/datasourcesexamples/php-mysql-json-handlebars-demo) - server side demo using PHP, MySQL database with JSON format and Handlebars Template
 - [PHP + MySQL + JSON + Mustache Example](http://jplist.com/datasourcesexamples/php-mysql-json-mustache-demo) - server side demo using PHP, MySQL database with JSON format and Mustache Template
@@ -97,7 +97,7 @@
 - [Range Slider](http://jplist.com/jqueryuiexamples/range-slider) - jQuery UI range slider
 - [Date Picker Filter](http://jplist.com/jqueryuiexamples/date-picker-range-filter) - jQuery UI date picker
 
-### DateTime Examples <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/changelog.png" align="right">
+### DateTime Examples 
 - [DateTime 1](http://jplist.com/datetimeexamples/datetime-1) - {day}.{month}.{year}
 - [DateTime 2](http://jplist.com/datetimeexamples/datetime-2) - {month} {day}, {year} {hour}:{min}:{sec}
 - [DateTime 3](http://jplist.com/datetimeexamples/datetime-3) - {month} {day}, {year}
