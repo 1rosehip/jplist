@@ -53,7 +53,7 @@
 - [ASP.NET + Sql Server](https://github.com/no81no/jplist-asp-net)
 - [NodeJS, Express and MySQL](https://github.com/no81no/jplist-nodejs-express)
 
-## [Examples](#examples) <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/clip.png" align="right">
+## [Examples](#examples) <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/bookmark.png" align="right">
 
 ### Layout Examples 
 - [DIVs Layout Demo](http://jplist.com/layoutexamples/div-layout) - demo with DIV elements and all default actions like sort, pagination, etc.
