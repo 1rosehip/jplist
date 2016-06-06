@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+open -a webstorm.app /Users/miriam/Documents/codelib/jplist/jplist
