@@ -28,6 +28,7 @@
 		"src/core/js/domain/dom/services/sort/numbers.js",
 		"src/core/js/domain/dom/services/sort/text.js",
 		"src/core/js/domain/dom/services/sort/doubleSort.js",
+        "src/core/js/domain/dom/services/sort/sort-api.js",
 		"src/core/js/domain/dom/services/helper.js",
 		"src/core/js/dal/services/deeplinks.js",
 		"src/core/js/domain/server/models/dataitem.js",

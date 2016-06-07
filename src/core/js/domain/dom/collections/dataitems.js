@@ -107,7 +107,7 @@
 		
 		//get all sort statuses, expand statuses group if needed		
 		sortStatuses = jQuery.fn.jplist.StatusesService.getSortStatuses(statuses);
-			
+
         if(sortStatuses.length > 0){
 
 		    jQuery.fn.jplist.SortService.doubleSort(sortStatuses, context.dataview);
@@ -160,8 +160,9 @@
 			dataitem = context.dataview[i];
 			
 			//add dataitem html
-			html += dataitem.content;
+			html += dataitem.html;
 		}
+
 		return html;
 	};
 	
@@ -407,6 +408,7 @@
 	
 	/**
 	 * API: sort dataview
+     * @param {Array.<jQuery.fn.jplist.StatusDTO>} statuses
 	 */
 	jQuery.fn.jplist.Dataitems.prototype.sort = function(statuses){
 		sort(this, statuses);

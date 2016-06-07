@@ -520,6 +520,9 @@
 		}
 	};
 
+    //API NAMESPACE REGISTRATION
+    jQuery.jplist = {};
+
     //PLUGINS AND CONTROLS REGISTRATION ----------------------------
     jQuery.fn.jplist.controls = jQuery.fn.jplist.controls || {};
     jQuery.fn.jplist.itemControls = jQuery.fn.jplist.itemControls || {};
