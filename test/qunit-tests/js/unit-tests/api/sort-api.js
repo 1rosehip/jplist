@@ -10,11 +10,13 @@ QUnit.test('sort api function exists - 2', function(assert){
     assert.ok(jQuery.isFunction($.jplist.sort));
 });
 
-QUnit.test('sort api function exists - 1', function(assert){
+QUnit.test('sort by text', function(assert){
 
-    var html = '<div data-type="jplist-item"><div class="title">ccc</div></div>\
-        <div data-type="jplist-item"><div class="title">bbb</div></div>\
-        <div data-type="jplist-item"><div class="title">aaa</div></div>';
+    var html = '<div class="jplist-item"><div class="title">ccc</div></div>\
+        <div class="jplist-item"><div class="title">bbb</div></div>\
+        <div class="jplist-item"><div class="title">aaa</div></div>';
+
+    var $items = $(html).filter('.jplist-item');
 
     var order = 'asc';
     var type = 'text';
@@ -23,7 +25,7 @@ QUnit.test('sort api function exists - 1', function(assert){
     var dateTimeFormat = '';
     var resultType = 'html';
 
-    var result = jQuery.jplist.sort(html, order, type, path, ignore, dateTimeFormat, resultType);
-    console.log(result);
-    assert.ok(true);
+    var result = jQuery.jplist.sort($items, order, type, path, ignore, dateTimeFormat, resultType);
+
+    assert.ok(result === '<div class="jplist-item"><div class="title">aaa</div></div><div class="jplist-item"><div class="title">bbb</div></div><div class="jplist-item"><div class="title">ccc</div></div>');
 });
