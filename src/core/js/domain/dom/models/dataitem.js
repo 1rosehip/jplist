@@ -14,7 +14,7 @@
 	
 		var resultPathitem = null
 			,pathitem
-			,PATH_ONLY = true;		
+			,PATH_ONLY = true;
 		
 		for(var i=0; i<context.pathitems.length; i++){
 		
@@ -60,6 +60,11 @@
 				pathitems.push(pathitem);
 			}
 		}
+
+        //add empty path; in this case it should be the whole element
+        path = new jQuery.fn.jplist.PathModel('', null);
+        pathitem = new jQuery.fn.jplist.DataItemMemberModel(context.$item, path);
+        pathitems.push(pathitem);
 		
 		return pathitems;
 	};
