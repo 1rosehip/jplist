@@ -34,7 +34,7 @@
 			context.$noResults.addClass('jplist-hidden');
 			context.$itemsBox.removeClass('jplist-hidden');
 			
-			if(context.effect){
+			if(context.effect && jQuery.fn.jplist.animation){
 
                 if(lastStatus && !(lastStatus.inAnimation)){
                     lastStatusNotInAnimation = true;
@@ -54,7 +54,6 @@
 					,$dataitems
 					,$dataview //new items
 					,context.effect //animation effect
-					,context.timeline //timeline object
 					,function(){
 												
 						//redraw callback
@@ -87,29 +86,20 @@
 	 * @param {Object} observer
 	 */
 	jQuery.fn.jplist.DOMView = function($root
-                                                     ,options
-                                                     ,observer
-                                                     ,itemsBoxPath
-                                                     ,noResultsPath
-                                                     ,redrawCallback
-                                                     ,effect
-                                                     ,fps){
+                                         ,options
+                                         ,observer
+                                         ,itemsBoxPath
+                                         ,noResultsPath
+                                         ,redrawCallback
+                                         ,effect){
 	
 		this.options = options;	//user options	
 		this.$root = $root; //jplist container
 		this.observer = observer;
 		this.redrawCallback = redrawCallback;
         this.effect = effect;
-		this.timeline = null;
-		this.timelineZero = null;
 		this.$itemsBox = $root.find(itemsBoxPath).eq(0);
 		this.$noResults = $root.find(noResultsPath);
-		
-		if(effect){
-			
-			//init timeline
-			this.timeline = new jQuery.fn.jplist.animation.Timeline(fps, this.observer);
-		}
 	};
 	
 	/**

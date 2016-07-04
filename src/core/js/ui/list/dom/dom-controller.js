@@ -80,8 +80,7 @@
                                         ,options.itemsBox
                                         ,options.noResults
                                         ,options.redrawCallback
-                                        ,options.effect
-                                        ,options.fps);
+                                        ,options.effect);
 		
 		//init dataitems collection
 		this.collection = getCollection(this, options.itemsBox, options.itemPath, panelPaths);

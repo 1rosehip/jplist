@@ -1,13 +1,19 @@
 (function(){
 	'use strict';
-	
+
+    /**
+     * jPList definition
+     * @type {Object}
+     */
+    jQuery.fn.jplist = jQuery.fn.jplist || {};
+
 	/**
 	* Animation Service
 	* @type {Object}
 	* @class Animation Service
 	*/
 	jQuery.fn.jplist.animation = {};
-			
+
 	/**
 	* Draw items	
 	* @param {Object} options - user options
@@ -15,16 +21,16 @@
 	* @param {jQueryObject} $dataitems - all items
 	* @param {jQueryObject} $dataview - new items
 	* @param {string} effect - animation effect
-	* @param {Object} timeline - timeline object
 	* @param {Function} endCallback
 	* @param {Object} observer
 	*/
-	jQuery.fn.jplist.animation.drawItems = function(options, $itemsBox, $dataitems, $dataview, effect, timeline, endCallback, observer){
+	jQuery.fn.jplist.animation.drawItems = function(options, $itemsBox, $dataitems, $dataview, effect, endCallback, observer){
 		
 		var effectClass
 			,beforeMethod
 			,afterMethod
-			,effectMethod;
+			,effectMethod
+            ,timeline;
 		
 		//get effect class
 		effectClass = jQuery.fn.jplist.animation[effect];	
@@ -44,14 +50,14 @@
 			
 			if(jQuery.isFunction(effectMethod)){
 				
-				observer.on(observer.events.animationStepEvent, function(e, progress, data){
-					
+				observer.on('animationStepEvent', function(e, progress, data){
+
 					//call 'effect' method
 					effectMethod(options, $itemsBox, $dataitems, $dataview, progress);
 				});				
 			}
 				
-			observer.on(observer.events.animationCompleteEvent, function(e){
+			observer.on('animationCompleteEvent', function(e){
 				
 				//after method
 				if(jQuery.isFunction(afterMethod)){
@@ -60,13 +66,16 @@
 					afterMethod(options, $itemsBox, $dataitems, $dataview);
 				}
 				
-				observer.off(observer.events.animationStepEvent);
-				observer.off(observer.events.animationCompleteEvent);
+				observer.off('animationStepEvent');
+				observer.off('animationCompleteEvent');
 				
 				if(jQuery.isFunction(endCallback)){
 					endCallback();
 				}
 			});
+
+            //init timeline
+            timeline = new jQuery.fn.jplist.animation.Timeline(options.fps, observer);
 						
 			//start effect
 			timeline.play(options.duration);

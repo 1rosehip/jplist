@@ -10,9 +10,6 @@
 		"src/core-ajax/js/domain/models/dataitem-member-path.js",
 		"src/core-ajax/js/domain/services/pagination/pagination.js",
 		"src/core-ajax/js/domain/models/dataitem.js",
-		"src/core-ajax/js/ui/animation/animation.js",
-		"src/core-ajax/js/ui/animation/timeline.js",
-		"src/core-ajax/js/ui/animation/effects/fade.js",
 		"src/core-ajax/js/ui/list/server/server-controller.js",
 		"src/core-ajax/js/ui/list/server/server-view.js",
 		"src/core-ajax/js/ui/list/server/server-model.js",
@@ -28,5 +25,5 @@
 	"externs": [
 		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js"
 	],
-	"version": 6
+	"version": 7
 }

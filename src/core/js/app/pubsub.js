@@ -65,12 +65,6 @@
             ,dataItemRemoved: '8' //+ this event is sent by dataitems collection and means that a data item was removed from the dataitems collection
             ,collectionReadyEvent: '9' //+ this event is sent by dataitems collection when all items are added (on plugin init only)
 			,statusesAppliedToList: '10' //+ this event is sent by dataitems collection when the statuses were applied to the collection (i.e. sort, filter and pagination is done according new statuses)
-			            
-			//animation events
-			,animationStartEvent: '11'
-			,animationStepEvent: '12'
-			,animationCompleteEvent: '13'
-			
 		};
 
         //init events debug

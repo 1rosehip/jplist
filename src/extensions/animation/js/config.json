@@ -1,0 +1,12 @@
+{
+	"dist": "dist/js/jplist.ext-animation.min.js",
+	"src": [
+		"src/extensions/animation/js/animation.js",
+		"src/extensions/animation/js/timeline.js",
+		"src/extensions/animation/js/effects/fade.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js"
+	],
+	"version": 9
+}

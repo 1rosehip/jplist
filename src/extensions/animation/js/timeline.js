@@ -16,7 +16,7 @@
 		context.start = null;
 		
 		//complete
-		context.observer.trigger(context.observer.events.animationCompleteEvent, []);
+		context.observer.trigger('animationCompleteEvent', []);
 	};
 	
 	/**
@@ -35,7 +35,7 @@
 				if(context.start === null){
 					
 					//start
-					context.observer.trigger(context.observer.events.animationStartEvent, []);
+					context.observer.trigger('animationStartEvent', []);
 					
 					//init start value
 					context.start = new Date().getTime();
@@ -52,7 +52,7 @@
 				}
 				
 				//trigger step event
-				context.observer.trigger(context.observer.events.animationStepEvent, [context.progress*100, context]);
+				context.observer.trigger('animationStepEvent', [context.progress*100, context]);
 				
 				if(context.progress < 1){
 					

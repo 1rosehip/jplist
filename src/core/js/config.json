@@ -30,9 +30,6 @@
 		"src/core/js/domain/dom/services/sort/sort-api.js",
 		"src/core/js/domain/dom/services/helper.js",
 		"src/core/js/dal/services/deeplinks.js",
-		"src/core/js/ui/animation/animation.js",
-		"src/core/js/ui/animation/timeline.js",
-		"src/core/js/ui/animation/effects/fade.js",
 		"src/core/js/ui/list/dom/dom-view.js",
 		"src/core/js/ui/list/dom/dom-controller.js",
 		"src/core/js/ui/list/item-controls/control-factory.js",
@@ -48,5 +45,5 @@
 	"externs": [
 		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js"
 	],
-	"version": 254
+	"version": 258
 }
