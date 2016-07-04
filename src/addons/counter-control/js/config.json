@@ -1,0 +1,11 @@
+{
+	"dist": "dist/js/jplist.counter-control.min.js",
+	"src": [
+		"src/addons/counter-control/js/counter-view.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+		"build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+	],
+	"version": 5
+}

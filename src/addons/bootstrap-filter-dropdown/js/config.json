@@ -1,0 +1,12 @@
+{
+	"dist": "dist/js/jplist.bootstrap-filter-dropdown.min.js",
+	"src": [
+		"src/addons/bootstrap-filter-dropdown/js/bootstrap-filter-dropdown-dto.js",
+		"src/addons/bootstrap-filter-dropdown/js/bootstrap-filter-dropdown-view.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+		"build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+	],
+	"version": 6
+}

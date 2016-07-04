@@ -1,0 +1,12 @@
+{
+	"dist": "dist/js/jplist.checkbox-dropdown.min.js",
+	"src": [
+		"src/addons/checkbox-dropdown/js/app.js",
+		"src/addons/checkbox-dropdown/js/dto/checkbox-dropdown-dto.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+		"build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+	],
+	"version": 5
+}

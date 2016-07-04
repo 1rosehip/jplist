@@ -1,0 +1,12 @@
+{
+	"dist": "dist/js/jplist.bootstrap-sort-dropdown.min.js",
+	"src": [
+		"src/addons/bootstrap-sort-dropdown/js/bootstrap-sort-dropdown-view.js",
+		"src/addons/bootstrap-sort-dropdown/js/bootstrap-sort-dropdown-dto.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+		"build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+	],
+	"version": 5
+}

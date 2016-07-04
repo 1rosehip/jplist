@@ -145,12 +145,12 @@ node ./build/closure/rebuild-js.js path-to-control-config-file
 
 For example: 
 ```
-node ./build/closure/rebuild-js.js src/textbox-filter/js/config.json
+node ./build/closure/rebuild-js.js src/addons/textbox-filter/js/config.json
 ```
 
 Enable **verbose** mode: 
 ```
-node ./build/closure/rebuild-js.js src/textbox-filter/js/config.json --verb
+node ./build/closure/rebuild-js.js src/addons/textbox-filter/js/config.json --verb
 ```
 
 To rebuild **jplist.core.min.js** and **all** controls: 
@@ -179,12 +179,12 @@ npm run cssdemo
 
 To create minified css for any **control** or **bundle**: 
 ```
-lessc -x src/control-folder-name/css/styles.less > dist/css/jplist.control-folder-name.min.css
+lessc -x src/addons/control-folder-name/css/styles.less > dist/css/jplist.control-folder-name.min.css
 ```
 
 For example:
 ```
-lessc -x src/filter-toggle-bundle/css/styles.less > dist/css/jplist.filter-toggle-bundle.min.css
+lessc -x src/addons/filter-toggle-bundle/css/styles.less > dist/css/jplist.filter-toggle-bundle.min.css
 ```
 
 #### List of source files: ####
@@ -201,10 +201,10 @@ node ./build/closure/get-js-files-list.js src/core/js/config.json --type=files
 node ./build/closure/get-js-files-list.js src/core/js/config.json --type=github
 
 //for any control; type can be: script, files or github
-node ./build/closure/get-js-files-list.js src/control-folder-name/js/config.json --type=files
+node ./build/closure/get-js-files-list.js src/addons/control-folder-name/js/config.json --type=files
 
 //for example
-node ./build/closure/get-js-files-list.js src/filter-dropdown-bundle/js/config.json --type=script
+node ./build/closure/get-js-files-list.js src/addons/filter-dropdown-bundle/js/config.json --type=script
 ```
 
 #### Integration Tests: ####

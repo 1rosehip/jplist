@@ -1,0 +1,16 @@
+{
+	"dist": "dist/js/jplist.bootstrap-pagination-bundle.min.js",
+	"src": [
+		"src/addons/bootstrap-pagination-bundle/js/bootstrap-pagination-info/pagination-info-view.js",
+		"src/addons/bootstrap-pagination-bundle/js/bootstrap-pagination/pagination-controller.js",
+		"src/addons/bootstrap-pagination-bundle/js/bootstrap-pagination/pagination-dto.js",
+		"src/addons/bootstrap-pagination-bundle/js/bootstrap-pagination/pagination-view.js",
+		"src/addons/bootstrap-pagination-bundle/js/bootstrap-items-per-page-dropdown/bootstrap-items-per-page-dropdown-view.js",
+		"src/addons/bootstrap-pagination-bundle/js/bootstrap-items-per-page-dropdown/bootstrap-items-per-page-dropdown-dto.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+		"build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+	],
+	"version": 12
+}

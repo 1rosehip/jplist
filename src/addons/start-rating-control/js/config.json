@@ -1,0 +1,11 @@
+{
+	"dist": "dist/js/jplist.start-rating-control.min.js",
+	"src": [
+		"src/addons/start-rating-control/js/star-rating-view.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+		"build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+	],
+	"version": 6
+}

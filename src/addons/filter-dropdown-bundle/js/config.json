@@ -1,0 +1,15 @@
+{
+	"dist": "dist/js/jplist.filter-dropdown-bundle.min.js",
+	"src": [
+		"src/addons/filter-dropdown-bundle/js/dropdown-view.js",
+		"src/addons/filter-dropdown-bundle/js/select-view.js",
+		"src/addons/filter-dropdown-bundle/js/dropdown-group-select-text-view.js",
+		"src/addons/filter-dropdown-bundle/js/dto/dropdown-filter-dto.js",
+		"src/addons/filter-dropdown-bundle/js/dto/dropdown-group-select-text-dto.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+		"build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+	],
+	"version": 6
+}
