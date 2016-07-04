@@ -258,7 +258,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <!-- jPList lib -->
-<script src="../../dist/js/jplist.core.min.js"></script>
+<script src="../../dist/js/jplist.core-ajax.min.js"></script>
 
 <!-- jPList bootstrap filter dropdown control js -->
 <script src="../../dist/js/jplist.bootstrap-pagination-bundle.min.js"></script>

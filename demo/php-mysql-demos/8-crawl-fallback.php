@@ -38,7 +38,7 @@
 
     <!-- jPList core js and css  -->
     <link href="../../dist/css/jplist.core.min.css" rel="stylesheet" type="text/css" />
-    <script src="../../dist/js/jplist.core.min.js"></script>
+    <script src="../../dist/js/jplist.core-ajax.min.js"></script>
 
     <!-- jPList sort bundle -->
     <script src="../../dist/js/jplist.sort-bundle.min.js"></script>
