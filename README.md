@@ -128,6 +128,16 @@ Enable verbose mode:
 npm run jscore -- --verb
 ```
 
+To create **jplist.core-ajax.min.js** from sources: 
+```
+npm run ajaxcore
+```
+
+Enable verbose mode:
+```
+npm run ajaxcore -- --verb
+```
+
 To create any **minified** bundle or control: 
 ```
 node ./build/closure/rebuild-js.js path-to-control-config-file
