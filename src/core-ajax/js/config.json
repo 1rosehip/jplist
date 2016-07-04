@@ -16,8 +16,6 @@
 		"src/core-ajax/js/ui/list/server/server-controller.js",
 		"src/core-ajax/js/ui/list/server/server-view.js",
 		"src/core-ajax/js/ui/list/server/server-model.js",
-		"src/core-ajax/js/ui/list/item-controls/control-factory.js",
-		"src/core-ajax/js/ui/list/item-controls/controls-collection.js",
 		"src/core-ajax/js/ui/panel/panel-controller.js",
 		"src/core-ajax/js/ui/panel/control-factory.js",
 		"src/core-ajax/js/ui/panel/controls-collection.js",
@@ -30,5 +28,5 @@
 	"externs": [
 		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js"
 	],
-	"version": 5
+	"version": 6
 }
