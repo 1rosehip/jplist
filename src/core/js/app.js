@@ -183,9 +183,6 @@
 		context.options.dataSource = context.options.dataSource || {};
 		context.options.dataSource.type = context.options.dataSource.type || 'html';
 		
-		//debug info
-		jQuery.fn.jplist.info(context.options, 'Data Source Type: ', context.options.dataSource.type);
-		
 		//check data source option:
 		switch(context.options.dataSource.type){
 		
@@ -477,10 +474,7 @@
 		
 		//if deep links options is enabled
 		if(context.options.deepLinking){
-			
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'Deep linking enabled', '');
-				
+
 			//try restore panel state from query string
 			context.panel.setStatusesByDeepLink();	
 		}

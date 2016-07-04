@@ -115,10 +115,7 @@
 	jQuery.fn.jplist.DeepLinksService.updateUrlPerControls = function(options, deepLinkUrl){
 		
 		if(options.deepLinking){
-									
-			//debug info
-			jQuery.fn.jplist.info(options, 'Change Deep links URL according to statuses: ', deepLinkUrl);
-			
+
 			//set new hash
 			replaceHash(options, deepLinkUrl);
 		}

@@ -69,9 +69,6 @@
 		//set deep links
 		params = jQuery.fn.jplist.DeepLinksService.getUrlParams(context.options);
 
-		//debug info
-		jQuery.fn.jplist.info(context.options, 'Set statuses by deep link: ', params);
-
 		if(params.length <= 0){
 
 			//try set panel controls statuses from storage
@@ -107,9 +104,6 @@
 
 		//check storage
 		if(isStorageEnabled){
-
-			//debug info
-			jQuery.fn.jplist.info(context.options, 'Storage enabled: ', context.options.storage);
 
 			if(context.options.storage === 'cookies'){
 
@@ -231,20 +225,6 @@
 
 		//get panel paths
 		context.paths = context.controls.getPaths();
-
-		//debug info
-		if(jQuery.fn.jplist.logEnabled(context.options)){
-
-			paths = jQuery.map(context.paths, function(el, index){
-				if(el && el.jqPath){
-					return el.jqPath;
-				}
-
-				return '';
-			});
-
-			jQuery.fn.jplist.info(context.options, 'Panel paths: ', paths.join(', '));
-		}
 	};
 
 	/**

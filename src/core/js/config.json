@@ -2,7 +2,6 @@
 	"dist": "dist/js/jplist.core.min.js",
 	"src": [
 		"src/core/js/app.js",
-		"src/core/js/app/log.js",
 		"src/core/js/app/pubsub.js",
 		"src/core/js/app/history.js",
 		"src/core/js/app/dto/status-dto.js",
@@ -28,7 +27,7 @@
 		"src/core/js/domain/dom/services/sort/numbers.js",
 		"src/core/js/domain/dom/services/sort/text.js",
 		"src/core/js/domain/dom/services/sort/doubleSort.js",
-        "src/core/js/domain/dom/services/sort/sort-api.js",
+		"src/core/js/domain/dom/services/sort/sort-api.js",
 		"src/core/js/domain/dom/services/helper.js",
 		"src/core/js/dal/services/deeplinks.js",
 		"src/core/js/domain/server/models/dataitem.js",
@@ -54,5 +53,5 @@
 	"externs": [
 		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js"
 	],
-	"version": 244
+	"version": 251
 }

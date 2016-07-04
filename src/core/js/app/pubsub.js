@@ -4,6 +4,35 @@
 */
 ;(function(){
 	'use strict';
+
+    /**
+     * init events debug
+     * @param {Object} context
+     */
+    var initDebug = function(context){
+
+        var triggerFunc = jQuery.fn.trigger;
+
+        if(context.options.debug){
+
+            //add log before every jquery event execution
+            jQuery.fn.trigger = function(eventNum){
+
+                for(var eventName in context.events){
+
+                    if(context.events[eventName] == eventNum){
+
+                        console.log(eventName, arguments);
+
+                        break;
+                    }
+                }
+
+                return triggerFunc.apply(this, arguments);
+            };
+        }
+
+    };
 	
 	/**
 	* jPList publisher / subscriber - handles application events
@@ -42,8 +71,11 @@
 			,animationStepEvent: '12'
 			,animationCompleteEvent: '13'
 			
-		};			
-				
+		};
+
+        //init events debug
+        initDebug(context);
+
 		return jQuery.extend(true, jQuery({}), this, context);
 	};
 	
