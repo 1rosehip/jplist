@@ -20,9 +20,11 @@
   "license": "MIT",
   "devDependencies": {
     "closurecompiler": "1.5.2",
+    "colors": "^1.1.2",
     "jshint": "2.9.1",
     "less": "2.6.1",
     "wdio-jasmine-framework": "^0.1.9",
+    "wdio-spec-reporter": "0.0.2",
     "webdriverio": "^4.0.5"
   },
   "repository": {

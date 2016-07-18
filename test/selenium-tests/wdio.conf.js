@@ -1,3 +1,5 @@
+var customReporter = require('./custom-reporter.js');
+
 exports.config = {
     
     //
@@ -15,9 +17,24 @@ exports.config = {
 
     suites: {
 
+        //wdio ./test/selenium-tests/wdio.conf.js --suite=temp
+        temp: [
+            './test/selenium-tests/specs/3-sort-bootstrap.js'
+        ]
+
         //wdio ./test/selenium-tests/wdio.conf.js --suite=api
-        api: [
+        ,api: [
             './test/selenium-tests/specs/8-api.js'
+        ]
+
+        //wdio ./test/selenium-tests/wdio.conf.js --suite=sort
+        ,sort: [
+            './test/selenium-tests/specs/1-hidden-sort.js'
+            ,'./test/selenium-tests/specs/1-initial-sort-order.js'
+            ,'./test/selenium-tests/specs/2-text-filter-with-sort-dd.js'
+            ,'./test/selenium-tests/specs/3-sort-bootstrap.js'
+            ,'./test/selenium-tests/specs/3-sort-dropdown.js'
+            ,'./test/selenium-tests/specs/3-sort-select.js'
         ]
 
         //wdio ./test/selenium-tests/wdio.conf.js --suite=bootpaging
@@ -132,12 +149,12 @@ exports.config = {
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
     framework: 'jasmine',
-    //
+
     // Test reporter for stdout.
     // The following are supported: dot (default), spec, and xunit
     // see also: http://webdriver.io/guide/testrunner/reporters.html
-    // reporters: ['dot'],
-    //
+    reporters: [customReporter],
+
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
         //
