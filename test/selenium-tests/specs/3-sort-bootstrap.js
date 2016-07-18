@@ -6,7 +6,7 @@ describe('sort by title asc (top)', function() {
 
         browser.url('/test/pages/3-sort-bootstrap.html')
             .click('//button[@id="dropdown-menu-1"]')
-            .click('(//li[span[@data-path=".title"][@data-order="asc"][@data-type="text"]])[1]')
+            .click('(//li[a[@data-path=".title"][@data-order="asc"][@data-type="text"]])[1]')
             .call(done);
     });
 
@@ -59,7 +59,7 @@ describe('sort by title asc (bottom)', function() {
 
         browser.url('/test/pages/3-sort-bootstrap.html')
             .click('//button[@id="dropdown-menu-2"]')
-            .click('(//li[span[@data-path=".title"][@data-order="asc"][@data-type="text"]])[2]')
+            .click('(//li[a[@data-path=".title"][@data-order="asc"][@data-type="text"]])[2]')
             .call(done);
     });
 
@@ -112,7 +112,7 @@ describe('sort by title desc (top)', function() {
 
         browser.url('/test/pages/3-sort-bootstrap.html')
             .click('//button[@id="dropdown-menu-1"]')
-            .click('(//li[span[@data-path=".title"][@data-order="desc"][@data-type="text"]])[1]')
+            .click('(//li[a[@data-path=".title"][@data-order="desc"][@data-type="text"]])[1]')
             .call(done);
     });
 
@@ -165,7 +165,7 @@ describe('sort by likes number asc (top)', function() {
 
         browser.url('/test/pages/3-sort-bootstrap.html')
             .click('//button[@id="dropdown-menu-1"]')
-            .click('(//li[span[@data-path=".like"][@data-order="asc"][@data-type="number"]])[1]')
+            .click('(//li[a[@data-path=".like"][@data-order="asc"][@data-type="number"]])[1]')
             .call(done);
     });
 
@@ -218,7 +218,7 @@ describe('sort by likes number desc (top)', function() {
 
         browser.url('/test/pages/3-sort-bootstrap.html')
             .click('//button[@id="dropdown-menu-1"]')
-            .click('(//li[span[@data-path=".like"][@data-order="desc"][@data-type="number"]])[1]')
+            .click('(//li[a[@data-path=".like"][@data-order="desc"][@data-type="number"]])[1]')
             .call(done);
     });
 
@@ -271,7 +271,7 @@ describe('sort by date number asc (top)', function() {
 
         browser.url('/test/pages/3-sort-bootstrap.html')
             .click('//button[@id="dropdown-menu-1"]')
-            .click('(//li[span[@data-path=".date"][@data-order="asc"][@data-type="datetime"]])[1]')
+            .click('(//li[a[@data-path=".date"][@data-order="asc"][@data-type="datetime"]])[1]')
             .call(done);
     });
 
@@ -324,7 +324,7 @@ describe('sort by date number desc (top)', function() {
 
         browser.url('/test/pages/3-sort-bootstrap.html')
             .click('//button[@id="dropdown-menu-1"]')
-            .click('(//li[span[@data-path=".date"][@data-order="desc"][@data-type="datetime"]])[1]')
+            .click('(//li[a[@data-path=".date"][@data-order="desc"][@data-type="datetime"]])[1]')
             .call(done);
     });
 

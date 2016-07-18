@@ -1,6 +1,6 @@
 ;(function(){
 	'use strict';
-		
+
 	/**
 	 * build statuses
 	 * @param {Object} context
@@ -14,9 +14,9 @@
 
 		if(context.collection){
 
-			//update dataview				
+			//update dataview
             $dataview = context.collection.applyStatuses(statuses); //it returns $dataview
-			
+
 			//render view
             $dataview = context.listView.render(context.collection, statuses, lastStatus); //it returns $dataview
 		}
@@ -32,7 +32,7 @@
     var addPaths = function(context, newPanelPaths){
         context.collection.addPaths(newPanelPaths);
     };
-		
+
 	/**
 	 * create collection of dataitems
 	 * @param {Object} context
