@@ -19,7 +19,7 @@ exports.config = {
 
         //wdio ./test/selenium-tests/wdio.conf.js --suite=temp
         temp: [
-            './test/selenium-tests/specs/3-sort-bootstrap.js'
+            './test/selenium-tests/specs/3-sort-buttons.js'
         ]
 
         //wdio ./test/selenium-tests/wdio.conf.js --suite=api
@@ -35,6 +35,7 @@ exports.config = {
             ,'./test/selenium-tests/specs/3-sort-bootstrap.js'
             ,'./test/selenium-tests/specs/3-sort-dropdown.js'
             ,'./test/selenium-tests/specs/3-sort-select.js'
+            ,'./test/selenium-tests/specs/3-sort-buttons.js'
         ]
 
         //wdio ./test/selenium-tests/wdio.conf.js --suite=bootpaging

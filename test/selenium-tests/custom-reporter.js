@@ -16,8 +16,8 @@ var CustomReporter = function(options) {
     this.on('start', function() {
 
         console.log('___ ___  __ ___ '.blue.bold);
-        console.log(' )  )_  (_ ` )  '.blue.bold);
-        console.log('(  (__ .__) (   '.blue.bold);
+        console.log(' )  )_  (_   )  '.blue.bold);
+        console.log('(  (__  __) (   '.blue.bold);
     });
 
     /**
