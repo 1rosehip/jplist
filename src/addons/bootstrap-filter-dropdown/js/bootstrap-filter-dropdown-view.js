@@ -146,7 +146,7 @@
             ,context.isAnimateToTop
             ,context.inDeepLinking
         );
-        console.log(status.data);
+
         return status;
     };
 

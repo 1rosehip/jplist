@@ -19,7 +19,7 @@ exports.config = {
 
         //wdio ./test/selenium-tests/wdio.conf.js --suite=temp
         temp: [
-            './test/selenium-tests/specs/4-pagination-items-per-page-select.js'
+            './test/selenium-tests/specs/5-filter-dropdown-bootstrap.js'
         ]
 
         //wdio ./test/selenium-tests/wdio.conf.js --suite=api
@@ -61,6 +61,13 @@ exports.config = {
             ,'./test/selenium-tests/specs/4-pagination-items-per-page-select.js'
             ,'./test/selenium-tests/specs/4-pagination-localstorage.js'
             ,'./test/selenium-tests/specs/4-pagination-with-sort.js'
+        ]
+
+        //wdio ./test/selenium-tests/wdio.conf.js --suite=ddfilter
+        ,ddfilter: [
+            './test/selenium-tests/specs/5-filter-dropdown-bootstrap.js',
+            './test/selenium-tests/specs/5-filter-dropdown.js',
+            './test/selenium-tests/specs/5-filter-select.js'
         ]
     },
     // Patterns to exclude.
