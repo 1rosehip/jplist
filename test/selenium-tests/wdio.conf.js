@@ -19,7 +19,7 @@ exports.config = {
 
         //wdio ./test/selenium-tests/wdio.conf.js --suite=temp
         temp: [
-            './test/selenium-tests/specs/3-sort-buttons.js'
+            './test/selenium-tests/specs/4-pagination-items-per-page-select.js'
         ]
 
         //wdio ./test/selenium-tests/wdio.conf.js --suite=api
@@ -58,6 +58,7 @@ exports.config = {
             ,'./test/selenium-tests/specs/4-pagination-exclude-localstorage.js'
             ,'./test/selenium-tests/specs/4-pagination-exclude-localstorage-2.js'
             ,'./test/selenium-tests/specs/4-pagination-items-per-page.js'
+            ,'./test/selenium-tests/specs/4-pagination-items-per-page-select.js'
             ,'./test/selenium-tests/specs/4-pagination-localstorage.js'
             ,'./test/selenium-tests/specs/4-pagination-with-sort.js'
         ]
