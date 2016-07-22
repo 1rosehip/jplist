@@ -173,7 +173,7 @@ describe('dropdown filter by Food (top)', function() {
         expect(browser.getText('(//div[@class="list-item"]//p[@class="title"])[2]')).toBe('Cupcakes');
         browser.call(done);
     });
-   
+
     it('bottom filter should have the same value as the top filter', function (done) {
 
         expect(browser.getText('//button[@id="dropdown-menu-1"]')).toBe('Food');
