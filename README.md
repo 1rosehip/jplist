@@ -7,13 +7,6 @@
     <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/jplist-controls.png">
 </div>
 
-## Current stable **jPList 5.2.0** version  is available on **cdnjs**:
-
-- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js)
-- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.core.min.css)
-- [https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css](https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css)
-- See full list of available js / css files on [cdnjs](https://cdnjs.com/libraries/jplist)
-
 ## Reporting issues
 Please read [jPList guidelines](https://github.com/no81no/jplist/wiki/Reporting-issues) that includes directions for **opening issues** and **making feature requests**.
 
