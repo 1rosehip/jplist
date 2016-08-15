@@ -123,14 +123,16 @@
 	var setStatus = function(context, status, restoredFromStorage){
 		
 		if(status.data){
-		
+
 			if(!status.data.value){
 				status.data.value = '';
 			}
-			
+
 			//set value
-			context.$control.val(status.data.value);
-		}		
+            if(context.$control.val() !== status.data.value) {
+                context.$control.val(status.data.value);
+            }
+		}
 	};
 	
 	/**
@@ -144,14 +146,14 @@
 			context.params.$button.on('click', function(e){
 				
 				e.preventDefault();
-				
+
                 var status = getStatus(context, false);
-                
+
 				//update last status
 				context.history.addStatus(status);
-			
+
 				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
-				
+
 				return false;
 			});
 		}
@@ -160,10 +162,10 @@
 			context.$control.on(context.params.eventName, function(){	
 					
                 var status = getStatus(context, false);
-                
+
 				//update last status
 				context.history.addStatus(status);
-			
+
 				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 			});
 		}		

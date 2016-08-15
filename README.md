@@ -187,7 +187,7 @@ To get a list of source files (to be included in HTML or for other purpose):
 //list of sources as HTML scripts
 npm run corefiles
 
-//simple source list
+//sample source list
 node ./build/closure/get-js-files-list.js src/core/js/config.json --type=files
 
 //list of github raw urls
