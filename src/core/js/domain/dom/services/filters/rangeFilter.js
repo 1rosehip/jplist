@@ -16,9 +16,10 @@
 		var resultDataview = []
 			,dataitem
 			,pathitem
-			,num
-			,prevNumeric = jQuery.isNumeric(prev)
-			,nextNumeric = jQuery.isNumeric(next);
+			,numbers = []
+            ,min
+            ,max
+            ,shouldBeAdded;
 		
 		for(var i=0; i<dataview.length; i++){
 		
@@ -29,45 +30,38 @@
 			pathitem = dataitem.findPathitem(path);	
 
 			//if path is found
-			if(pathitem){										
-				
-				//get number				
-				num = Number(pathitem.text.replace(/[^-0-9\.]+/g,''));
-					
-				if(!isNaN(num)){
-				
-					if(prevNumeric && nextNumeric){
-					
-						if(num >= prev && num <= next){
-							
-							//add to list
-							resultDataview.push(dataitem);
-						}
-					}
-					else{
-						
-						//min exists, and max doesn't exist
-						if(prevNumeric && !nextNumeric){
-						
-							if(num >= prev){
-								
-								//add to list
-								resultDataview.push(dataitem);
-							}
-						}
-						else{
-						
-							//max exists, and min doesn't exist
-							if(!prevNumeric && nextNumeric){
-							
-								if(num <= next){
-									
-									//add to list
-									resultDataview.push(dataitem);
-								}
-							}
-						}
-					}					
+			if(pathitem && pathitem.$element.length > 0){
+
+                //find all number from the path
+                pathitem.$element.each(function(){
+
+                    var num = Number($(this).text().replace(/[^-0-9\.]+/g,''));
+
+                    if(!isNaN(num)){
+                        numbers.push(num);
+                    }
+                });
+
+				if(numbers.length > 0){
+
+                    max = Math.max.apply(Math, numbers);
+                    min = Math.min.apply(Math, numbers);
+
+                    shouldBeAdded = true;
+
+                    if(jQuery.isNumeric(prev) && prev > min){
+                        shouldBeAdded = false;
+                    }
+
+                    if(jQuery.isNumeric(next) && max > next){
+                        shouldBeAdded = false;
+                    }
+
+                    if(shouldBeAdded){
+
+                        //add to list
+                        resultDataview.push(dataitem);
+                    }
 				}
 			}
 		}
