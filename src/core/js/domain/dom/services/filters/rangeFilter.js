@@ -22,7 +22,9 @@
             ,shouldBeAdded;
 		
 		for(var i=0; i<dataview.length; i++){
-		
+
+            numbers = [];
+
 			//get dataitem
 			dataitem = dataview[i];			
 			
