@@ -1,0 +1,554 @@
+<!doctype html>
+<html>
+    <head>		
+		<title>Google Maps Bundle | jPList - jQuery Data Grid Controls</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	    <!-- font libs -->
+		<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+		
+		<!-- demo page styles -->
+		<link href="../dist/css/jplist.demo-pages.min.css" rel="stylesheet" type="text/css" />
+				
+		<!-- jQuery lib -->		
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		
+		<!-- jPList core js and css  -->
+		<link href="../dist/css/jplist.core.min.css" rel="stylesheet" type="text/css" />		
+		<!--script src="../dist/js/jplist.core.min.js"></script-->
+        <script src="../src/core/js/app.js"></script>
+        <script src="../src/core/js/app/pubsub.js"></script>
+        <script src="../src/core/js/app/history.js"></script>
+        <script src="../src/core/js/app/dto/status-dto.js"></script>
+        <script src="../src/core/js/app/dto/statuses-service.js"></script>
+        <script src="../src/core/js/app/dto/dto-mapper-service.js"></script>
+        <script src="../src/core/js/domain/dom/models/dataitem-member-path.js"></script>
+        <script src="../src/core/js/domain/dom/models/dataitem-member.js"></script>
+        <script src="../src/core/js/domain/dom/models/dataitem.js"></script>
+        <script src="../src/core/js/domain/dom/collections/dataitems.js"></script>
+        <script src="../src/core/js/domain/dom/services/pagination/pagination.js"></script>
+        <script src="../src/core/js/domain/dom/services/pagination/pagination-google.js"></script>
+        <script src="../src/core/js/domain/dom/services/filters/dateFilter.js"></script>
+        <script src="../src/core/js/domain/dom/services/filters/dateRangeFilter.js"></script>
+        <script src="../src/core/js/domain/dom/services/filters/pagerFilter.js"></script>
+        <script src="../src/core/js/domain/dom/services/filters/pathFilter.js"></script>
+        <script src="../src/core/js/domain/dom/services/filters/pathGroupFilter.js"></script>
+        <script src="../src/core/js/domain/dom/services/filters/rangeFilter.js"></script>
+        <script src="../src/core/js/domain/dom/services/filters/text-filters/advanced-search.js"></script>
+        <script src="../src/core/js/domain/dom/services/filters/text-filters/text-filter-group-by-path-logic.js"></script>
+        <script src="../src/core/js/domain/dom/services/filters/text-filters/text-filter-by-path.js"></script>
+        <script src="../src/core/js/domain/dom/services/filters/text-filters/text-filter-group-by-path.js"></script>
+        <script src="../src/core/js/domain/dom/services/sort/datetime.js"></script>
+        <script src="../src/core/js/domain/dom/services/sort/numbers.js"></script>
+        <script src="../src/core/js/domain/dom/services/sort/text.js"></script>
+        <script src="../src/core/js/domain/dom/services/sort/doubleSort.js"></script>
+        <script src="../src/core/js/domain/dom/services/sort/sort-api.js"></script>
+        <script src="../src/core/js/domain/dom/services/helper.js"></script>
+        <script src="../src/core/js/dal/services/deeplinks.js"></script>
+        <script src="../src/core/js/ui/list/dom/dom-view.js"></script>
+        <script src="../src/core/js/ui/list/dom/dom-controller.js"></script>
+        <script src="../src/core/js/ui/list/item-controls/control-factory.js"></script>
+        <script src="../src/core/js/ui/list/item-controls/controls-collection.js"></script>
+        <script src="../src/core/js/ui/panel/panel-controller.js"></script>
+        <script src="../src/core/js/ui/panel/control-factory.js"></script>
+        <script src="../src/core/js/ui/panel/controls-collection.js"></script>
+        <script src="../src/core/js/ui/panel/controls/dropdown/dropdown-view.js"></script>
+        <script src="../src/core/js/dal/storage.js"></script>
+        <script src="../src/core/js/dal/services/cookies.js"></script>
+        <script src="../src/core/js/dal/services/localstorage.js"></script>
+
+        <!-- jPlist history bundle -->
+        <link href="../dist/css/jplist.history-bundle.min.css" rel="stylesheet" type="text/css" />
+        <script src="../dist/js/jplist.history-bundle.min.js"></script>
+
+        <!-- jPList sort bundle -->
+        <script src="../dist/js/jplist.sort-bundle.min.js"></script>
+
+        <!-- jPList pagination bundle -->
+        <link href="../dist/css/jplist.pagination-bundle.min.css" rel="stylesheet" type="text/css" />
+        <script src="../dist/js/jplist.pagination-bundle.min.js"></script>
+
+        <!-- jPlist toggle filters bundle -->
+        <link href="../dist/css/jplist.filter-toggle-bundle.min.css" rel="stylesheet" type="text/css" />
+        <script src="../dist/js/jplist.filter-toggle-bundle.min.js"></script>
+		
+		<!-- jPList Google Maps Bundle -->
+		<!--script src="../dist/js/jplist.google-maps-bundle.min.js"></script-->
+		<link href="../dist/css/jplist.google-maps-bundle.min.css" rel="stylesheet" type="text/css" />
+
+        <script src="../src/addons/google-maps-bundle/js/map-control/app.js"></script>
+        <script src="../src/addons/google-maps-bundle/js/map-control/views/map-view.js"></script>
+        <script src="../src/addons/google-maps-bundle/js/map-control/views/stores-view.js"></script>
+        <script src="../src/addons/google-maps-bundle/js/map-control/models/store-model.js"></script>
+        <script src="../src/addons/google-maps-bundle/js/map-control/models/marker-model.js"></script>
+        <script src="../src/addons/google-maps-bundle/js/autocomplete-control/dom-filters-addon.js"></script>
+        <script src="../src/addons/google-maps-bundle/js/autocomplete-control/dto-mapper-addon.js"></script>
+        <script src="../src/addons/google-maps-bundle/js/autocomplete-control/autocomplete-view.js"></script>
+        <script src="../src/addons/google-maps-bundle/js/autocomplete-control/autocomplete-dto.js"></script>
+
+        <!-- google maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB--kC8tRWEzI7fGB9UXpFt89vfJZ38XcQ&libraries=places,geometry"></script>
+
+
+		<!-- jPList start -->
+		<script>
+		$('document').ready(function(){	
+				
+			$('#demo').jplist({				
+				itemsBox: '.stores'
+				,itemPath: '.store'
+				,panelPath: '.jplist-panel, .jplist-map-panel'
+                //,debug: true
+			});
+		});
+		</script>
+		
+    </head>
+    <body>
+	
+		<!-- top bar -->
+		<div id="black-top-bar" class="box">
+			<div class="center">			
+				<div class="box">
+
+					<!-- left menu -->
+					<ul id="black-top-bar-left-menu" class="hmenu left iphone-hidden">
+						<li class="glow">
+							<a title="" href="https://github.com/no81no/jplist/issues?state=open">
+								<i class="fa fa-asterisk"></i> Request a feature / <i class="fa fa-bug"></i> Report a bug
+							</a>
+						</li>
+					</ul>
+
+					<!-- social menu -->
+					<ul id="social-menu" class="hmenu right">
+						<li class="glow"><a title="" href="https://www.facebook.com/jplist"><i class="fa fa-facebook"></i>&nbsp;</a></li>
+						<li class="glow"><a rel="publisher" title="" href="https://plus.google.com/+Jplistjs"><i class="fa fa-google-plus"></i></a></li>	
+						<li class="glow"><a title="" href="https://twitter.com/jquery_jplist"><i class="fa fa-twitter"></i></a></li>					
+						<li class="glow"><a title="" href="https://github.com/no81no/jplist"><i class="fa fa-github"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>	
+				
+		<!-- header -->
+		<header id="header" class="box">
+			<div id="header-box" class="box">
+				<div class="center">			
+					<div class="box">
+
+						<!-- logo -->
+						<div class="align-center text-shadow" id="logo">	
+							<p>
+								<img title="jPList - jQuery Data Grid Controls" alt="jPList - jQuery Data Grid Controls" src="http://jplist.com/content/img/common/rocket.png" />
+								<a title="" href="http://jplist.com">jPList - jQuery Data Grid Controls</a>
+							</p>
+							<h1 class="h1-30-normal">Google Maps Bundle</h1>
+						</div>
+
+					</div>
+				</div>					
+			</div>
+		</header>
+		
+		<!-- main content -->
+		<div class="box">
+			<div class="center">
+
+				<!--<><><><><><><> DEMO START <><><><><><><><>-->
+				<div id="demo" class="jplist-google-maps-bundle">
+
+                    <!-- controls panel -->
+                    <div class="jplist-panel">
+
+                        <!-- reset button -->
+                        <button
+                                type="button"
+                                class="jplist-reset-btn"
+                                data-control-type="reset"
+                                data-control-name="reset"
+                                data-control-action="reset">
+                            Reset  <i class="fa fa-share"></i>
+                        </button>
+
+                        <!-- sort dropdown -->
+                        <div
+                                class="jplist-drop-down"
+                                data-control-type="sort-drop-down"
+                                data-control-name="sort"
+                                data-control-action="sort"
+                                data-datetime-format="{month}/{day}/{year}"> <!-- {year}, {month}, {day}, {hour}, {min}, {sec} -->
+
+                            <ul>
+                                <li><span data-path="default">Sort by</span></li>
+                                <li><span data-path=".title" data-order="asc" data-type="text">Title A-Z</span></li>
+                                <li><span data-path="[data-type='country']" data-order="asc" data-type="text">Country A-Z</span></li>
+                                <li><span data-path="[data-type='country']" data-order="desc" data-type="text">Country Z-A</span></li>
+                            </ul>
+                        </div>
+
+                        <input
+                                class="jplist-map-autocomplete"
+                                data-control-type="google-autocomplete-control"
+                                data-control-name="google-autocomplete-control"
+                                data-control-action="filter"
+                                data-radius="100000"
+                                type="text"
+                                placeholder="Enter a location"
+                        />
+
+                        <!-- data-radius in meters -->
+
+                        <!-- checkbox filters -->
+                        <div
+                                class="jplist-group"
+                                data-control-type="checkbox-group-filter"
+                                data-control-action="filter"
+                                data-control-name="themes-art">
+
+                            <div class="cb">
+                                <input
+                                        data-path=".art"
+                                        id="art"
+                                        type="checkbox"
+                                />
+                                <label for="art">Art</label>
+                            </div>
+                        </div>
+
+                        <!-- checkbox filters -->
+                        <div
+                                class="jplist-group"
+                                data-control-type="checkbox-group-filter"
+                                data-control-action="filter"
+                                data-control-name="themes-history">
+
+                            <div class="cb">
+                                <input
+                                        data-path=".history"
+                                        id="history"
+                                        type="checkbox" />
+                                <label for="history">History</label>
+                            </div>
+                        </div>
+
+                        <!-- checkbox filters -->
+                        <div
+                                class="jplist-group"
+                                data-control-type="checkbox-group-filter"
+                                data-control-action="filter"
+                                data-control-name="themes-science">
+
+                            <div class="cb">
+                                <input
+                                        data-path=".science"
+                                        id="science"
+                                        type="checkbox" />
+                                <label for="science">Science</label>
+                            </div>
+                        </div>
+
+                        <!-- paging -->
+                        <div
+                                class="jplist-label"
+                                data-type="Page {current} of {pages}"
+                                data-control-type="pagination-info"
+                                data-control-name="paging"
+                                data-control-action="paging">
+                        </div>
+
+                        <div
+                                class="jplist-pagination"
+                                data-control-type="pagination"
+                                data-control-name="paging"
+                                data-control-action="paging"
+                                data-items-per-page="5">
+                        </div>
+                    </div>
+
+                    <div class="jplist-google-maps-row">
+
+                        <!-- stores box -->
+                        <div class="stores-box">
+
+                            <div class="stores">
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="39.8252813"
+                                        data-longitude="-86.1857915">
+                                    <p class="art">
+                                        <span class="title" data-type="title">Indianapolis Museum of Art</span>,<br>
+                                        <span data-type="address">4000 Michigan Road</span>,<br>
+                                        <span data-type="city">Indianapolis</span>,<br>
+                                        <span data-type="state">Indiana</span>,<br>
+                                        <span data-type="country">United States</span><br/>
+                                        <span class="tags">Tags: Art</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="40.7609666"
+                                        data-longitude="-73.97723259999998">
+                                    <p class="art">
+                                        <span class="title" data-type="title">The Museum of Modern Art</span>,<br>
+                                        <span data-type="address">11 West 53 Street</span>,<br>
+                                        <span data-type="city">New York</span>,<br>
+                                        <span data-type="state">NY</span>
+                                        <span data-type="zipcode">10019</span>,<br>
+                                        <span data-type="country">United States</span><br/>
+                                        <span class="tags">Tags: Art</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="-37.7865175"
+                                        data-longitude="144.97686169999997">
+                                    <p class="art history">
+                                        <span class="title" data-type="title">Melbourne Museum</span>,<br>
+                                        <span data-type="address">Nicholson Street</span>, Carlton Gardens,<br>
+                                        <span data-type="city">Melbourne</span>,<br>
+                                        <span data-type="state">Victoria</span>,<br>
+                                        <span data-type="country">Australia</span><br/>
+                                        <span class="tags">Tags: Art, History</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="51.5189698"
+                                        data-longitude="-0.12650029999997514">
+                                    <p class="art history">
+                                        <span class="title" data-type="title">The British Museum</span>,<br>
+                                        <span data-type="address">Great Russell Street</span>,<br>
+                                        <span data-type="city">London</span>
+                                        <span data-type="zipcode">WC1B 3DG</span>,<br>
+                                        <span data-type="country">United Kingdom</span>
+                                        <span class="tags">Tags: Art, History</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="51.4965633"
+                                        data-longitude="-0.17689199999995253">
+                                    <p class="history">
+                                        <span class="title" data-type="title">The Natural History Museum</span>,<br>
+                                        <span data-type="address">Cromwell Road</span>,<br>
+                                        <span data-type="city">London</span>
+                                        <span data-type="zipcode">SW7 5BD</span>,<br>
+                                        <span data-type="country">United Kingdom</span><br/>
+                                        <span class="tags">Tags: History</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        data-longitude="2.3410350000000335"
+                                        data-latitude="48.8616803"
+                                        class="store">
+                                    <p class="art">
+                                        <span class="title" data-type="title">Musee du Louvre</span>,<br>
+                                        <span data-type="address">99 Rue de Rivoli</span>,<br>
+                                        <span data-type="zipcode">75004</span>
+                                        <span data-type="city">Paris</span>,<br>
+                                        <span data-type="country">France</span><br/>
+                                        <span class="tags">Tags: Art</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="55.7416585"
+                                        data-longitude="37.620750000000044">
+                                    <p class="art">
+                                        <span class="title" data-type="title">The State Tretyakov Gallery</span>,<br>
+                                        <span data-type="address">Lavrushinskiy pereulok, 10</span>,<br>
+                                        <span data-type="zipcode">119017</span>
+                                        <span data-type="city">Moscow</span>,<br>
+                                        <span data-type="country">Russia</span><br/>
+                                        <span class="tags">Tags: Art</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store box"
+                                        data-latitude="41.914051"
+                                        data-longitude="12.492039999999974">
+                                    <p class="art">
+                                        <span class="title" data-type="title">Galleria Borghese</span>,<br>
+                                        <span data-type="address">Piazzale del Museo Borghese, 5</span>,<br>
+                                        <span data-type="zipcode">00197</span>
+                                        <span data-type="city">Rome</span>,<br>
+                                        <span data-type="country">Italy</span><br/>
+                                        <span class="tags">Tags: Art</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="45.44152769999999"
+                                        data-longitude="12.327727699999969">
+                                    <p class="history">
+                                        <span class="title" data-type="title">Museo di Storia Naturale di Venezia</span>,<br>
+                                        <span data-type="address">Sestiere Santa Croce, 1730</span>,<br>
+                                        <span data-type="zipcode">30135</span>
+                                        <span data-type="city">Venice</span>,<br>
+                                        <span data-type="country">Italy</span><br/>
+                                        <span class="tags">Tags: History</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="37.7986528"
+                                        data-longitude="-122.26426950000001">
+                                    <p class="art history">
+                                        <span class="title" data-type="title">Oakland Museum of California</span>,<br>
+                                        <span data-type="address">1000 Oak Street</span>,<br>
+                                        <span data-type="city">Oakland</span>,<br>
+                                        <span data-type="state">CA</span>
+                                        <span data-type="zipcode">94607</span>,<br/>
+                                        <span data-type="country">United States</span>
+                                        <span class="tags">Tags: Art, History</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="37.414341"
+                                        data-longitude="-122.07692159999999">
+                                    <p class="science">
+                                        <span class="title" data-type="title">Computer History Museum</span>,<br>
+                                        <span data-type="address">1401 North Shoreline Boulevard</span>,<br>
+                                        <span data-type="city">Mountain View</span>,<br>
+                                        <span data-type="state">CA</span>
+                                        <span data-type="zipcode">94043</span>,<br/>
+                                        <span data-type="country">United States</span><br/>
+                                        <span class="tags">Tags: Science</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="40.782568"
+                                        data-longitude="-73.96547199999998">
+                                    <p class="art">
+                                        <span class="title" data-type="title">Metropolitan Museum of Art</span>,<br>
+                                        <span data-type="address">1000 5th Ave</span>,<br>
+                                        <span data-type="city">New York</span>,<br>
+                                        <span data-type="state">NY</span>
+                                        <span data-type="zipcode">10028</span>,<br/>
+                                        <span data-type="country">United States</span><br/>
+                                        <span class="tags">Tags: Art</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="38.6396114"
+                                        data-longitude="-90.29397840000001">
+                                    <p class="art">
+                                        <span class="title" data-type="title">Saint Louis Art Museum</span>,<br>
+                                        <span data-type="address">1 Fine Arts Drive</span>,<br>
+                                        <span data-type="city">St. Louis</span>,<br>
+                                        <span data-type="state">MO</span>
+                                        <span data-type="zipcode">63110</span>,<br/>
+                                        <span data-type="country">United States</span><br/>
+                                        <span class="tags">Tags: Art</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="37.331629"
+                                        data-longitude="-121.89012639999999">
+                                    <p class="science">
+                                        <span class="title" data-type="title">The Tech Museum of Innovation</span>,<br>
+                                        <span data-type="address">201 South Market Street</span>,<br>
+                                        <span data-type="city">San Jose</span>,<br>
+                                        <span data-type="state">CA</span>
+                                        <span data-type="zipcode">95113</span>,<br/>
+                                        <span data-type="country">United States</span><br/>
+                                        <span class="tags">Tags: Science</span>
+                                    </p>
+                                </div>
+
+                                <!-- store -->
+                                <div
+                                        class="store"
+                                        data-latitude="40.4144049"
+                                        data-longitude="-3.694179800000029">
+                                    <p class="art history">
+                                        <span class="title" data-type="title">Museo del Prado</span>,<br>
+                                        <span data-type="address">Paseo del Prado</span>,<br>
+                                        <span data-type="zipcode">28014</span>
+                                        <span data-type="city">Madrid</span>,<br>
+                                        <span data-type="country">Spain</span><br/>
+                                        <span class="tags">Tags: Art, History</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- no results found -->
+                            <div class="jplist-no-results">
+                                <p>No results found</p>
+                            </div>
+
+                        </div>
+
+                        <!-- map panel -->
+                        <div class="jplist-map-panel">
+
+                            <div
+                                    data-control-type="google-maps-control"
+                                    data-control-name="google-maps-control"
+                                    data-control-action="google-maps-control"
+                                    data-latitude="0"
+                                    data-longitude="90"
+                                    data-map-type="ROADMAP"
+                                    data-initil-zoom="2"
+                                    data-store-zoom="17"
+                                    data-geolocation="false"
+                                    data-open-popup-store-click="true"
+                                    class="jplist-map">
+                            </div>
+
+                        </div>
+                    </div>
+								
+				</div>
+				<!--<><><><><><><> DEMO END <><><><><><><><><>-->
+
+			</div>		
+		</div>	
+		
+		<!-- footer -->
+		<footer class="box" id="footer">
+			<div class="center">			
+                <div class="box">
+					<p id="footer-content" class="align-center glow">
+						<a href="http://jplist.com" title="">Copyright &copy; <script>document.write(new Date().getFullYear())</script> <b>jPList Software</b></a>
+					</p>					
+				</div>
+			</div>
+		</footer>	
+    </body>
+</html>

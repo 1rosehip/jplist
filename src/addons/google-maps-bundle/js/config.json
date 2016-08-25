@@ -6,7 +6,10 @@
         "src/addons/google-maps-bundle/js/map-control/views/stores-view.js",
         "src/addons/google-maps-bundle/js/map-control/models/store-model.js",
         "src/addons/google-maps-bundle/js/map-control/models/marker-model.js",
-        "src/addons/google-maps-bundle/js/autocomplete-control/autocomplete-view.js"
+        "src/addons/google-maps-bundle/js/autocomplete-control/dom-filters-addon.js",
+        "src/addons/google-maps-bundle/js/autocomplete-control/dto-mapper-addon.js",
+        "src/addons/google-maps-bundle/js/autocomplete-control/autocomplete-view.js",
+        "src/addons/google-maps-bundle/js/autocomplete-control/autocomplete-dto.js"
 	],
 	"externs": [
 		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
