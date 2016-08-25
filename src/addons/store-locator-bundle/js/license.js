@@ -1,6 +1,6 @@
 /**
  * jPList - jQuery Data Grid Controls
- * Google Maps Bundle ##version## - http://jplist.com
+ * jPList Store Locator Bundle ##version## - http://jplist.com
  * Copyright ##year## Miriam Zusin
  *
  * Free for non commercial use only
