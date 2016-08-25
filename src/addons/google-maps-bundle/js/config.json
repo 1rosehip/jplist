@@ -1,0 +1,16 @@
+{
+	"dist": "dist/js/jplist.google-maps-bundle.min.js",
+	"src": [
+		"src/addons/google-maps-bundle/js/map-control/app.js",
+        "src/addons/google-maps-bundle/js/map-control/views/map-view.js",
+        "src/addons/google-maps-bundle/js/map-control/views/stores-view.js",
+        "src/addons/google-maps-bundle/js/map-control/models/store-model.js",
+        "src/addons/google-maps-bundle/js/map-control/models/marker-model.js",
+        "src/addons/google-maps-bundle/js/autocomplete-control/autocomplete-view.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+		"build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+	],
+	"version": 1
+}
