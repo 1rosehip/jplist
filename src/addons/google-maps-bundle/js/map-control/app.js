@@ -55,11 +55,9 @@
      */
     var initEvents = function(context){
 
-        /**
-         * when all jplist dataitems are collected
-         * @param {Object} e - event object
-         * @param {jQuery.fn.jplist.Dataitems} collection
-         */
+        // when all jplist dataitems are collected
+        // @param {Object} e - event object
+        // @param {jQuery.fn.jplist.Dataitems} collection
         context.observer.on(context.observer.events.collectionReadyEvent, function(e, collection){
 
             //save data items for the case when all stores should be drawn on the map
@@ -69,11 +67,9 @@
             setStores(context, context.params.dataitems);
         });
 
-        /**
-         * when jplist dataview changed
-         * @param {Object} e - event object
-         * @param {jQuery.fn.jplist.Dataitems} collection
-         */
+        // when jplist dataview changed
+        // @param {Object} e - event object
+        // @param {jQuery.fn.jplist.Dataitems} collection
         context.observer.on(context.observer.events.statusesAppliedToList, function(e, collection){
 
             //save data items for the case when all stores should be drawn on the map
@@ -83,12 +79,10 @@
             setStores(context, context.params.dataview);
         });
 
-        /**
-         * store onclick
-         * @param {Object} e - event object
-         * @param {Number} latitude
-         * @param {Number} longitude
-         */
+        // store onclick
+        // @param {Object} e - event object
+        // @param {Number} latitude
+        // @param {Number} longitude
         context.observer.on('jplist.map.store.clicked', function(e, latitude, longitude){
 
             context.params.mapView.showStore(latitude, longitude, context.params.userSettings.storeZoom);

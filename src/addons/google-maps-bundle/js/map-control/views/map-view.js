@@ -59,9 +59,9 @@
     /**
      * show location on map
      * @param {Object} context
-     * @param {number} latitude
-     * @param {number} latitude
-     * @param {number} zoom
+     * @param {Number} latitude
+     * @param {Number} latitude
+     * @param {Number} zoom
      */
     var showLocation = function(context, latitude, longitude, zoom){
 
@@ -85,9 +85,9 @@
     /**
      * show store on map
      * @param {Object} context
-     * @param {number} latitude
-     * @param {number} latitude
-     * @param {number} zoom
+     * @param {Number} latitude
+     * @param {Number} latitude
+     * @param {Number} zoom
      */
     var showStore = function(context, latitude, longitude, zoom){
 
@@ -171,12 +171,10 @@
             });
         }
 
-        /**
-         * marker onclick
-         * @param {Object} e - event object
-         * @param {Number} latitude
-         * @param {Number} longitude
-         */
+        // marker onclick
+        // @param {Object} e - event object
+        // @param {Number} latitude
+        // @param {Number} longitude
         context.observer.on('jplist.map.marker.clicked', function(e, latitude, longitude){
 
             //close all info windows
@@ -206,9 +204,9 @@
     /**
      * show location on map - used for geolocation; used inside showStore;
      * @public
-     * @param {number} latitude
-     * @param {number} latitude
-     * @param {number} zoom
+     * @param {Number} latitude
+     * @param {Number} longitude
+     * @param {Number} zoom
      */
     jQuery.fn.jplist.controls.GoogleMapsControl.MapView.prototype.showLocation = function(latitude, longitude, zoom){
         showLocation(this, latitude, longitude, zoom);
@@ -217,9 +215,9 @@
     /**
      * show store on map - used for store click
      * @public
-     * @param {number} latitude
-     * @param {number} latitude
-     * @param {number} zoom
+     * @param {Number} latitude
+     * @param {Number} longitude
+     * @param {Number} zoom
      */
     jQuery.fn.jplist.controls.GoogleMapsControl.MapView.prototype.showStore = function(latitude, longitude, zoom){
         showStore(this, latitude, longitude, zoom);

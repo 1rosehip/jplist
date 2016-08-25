@@ -23,8 +23,8 @@
             ,store
             ,sameCountry;
 
-        if($.isNumeric(latitude)
-            && $.isNumeric(longitude)
+        if(jQuery.isNumeric(latitude)
+            && jQuery.isNumeric(longitude)
             && window.google){
 
             //init latlng
@@ -39,7 +39,7 @@
                 if(store.country){
 
                     //check if same country
-                    sameCountry = $.trim(store.country.toLowerCase()) == $.trim(name.toLowerCase());
+                    sameCountry = jQuery.trim(store.country.toLowerCase()) == jQuery.trim(name.toLowerCase());
                 }
                 else{
                     sameCountry = false;

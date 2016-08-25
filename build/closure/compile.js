@@ -2,7 +2,29 @@ var fs = require('fs');
 var closureCompiler = require('closurecompiler');
 
 /**
-* compiler
+ * get license file
+ * @param {string} configPath
+ */
+var getLicenseFile = function(configPath){
+
+    var licenseFile = '';
+
+    try {
+        licenseFile = fs.readFileSync(configPath.replace('config.json', 'license.js'), 'utf8');
+    }
+    catch (e) {}
+
+    if(!licenseFile){
+
+        //get general license file
+        licenseFile = fs.readFileSync('src/licenses/license.js', 'utf8');
+    }
+
+    return licenseFile;
+};
+
+/**
+ * compiler
  * @param {string} configPath - the path to ./src/js-core-or-control/js/config.js file
  * @param {string} additionalArgs
  */
@@ -64,7 +86,8 @@ var compiler = function(configPath, additionalArgs){
                     var version = packageJson.version + '.' + additionalVersion;
 
                     //read licens.js file
-                    var license = fs.readFileSync('src/licenses/license.js', 'utf8');
+                    var license = getLicenseFile(configPath);
+
                     var year = (new Date()).getFullYear();
                     var updateLicense = license.replace('##year##', year).replace('##version##', version);
 

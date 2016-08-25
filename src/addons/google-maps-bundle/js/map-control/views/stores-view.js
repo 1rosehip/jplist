@@ -12,7 +12,7 @@
          */
         context.$storesPanel.on('click', context.storePath, function(){
 
-            var $store = $(this);
+            var $store = jQuery(this);
 
             context.$storesPanel.find(context.storePath).removeClass('jplist-active-store');
 
