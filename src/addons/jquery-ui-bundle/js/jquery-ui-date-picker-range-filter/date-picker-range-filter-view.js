@@ -8,21 +8,11 @@
 	var render = function(context){
 		
 		var options = {}
-			,$prev
-			,$next
 			,prevDefaultDate
 			,nextDefaultDate;
-				
-		//init prev and next input fields
-		$prev = context.$control.find('[data-type="prev"]');
-		$next = context.$control.find('[data-type="next"]');
-		
-		//init data
-		context.$control.data('jplist-datepicker-range-prev', $prev);
-		context.$control.data('jplist-datepicker-range-next', $next);
-		
+
 		//init empty onchacnge
-		$prev.off('change').change(function(){
+		context.params.$prev.off('change').change(function(){
 		
             var status;
             
@@ -34,8 +24,8 @@
 				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 			}
 		});
-		
-		$next.off('change').change(function(){
+
+        context.params.$next.off('change').change(function(){
 		
             var status;
             
@@ -58,21 +48,21 @@
 		};
 				
 		//start prev datepicker
-		context.params.datepickerFunc($prev, options);
+		context.params.datepickerFunc(context.params.$prev, options);
 		
 		//start next datepicker	
-		context.params.datepickerFunc($next, options);
+		context.params.datepickerFunc(context.params.$next, options);
 		
-		prevDefaultDate = $prev.attr('value');
+		prevDefaultDate = context.params.$prev.attr('value');
 		
 		if(prevDefaultDate){
-			$prev['datepicker']('setDate', prevDefaultDate);
+            context.params.$prev['datepicker']('setDate', prevDefaultDate);
 		}
 		
-		nextDefaultDate = $next.attr('value');
+		nextDefaultDate = context.params.$next.attr('value');
 		
 		if(nextDefaultDate){
-			$next['datepicker']('setDate', nextDefaultDate);
+            context.params.$next['datepicker']('setDate', nextDefaultDate);
 		}
 	};
 	
@@ -83,27 +73,27 @@
 	* @return {jQuery.fn.jplist.StatusDTO}
 	*/
 	var getStatus = function(context, isDefault){
-		
+
 		var status = null
 			,data = null
 			,prevDate = null
 			,nextDate = null
 			,dateTimeFormat
-			,$prev
-			,$next
 			,dataPath;	
 					
 		//get vars
 		dataPath = context.$control.attr('data-path').toString();
 		dateTimeFormat = context.$control.attr('data-datetime-format').toString();
-		
-		//get prev/next controls
-		$prev = context.$control.data('jplist-datepicker-range-prev');
-		$next = context.$control.data('jplist-datepicker-range-next');
-		
-		//get dates from datepickers
-		prevDate = $prev['datepicker']('getDate');
-		nextDate = $next['datepicker']('getDate');
+
+        if(isDefault){
+            prevDate = context.params.defaultPrev;
+            nextDate = context.params.defaultNext;
+        }
+        else{
+            //get dates from datepickers
+            prevDate = context.params.$prev['datepicker']('getDate');
+            nextDate = context.params.$next['datepicker']('getDate');
+        }
 		
 		data = new jQuery.fn.jplist.controls.DatePickerRangeFilterDTO(dataPath, dateTimeFormat, prevDate, nextDate);
 		
@@ -328,26 +318,20 @@
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
-				
+
 		var prevDate
-			,nextDate
-			,$prev
-			,$next;
-		
-		//get prev/next controls
-		$prev = context.$control.data('jplist-datepicker-range-prev');
-		$next = context.$control.data('jplist-datepicker-range-next');
+			,nextDate;
 		
 		if(jQuery.isNumeric(status.data.prev_year) && 
 			jQuery.isNumeric(status.data.prev_month) && 
 			jQuery.isNumeric(status.data.prev_day)){
 		
 			//init dates
-			prevDate = new Date(status.data.prev_year, status.data.prev_month, status.data.prev_day);	
-			$prev['datepicker']('setDate', prevDate);
+			prevDate = new Date(status.data.prev_year, status.data.prev_month, status.data.prev_day);
+            context.params.$prev['datepicker']('setDate', prevDate);
 		}
 		else{
-			$prev.val('');
+            context.params.$prev.val('');
 		}
 		
 		if(jQuery.isNumeric(status.data.next_year) && 
@@ -355,10 +339,10 @@
 			jQuery.isNumeric(status.data.next_day)){
 			
 			nextDate = new Date(status.data.next_year, status.data.next_month, status.data.next_day);
-			$next['datepicker']('setDate', nextDate);
+            context.params.$next['datepicker']('setDate', nextDate);
 		}
-		else{				
-			$next.val('');
+		else{
+            context.params.$next.val('');
 		}
 	};
 	
@@ -383,7 +367,13 @@
 				
 		context.params = {
 			datepickerFunc: function(){}
+            ,$prev: context.$control.find('[data-type="prev"]')
+            ,$next: context.$control.find('[data-type="next"]')
 		};
+
+        //save default prev / next values
+        context.params.defaultPrev = context.params.$prev['datepicker']('getDate');
+        context.params.defaultNext = context.params.$next['datepicker']('getDate');
 		
 		//set user defined functions
 		initUserDefinedFunctions(context);
