@@ -1,3 +1,5 @@
 jPList - jQuery Data Grid Controls - http://jplist.com 
 Copyright 2016 Miriam Zusin.
-The MIT License (MIT) http://opensource.org/licenses/MIT
+
+Most of the project is licensed under the MIT license except several paid addons.
+The detailed license list can be found at http://jplist.com/download
