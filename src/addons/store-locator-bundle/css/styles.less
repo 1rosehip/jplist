@@ -6,6 +6,67 @@
 @import "../../../../themes/core/common.less";
 
 /**
+ * map layout mixin
+ */
+.jplist-map-layout-mixin(){
+
+  .jplist-store-locator-bundle{
+    .jplist-panel{
+      width: 100%;
+      float: left;
+      margin: 20px 0;
+    }
+  }
+
+  .jplist-no-results{
+      text-align: center;
+  }
+
+  .jplist-google-maps-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .stores-box{
+      width: 250px;
+      height: 500px;
+      background: #fff;
+      overflow-x: auto;
+    }
+
+    .jplist-map-panel{
+      width: ~"calc(100% - 250px)";
+      height: 500px;
+    }
+
+    .jplist-map{
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .jplist-google-maps-row{
+      flex-direction: column;
+
+
+      .jplist-map-panel{
+        order: 1;
+        margin: 10px 0;
+        width: 100%;
+        height: 300px;
+      }
+
+      .stores-box{
+        order: 2;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+/**
  * stores mixin
  */
 .stores-mixin(){
@@ -42,43 +103,6 @@
 }
 
 /**
- * map mixin
- */
-.jplist-map-mixin(){
-
-  .jplist-store-locator-bundle{
-    .jplist-panel{
-      width: 100%;
-      float: left;
-      margin: 20px 0;
-    }
-  }
-
-  .jplist-google-maps-row{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-
-    .stores-box{
-      width: 250px;
-      height: 500px;
-      background: #fff;
-      overflow-x: auto;
-    }
-
-    .jplist-map-panel{
-      width: ~"calc(100% - 250px)";
-      height: 500px;
-    }
-
-    .jplist-map{
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
-
-/**
  * map autocomplete mixin
  */
 .jplist-map-autocomplete-mixin(){
@@ -92,6 +116,6 @@
   }
 }
 
-.jplist-map-mixin();
+.jplist-map-layout-mixin();
 .stores-mixin();
 .jplist-map-autocomplete-mixin();
