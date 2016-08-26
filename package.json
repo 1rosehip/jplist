@@ -12,6 +12,7 @@
     "lint": "jshint --config build/jshint/config.json src/*/js/*.js || true",
     "csscore": "lessc -x src/core/css/styles.less > dist/css/jplist.core.min.css",
     "cssdemo": "lessc -x src/demo-pages/css/styles.less > dist/css/jplist.demo-pages.min.css",
+    "cssaddon": "node ./build/css/minify-css.js",
     "corefiles": "node ./build/closure/get-js-files-list.js src/core/js/config.json --type=script || true",
     "selenium": "java -jar ./build/selenium/selenium-server-standalone-2.53.0.jar",
     "test": "./node_modules/.bin/wdio ./test/selenium-tests/wdio.conf.js"
@@ -23,6 +24,8 @@
     "colors": "^1.1.2",
     "jshint": "2.9.1",
     "less": "2.6.1",
+    "less-plugin-autoprefix": "^1.5.1",
+    "less-plugin-clean-css": "^1.5.1",
     "wdio-jasmine-framework": "^0.1.9",
     "wdio-spec-reporter": "0.0.2",
     "webdriverio": "^4.0.5"
