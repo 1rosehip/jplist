@@ -25,7 +25,8 @@
 
         if(jQuery.isNumeric(latitude)
             && jQuery.isNumeric(longitude)
-            && window.google){
+            && window.google
+            && radius > 0){
 
             //init latlng
             latlng = new google['maps']['LatLng'](latitude, longitude);

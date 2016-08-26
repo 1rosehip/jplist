@@ -131,6 +131,26 @@
 		margin: 10px 10px 0 0;	
 		.linear-gradient(#fff, #fff, @light-grey4); //bgcolor, from, to
 	}
+
+    .jplist-clear{
+      color: #666;
+      cursor: pointer;
+      float: left;
+      height: 30px;
+      line-height: 27px;
+      padding: 0 4px;
+      background: #fff;
+
+      .border-box-mixin();
+      border: 1px solid @light-grey5;
+      border-left: 0;
+      border-radius: 0 3px 3px 0;
+      text-shadow: 1px 1px 1px #fff;
+    }
+
+    .jplist-clear:hover{
+      color: #444;
+    }
 	
 	.jplist-selected{
 		color: @red1;

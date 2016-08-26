@@ -145,15 +145,18 @@
                             </ul>
                         </div>
 
-                        <input
-                                class="jplist-map-autocomplete"
-                                data-control-type="google-autocomplete-control"
-                                data-control-name="google-autocomplete-control"
-                                data-control-action="filter"
-                                data-radius="100000"
-                                type="text"
-                                placeholder="Enter a location"
-                        />
+                        <div class="jplist-map-autocomplete">
+                            <i class="fa fa-map-marker jplist-icon" aria-hidden="true"></i>
+                            <input
+                                    data-control-type="google-autocomplete-control"
+                                    data-control-name="google-autocomplete-control"
+                                    data-control-action="filter"
+                                    data-radius="100000"
+                                    type="text"
+                                    placeholder="Enter a location"
+                            />
+                            <i class="fa fa-times-circle jplist-clear" aria-hidden="true" data-type="clear"></i>
+                        </div>
 
                         <!-- data-radius in meters -->
 

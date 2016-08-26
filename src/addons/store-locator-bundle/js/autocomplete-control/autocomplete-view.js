@@ -2,24 +2,30 @@
     'use strict';
 
     /**
-     * handle place change
+     * send jPList redraw event
      * @param {Object} context
      */
-    var handlePlaceChange = function(context){
+    var sendEvent = function(context){
 
-        var place
-            ,status;
-
-        //get selected place
-        context.params.place = context.params.autocomplete.getPlace();
-
-        status = getStatus(context, false);
+        var status = getStatus(context, false);
 
         //update last status
         context.history.addStatus(status);
 
         context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
+    };
 
+    /**
+     * handle place change
+     * @param {Object} context
+     */
+    var handlePlaceChange = function(context){
+
+        //get selected place
+        context.params.place = context.params.autocomplete.getPlace();
+
+        //send jPList redraw event
+        sendEvent(context);
     };
 
     /**
@@ -41,22 +47,36 @@
             handlePlaceChange(context);
         });
 
-        /*
+        /**
+         * on autocomplete textbox clear
+         */
+        context.$control.next('[data-type="clear"]').off('click').on('click', function(){
+
+            context.$control.val('');
+            context.params.place = null;
+
+            //send jPList redraw event
+            sendEvent(context);
+        });
+
+        /**
+         * on empty textbox
+         */
         context.$control.off('keyup').on('keyup', function(e){
 
             var val;
 
             //get val
-            val = $.trim($(this).val());
+            val = jQuery.trim(jQuery(this).val());
 
             if(val === ''){
 
                 context.params.place = null;
 
-                //send panel redraw event
-                control.$jplistBox.trigger(control.options.force_ask_event, [false]);
+                //send jPList redraw event
+                sendEvent(context);
             }
-        });*/
+        });
     };
 
     /**
@@ -70,41 +90,30 @@
         var status = null
             ,data;
 
-        /*
-        if(isDefault){
+        if(isDefault || !(context.params.place)){
 
-            status = new jQuery.fn.jplist.controls.AutocompleteDTO(
-                context.params.latitude
-                ,context.params.longitude
-                ,context.params.name
-                ,context.params.radius);
+            data = new jQuery.fn.jplist.controls.AutocompleteDTO(0 ,0 ,'', 0);
         }
         else{
-            status = new jQuery.fn.jplist.controls.AutocompleteDTO(latitude, longitude, name, radius);
-        }
-        */
-
-        if(context.params.place) {
-
             data = new jQuery.fn.jplist.controls.AutocompleteDTO(
                 context.params.place.geometry.location['lat']()
                 ,context.params.place.geometry.location['lng']()
                 ,context.params.place.name
                 ,context.params.radius
             );
-
-            //create status object
-            status = new jQuery.fn.jplist.StatusDTO(
-                context.name
-                ,context.action
-                ,context.type
-                ,data
-                ,context.inStorage
-                ,context.inAnimation
-                ,context.isAnimateToTop
-                ,context.inDeepLinking
-            );
         }
+
+        //create status object
+        status = new jQuery.fn.jplist.StatusDTO(
+            context.name
+            ,context.action
+            ,context.type
+            ,data
+            ,context.inStorage
+            ,context.inAnimation
+            ,context.isAnimateToTop
+            ,context.inDeepLinking
+        );
 
         return status;
     };
@@ -122,9 +131,6 @@
             ,place: null
 
             ,zoom: Number(context.$control.attr('data-zoom')) || 17
-            //,latitude: Number(context.$control.attr('data-latitude')) || 0
-            //,longitude: Number(context.$control.attr('data-longitude')) || 0
-            //,name: context.$control.attr('data-name')
             ,radius: context.$control.attr('data-radius')
         };
 
