@@ -107,118 +107,34 @@ Please read [jPList guidelines](https://github.com/no81no/jplist/wiki/Reporting-
 - [jPList with Fancybox](http://jplist.com/otherexamples/jplist-with-fancybox) - example of jPList with lightbox
 - [Large Amount of Data](http://jplist.com/otherexamples/large-amount-of-data-demo) - demo with 1000 items on the page
 
-## [Working with Sources](#build-sources) <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/edit.png" align="right">
+## [Documentation](#docs) <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/tools.png" align="right">
 
-#### Create minified JS files: ####
+### Settings
+- [Getting Started](http://jplist.com/documentation)
+- [Controls Settings](http://jplist.com/documentation/controls)
+- [JavaScript Settings](http://jplist.com/documentation/js-settings)
+- [Animation Settings](http://jplist.com/documentation/animation)
+- [Deep links Settings](http://jplist.com/documentation/deep-links)
+- [Storage Settings](http://jplist.com/documentation/storage)
+- [Data Sources](http://jplist.com/documentation/data-sources)
+- ['Redraw Callback' Function](http://jplist.com/documentation/redraw-callback-function)
 
-To create **jplist.core.min.js** from sources: 
-```
-npm run jscore
-```
+### API
+- [Add one item](http://jplist.com/documentation/api-add-one-item)
+- [Add range of items](http://jplist.com/documentation/api-add-range-of-items)
+- [Remove one item](http://jplist.com/documentation/api-remove-one-item)
+- [Remove range of items](http://jplist.com/documentation/api-remove-range-of-items)
 
-Enable verbose mode:
-```
-npm run jscore -- --verb
-```
+### Sources
+- [JS Minification and Lint](http://jplist.com/documentation/js-minification-and-lint)
+- [CSS Minification](http://jplist.com/documentation/css-minification)
+- [Source Files List](http://jplist.com/documentation/source-files-list)
+- [Tests](http://jplist.com/documentation/tests)
+- [Changelog](https://github.com/no81no/jplist)
+- [aaa](http://jplist.com/documentation)
 
-To create **jplist.core-ajax.min.js** from sources: 
-```
-npm run ajaxcore
-```
-
-Enable verbose mode:
-```
-npm run ajaxcore -- --verb
-```
-
-To create any **minified** bundle or control: 
-```
-node ./build/closure/rebuild-js.js path-to-control-config-file
-```
-
-For example: 
-```
-node ./build/closure/rebuild-js.js src/addons/textbox-filter/js/config.json
-```
-
-Enable **verbose** mode: 
-```
-node ./build/closure/rebuild-js.js src/addons/textbox-filter/js/config.json --verb
-```
-
-To rebuild **jplist.core.min.js** and **all** controls: 
-```
-node ./build/closure/rebuild-js-all.js
-```
-
-#### Lint: ####
-
-To run **jshint** on jPList sources:
-```
-npm run lint
-```
-
-#### Create minified CSS files: ####
-
-To create **jplist.core.min.css** from sources: 
-```
-npm run csscore
-```
-
-To create **jplist.demo-pages.min.css** from sources: 
-```
-npm run cssdemo
-```
-
-To create minified css for any **control** or **bundle**: 
-```
-lessc -x src/addons/control-folder-name/css/styles.less > dist/css/jplist.control-folder-name.min.css
-```
-
-For example:
-```
-lessc -x src/addons/filter-toggle-bundle/css/styles.less > dist/css/jplist.filter-toggle-bundle.min.css
-```
-
-#### List of source files: ####
-
-To get a list of source files (to be included in HTML or for other purpose):
-```js
-//list of sources as HTML scripts
-npm run corefiles
-
-//sample source list
-node ./build/closure/get-js-files-list.js src/core/js/config.json --type=files
-
-//list of github raw urls
-node ./build/closure/get-js-files-list.js src/core/js/config.json --type=github
-
-//for any control; type can be: script, files or github
-node ./build/closure/get-js-files-list.js src/addons/control-folder-name/js/config.json --type=files
-
-//for example
-node ./build/closure/get-js-files-list.js src/addons/filter-dropdown-bundle/js/config.json --type=script
-```
-
-#### Integration Tests: ####
-
-jPList uses selenium to run integration tests. Also the root folder should be configured as **jplist-php.local** website. PHP / MySQL should be configured to test the relevant pages.
-```
-npm install
-```
-
-Run selenium server:
-```
-npm run selenium
-```
-
-Run the tests:
-```
-npm test
-```
-
-#### Unit Tests: ####
-jPList uses **qunit** for the unit testing. It could be run in the browser using **/test/qunit-tests/index.html**.
+### Addons
+- [How to create a jPList addon](http://jplist.com/documentation/how-to-create-a-basic-jplist-plugin)
 
 ## [Browser Compatibility](#browser-compat) <img src="https://raw.githubusercontent.com/no81no/jplist/master/demo/img/common/puzzle.png" align="right">
 - Internet Explorer 8+
