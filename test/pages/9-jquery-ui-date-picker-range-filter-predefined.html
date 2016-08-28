@@ -26,28 +26,10 @@
         <!-- jPList jQuery UI bundle js and css -->
         <link href="../../dist/css/jplist.jquery-ui-bundle.min.css" rel="stylesheet" type="text/css" />
         <script src="../../dist/js/jplist.jquery-ui-bundle.min.js"></script>
-		
+
 		<script>
 		$('document').ready(function(){
-		
-			var todayDate = new Date()
-				,month = todayDate.getMonth() + 1
-				,day = todayDate.getDate()
-				,year = todayDate.getFullYear()
-				,path
-				,dataitems
-				,observer;
-			
-			$('.date-picker[data-type="prev"]').attr('value', month + '/' + day + '/' + year);
-			$('.date-picker[data-type="next"]').attr('value','11/12/2014');
-			
-			//init path
-			path = new jQuery.fn.jplist.domain.dom.models.DataItemMemberPathModel('.date', 'datetime');
-			observer = new jQuery.fn.jplist.app.events.PubSub($('#demo'), {});
-			dataitemsCollection = new jQuery.fn.jplist.domain.dom.collections.DataItemsCollection({}, observer, $('.list-item'), [path])();
-			
-			//jQuery.fn.jplist.domain.dom.services.SortService.datetime('desc', path, dataitemsCollection.dataitems, 'mm/dd/yy');
-			
+
 			/**
 			* user defined functions
 			*/
@@ -59,7 +41,9 @@
 				datepicker: function(input, options){
 
 					//set options
-					options.dateFormat = 'mm/dd/yy' 								
+					options.dateFormat = 'mm/dd/yy';
+                    options.changeMonth = true;
+                    options.changeYear = true;
 
 					//start datepicker
 					input.datepicker(options);
@@ -112,20 +96,24 @@
 						   data-datetime-format="{month}/{day}/{year}"
 						   data-datepicker-func="datepicker"
 						   class="jplist-date-picker-range">
-												
-						   <input
-							  type="text"
-							  class="date-picker"
-							  placeholder="Datepicker"
-							  data-type="prev" />
-						   
-						   <span class="gap">-</span>
-						   
-						   <input
-							  type="text"
-							  class="date-picker"	
-							  placeholder="Datepicker" 
-							  data-type="next"/>
+
+                            <i class="fa fa-calendar jplist-icon" aria-hidden="true"></i>
+                            <input
+                                    type="text"
+                                    value="11/12/2014"
+                                    class="date-picker"
+                                    placeholder="Datepicker"
+                                    data-type="prev" />
+
+                            <i class="fa fa-minus gap" aria-hidden="true"></i>
+
+                            <i class="fa fa-calendar jplist-icon" aria-hidden="true"></i>
+                            <input
+                                    type="text"
+                                    value="today"
+                                    class="date-picker"
+                                    placeholder="Datepicker"
+                                    data-type="next"/>
 						</div>	
 						
 					</div>				 

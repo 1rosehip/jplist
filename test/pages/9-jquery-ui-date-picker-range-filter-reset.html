@@ -27,15 +27,6 @@
         <link href="../../dist/css/jplist.jquery-ui-bundle.min.css" rel="stylesheet" type="text/css" />
         <script src="../../dist/js/jplist.jquery-ui-bundle.min.js"></script>
 
-        <!--
-        <script src="../../src/addons/jquery-ui-bundle/js/jquery-ui-date-picker-range-filter/date-picker-range-filter-dto.js"></script>
-        <script src="../../src/addons/jquery-ui-bundle/js/jquery-ui-date-picker-range-filter/date-picker-range-filter-view.js"></script>
-        <script src="../../src/addons/jquery-ui-bundle/js/jquery-ui-date-picker-filter/date-picker-filter-dto.js"></script>
-        <script src="../../src/addons/jquery-ui-bundle/js/jquery-ui-date-picker-filter/date-picker-filter-view.js"></script>
-        <script src="../../src/addons/jquery-ui-bundle/js/jquery-ui-range-slider/range-slider-dto.js"></script>
-        <script src="../../src/addons/jquery-ui-bundle/js/jquery-ui-range-slider/range-slider-view.js"></script>
-        -->
-
         <script src="../../dist/js/jplist.history-bundle.min.js"></script>
 		
 		<script>
@@ -52,7 +43,9 @@
 				datepicker: function(input, options){
 
 					//set options
-					options.dateFormat = 'mm/dd/yy' 								
+					options.dateFormat = 'mm/dd/yy';
+                    options.changeMonth = true;
+                    options.changeYear = true;
 
 					//start datepicker
 					input.datepicker(options);
@@ -116,20 +109,22 @@
 						   data-datetime-format="{month}/{day}/{year}"
 						   data-datepicker-func="datepicker"
 						   class="jplist-date-picker-range">
-												
-						   <input
-							  type="text"
-							  class="date-picker"
-							  placeholder="Datepicker"
-							  data-type="prev" />
-						   
-						   <span class="gap">-</span>
-						   
-						   <input
-							  type="text"
-							  class="date-picker"								
-							  placeholder="Datepicker" 
-							  data-type="next"/>
+
+                            <i class="fa fa-calendar jplist-icon" aria-hidden="true"></i>
+                            <input
+                                    type="text"
+                                    class="date-picker"
+                                    placeholder="Datepicker"
+                                    data-type="prev" />
+
+                            <i class="fa fa-minus gap" aria-hidden="true"></i>
+
+                            <i class="fa fa-calendar jplist-icon" aria-hidden="true"></i>
+                            <input
+                                    type="text"
+                                    class="date-picker"
+                                    placeholder="Datepicker"
+                                    data-type="next"/>
 						</div>	
 						
 					</div>				 

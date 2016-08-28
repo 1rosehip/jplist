@@ -174,7 +174,7 @@
 	
 	/**
 	* Get datetime from string with wildcards like {year}, {month}, {day}, {hour}, {min}, {sec}
-	* @param {Date} datetime
+	* @param {string} datetime
 	* @param {string} format
 	* @return {Date}
 	*/

@@ -2,9 +2,9 @@
 	'use strict';		
 		
 	/**
-	* Render control html
-	* @param {Object} context
-	*/
+	 * Render control html
+	 * @param {Object} context
+	 */
 	var render = function(context){
 		
 		var options = {}
@@ -67,23 +67,21 @@
 	};
 	
 	/**
-	* Get control status
-	* @param {Object} context
-	* @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
-	* @return {jQuery.fn.jplist.StatusDTO}
-	*/
+	 * Get control status
+	 * @param {Object} context
+	 * @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
+	 * @return {jQuery.fn.jplist.StatusDTO}
+	 */
 	var getStatus = function(context, isDefault){
 
 		var status = null
 			,data = null
 			,prevDate = null
 			,nextDate = null
-			,dateTimeFormat
 			,dataPath;	
 					
 		//get vars
 		dataPath = context.$control.attr('data-path').toString();
-		dateTimeFormat = context.$control.attr('data-datetime-format').toString();
 
         if(isDefault){
             prevDate = context.params.defaultPrev;
@@ -95,7 +93,7 @@
             nextDate = context.params.$next['datepicker']('getDate');
         }
 		
-		data = new jQuery.fn.jplist.controls.DatePickerRangeFilterDTO(dataPath, dateTimeFormat, prevDate, nextDate);
+		data = new jQuery.fn.jplist.controls.DatePickerRangeFilterDTO(dataPath, context.params.dateTimeFormat, prevDate, nextDate);
 		
 		status = new jQuery.fn.jplist.StatusDTO(
 			context.name
@@ -112,10 +110,10 @@
 	};
 	
 	/**
-	* Get deep link
-	* @param {Object} context
-	* @return {string} deep link
-	*/
+	 * Get deep link
+	 * @param {Object} context
+	 * @return {string} deep link
+	 */
 	var getDeepLink = function(context){
 		
 		var deepLink = ''
@@ -189,11 +187,11 @@
 	};
 	
 	/**
-	* get prev value from deep link
-	* @param {Object} context
-	* @param {jQuery.fn.jplist.StatusDTO} status
-	* @param {string} propValue
-	*/
+	 * get prev value from deep link
+	 * @param {Object} context
+	 * @param {jQuery.fn.jplist.StatusDTO} status
+	 * @param {string} propValue
+	 */
 	var getPrevValue = function(context, status, propValue){
 		
 		var sections;
@@ -209,11 +207,11 @@
 	};
 	
 	/**
-	* get next value from deep link
-	* @param {Object} context
-	* @param {jQuery.fn.jplist.StatusDTO} status
-	* @param {string} propValue
-	*/
+	 * get next value from deep link
+	 * @param {Object} context
+	 * @param {jQuery.fn.jplist.StatusDTO} status
+	 * @param {string} propValue
+	 */
 	var getNextValue = function(context, status, propValue){
 		
 		var sections;
@@ -229,12 +227,12 @@
 	};
 	
 	/**
-	* get status by deep link
-	* @param {Object} context
-	* @param {string} propName - deep link property name
-	* @param {string} propValue - deep link property value
-	* @return {jQuery.fn.jplist.StatusDTO}
-	*/
+	 * get status by deep link
+	 * @param {Object} context
+	 * @param {string} propName - deep link property name
+	 * @param {string} propValue - deep link property value
+	 * @return {jQuery.fn.jplist.StatusDTO}
+	 */
 	var getStatusByDeepLink = function(context, propName, propValue){
 		
 		var isDefault = true
@@ -291,10 +289,10 @@
 	};
 	
 	/**
-	* Get control paths
-	* @param {Object} context
-	* @param {Array.<jQuery.fn.jplist.PathModel>} paths
-	*/
+	 * Get control paths
+	 * @param {Object} context
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths
+	 */
 	var getPaths = function(context, paths){
 	
 		var jqPath
@@ -312,11 +310,11 @@
 	};
 		
 	/**
-	* Set control status
-	* @param {Object} context
-	* @param {jQuery.fn.jplist.StatusDTO} status
-	* @param {boolean} restoredFromStorage - is status restored from storage
-	*/
+	 * Set control status
+	 * @param {Object} context
+	 * @param {jQuery.fn.jplist.StatusDTO} status
+	 * @param {boolean} restoredFromStorage - is status restored from storage
+	 */
 	var setStatus = function(context, status, restoredFromStorage){
 
 		var prevDate
@@ -347,8 +345,9 @@
 	};
 	
 	/**
-	* init user defined functions
-	*/
+	 * init user defined functions
+     * @param {Object} context
+	 */
 	var initUserDefinedFunctions = function(context){
 		
 		var datePickerFunc = context.$control.attr('data-datepicker-func');
@@ -357,23 +356,57 @@
 			context.params.datepickerFunc = jQuery.fn.jplist.settings[datePickerFunc];
 		}
 	};
-	
+
+    /**
+     * get default date value
+     * @param {Object} context
+     * @param {string} dateValue
+     * @return {Date}
+     */
+    var getDefaultDate = function(context, dateValue){
+
+        var date = null;
+
+        if(dateValue){
+
+            if(dateValue === 'today'){
+
+                date = new Date();
+            }
+            else{
+                date = jQuery.fn.jplist.HelperService.formatDateTime(dateValue, context.params.dateTimeFormat);
+            }
+        }
+
+        return date;
+    };
+
 	/** 
-	* jQUery UI date picker range filter
-	* @constructor
-	* @param {Object} context
-	*/
+	 * jQUery UI date picker range filter
+	 * @constructor
+	 * @param {Object} context
+	 */
 	var Init = function(context){
 				
 		context.params = {
 			datepickerFunc: function(){}
             ,$prev: context.$control.find('[data-type="prev"]')
             ,$next: context.$control.find('[data-type="next"]')
+            ,dateTimeFormat: context.$control.attr('data-datetime-format').toString()
 		};
 
         //save default prev / next values
         context.params.defaultPrev = context.params.$prev['datepicker']('getDate');
+
+        if(!context.params.defaultPrev){
+            context.params.defaultPrev = getDefaultDate(context, context.params.$prev.attr('value'));
+        };
+
         context.params.defaultNext = context.params.$next['datepicker']('getDate');
+
+        if(!context.params.defaultNext){
+            context.params.defaultNext = getDefaultDate(context, context.params.$next.attr('value'));
+        }
 		
 		//set user defined functions
 		initUserDefinedFunctions(context);
@@ -385,61 +418,61 @@
 	};
 	
 	/**
-	* Get control status
-	* @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
-	* @return {jQuery.fn.jplist.StatusDTO}
-	*/
+	 * Get control status
+	 * @param {boolean} isDefault - if true, get default (initial) control status; else - get current control status
+	 * @return {jQuery.fn.jplist.StatusDTO}
+	 */
 	Init.prototype.getStatus = function(isDefault){
 		return getStatus(this, isDefault);
 	};
 	
 	/**
-	* Get Deep Link
-	* @return {string} deep link
-	*/
+	 * Get Deep Link
+	 * @return {string} deep link
+	 */
 	Init.prototype.getDeepLink = function(){
 		return getDeepLink(this);
 	};
 	
 	/**
-	* Get Paths by Deep Link
-	* @param {string} propName - deep link property name
-	* @param {string} propValue - deep link property value
-	* @return {jQuery.fn.jplist.StatusDTO}
-	*/
+	 * Get Paths by Deep Link
+	 * @param {string} propName - deep link property name
+	 * @param {string} propValue - deep link property value
+	 * @return {jQuery.fn.jplist.StatusDTO}
+	 */
 	Init.prototype.getStatusByDeepLink = function(propName, propValue){
 		return getStatusByDeepLink(this, propName, propValue);
 	};
 	
 	/**
-	* Get Paths
-	* @param {Array.<jQuery.fn.jplist.PathModel>} paths
-	*/
+	 * Get Paths
+	 * @param {Array.<jQuery.fn.jplist.PathModel>} paths
+	 */
 	Init.prototype.getPaths = function(paths){
 		getPaths(this, paths);
 	};
 	
 	/**
-	* Set Status
-	* @param {jQuery.fn.jplist.StatusDTO} status
-	* @param {boolean} restoredFromStorage - is status restored from storage
-	*/
+	 * Set Status
+	 * @param {jQuery.fn.jplist.StatusDTO} status
+	 * @param {boolean} restoredFromStorage - is status restored from storage
+	 */
 	Init.prototype.setStatus = function(status, restoredFromStorage){
 		setStatus(this, status, restoredFromStorage);
 	};
 	
 	/** 
-	* jQuery UI date pciker range filter controller
-	* @constructor
-	* @param {Object} context
-	*/
+	 * jQuery UI date pciker range filter controller
+	 * @constructor
+	 * @param {Object} context
+	 */
 	jQuery.fn.jplist.controls.DatePickerRangeFilter = function(context){
 		return new Init(context);
 	};	
 	
 	/**
-	* static control registration
-	*/
+	 * static control registration
+	 */
 	jQuery.fn.jplist.controlTypes['date-picker-range-filter'] = {
 		className: 'DatePickerRangeFilter'
 		,options: {}

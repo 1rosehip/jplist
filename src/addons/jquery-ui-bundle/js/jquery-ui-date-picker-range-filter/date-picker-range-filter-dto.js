@@ -15,9 +15,11 @@
 			path: dataPath
 			,format: dateTimeFormat
 			,filterType: 'dateRange'
+
 			,prev_year: ''
 			,prev_month: ''
 			,prev_day: ''
+
 			,next_year: ''
 			,next_month: ''
 			,next_day: ''

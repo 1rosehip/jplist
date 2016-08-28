@@ -10,23 +10,34 @@
 */
 .datepicker-mixin(){
 
-    .jplist-date-picker-range{
+  .jplist-panel {
+    .jplist-date-picker-range {
+      float: left;
+      margin-top: 10px;
+
+      .gap {
         float: left;
-        margin-top: 10px;
-		
-       .gap{
-            float: left;
-            display: block;
-            margin-right: 5px;
-       }
+        display: block;
+        margin-right: 5px;
+        line-height: 30px;
+      }
+
+      input[type="text"] {
+        border-radius: 0 3px 3px 0;
+      }
+
+      .jplist-icon{
+        border-radius: 3px 0 0 3px;
+      }
     }
 
-    .date-picker{
-        float: left;
-        border: 1px solid @light-grey5;
-        margin-right: 5px;
-        width: 100px;
+    .date-picker {
+      float: left;
+      border: 1px solid @light-grey5;
+      margin-right: 5px;
+      width: 100px;
     }
+  }
 }
 
 /**

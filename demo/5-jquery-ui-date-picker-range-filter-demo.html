@@ -42,7 +42,9 @@
 				datepicker: function(input, options){
 
 					//set options
-					options.dateFormat = 'mm/dd/yy' 								
+					options.dateFormat = 'mm/dd/yy';
+                    options.changeMonth = true;
+                    options.changeYear = true;
 
 					//start datepicker
 					input.datepicker(options);
@@ -132,16 +134,18 @@
 						   data-datetime-format="{month}/{day}/{year}"
 						   data-datepicker-func="datepicker"
 						   class="jplist-date-picker-range">
-												
-						   <input
+
+                            <i class="fa fa-calendar jplist-icon" aria-hidden="true"></i>
+						    <input
 							  type="text"
 							  class="date-picker"
 							  placeholder="Datepicker"
 							  data-type="prev" />
-						   
-						   <span class="gap">-</span>
-						   
-						   <input
+
+                            <i class="fa fa-minus gap" aria-hidden="true"></i>
+
+                            <i class="fa fa-calendar jplist-icon" aria-hidden="true"></i>
+						    <input
 							  type="text"
 							  class="date-picker"								
 							  placeholder="Datepicker" 
