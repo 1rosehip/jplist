@@ -114,7 +114,7 @@ Please read [jPList guidelines](https://github.com/no81no/jplist/wiki/Reporting-
 - [Controls Settings](http://jplist.com/documentation/controls)
 - [JavaScript Settings](http://jplist.com/documentation/js-settings)
 - [Animation Settings](http://jplist.com/documentation/animation)
-- [Deep links Settings](http://jplist.com/documentation/deep-links)
+- [Deep Links Settings](http://jplist.com/documentation/deep-links)
 - [Storage Settings](http://jplist.com/documentation/storage)
 - [Data Sources](http://jplist.com/documentation/data-sources)
 - ['Redraw Callback' Function](http://jplist.com/documentation/redraw-callback-function)
@@ -131,7 +131,6 @@ Please read [jPList guidelines](https://github.com/no81no/jplist/wiki/Reporting-
 - [Source Files List](http://jplist.com/documentation/source-files-list)
 - [Tests](http://jplist.com/documentation/tests)
 - [Changelog](https://github.com/no81no/jplist)
-- [aaa](http://jplist.com/documentation)
 
 ### Addons
 - [How to create a jPList addon](http://jplist.com/documentation/how-to-create-a-basic-jplist-plugin)
