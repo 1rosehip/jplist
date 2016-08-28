@@ -50,7 +50,7 @@
 
         this.gmarker.infowindow = new window.google.maps.InfoWindow();
 
-        this.gmarker.infowindow.setContent(popupContent);
+        this.gmarker.infowindow.setContent('<div class="jplist-marker-popup">' + popupContent + '</div>');
 
         //init marker events
         initEvents(this);
