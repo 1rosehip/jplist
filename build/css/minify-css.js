@@ -32,3 +32,6 @@ if(process.argv.length > 2){
 
     }
 }
+else{
+    console.log('ERROR: addon alias is not specified.');
+}
