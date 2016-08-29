@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>		
-		<title>Radio Button Filter Control | jPList - jQuery Data Grid Controls</title>
+		<title>Radio Button Text Filter Control | jPList - jQuery Data Grid Controls</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -75,7 +75,7 @@
 								<img title="jPList - jQuery Data Grid Controls" alt="jPList - jQuery Data Grid Controls" src="http://jplist.com/content/img/common/rocket.png" />
 								<a title="" href="http://jplist.com">jPList - jQuery Data Grid Controls</a>
 							</p>
-							<h1 class="h1-30-normal">Radio Button Filter Control</h1>
+							<h1 class="h1-30-normal">Radio Button Text Filter Control</h1>
 						</div>
 
 					</div>
@@ -101,12 +101,13 @@
 											
 						<!-- radio buttons filters -->
 						<div class="jplist-group">
-						   
+
 						   <input 
-							  data-control-type="radio-buttons-filters"
+							  data-control-type="radio-buttons-text-filters"
 							  data-control-action="filter"
 							  data-control-name="default" 
-							  data-path="default" 
+							  data-path="default"
+                              value=""
 							  
 							  id="default-radio" 
 							  type="radio" 
@@ -117,10 +118,11 @@
 						   <label for="default-radio">All</label>
 						   
 						   <input 									
-							  data-control-type="radio-buttons-filters"
+							  data-control-type="radio-buttons-text-filters"
 							  data-control-action="filter"
-							  data-control-name="architecture" 
-							  data-path=".architecture" 
+							  data-control-name="architecture"
+							  value="architecture"
+                              data-path=".theme"
 							  
 							  id="architecture" 
 							  type="radio" 
@@ -130,10 +132,11 @@
 						   <label for="architecture">Architecture</label>
 						   
 						   <input 
-							  data-control-type="radio-buttons-filters"
+							  data-control-type="radio-buttons-text-filters"
 							  data-control-action="filter"
 							  data-control-name="christmas" 
-							  data-path=".christmas" 
+							  value="christmas"
+                              data-path=".theme"
 							  
 							  id="christmas" 
 							  type="radio"
@@ -143,10 +146,11 @@
 						   <label for="christmas">Christmas</label>
 						   
 						   <input 
-							  data-control-type="radio-buttons-filters"
+							  data-control-type="radio-buttons-text-filters"
 							  data-control-action="filter"
 							  data-control-name="nature" 
-							  data-path=".nature" 
+							  value="nature"
+                              data-path=".theme"
 							  
 							  id="nature" 
 							  type="radio" 
@@ -156,10 +160,11 @@
 						   <label for="nature">Nature</label>
 						   
 						   <input 
-							  data-control-type="radio-buttons-filters"
+							  data-control-type="radio-buttons-text-filters"
 							  data-control-action="filter"
 							  data-control-name="sea" 
-							  data-path=".sea" 
+							  value="sea"
+                              data-path=".theme"
 							  
 							  id="sea" 
 							  type="radio"
@@ -169,10 +174,11 @@
 						   <label for="sea">Sea</label>
 						   
 						   <input 
-							  data-control-type="radio-buttons-filters"
+							  data-control-type="radio-buttons-text-filters"
 							  data-control-action="filter"
 							  data-control-name="lifestyle" 
-							  data-path=".lifestyle" 
+							  value="lifestyle"
+                              data-path=".theme"
 							  
 							  id="lifestyle" 
 							  type="radio" 
