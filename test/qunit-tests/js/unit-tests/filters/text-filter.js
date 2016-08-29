@@ -1,4 +1,3 @@
-
 /**
 * Helper: 3 items array
 * @param {string} jqueryPath - jquery path
@@ -44,7 +43,7 @@ QUnit.test('Seach "a" in title, 3 items in array', function(assert){
 
 	var resultDataview = helper3ItemsArray('.title', 'a', null);
 	
-	assert.ok(resultDataview.length == 1, 'Array should have 1 item')
+	assert.ok(resultDataview.length == 1, 'Array should have 1 item');
 });
 
 /**
@@ -54,7 +53,7 @@ QUnit.test('Search "" in title, 3 items in array', function(assert){
 	
 	var resultDataview = helper3ItemsArray('.title', '', null);
 	
-	assert.ok(resultDataview.length == 3, 'All results should  be returned')
+	assert.ok(resultDataview.length == 3, 'All results should  be returned');
 });
 
 /**
@@ -64,7 +63,7 @@ QUnit.test('Search null in title, 3 items in array', function(assert){
 	
 	var resultDataview = helper3ItemsArray('.title', null, null);
 	
-	assert.ok(resultDataview.length == 3, 'All results should  be returned')
+	assert.ok(resultDataview.length == 3, 'All results should  be returned');
 });
 
 /**
@@ -74,7 +73,7 @@ QUnit.test('Search "   " in title, 3 items in array with regex [ ]+', function(a
 	
 	var resultDataview = helper3ItemsArray('.title', '    ', '[ ]+');
 	
-	assert.ok(resultDataview.length == 3, 'All results should  be returned')
+	assert.ok(resultDataview.length == 3, 'All results should  be returned');
 });
 
 /**
@@ -84,7 +83,7 @@ QUnit.test('Search undefined in title, 3 items in array', function(assert){
 	
 	var resultDataview = helper3ItemsArray('.title', undefined, null);
 	
-	assert.ok(resultDataview.length == 3, 'All results should  be returned')
+	assert.ok(resultDataview.length == 3, 'All results should  be returned');
 });
 
 /**
@@ -112,7 +111,7 @@ QUnit.test('Search non english letters in title, 3 items in array', function(ass
 		,''
 	);
 	
-	assert.ok(resultDataview.length == 1, '1 item should  be returned')
+	assert.ok(resultDataview.length == 1, '1 item should  be returned');
 });
 
 /**
@@ -122,7 +121,7 @@ QUnit.test('Search text with special characters, 3 items in array, "[~!@#$%^&*()
 	
 	var resultDataview = helper3ItemsArray('.title', 'a!@^', '[~!@#$%^&*()+=`\'"\/\\_ ]+');
 	
-	assert.ok(resultDataview.length == 1, '1 item should  be returned')
+	assert.ok(resultDataview.length == 1, '1 item should  be returned');
 });
 
 //-----------------------------------------------------------------------------------------------------------------------
@@ -137,6 +136,12 @@ QUnit.test('abc eee - not fff -> true', function(assert){
 	assert.ok(contains === true, 'true');
 });
 
+
+QUnit.test('abc eee - !fff -> true', function(assert){
+    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', '!fff', '', ['!'], [], []);
+    assert.ok(contains === true, 'true');
+});
+
 QUnit.test('abc eee - not abc -> false', function(assert){
 	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'not abc');
 	assert.ok(contains === false, 'false');
@@ -145,6 +150,16 @@ QUnit.test('abc eee - not abc -> false', function(assert){
 QUnit.test('abc eee - abc and eee -> true', function(assert){
 	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'abc and eee');
 	assert.ok(contains === true, 'true');
+});
+
+QUnit.test('abc eee - abc && eee -> true', function(assert){
+    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'abc && eee', '', ['!'], ['&&'], []);
+    assert.ok(contains === true, 'true');
+});
+
+QUnit.test('abc eee - abc && eee -> true', function(assert){
+    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'abc && eee', '', ['!'], ['&&', 'and'], []);
+    assert.ok(contains === true, 'true');
 });
 
 QUnit.test('abc eee ddd - abc and eee -> true', function(assert){
@@ -160,6 +175,11 @@ QUnit.test('abc eee ddd - abc and fff -> false', function(assert){
 QUnit.test('abc eee ddd - abc or fff -> true', function(assert){
 	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc or fff');
 	assert.ok(contains === true, 'true');
+});
+
+QUnit.test('abc eee ddd - abc, fff -> true', function(assert){
+    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc, fff', '', [], [], [',']);
+    assert.ok(contains === true, 'true');
 });
 
 QUnit.test('abc eee ddd - aaa or fff -> false', function(assert){
@@ -180,6 +200,11 @@ QUnit.test('... - aaa or calendar and system -> false', function(assert){
 QUnit.test('... - aaa or calendar and system -> false', function(assert){
 	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('an arch is a structure that spans a space and supports a load. arches appeared as early as the 2nd millennium bc in mesopotamian brick architecture and their systematic use started with the ancient romans who were the first to apply the technique to a wide range of structures.', 'calendar and system');
 	assert.ok(contains === false, 'false');
+});
+
+QUnit.test('and not', function(assert){
+    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc and not fff');
+    assert.ok(contains === false, 'false');
 });
 
 

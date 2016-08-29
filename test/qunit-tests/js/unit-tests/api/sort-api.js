@@ -46,6 +46,6 @@ QUnit.test('sort by text with the empty path', function(assert){
     var resultType = 'html';
 
     var result = jQuery.jplist.sort($items, order, type, path, ignore, dateTimeFormat, resultType);
-    console.log(result);
+
     assert.ok(result === '<div class="jplist-item">aaa</div><div class="jplist-item">bbb</div><div class="jplist-item">ccc</div>');
 });

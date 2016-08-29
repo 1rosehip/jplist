@@ -26,7 +26,7 @@
 		}		
 				
 		//create status related data object
-		data = new jQuery.fn.jplist.controls.TextboxDTO(dataPath, value, context.params.ignore, context.params.mode);
+		data = new jQuery.fn.jplist.controls.TextboxDTO(dataPath, value, context.params.ignore, context.params.mode, context.params.not, context.params.and, context.params.or);
 				
 		//create status object
 		status = new jQuery.fn.jplist.StatusDTO(
@@ -177,16 +177,26 @@
 	* @param {Object} context
 	*/
 	var Init = function(context){
-			
+
 		context.params = {
 			
 			path: context.$control.attr('data-path')
 			,dataButton: context.$control.attr('data-button')
-			,mode: context.$control.attr('data-mode') || 'contains'
-			,ignore: context.$control.attr('data-ignore') || '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+	
 			,eventName: context.$control.attr('data-event-name') || 'keyup'
 			,$button: null
+            ,ignore: context.$control.attr('data-ignore')
+            ,mode: context.$control.attr('data-mode') || 'contains'
 		};
+
+        if(context.params.mode === 'advanced'){
+
+            context.params.or = context.$control.attr('data-or');
+            context.params.and = context.$control.attr('data-and');
+            context.params.not = context.$control.attr('data-not');
+        }
+        else{
+            context.params.ignore = context.params.ignore || '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+
+        }
 
 		//set initial value
 		context.$control.val(context.$control.attr('value') || '');

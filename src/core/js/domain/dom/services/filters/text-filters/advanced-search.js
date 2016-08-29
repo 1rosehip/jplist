@@ -1,174 +1,149 @@
 ;(function(){
-	'use strict';	
-	
-	/**
-	* trim all items in array, remove empty items
-	* @param {Array.<string>} list
-	* @return {Array.<string>}
-	*/
-	var trimArr = function(list){
-		
-		var arr = []
-			,item;
-		
-		if(list){
-			
-			for(var i=0; i<list.length; i++){
-				
-				item = jQuery.trim(list[i]);
-				
-				if(item){
-					arr.push(item);
-				}
-			}
-		}
-		
-		return arr;
-	};
-	
-	/**
-	* check OR logic
-	* @param {string} itemText
-	* @param {string} searchText - may contain OR, AND, NOT
-	* @return {boolean} id contains
-	*/
-	var containsOR = function(itemText, searchText){
-		
-		var contains = false
-			,temp;
-		
-		temp = searchText.split(' or ');
-		temp = trimArr(temp);
-		
-		if(temp.length > 0){
-			contains = itemText.indexOf(temp[0]) !== -1;			
-			
-			for(var i=1; i<temp.length; i++){
-				contains = contains || (itemText.indexOf(temp[i]) !== -1)
-			}
-		}
-		
-		return contains;
-	};
-	
-	/**
-	* check AND logic
-	* @param {string} itemText
-	* @param {string} searchText - may contain OR, AND, NOT
-	* @return {boolean} id contains
-	*/
-	var containsAND = function(itemText, searchText){
-		
-		var temp
-			,andItem
-			,contains = false;
-		
-		temp = searchText.split(' and ');
-		temp = trimArr(temp);
-		
-		if(temp.length > 0){
-				
-			andItem = temp[0];
-			
-			if(andItem.indexOf(' or ') === -1){
-				contains = itemText.indexOf(andItem) !== -1;
-			}
-			else{
-				contains = containsOR(itemText, andItem);
-			}
-			
-			for(var i=1; i<temp.length; i++){
-			
-				andItem = temp[i];
-				
-				if(andItem.indexOf(' or ') === -1){
-					contains = contains && itemText.indexOf(andItem) !== -1;
-				}
-				else{
-					contains = contains && containsOR(itemText, andItem);
-				}
-			}
-		}
-		
-		return contains;
-	};
-		
-	/**
-	* check NOT logic
-	* @param {string} itemText
-	* @param {string} searchText - may contain OR, AND, NOT
-	* @return {boolean} id contains
-	*/
-	var containsNOT = function(itemText, searchText){
-		
-		var temp
-			,notItem
-			,contains = false;
-		
-		temp = searchText.split('not ');
-		temp = trimArr(temp);
-		
-		if(temp.length > 0){
-						
-			notItem = temp[0];
-			
-			if(notItem.indexOf(' and ') === -1){
-				
-				if(notItem.indexOf(' or ') === -1){
-					contains = itemText.indexOf(notItem) === -1;
-				}
-				else{
-					contains = containsOR(itemText, notItem);
-				}
-			}
-			else{
-				contains = containsAND(itemText, notItem);
-			}
-			
-			for(var i=1; i<temp.length; i++){
-			
-				notItem = temp[i];
-				
-				if(notItem.indexOf(' and ') === -1){
-				
-					if(notItem.indexOf(' or ') === -1){
-						contains = contains && (itemText.indexOf(notItem) === -1);
-					}
-					else{
-						contains = contains && containsOR(itemText, notItem);
-					}
-					
-					contains = contains && containsOR(itemText, notItem);
-				}
-				else{
-					contains = contains && containsAND(itemText, notItem);
-				}
-			}
-		}
-		
-		return contains;
-	};
-	
-	/**
-	* check logic
-	* @param {string} itemText
-	* @param {string} searchText - may contain OR, AND, NOT
-	* @return {boolean} id contains
-	*/
-	jQuery.fn.jplist.FiltersService.advancedSearchParse = function(itemText, searchText){
-		
-		var contains = false;
-		
-		searchText = jQuery.trim(searchText);
-		
-		if((searchText.indexOf(' or ') === -1)&&(searchText.indexOf(' and ') === -1)&&(searchText.indexOf('not ') === -1)){			
-			return itemText.indexOf(searchText) !== -1;
-		}
-		else{
-			contains = containsNOT(itemText, searchText);
-		}
-				
-		return contains;
-	};
+	'use strict';
+
+    /**
+     * scan
+     * @param {string} pattern
+     * @param {Array.<string>} operators
+     * @param {string] ignoreRegex
+     * @return {Object} tree
+     */
+    var scan = function(pattern, operators, operatorsIndex, ignoreRegex){
+
+        var part
+            ,parts
+            ,operator
+            ,tree;
+
+        if(operatorsIndex < operators.length){
+
+            operator = operators[operatorsIndex];
+            parts = pattern.split(operator);
+
+            if(parts.length > 1){
+                tree = {
+                    operator: operator
+                    ,nodes: parts
+                };
+
+                for(var i=0; i<tree.nodes.length; i++){
+
+                    part = tree.nodes[i];
+
+                    tree.nodes[i] = scan(part, operators, operatorsIndex + 1);
+                }
+            }
+            else{
+                return scan(pattern, operators, operatorsIndex + 1);
+            }
+        }
+        else{
+            return jQuery.trim(jQuery.fn.jplist.HelperService.removeCharacters(pattern, ignoreRegex));
+        }
+
+        return tree;
+    };
+
+    /**
+     * operation
+     * @param {Array.<string>} nodes
+     * @param {string} input
+     * @param {string} operator
+     * @param {Array.<string>} notOperators
+     * @param {Array.<string>} andOperators
+     * @param {Array.<string>} orOperators
+     * @return {boolean}
+     */
+    var operation = function(nodes, input, operator, notOperators, andOperators, orOperators){
+
+        var contains
+            ,node;
+
+        contains = input.indexOf(nodes[0]) !== -1;
+
+        for(var i=1; i<nodes.length; i++){
+
+            node = nodes[i];
+
+            if(node !== '') {
+
+                if(notOperators.indexOf(operator) !== -1){
+                    contains = contains && input.indexOf(node) === -1;
+                }
+
+                if(andOperators.indexOf(operator) !== -1){
+                    contains = contains && input.indexOf(node) !== -1;
+                }
+
+                if(orOperators.indexOf(operator) !== -1){
+                    contains = contains || input.indexOf(node) !== -1;
+                }
+            }
+        }
+
+        return contains;
+    };
+
+    /**
+     * parse
+     * @param {Object} tree
+     * @param {string} input
+     * @param {Array.<string>} notOperators
+     * @param {Array.<string>} andOperators
+     * @param {Array.<string>} orOperators
+     * @return {boolean} contains?
+     */
+    var parse = function(tree, input, notOperators, andOperators, orOperators){
+
+        var contains = true;
+
+        if(tree.nodes){
+
+            for(var i=0; i<tree.nodes.length; i++){
+                parse(tree.nodes[i], input, notOperators, andOperators, orOperators);
+            }
+
+            contains = operation(tree.nodes, input, tree.operator, notOperators, andOperators, orOperators);
+        }
+        else{
+            contains = input.indexOf(tree) !== -1;
+        }
+
+        return contains;
+    };
+
+    /**
+     * advanced search
+     * @param {string} input
+     * @param {string} pattern (may contain OR, AND, NOT)
+     * @param {string=} ignoreRegex
+     * @param {Array.<string>=} notOperators
+     * @param {Array.<string>=} andOperators
+     * @param {Array.<string>=} orOperators
+     * @return {boolean} contains?
+     */
+    jQuery.fn.jplist.FiltersService.advancedSearchParse = function(input, pattern, ignoreRegex, notOperators, andOperators, orOperators){
+
+        var operators
+            ,tree;
+
+        if(!notOperators || notOperators.length == 0){
+            notOperators = ['not '];
+        }
+
+        if(!andOperators || andOperators.length == 0){
+            andOperators = [' and '];
+        }
+
+        if(!orOperators || orOperators.length == 0){
+            orOperators = [' or '];
+        }
+
+        operators = orOperators.concat(andOperators).concat(notOperators);
+
+        tree = scan(pattern, operators, 0, ignoreRegex);
+
+        return parse(tree, input, notOperators, andOperators, orOperators);
+    };
 	
 })();	
