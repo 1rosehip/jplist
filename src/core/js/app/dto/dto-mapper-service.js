@@ -27,27 +27,6 @@
 		
 		var path = new jQuery.fn.jplist.PathModel(status.data.path, null);
 
-        if(status.data.mode === 'advanced'){
-
-            var temp = ['not', 'and', 'or'];
-
-            for(var i=0; i<temp.length; i++){
-
-                var opType = temp[i];
-                var opVal = status.data[opType];
-
-                if(opVal){
-                    try {
-                        status.data[opType] = $.parseJSON(opVal);
-
-                    }
-                    catch (e) {
-                        status.data[opType] = [opVal];
-                    }
-                }
-            }
-        }
-
 		return jQuery.fn.jplist.FiltersService.textFilter(
 			status.data.value
 			,path

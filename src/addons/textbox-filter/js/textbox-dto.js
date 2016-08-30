@@ -8,9 +8,9 @@
 	 * @param {string} value - textbox value
 	 * @param {string} ignore - ignore characters regex (defined in javascript in control's options)
 	 * @param {string} mode: startsWith, endsWith, contains, advanced
-     * @param {string} not - not operators in advanced mode
-     * @param {string} and - and operators in advanced mode
-     * @param {string} or - or operators in advanced mode
+     * @param {Array.<string>|string} not - not operators in advanced mode
+     * @param {Array.<string>|string} and - and operators in advanced mode
+     * @param {Array.<string>|string} or - or operators in advanced mode
 	 */
 	jQuery.fn.jplist.controls.TextboxDTO = function(dataPath, value, ignore, mode, not, and, or){
 		

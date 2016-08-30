@@ -128,15 +128,15 @@
             ,tree;
 
         if(!notOperators || notOperators.length == 0){
-            notOperators = ['not '];
+            notOperators = ['-'];
         }
 
         if(!andOperators || andOperators.length == 0){
-            andOperators = [' and '];
+            andOperators = ['&&'];
         }
 
         if(!orOperators || orOperators.length == 0){
-            orOperators = [' or '];
+            orOperators = [','];
         }
 
         operators = orOperators.concat(andOperators).concat(notOperators);

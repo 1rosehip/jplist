@@ -26,7 +26,15 @@
 		}		
 				
 		//create status related data object
-		data = new jQuery.fn.jplist.controls.TextboxDTO(dataPath, value, context.params.ignore, context.params.mode, context.params.not, context.params.and, context.params.or);
+		data = new jQuery.fn.jplist.controls.TextboxDTO(
+            dataPath
+            ,value
+            ,context.params.ignore
+            ,context.params.mode
+            ,context.params.not
+            ,context.params.and
+            ,context.params.or
+        );
 				
 		//create status object
 		status = new jQuery.fn.jplist.StatusDTO(
@@ -190,9 +198,9 @@
 
         if(context.params.mode === 'advanced'){
 
-            context.params.or = context.$control.attr('data-or');
-            context.params.and = context.$control.attr('data-and');
-            context.params.not = context.$control.attr('data-not');
+            context.params.or = jQuery.fn.jplist.ControlFactory.getProp(context.$control, 'or');
+            context.params.and = jQuery.fn.jplist.ControlFactory.getProp(context.$control, 'and');
+            context.params.not = jQuery.fn.jplist.ControlFactory.getProp(context.$control, 'not');
         }
         else{
             context.params.ignore = context.params.ignore || '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+

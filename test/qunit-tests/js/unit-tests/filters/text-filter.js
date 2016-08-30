@@ -131,8 +131,8 @@ QUnit.test('Search text with special characters, 3 items in array, "[~!@#$%^&*()
 */
 QUnit.module('Unit Test: Text Filters: Advanced Search');
 
-QUnit.test('abc eee - not fff -> true', function(assert){
-	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'not fff');
+QUnit.test('abc eee - -fff -> true', function(assert){
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', '-fff');
 	assert.ok(contains === true, 'true');
 });
 
@@ -142,18 +142,18 @@ QUnit.test('abc eee - !fff -> true', function(assert){
     assert.ok(contains === true, 'true');
 });
 
-QUnit.test('abc eee - not abc -> false', function(assert){
-	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'not abc');
+QUnit.test('abc eee - -abc -> false', function(assert){
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', '-abc');
 	assert.ok(contains === false, 'false');
 });
 
-QUnit.test('abc eee - abc and eee -> true', function(assert){
-	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'abc and eee');
+QUnit.test('abc eee - abc && eee -> true', function(assert){
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'abc && eee');
 	assert.ok(contains === true, 'true');
 });
 
-QUnit.test('abc eee - abc && eee -> true', function(assert){
-    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'abc && eee', '', ['!'], ['&&'], []);
+QUnit.test('abc eee - abc and eee -> true', function(assert){
+    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee', 'abc and eee', '', ['!'], [' and '], []);
     assert.ok(contains === true, 'true');
 });
 
@@ -162,48 +162,48 @@ QUnit.test('abc eee - abc && eee -> true', function(assert){
     assert.ok(contains === true, 'true');
 });
 
-QUnit.test('abc eee ddd - abc and eee -> true', function(assert){
-	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc and eee');
+QUnit.test('abc eee ddd - abc&&eee -> true', function(assert){
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc&&eee');
 	assert.ok(contains === true, 'true');
 });
 
-QUnit.test('abc eee ddd - abc and fff -> false', function(assert){
-	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc and fff');
+QUnit.test('abc eee ddd - abc && fff -> false', function(assert){
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc && fff');
 	assert.ok(contains === false, 'false');
-});
-
-QUnit.test('abc eee ddd - abc or fff -> true', function(assert){
-	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc or fff');
-	assert.ok(contains === true, 'true');
 });
 
 QUnit.test('abc eee ddd - abc, fff -> true', function(assert){
-    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc, fff', '', [], [], [',']);
-    assert.ok(contains === true, 'true');
-});
-
-QUnit.test('abc eee ddd - aaa or fff -> false', function(assert){
-	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'aaa or fff');
-	assert.ok(contains === false, 'false');
-});
-
-QUnit.test('... - aaa or calendar and system -> true', function(assert){
-	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('A calendar is a system of organizing days for social, religious, commercial, or administrative purposes. This is done by giving names to periods of time, typically days, weeks, months, and years. The name given to each day is known as a date. Periods in a calendar (such as years and months) are usually, though not necessarily, synchronized with the cycle of the sun or the moon.', 'calendar and system');
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc, fff');
 	assert.ok(contains === true, 'true');
 });
 
-QUnit.test('... - aaa or calendar and system -> false', function(assert){
-	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.', 'calendar and system');
+QUnit.test('abc eee ddd - abc or fff -> true', function(assert){
+    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc or fff', '', [], [], [' or ']);
+    assert.ok(contains === true, 'true');
+});
+
+QUnit.test('abc eee ddd - aaa, fff -> false', function(assert){
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'aaa, fff');
 	assert.ok(contains === false, 'false');
 });
 
-QUnit.test('... - aaa or calendar and system -> false', function(assert){
-	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('an arch is a structure that spans a space and supports a load. arches appeared as early as the 2nd millennium bc in mesopotamian brick architecture and their systematic use started with the ancient romans who were the first to apply the technique to a wide range of structures.', 'calendar and system');
+QUnit.test('... - aaa or calendar && system -> true', function(assert){
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('A calendar is a system of organizing days for social, religious, commercial, or administrative purposes. This is done by giving names to periods of time, typically days, weeks, months, and years. The name given to each day is known as a date. Periods in a calendar (such as years and months) are usually, though not necessarily, synchronized with the cycle of the sun or the moon.', 'calendar && system');
+	assert.ok(contains === true, 'true');
+});
+
+QUnit.test('... - aaa or calendar && system -> false', function(assert){
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.', 'calendar && system');
 	assert.ok(contains === false, 'false');
 });
 
-QUnit.test('and not', function(assert){
-    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc and not fff');
+QUnit.test('... - aaa or calendar && system -> false', function(assert){
+	var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('an arch is a structure that spans a space and supports a load. arches appeared as early as the 2nd millennium bc in mesopotamian brick architecture and their systematic use started with the ancient romans who were the first to apply the technique to a wide range of structures.', 'calendar && system');
+	assert.ok(contains === false, 'false');
+});
+
+QUnit.test('abc && -fff', function(assert){
+    var contains = jQuery.fn.jplist.FiltersService.advancedSearchParse('abc eee ddd', 'abc && -fff');
     assert.ok(contains === false, 'false');
 });
 
