@@ -9,9 +9,8 @@
 	* @param {string} order - 'asc' or 'desc'
 	* @param {string} dateTimeFormat - like {day}.{month}.{year} //{year}, {month}, {day}, {hour}, {min}, {sec}
 	* @param {string} ignore - ignore regex
-	* @param {Array.<string>} additionalPaths - used for multiple sort
 	*/
-	jQuery.fn.jplist.controls.DropdownSortDTO = function(dataPath, type, order, dateTimeFormat, ignore, additionalPaths){
+	jQuery.fn.jplist.controls.DropdownSortDTO = function(dataPath, type, order, dateTimeFormat, ignore){
 		
 		return {
 			path: dataPath
@@ -19,7 +18,6 @@
 			,order: order
 			,dateTimeFormat: dateTimeFormat
 			,ignore: ignore
-			,additionalPaths: additionalPaths
 		};
 	};	
 		

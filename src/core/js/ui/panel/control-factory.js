@@ -250,6 +250,38 @@
 
         return values;
     };
+
+    /**
+     * returns string like [data-prop="..."][data-prop1=""][data-prop2=""]
+     * static control helper
+     * @static
+     * @param {Array.<string>|string} property values
+     * @param {string} prop - data attribute property name
+     * @return {Array.<string>|string} path
+     */
+    jQuery.fn.jplist.ControlFactory.getPropPath = function(values, prop){
+
+        var path = '';
+
+        if(jQuery.isArray(values)){
+
+            for(var i=0; i<values.length; i++){
+
+                var prefix = '';
+
+                if(i !== 0){
+                    prefix = '' + i;
+                }
+
+                path += '[data-' + prop + prefix + '="' + values[i] + '"]';
+            }
+        }
+        else{
+            path += '[data-' + prop + '="' + values + '"]';
+        }
+
+        return path;
+    };
 })();
 
 /*

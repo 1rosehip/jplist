@@ -1,26 +1,5 @@
 ;(function(){//+
-	'use strict';		
-	
-	/**
-	* get additional paths - used for multiple sort
-	* <span data-path="..." data-path-1="..." data-path-2="..."
-	* @param {jQueryObject} $span
-	* @return {Array.<string>} additionalPaths
-	*/
-	var getAdditionalPaths = function($span){
-		
-		var additionalPaths = [];
-		
-		//init additional data-paths used for the multiple sort
-		jQuery.each($span.get(0).attributes, function(key, attr){
-			
-			if(attr.name.indexOf('data-path-') !== -1){				
-				additionalPaths.push(attr.value);
-			}
-		});
-		
-		return additionalPaths;
-	};
+	'use strict';
 	
 	/**
 	* Get control status
@@ -33,9 +12,7 @@
 		var status = null
 			,data
 			,$li
-			,$span
-			,dateTimeFormat
-			,ignore;	
+			,$span;
 		
 		if(isDefault){
 					
@@ -51,21 +28,14 @@
 		
 		//get span
 		$span = $li.find('span');
-		
-		//init datetime format
-		dateTimeFormat = context.$control.attr('data-datetime-format') || '';
-		
-		//init ignore
-		ignore = context.$control.attr('data-ignore') || '';
 				
 		//init status related data
 		data = new jQuery.fn.jplist.controls.DropdownSortDTO(
-			$span.attr('data-path')
-			,$span.attr('data-type')
-			,$span.attr('data-order')
-			,dateTimeFormat
-			,ignore
-			,getAdditionalPaths($span)
+            jQuery.fn.jplist.ControlFactory.getProp($span, 'path')
+			,jQuery.fn.jplist.ControlFactory.getProp($span, 'type')
+			,jQuery.fn.jplist.ControlFactory.getProp($span, 'order')
+			,context.params.dateTimeFormat
+			,context.params.ignore
 		);
 		
 		//create status
@@ -149,34 +119,72 @@
 
 		return status;
 	};
-	
+
+    /**
+     * get path
+     * @param {string} path
+     * @param {string} type
+     * @return {jQuery.fn.jplist.PathModel|null}
+     */
+    var getPath = function(path, type){
+
+        var path = jQuery.trim(path)
+            ,type = type || 'text';
+
+        if(path){
+            return new jQuery.fn.jplist.PathModel(path, type);
+        }
+
+        return null;
+    };
+
 	/**
 	* Get control paths
 	* @param {Object} context
 	* @param {Array.<jQuery.fn.jplist.PathModel>} paths
 	*/
 	var getPaths = function(context, paths){
-	
+
 		context.$control.find('span').each(function(){
-		
-			var jqPath
-				,dataType
-				,path;
-			
-			//init vars
-			jqPath = jQuery(this).attr('data-path');
-			dataType = jQuery(this).attr('data-type');
-			
-			//init path
-			if(jqPath && jQuery.trim(jqPath) !== ''){
-			   
-			    //init path
-				path = new jQuery.fn.jplist.PathModel(jqPath, dataType);
-				paths.push(path);
-			}
+
+            var dataPaths
+                ,types
+                ,$span = jQuery(this)
+                ,path
+                ,type;
+
+            dataPaths = jQuery.fn.jplist.ControlFactory.getProp($span, 'path');
+            types = jQuery.fn.jplist.ControlFactory.getProp($span, 'type');
+
+            if(jQuery.isArray(dataPaths)){
+
+                for(var i=0; i<dataPaths.length; i++){
+
+                    if(i < types.length){
+                        type = types[i];
+                    }
+                    else{
+                        type = 'text';
+                    }
+
+                    path = getPath(dataPaths[i], type);
+
+                    if(path){
+                        paths.push(path);
+                    }
+                }
+            }
+            else{
+                path = getPath(dataPaths, types);
+
+                if(path){
+                    paths.push(path);
+                }
+            }
+
 		});
 	};
-		
+
 	/**
 	* Set control status
 	* @param {Object} context
@@ -186,7 +194,7 @@
 	var setStatus = function(context, status, restoredFromStorage){
 				
 		var $li
-			,$liList;		
+			,$liList;
 		
 		//get li list
 		$liList = context.$control.find('li');
@@ -195,11 +203,16 @@
 		$liList.removeClass('active');
 		
 		//set active class
-		if(status.data.path == 'default'){
+		if(status.data.path === 'default'){
 			$li = context.$control.find('li:has([data-path="default"])');
 		}
 		else{
-			$li = context.$control.find('li:has([data-path="' + status.data.path + '"][data-type="' + status.data.type + '"][data-order="' + status.data.order + '"])');
+
+            var path = jQuery.fn.jplist.ControlFactory.getPropPath(status.data.path, 'path');
+            var type = jQuery.fn.jplist.ControlFactory.getPropPath(status.data.type, 'type');
+            var order = jQuery.fn.jplist.ControlFactory.getPropPath(status.data.order, 'order');
+
+			$li = context.$control.find('li:has(' + path + type + order + ')');
 		}
 		
 		if($li.length <= 0){
@@ -230,13 +243,11 @@
 			status = getStatus(context, false);
 			
 			$span = jQuery(this).find('span');
-			dataPath = $span.attr('data-path');
-			
-			if(dataPath){			
-				status.data.path = dataPath;
-				status.data.type = $span.attr('data-type');
-				status.data.order = $span.attr('data-order');
-				status.data.additionalPaths = getAdditionalPaths($span);			
+
+			if($span.length > 0){
+				status.data.path = jQuery.fn.jplist.ControlFactory.getProp($span, 'path');
+				status.data.type = jQuery.fn.jplist.ControlFactory.getProp($span, 'type');
+                status.data.order = jQuery.fn.jplist.ControlFactory.getProp($span, 'order');
 			}
 			
 			//send status event	
@@ -250,6 +261,11 @@
 	* @param {Object} context
 	*/
 	var Init = function(context){
+
+        context.params = {
+            dateTimeFormat: context.$control.attr('data-datetime-format') || ''
+            ,ignore: context.$control.attr('data-ignore') || ''
+        };
 		
 		//run default dropdown control
 		new jQuery.fn.jplist.DropdownControl(context.options, context.observer, context.history, context.$control);

@@ -80,16 +80,6 @@
 				if(jQuery.isFunction(service)){				
 					
 					result = service(currentStatus, dataitem1, dataitem2);
-
-					if(result === 0 && jQuery.isArray(currentStatus.data.additionalPaths) && currentStatus.data.additionalPaths.length > 0){
-					
-						for(var i=0; i<currentStatus.data.additionalPaths.length; i++){
-						
-							tempStatus = jQuery.extend(true, {}, currentStatus);							
-							tempStatus.data.path = currentStatus.data.additionalPaths[i];
-							result = service(tempStatus, dataitem1, dataitem2);
-						}					
-					}
 				}
 			}
 			else{
