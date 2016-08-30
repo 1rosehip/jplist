@@ -1,5 +1,6 @@
 var assert = require('assert');
 
+/*
 describe('click on page #2 (top)', function() {
 
     beforeAll(function(done){
@@ -117,3 +118,4 @@ describe('click on page #3 (bottom)', function() {
         browser.call(done);
     });
 });
+*/

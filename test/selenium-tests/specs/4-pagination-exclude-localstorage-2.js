@@ -5,7 +5,7 @@ var assert = require('assert');
  - and then select another per page
  - and refresh page,
  current page (2) stay saved,
- */
+
 describe('click on page #2, select items per page 10, refresh page (top)', function() {
 
     beforeAll(function(done){
@@ -42,3 +42,4 @@ describe('click on page #2, select items per page 10, refresh page (top)', funct
         expect(boxes.value.length).toBe(10);
     });
 });
+*/

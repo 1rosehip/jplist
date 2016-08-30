@@ -5,7 +5,7 @@ var assert = require('assert');
  - and go to second page
  - and then refresh page,
  per page will reset
- */
+
 describe('select items per page 10, click on page #2, refresh page (top)', function() {
 
     beforeAll(function(done){
@@ -42,3 +42,4 @@ describe('select items per page 10, click on page #2, refresh page (top)', funct
         expect(boxes.value.length).toBe(10);
     });
 });
+ */

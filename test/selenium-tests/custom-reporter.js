@@ -69,7 +69,9 @@ var CustomReporter = function(options) {
      */
     this.on('test:fail', function(param1) {
 
-        var stackParts = [];
+        var stackParts = []
+            ,specs
+            ,url;
 
         const text = param1.title;
 
@@ -89,6 +91,17 @@ var CustomReporter = function(options) {
                 console.log(msg.red);
             }
         }
+
+        if(param1.specs) {
+
+            for(var i=0; i<param1.specs.length; i++){
+
+                specs = param1.specs[i].toString().match(/[^\\/]+$/);
+                url = 'URL: ' + specs;
+                console.log(url.red);
+            }
+        }
+
         //console.log(('    '+param1.err.stack).red);
         console.log('');
 
