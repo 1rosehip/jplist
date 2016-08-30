@@ -21,6 +21,7 @@
 	require "controls/filterselect.php";
     require "controls/range-slider.php";	
     require "controls/range-filter.php";
+    require "controls/button-text-filter.php";
 		
 	class jPListHTML extends jPListServer{
 			

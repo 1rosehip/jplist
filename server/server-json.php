@@ -19,6 +19,7 @@
 	require "controls/checkboxgroupfilter.php";
 	require "controls/filterdropdown.php";
 	require "controls/filterselect.php";
+	require "controls/button-text-filter.php";
 		
 	class jPListJSON extends jPListServer{
 	

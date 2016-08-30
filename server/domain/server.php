@@ -45,7 +45,9 @@
 			if($this->sorting->sortQuery){
 				$query .= " " . $this->sorting->sortQuery . " ";
 			}
-							
+
+		    //error_log(print_r($this->filter->filterQuery));
+
 			if($this->pagination->paginationQuery){
 				$query .= " " . $this->pagination->paginationQuery . " ";
 			}
