@@ -215,6 +215,71 @@
 	 * @param {Array.<Object>} params - array of params {controlName: '...', propName: '...', propValue: '...'}
 	 */
 	jQuery.fn.jplist.ControlFactory.prototype.setByDeepLink = function(params){};
+
+    /**
+     * loops through data attributes of the $control and searches for data-prop, data-prop1, data-prop2
+     * if found only 1 data attribute -> returns it's value as string
+     * otherwise returns array of values
+     * static control helper
+     * @static
+     * @param {jQueryObject} $control
+     * @param {string} prop - data attribute property name
+     * @return {Array.<string>|string}
+     */
+    jQuery.fn.jplist.ControlFactory.getProp = function($control, prop){
+
+        var values = []
+            ,regex = new RegExp('^' + prop + '[0-9]*$');
+
+        $.each($control.data(), function(key, value) {
+
+            if(regex.test(key)){
+                values.push(value);
+            }
+        });
+
+        if(values.length == 0){
+            return "";
+        }
+
+        if(values.length == 1){
+            return values[0];
+        }
+
+        return values;
+    };
+
+    /**
+     * returns string like [data-prop="..."][data-prop1=""][data-prop2=""]
+     * static control helper
+     * @static
+     * @param {Array.<string>|string} property values
+     * @param {string} prop - data attribute property name
+     * @return {Array.<string>|string} path
+     */
+    jQuery.fn.jplist.ControlFactory.getPropPath = function(values, prop){
+
+        var path = '';
+
+        if(jQuery.isArray(values)){
+
+            for(var i=0; i<values.length; i++){
+
+                var prefix = '';
+
+                if(i !== 0){
+                    prefix = '' + i;
+                }
+
+                path += '[data-' + prop + prefix + '="' + values[i] + '"]';
+            }
+        }
+        else{
+            path += '[data-' + prop + '="' + values + '"]';
+        }
+
+        return path;
+    };
 })();
 
 /*
