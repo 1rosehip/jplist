@@ -91,6 +91,24 @@
     };
 
     /**
+     * API: remove all data items from the list
+     * @param {*} context
+     * @param {Object} commandData
+     */
+    var empty = function(context, commandData){
+
+        if(context &&
+            context.controller &&
+            context.controller.collection){
+
+            context.controller.collection.empty();
+
+            //redraw dataview with the given statuses
+            context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
+        }
+    };
+
+    /**
      * API: del data item from the list
      * @param {*} context
      * @param {Object} commandData
@@ -190,6 +208,11 @@
 
             case 'del':{
                 del(context, commandData);
+            }
+                break;
+
+            case 'empty':{
+                empty(context, commandData);
             }
                 break;
 
