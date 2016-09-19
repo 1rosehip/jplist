@@ -337,6 +337,8 @@
 	 * @param {Object} context
 	 */
 	var empty = function(context){
+
+        dataitemsToJqueryObject(context).detach();
 		context.dataitems = [];
 		context.dataview = [];
 	};
