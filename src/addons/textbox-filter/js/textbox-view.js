@@ -168,6 +168,20 @@
         }
     };
 
+    /**
+     * send event
+     * @param {Object} context
+     */
+    var sendEvent = function(context){
+
+        var status = getStatus(context, false);
+
+        //update last status
+        context.history.addStatus(status);
+
+        context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
+    };
+
 	/**
 	* Init control events
 	* @param {Object} context
@@ -180,31 +194,36 @@
 				
 				e.preventDefault();
 
-                var status = getStatus(context, false);
-
-				//update last status
-				context.history.addStatus(status);
-
-				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
+                //send event
+                sendEvent(context);
 
 				return false;
 			});
 		}
 		else{
 						
-			context.$control.on(context.params.eventName, function(){	
-					
-                var status = getStatus(context, false);
+			context.$control.on(context.params.eventName, function(){
 
-				//update last status
-				context.history.addStatus(status);
-
-				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
+                //send event
+                sendEvent(context);
 
                 //handle typing
                 handleTyping(context);
 			});
-		}		
+		}
+
+        if(context.params.$clear.length > 0){
+
+            context.params.$clear.on('click', function(e){
+
+                e.preventDefault();
+
+                context.$control.val('');
+
+                //send event
+                sendEvent(context);
+            });
+        }
 	};
 
     /**
@@ -232,11 +251,12 @@
 	var Init = function(context){
 
 		context.params = {
-			
+
 			path: context.$control.attr('data-path')
 			,dataButton: context.$control.attr('data-button')
 			,eventName: context.$control.attr('data-event-name') || 'keyup'
 			,$button: null
+            ,$clear: context.$control.next('[data-type="clear"]')
             ,ignore: context.$control.attr('data-ignore')
             ,mode: context.$control.attr('data-mode') || 'contains'
 

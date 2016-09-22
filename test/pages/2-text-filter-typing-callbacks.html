@@ -18,9 +18,7 @@
     <!-- jPList core js and css  -->
     <link href="../../dist/css/jplist.core.min.css" rel="stylesheet" type="text/css" />
     <script src="../../dist/js/jplist.core.min.js"></script>
-    <!--<script src="../../dist/js/jplist.textbox-filter.min.js"></script>-->
-    <script src="../../src/addons/textbox-filter/js/textbox-view.js"></script>
-    <script src="../../src/addons/textbox-filter/js/textbox-dto.js"></script>
+    <script src="../../dist/js/jplist.textbox-filter.min.js"></script>
 
     <!-- jPList start -->
     <script>
@@ -141,7 +139,10 @@
                             data-typing-delay="1000"
                             data-typing-start="typingStart"
                             data-typing-end="typingEnd"
+                            class="jplist-no-right-border"
                     />
+
+                    <i class="fa fa-times-circle jplist-clear" data-type="clear"></i>
                 </div>
 
             </div>
@@ -903,7 +904,13 @@
                             data-control-type="textbox"
                             data-control-name="title-filter"
                             data-control-action="filter"
+                            data-typing-delay="1000"
+                            data-typing-start="typingStart"
+                            data-typing-end="typingEnd"
+                            class="jplist-no-right-border"
                     />
+
+                    <i class="fa fa-times-circle jplist-clear" data-type="clear"></i>
                 </div>
 
             </div>

@@ -109,8 +109,14 @@
 			.border-box-mixin();
 			color: @black1;
 			cursor: pointer;
-		}		
-	}
+		}
+
+        input.jplist-no-right-border{
+          border-right: 0;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+    }
 			
 	.jplist-icon{
 		.jplist-control-mixin();		
@@ -161,7 +167,7 @@
 		height: 30px;
 		margin: 10px 10px 0 0;
 	}
-	
+
 	@media only screen and (max-width: 600px){
 		.jplist-panel{
 			display: none;
