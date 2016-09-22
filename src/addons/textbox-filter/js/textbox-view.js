@@ -142,7 +142,32 @@
             }
 		}
 	};
-	
+
+    /**
+     * handle typing
+     * @param {Object} context
+     */
+    var handleTyping = function(context){
+
+        if(context.params.typingStart && context.params.typingEnd) {
+
+            if (context.params.isTyping) {
+                window.clearTimeout(context.params.typingHandler);
+            }
+            else {
+                context.params.isTyping = true;
+                context.params.typingStart();
+            }
+
+            context.params.typingHandler = window.setTimeout(function () {
+
+                context.params.isTyping = false;
+                context.params.typingEnd();
+
+            }, context.params.typingDelay);
+        }
+    };
+
 	/**
 	* Init control events
 	* @param {Object} context
@@ -175,10 +200,30 @@
 				context.history.addStatus(status);
 
 				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
+
+                //handle typing
+                handleTyping(context);
 			});
 		}		
 	};
-	
+
+    /**
+     * init user defined functions
+     */
+    var initUserDefinedFunctions = function(context){
+
+        var typingStart = context.$control.attr('data-typing-start')
+            ,typingEnd = context.$control.attr('data-typing-end');
+
+        if(jQuery.isFunction(jQuery.fn.jplist.settings[typingStart])){
+            context.params.typingStart = jQuery.fn.jplist.settings[typingStart];
+        }
+
+        if(jQuery.isFunction(jQuery.fn.jplist.settings[typingEnd])){
+            context.params.typingEnd = jQuery.fn.jplist.settings[typingEnd];
+        }
+    };
+
 	/** 
 	* Textbox control - used as text filter
 	* @constructor
@@ -194,6 +239,13 @@
 			,$button: null
             ,ignore: context.$control.attr('data-ignore')
             ,mode: context.$control.attr('data-mode') || 'contains'
+
+            //typing
+            ,typingDelay: Number(context.$control.attr('data-typing-delay')) || 400
+            ,isTyping: false
+            ,typingHandler: null
+            ,typingStart: null
+            ,typingEnd: null
 		};
 
         if(context.params.mode === 'advanced'){
@@ -206,7 +258,10 @@
             context.params.ignore = context.params.ignore || '[~!@#$%^&*()+=`\'"\/\\_]+' //[^a-zA-Z0-9]+ not letters/numbers: [~!@#$%^&*\(\)+=`\'"\/\\_]+
         }
 
-		//set initial value
+        //init user defined functions
+        initUserDefinedFunctions(context);
+
+            //set initial value
 		context.$control.val(context.$control.attr('value') || '');
 		
 		if(context.params.dataButton){
