@@ -176,9 +176,6 @@
 
         var status = getStatus(context, false);
 
-        //update last status
-        context.history.addStatus(status);
-
         context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
     };
 

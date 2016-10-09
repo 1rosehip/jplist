@@ -19,8 +19,7 @@
 			if(jQuery.trim(jQuery(this).val()) === ''){
                 
                 status = getStatus(context, false);
-                
-				context.history.addStatus(status);
+
 				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 			}
 		});
@@ -32,8 +31,7 @@
 			if(jQuery.trim(jQuery(this).val()) === ''){
                 
                 status = getStatus(context, false);
-                
-				context.history.addStatus(status);
+
 				context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 			}
 		});
@@ -42,8 +40,7 @@
         options['onSelect'] = function(dateText, inst){
             
             var status = getStatus(context, false);
-            
-			context.history.addStatus(status);
+
 			context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
 		};
 				

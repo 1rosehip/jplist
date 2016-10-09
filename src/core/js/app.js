@@ -276,9 +276,6 @@
 
             if(statusesToMerge){
 
-                //update history
-                context.history.addStatuses(statusesToMerge);
-
                 mergedStatuses = context.panel.mergeStatuses(statusesToMerge);
 
                 if(mergedStatuses && mergedStatuses.length > 0){

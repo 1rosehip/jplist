@@ -237,9 +237,6 @@
 			$button.data('selected', !selected);
 			
             status = getStatus(context, false);
-            
-			//save last status in the history
-			context.history.addStatus(status);
 			
 			//render statuses
 			context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);

@@ -209,10 +209,7 @@
 		* on dropdown change
 		*/
 		context.params.$dropdowns.on('change', function(){
-			
-			//save last status in the history
-			context.history.addStatus(getStatus(context, false));
-			
+
 			//render statuses
 			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});

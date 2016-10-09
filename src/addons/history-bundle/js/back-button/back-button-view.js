@@ -40,55 +40,33 @@
 		*/
 		context.$control.on('click', function(){
 		
-			var status
-				,cStatus
-				,statusesList;
+			var statusesList;
 			
-			//pop the current status and statuses list
-			status = context.history.popStatus();
-			statusesList = context.history.popList();
+			//pop the current statuses list
+			context.history.popList();
 			
-			//get the prev status and statuses list
-			status = context.history.getLastStatus();
+			//get the prev statuses list
 			statusesList = context.history.getLastList() || [];
-			
-			if(statusesList && status){
-		
-				for(var i=0; i<statusesList.length; i++){
-				
-					//get current status
-					cStatus = statusesList[i];
-					
-					if(cStatus.name === status.name && cStatus.action === status.action){
-					 
-						/**
-						* fix for arrays
-						* jQuery extend doesn't replace arrays, it merges them
-						*/
-						if(cStatus.data){
-							for(var property in cStatus.data){
-								if(jQuery.isArray(cStatus.data[property])){
-									cStatus.data[property] = [];
-								}
-							}
-						}
-						
-						//merge current status with the given one
-						jQuery.extend(true, cStatus, status);
-						
-						statusesList[i] = cStatus;
-					}
-				}
-				
-				context.observer.trigger(context.observer.events.knownStatusesChanged, [statusesList]);
+
+            context.observer.one(context.observer.events.statusesAppliedToList, function(){
+
+                //pop statuses list that will be added by the following knownStatusesChanged / unknownStatusesChanged
+                context.history.popList();
+            });
+
+			if(statusesList){
+
+                context.observer.trigger(context.observer.events.knownStatusesChanged, [statusesList]);
 			}
 			else{
+
 				//force build statuses event			
 				context.observer.trigger(context.observer.events.unknownStatusesChanged, [true]);
 			}
 			
 			//refresh button class
 			render(context);
+
 		});
 	};
 

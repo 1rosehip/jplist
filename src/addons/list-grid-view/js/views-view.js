@@ -138,9 +138,6 @@
 			//set current view
 			context.params.currentView = viewType;
 			
-			//update last status
-			context.history.addStatus(getStatus(context, false));
-			
 			//force build statuses event			
 			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});

@@ -182,9 +182,6 @@
 			//toggle value
 			context.params.selected = !context.params.selected;
 			
-			//save last status in the history
-			context.history.addStatus(getStatus(context, false));
-			
 			//trigger force build statuses event
 			context.observer.trigger(context.observer.events.unknownStatusesChanged, [false]);
 		});

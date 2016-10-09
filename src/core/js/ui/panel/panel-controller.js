@@ -141,6 +141,9 @@
 
 		var NOT_RESTORED_FROM_COOKIES = false;
 
+        //update history
+        context.history.addStatuses(statusesArray);
+
 		//set statuses
 		context.controls.setStatuses(statusesArray, NOT_RESTORED_FROM_COOKIES);
 

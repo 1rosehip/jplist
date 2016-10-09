@@ -152,9 +152,6 @@
 		context.$control.on('change', function(){
 			
             var status = getStatus(context, false);
-            
-			//add status to the history object
-			context.history.addStatus(status);
 			
 			//force render statuses event
 			context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);

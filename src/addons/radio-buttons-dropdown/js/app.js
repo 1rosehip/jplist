@@ -285,9 +285,6 @@
 		* on input change
 		*/
 		context.params.$radioButtons.off('change').on('change', function(e){
-						
-			//save last status in the history
-			context.history.addStatus(getStatus(context, false));
 				
 			//render statuses
 			context.observer.trigger(context.observer.events.knownStatusesChanged, [[getStatus(context, false)]]);

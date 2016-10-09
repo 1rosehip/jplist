@@ -168,9 +168,6 @@
 		context.params.$uiSlider.on('slidechange', function(event, ui) {
 			
             var status = getStatus(context, false);
-            
-			//add status to the history object	
-			context.history.addStatus(status);
 			
 			//force render statuses event
             context.observer.trigger(context.observer.events.knownStatusesChanged, [[status]]);
