@@ -2,6 +2,7 @@
 
 node_modules
 .DS_Store
+nohup.out
 local-access_log
 local-error_log
 errorShots
