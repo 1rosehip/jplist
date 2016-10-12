@@ -19,7 +19,7 @@ exports.config = {
 
         //wdio ./test/selenium-tests/wdio.conf.js --suite=temp
         temp: [
-            './test/selenium-tests/specs/5-filter-dropdown-bootstrap.js'
+            './test/selenium-tests/specs/4-pagination-items-per-page.js'
         ]
 
         //wdio ./test/selenium-tests/wdio.conf.js --suite=api

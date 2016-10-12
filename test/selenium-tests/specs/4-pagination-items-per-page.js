@@ -21,6 +21,18 @@ describe('click on page #3 (top)', function() {
         var boxes = browser.elements('//div[@class="list-item box"]');
         expect(boxes.value.length).toBe(5);
     });
+
+    it('top dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('5 per page');
+        browser.call(done);
+    });
+
+    it('bottom dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('5 per page');
+        browser.call(done);
+    });
 });
 
 describe('click on the "next" button (top)', function() {
@@ -238,6 +250,18 @@ describe('click on page #3 (bottom)', function() {
 
         var boxes = browser.elements('//div[@class="list-item box"]');
         expect(boxes.value.length).toBe(5);
+    });
+
+    it('top dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('5 per page');
+        browser.call(done);
+    });
+
+    it('bottom dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('5 per page');
+        browser.call(done);
     });
 });
 
@@ -458,6 +482,18 @@ describe('select 3 items per page (top)', function() {
         var boxes = browser.elements('//div[@class="list-item box"]');
         expect(boxes.value.length).toBe(3);
     });
+
+    it('top dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('3 per page');
+        browser.call(done);
+    });
+
+    it('bottom dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('3 per page');
+        browser.call(done);
+    });
 });
 
 describe('select 3 items per page and click on page #4 (top)', function() {
@@ -501,7 +537,7 @@ describe('select 3 items per page and click on page #4 (top)', function() {
     });
 });
 
-describe('select 3 items per page and click on tje "next" page (top)', function() {
+describe('select 3 items per page and click on the "next" page (top)', function() {
 
     beforeAll(function(done){
 
@@ -542,7 +578,7 @@ describe('select 3 items per page and click on tje "next" page (top)', function(
     });
 });
 
-describe('select 3 items per page and click on tje "last" page (top)', function() {
+describe('select 3 items per page and click on the "last" page (top)', function() {
 
     beforeAll(function(done){
 
@@ -605,6 +641,18 @@ describe('select 3 items per page (bottom)', function() {
         var boxes = browser.elements('//div[@class="list-item box"]');
         expect(boxes.value.length).toBe(3);
     });
+
+    it('top dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('3 per page');
+        browser.call(done);
+    });
+
+    it('bottom dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('3 per page');
+        browser.call(done);
+    });
 });
 
 
@@ -630,6 +678,18 @@ describe('select 10 items per page (top)', function() {
         var boxes = browser.elements('//div[@class="list-item box"]');
         expect(boxes.value.length).toBe(10);
     });
+
+    it('top dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('10 per page');
+        browser.call(done);
+    });
+
+    it('bottom dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('10 per page');
+        browser.call(done);
+    });
 });
 
 // ----------------- 10 items per page BOTTOM ------------------
@@ -653,6 +713,18 @@ describe('select 10 items per page (bottom)', function() {
 
         var boxes = browser.elements('//div[@class="list-item box"]');
         expect(boxes.value.length).toBe(10);
+    });
+
+    it('top dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('10 per page');
+        browser.call(done);
+    });
+
+    it('bottom dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('10 per page');
+        browser.call(done);
     });
 });
 
@@ -680,6 +752,18 @@ describe('select all items per page (top)', function() {
         var boxes = browser.elements('//div[@class="list-item box"]');
         expect(boxes.value.length).toBe(33);
     });
+
+    it('top dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('view all');
+        browser.call(done);
+    });
+
+    it('bottom dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('view all');
+        browser.call(done);
+    });
 });
 
 // ----------------- All items BOTTOM ------------------
@@ -703,6 +787,18 @@ describe('select all items per page (bottom)', function() {
 
         var boxes = browser.elements('//div[@class="list-item box"]');
         expect(boxes.value.length).toBe(33);
+    });
+
+    it('top dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[1]')).toBe('view all');
+        browser.call(done);
+    });
+
+    it('bottom dropdown should have all text', function (done) {
+
+        expect(browser.getText('(//div[@class="jplist-dd-panel"])[2]')).toBe('view all');
+        browser.call(done);
     });
 });
 

@@ -155,7 +155,7 @@
             }
         }
 
-        if(jQuery.isNumeric(itemsPerPageNumber)) {
+        if(jQuery.isNumeric(itemsPerPageNumber) || itemsPerPageNumber === 'all') {
 
             $option = context.$control.find('option[data-number="' + itemsPerPageNumber + '"]');
 

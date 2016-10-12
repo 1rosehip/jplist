@@ -144,7 +144,7 @@
 	* @param {boolean} restoredFromStorage - is status restored from storage
 	*/
 	var setStatus = function(context, status, restoredFromStorage){
-				
+
 		var $li
 			,$liList
             ,itemsPerPageNumber;
@@ -165,8 +165,7 @@
             }
         }
 
-        if(jQuery.isNumeric(itemsPerPageNumber)){
-
+        if(jQuery.isNumeric(itemsPerPageNumber) || itemsPerPageNumber === 'all'){
 
             //get li list
             $liList = context.$control.find('li');
