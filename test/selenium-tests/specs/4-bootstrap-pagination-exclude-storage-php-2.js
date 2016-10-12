@@ -8,6 +8,7 @@ var assert = require('assert');
  */
 describe('select items per page 10, click on page #2, refresh page (bottom)', function() {
 
+
     beforeAll(function(done){
 
         browser.url('http://jplist.local/test/pages/4-bootstrap-pagination-exclude-storage-php-mysql.php')
@@ -41,4 +42,5 @@ describe('select items per page 10, click on page #2, refresh page (bottom)', fu
         var boxes = browser.elements('//div[@class="list-item"]');
         expect(boxes.value.length).toBe(10);
     });
+
 });

@@ -1,0 +1,19 @@
+Oct 10, 2016 11:50:56 AM org.openqa.grid.selenium.GridLauncher main
+INFO: Launching a standalone server
+11:50:56.616 INFO - Java: Oracle Corporation 25.92-b14
+11:50:56.616 INFO - OS: Mac OS X 10.10.5 x86_64
+11:50:56.622 INFO - v2.42.2, with Core v2.42.2. Built from revision 6a6995d
+11:50:56.659 INFO - Default driver org.openqa.selenium.ie.InternetExplorerDriver registration is skipped: registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match with current platform: MAC
+11:50:56.707 INFO - RemoteWebDriver instances should connect to: http://127.0.0.1:4444/wd/hub
+11:50:56.708 INFO - Version Jetty/5.1.x
+11:50:56.709 INFO - Started HttpContext[/selenium-server,/selenium-server]
+11:50:56.730 INFO - Started org.openqa.jetty.jetty.servlet.ServletHandler@71c7db30
+11:50:56.730 INFO - Started HttpContext[/wd,/wd]
+11:50:56.730 INFO - Started HttpContext[/selenium-server/driver,/selenium-server/driver]
+11:50:56.730 INFO - Started HttpContext[/,/]
+11:50:56.733 WARN - Failed to start: SocketListener0@0.0.0.0:4444
+Exception in thread "main" java.net.BindException: Selenium is already running on port 4444. Or some other service is.
+	at org.openqa.selenium.server.SeleniumServer.start(SeleniumServer.java:491)
+	at org.openqa.selenium.server.SeleniumServer.boot(SeleniumServer.java:300)
+	at org.openqa.selenium.server.SeleniumServer.main(SeleniumServer.java:245)
+	at org.openqa.grid.selenium.GridLauncher.main(GridLauncher.java:95)

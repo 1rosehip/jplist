@@ -92,6 +92,14 @@ exports.config = {
     //
     capabilities: [{
         browserName: 'firefox'
+        //chromeOptions: {
+        //    args: ['disable-web-security'],
+        //    //'chrome.binary': '/Users/miriam/Documents/codelib/jplist/jplist/build/selenium/chromedriver',
+        //    'binary': '/Users/miriam/Documents/codelib/jplist/jplist/build/selenium/chromedriver'
+        //}
+
+        //'chromeOptions.binary': '/Users/miriam/Documents/codelib/jplist/jplist/build/selenium/chromedriver',
+        //'chrome.binary': '/Users/miriam/Documents/codelib/jplist/jplist/build/selenium/chromedriver'
     }],
     maxInstances: 3,
     //
