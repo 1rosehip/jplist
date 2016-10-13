@@ -11,10 +11,12 @@
 		var $selected;
 		
 		$selected = context.params.$buttons.filter('[data-selected="true"]');
-			
+
+        /*
 		if($selected.length <= 0){
 			$selected = context.params.$buttons.eq(0);
 		}
+		*/
 		
 		return $selected;
 	};
@@ -33,8 +35,11 @@
 		//in single mode -> select a button
 		if(context.params.mode === 'single'){
 			
-			$selected = getFirstSelectedButton(context);			
-			$selected.data(context.params.DATA_NAME, true);
+			$selected = getFirstSelectedButton(context);
+
+            if($selected && $selected.length > 0) {
+                $selected.data(context.params.DATA_NAME, true);
+            }
 		}
 	};
 	
@@ -62,7 +67,7 @@
 			else{
 				selected = $btn.data(context.params.DATA_NAME);
 			}
-			
+
 			if(selected){
 			
 				buttonData = new jQuery.fn.jplist.controls.SortButtonDTO(
@@ -77,23 +82,26 @@
 				groupData.push(buttonData);	
 			}				
 		});
-		
+
 		if(context.params.mode === 'single' && groupData.length <= 0){
-			
+
 			$selected = getFirstSelectedButton(context);
-			
-			buttonData = new jQuery.fn.jplist.controls.SortButtonDTO(
-				$selected.attr('data-path')
-				,$selected.attr('data-type')
-				,$selected.attr('data-order')
-				,$selected.attr('data-datetime-format')
-				,$selected.attr('data-ignore')
-				,true 
-			);
-			
-			groupData.push(buttonData);	
+
+            if($selected && $selected.length > 0) {
+
+                buttonData = new jQuery.fn.jplist.controls.SortButtonDTO(
+                    $selected.attr('data-path')
+                    , $selected.attr('data-type')
+                    , $selected.attr('data-order')
+                    , $selected.attr('data-datetime-format')
+                    , $selected.attr('data-ignore')
+                    , true
+                );
+
+                groupData.push(buttonData);
+            }
 		}
-		
+
 		status = new jQuery.fn.jplist.StatusDTO(
 			context.name
 			,context.action
