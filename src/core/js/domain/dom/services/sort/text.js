@@ -39,16 +39,27 @@
 				text2 = pathitem2.text.toString().toLowerCase(); //.replace(/[^a-zA-Z0-9]+/g,'')
 			}
 			
-			if(text1 == text2){
+			if(text1 === text2){
 				return 0;
 			}
 			else{
-				if(order == 'asc'){
-					return text1 > text2 ? 1 : -1;
-				}
-				else{
-					return text1 < text2 ? 1 : -1; 
-				}
+                if(''.localeCompare){
+
+                    if (order === 'asc') {
+                        return text1.localeCompare(text2);
+                    }
+                    else {
+                        return text2.localeCompare(text1);
+                    }
+                }
+                else {
+                    if (order === 'asc') {
+                        return text1 > text2 ? 1 : -1;
+                    }
+                    else {
+                        return text1 < text2 ? 1 : -1;
+                    }
+                }
 			}
 		}
 		else{
