@@ -233,7 +233,7 @@
         var values = []
             ,regex = new RegExp('^' + prop + '[0-9]*$');
 
-        $.each($control.data(), function(key, value) {
+        jQuery.each($control.data(), function(key, value) {
 
             if(regex.test(key)){
                 values.push(value);
