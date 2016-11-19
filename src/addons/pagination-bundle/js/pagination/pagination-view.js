@@ -26,16 +26,18 @@
 	};
 	
 	/**
-	* draw the pagination
-	* @param {number} start
-	* @param {number} end
-	* @param {number} current
-	* @return {string} html
-	*/
-	var getHTML = function(start, end, current){
+	 * draw the pagination
+     * @param {Object} context
+	 * @param {number} start
+	 * @param {number} end
+	 * @param {number} current
+	 * @return {string} html
+	 */
+	var getHTML = function(context, start, end, current){
 		
 		var html = ''
-			,temp;
+			,temp
+            ,title = context.$control.attr('data-number-title') || context.options.numberArrowTitle;
 		
 		html +=	'<div class="jplist-pagesbox" data-type="pagesbox">';			
 		for(var i=start; i<end; i++){
@@ -46,6 +48,7 @@
 			}
 			temp = i + 1;
 			html += ' data-number="' + i + '" ';
+            html += ' title="' + (title.replace('{number}', temp)) + '" ';
 			html += '>' + temp + '</button> ';
 		}
 		html +=	'</div>';
@@ -77,7 +80,7 @@
 			end = pagingObj.pagesNumber;
 		}
 		
-		html = getHTML(start, end, pagingObj.currentPage);
+		html = getHTML(context, start, end, pagingObj.currentPage);
 		
 		//set html
 		context.$pagingmid.html(html);
@@ -116,7 +119,7 @@
 			end = pagingObj.pagesNumber;
 		}
 		
-		html = getHTML(start, end, pagingObj.currentPage);
+		html = getHTML(context, start, end, pagingObj.currentPage);
 		
 		//set html
 		context.$pagingmid.html(html);		
@@ -178,14 +181,22 @@
 	var render = function(context){
 		
 		var prevArrow
+            ,prevArrowTitle
 			,nextArrow
+            ,nextArrowTitle
 			,firstArrow
-			,lastArrow;
-		
+            ,firstArrowTitle
+			,lastArrow
+            ,lastArrowTitle;
+
 		prevArrow = context.$control.attr('data-prev') || context.options.prevArrow;
+        prevArrowTitle = context.$control.attr('data-prev-title') || context.options.prevArrowTitle;
 		nextArrow = context.$control.attr('data-next') || context.options.nextArrow;
+        nextArrowTitle = context.$control.attr('data-next-title') || context.options.nextArrowTitle;
 		firstArrow = context.$control.attr('data-first') || context.options.firstArrow;
+        firstArrowTitle = context.$control.attr('data-first-title') || context.options.firstArrowTitle;
 		lastArrow = context.$control.attr('data-last') || context.options.lastArrow;
+        lastArrowTitle = context.$control.attr('data-last-title') || context.options.lastArrowTitle;
 		
 		//set containers html		
 		context.$control.html('<div class="jplist-pagingprev" data-type="pagingprev"></div><div class="jplist-pagingmid" data-type="pagingmid"></div><div class="jplist-pagingnext" data-type="pagingnext"></div>');
@@ -196,8 +207,8 @@
 		context.$pagingnext = context.$control.find('[data-type="pagingnext"]');
 			
 		//set arrows html
-		context.$pagingprev.html('<button type="button" class="jplist-first" data-number="0" data-type="first">' + firstArrow + '</button><button type="button" class="jplist-prev" data-type="prev">' + prevArrow + '</button>');
-		context.$pagingnext.html('<button type="button" class="jplist-next" data-type="next">' + nextArrow + '</button><button type="button" class="jplist-last" data-type="last">' + lastArrow + '</button>');
+		context.$pagingprev.html('<button type="button" class="jplist-first" data-number="0" data-type="first" title="' + firstArrowTitle + '">' + firstArrow + '</button><button type="button" class="jplist-prev" data-type="prev" title="' + prevArrowTitle + '">' + prevArrow + '</button>');
+		context.$pagingnext.html('<button type="button" class="jplist-next" data-type="next" title="' + nextArrowTitle + '">' + nextArrow + '</button><button type="button" class="jplist-last" data-type="last" title="' + lastArrowTitle + '">' + lastArrow + '</button>');
 		
 		//init vars
 		context.$jplistFirst = context.$pagingprev.find('[data-type="first"]');
@@ -269,6 +280,11 @@
 			,nextArrow: '&rsaquo;'
 			,firstArrow: '&laquo;'
 			,lastArrow: '&raquo;'
+            ,prevArrowTitle: ''
+            ,nextArrowTitle: ''
+            ,firstArrowTitle: ''
+            ,lastArrowTitle: ''
+            ,numberArrowTitle: ''
 		}
 	};		
 })();
