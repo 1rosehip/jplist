@@ -37,7 +37,7 @@
                 //find all number from the path
                 pathitem.$element.each(function(){
 
-                    var num = Number($(this).text().replace(/[^-0-9\.]+/g,''));
+                    var num = Number(jQuery(this).text().replace(/[^-0-9\.]+/g,''));
 
                     if(!isNaN(num)){
                         numbers.push(num);

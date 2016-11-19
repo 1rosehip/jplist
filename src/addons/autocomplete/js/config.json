@@ -1,0 +1,13 @@
+{
+	"dist": "dist/js/jplist.autocomplete.min.js",
+	"src": [
+		"src/addons/autocomplete/js/app.js",
+		"src/addons/autocomplete/js/dal/data-source.js",
+		"src/addons/autocomplete/js/ui/autocomplete-view.js"
+	],
+	"externs": [
+		"build/closure/google-closure-compiler/externs/jquery-1.7.externs.js",
+		"build/closure/google-closure-compiler/externs/jplist.addons.externs.js"
+	],
+	"version": 9
+}

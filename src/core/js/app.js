@@ -165,27 +165,8 @@
 
         var dataitems = null;
 
-        if(context.options && context.options.dataSource){
-            switch(context.options.dataSource.type){
-
-                //html data source (dom)
-                case 'html':{
-
-                    if(context.controller && context.controller.collection){
-                        dataitems = context.controller.collection.dataitems;
-                    }
-                }
-                    break;
-
-                //server side (html) data source
-                case 'server':{
-
-                    if(context.controller && context.controller.model && context.controller.model.dataItem){
-                        dataitems = context.controller.model.dataItem;
-                    }
-                }
-                    break;
-            }
+        if(context.controller && context.controller.collection){
+            dataitems = context.controller.collection.dataitems;
         }
 
         return dataitems;

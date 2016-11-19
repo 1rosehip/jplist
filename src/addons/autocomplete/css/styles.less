@@ -1,0 +1,153 @@
+/**
+* import files
+*/
+@import "../../../../themes/core/helpers.less";
+@import "../../../../themes/core/vars.less";
+@import "../../../../themes/core/common.less";
+
+/**
+* jplist autocomplete control
+*/
+.jplist-autocomplete-control-mixin(){
+	
+	.jplist-autocomplete{
+	
+		position: relative;
+		height: 30px;			
+		float: left;
+		margin: 10px 10px 0 0;
+		
+		.jplist-icon{
+			background: @light-blue1;
+		}
+		
+		.jplist-label{
+			margin: 0;
+			border-right: 0;
+			background: @light-grey;
+		}
+		
+		button{
+			margin: 0;
+			border-left: 0;
+			padding: 0 10px;
+			font-size: 14px;
+		}
+	}
+}
+
+/**
+* jplist autocomplete list
+*/
+.jplist-autocomplete-list-mixin(){
+				
+	.jplist-autocomplete-placeholder{
+				
+		position: relative;
+		float: left;
+		width: 100%;
+		
+		.autocomplete-box{
+		
+			float: left;
+			width: 310px;
+			overflow: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+			
+			color: @dark-grey;
+			background: #fff;
+			
+			border-radius: 0 0 4px 4px;
+			border: 1px solid @grey1;	
+			border-top: 0;	
+			outline:0;	
+			
+			-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);
+			box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);
+			
+			-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+			box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+			
+			-webkit-transition:border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			transition:border-color ease-in-out .15s, box-shadow ease-in-out .15s;	
+			
+			.list-item-link{
+				float: left;
+				width: 100%;
+				padding: 10px 0;
+				color: @dark-grey;
+				cursor: pointer;
+				font-weight: normal;
+				
+				p{
+					padding: 0;
+					margin: 0;
+				}
+				
+				.img{
+					float: left;
+					margin-left: 10px;
+					
+					img{
+						width: 70px;
+					}
+				}
+				
+				.block{
+					float: right;
+					width: 200px;
+					
+					font-size: 12px;
+					
+					text-align: left;
+					margin-right: 10px;
+				}
+				
+				.desc{
+					text-overflow: ellipsis;
+					overflow: hidden;
+					white-space: nowrap;
+				}
+
+				.title{
+					color: @blue3;
+					font-size: 18px;
+				}
+				
+				.theme,
+				.like,
+				.date{
+					display: none;
+				}
+			}
+
+			.list-item-link:hover,
+			.autocomplete-active{
+				background: @light-grey4;
+			}
+		}
+	}
+	
+	 @media only screen and (max-width: 600px){
+		
+		.jplist-autocomplete-placeholder{
+			.autocomplete-box{
+				width: 250px;
+				
+				.list-item-link{
+					.block{
+						width: 150px;
+					}
+				}
+			}
+		}
+	 }
+}
+
+/**
+* mixin calls
+*/
+.jplist-autocomplete-control-mixin();
+.jplist-autocomplete-list-mixin();
