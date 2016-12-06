@@ -21,7 +21,7 @@
   "author": "Miriam Zusin",
   "license": "MIT",
   "devDependencies": {
-    "closurecompiler": "1.5.2",
+    "closurecompiler": "^1.6.1",
     "colors": "^1.1.2",
     "jshint": "2.9.1",
     "less": "2.6.1",
