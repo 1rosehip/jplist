@@ -106,26 +106,27 @@
 			$number = 0;
 						
 			if(count($this->paginationStatuses) > 0){
-                
-                foreach($this->paginationStatuses as $key => $value){
-
-                    $data = $value->data;
-                    
-                    if(isset($data)){
-                        
-                        if(is_numeric($data->currentPage)){
-                            $currentPage = intval($data->currentPage);
-                        }
-
-                        if(is_numeric($data->number)){
-                            $number = intval($data->number);
-                        }
-                    }
-                }
 				
-				if($number > 0 && $this->numberOfPages > $data->number){
-				    $query = "LIMIT " . $currentPage * $number . ", " . $number;
+				foreach($this->paginationStatuses as $key => $value){
+						
+					$data = $value->data;
+						
+					if(isset($data)){
+						
+						if(isset($data->currentPage) && is_numeric($data->currentPage)){
+							$currentPage = intval($data->currentPage);
+						}
+						
+						if(isset($data->number) && is_numeric($data->number)){
+							$number = intval($data->number);
+						}
+					}				  
 				}
+				
+				if($this->numberOfPages > $number){
+					$query = "LIMIT " . $currentPage * $number . ", " . $number;
+				}
+				
 			}		
 			
 			return $query;
