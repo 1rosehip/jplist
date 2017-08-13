@@ -28,12 +28,12 @@ Please read [jPList guidelines](https://github.com/no81no/jplist/wiki/Reporting-
 - SELECT and UL/LI sort controls
 - Sort by 'Most Reviewed' and by 'Top Rated' items
 
-###Pagination
+### Pagination
 - Auto pagination control
 - Google style pagination
 - Items per page control
 
-###Filter and Search
+### Filter and Search
 - Any number of textbox filters
 - Any number of dropdown filters
 - Filter by jQuery path or by text content
@@ -41,7 +41,7 @@ Please read [jPList guidelines](https://github.com/no81no/jplist/wiki/Reporting-
 - Button filter controls
 - Range filter controls
 
-###Other Controls
+### Other Controls
 - Reset button Control
 - Back button Control
 - Counter Controls
@@ -81,7 +81,7 @@ Please read [jPList guidelines](https://github.com/no81no/jplist/wiki/Reporting-
 - [Star Rating Demo](http://jplist.com/controlsexamples/star-rating) - sort by 'Most Reviewed' and by 'Top Rated' items
 - [Hidden Sort (Default Sort Control)](http://jplist.com/controlsexamples/hidden-sort)
 
-###Toggle Filters
+### Toggle Filters
 - [Checkbox Filters](http://jplist.com/togglefiltersexamples/checkbox-filters) - filter by jQuery path using group of checkboxes. OR logic inside group, AND logic between different groups
 - [Radio Button Filters](http://jplist.com/togglefiltersexamples/radio-buttons-filters) - filter by jQuery path with radio buttons
 - [Button Filters](http://jplist.com/togglefiltersexamples/button-filters-input) - filter by jQuery path with BUTTON elements
@@ -93,7 +93,7 @@ Please read [jPList guidelines](https://github.com/no81no/jplist/wiki/Reporting-
 - [Button Text Filter](http://jplist.com/togglefiltersexamples/button-text-filter) - filter by text using any elements like SPAN, INPUT etc.
 - [Button Text Filter Group](http://jplist.com/togglefiltersexamples/button-text-filter-group) - filter by text using any elements like SPAN, INPUT etc. OR logic inside group, AND logic between different groups
 
-###jPList with jQuery UI
+### jPList with jQuery UI
 - [Range Slider](http://jplist.com/jqueryuiexamples/range-slider) - jQuery UI range slider
 - [Date Picker Filter](http://jplist.com/jqueryuiexamples/date-picker-range-filter) - jQuery UI date picker
 
@@ -102,7 +102,7 @@ Please read [jPList guidelines](https://github.com/no81no/jplist/wiki/Reporting-
 - [DateTime 2](http://jplist.com/datetimeexamples/datetime-2) - {month} {day}, {year} {hour}:{min}:{sec}
 - [DateTime 3](http://jplist.com/datetimeexamples/datetime-3) - {month} {day}, {year}
 
-###Other Examples
+### Other Examples
 - [Fade Animation](http://jplist.com/otherexamples/fade-animation) - example page of fade animation in jPList
 - [jPList with Fancybox](http://jplist.com/otherexamples/jplist-with-fancybox) - example of jPList with lightbox
 - [Large Amount of Data](http://jplist.com/otherexamples/large-amount-of-data-demo) - demo with 1000 items on the page
@@ -142,16 +142,16 @@ Please read [jPList guidelines](https://github.com/no81no/jplist/wiki/Reporting-
 - Safari
 - Opera
 
-##[jQuery Compatibility](#jquery-compat)
+## [jQuery Compatibility](#jquery-compat)
 - Works with jQuery from [version 1.8](http://code.jquery.com/jquery-1.8.0.min.js)
 - Works with jQuery 2.x versions
 
-##[Donations](#donation)
+## [Donations](#donation)
 If you find jPList useful, please consider making a donation to support project development. Thank you for your help!
 
 [![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N54PFNPQ8ZJSU)
 
-##[Links](#links)
+## [Links](#links)
 - [Project Home](http://jplist.com)
 - [jPList on Facebook](https://www.facebook.com/jplist)
 - [jPList on Google+](https://plus.google.com/+Jplistjs)
