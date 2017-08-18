@@ -57,7 +57,7 @@ var compiler = function(configPath, additionalArgs){
                 // If you specify a directory here, all files inside are used
                 ,externs: config.externs
 
-                ,process_jquery_primitives: true
+                //,process_jquery_primitives: true
             }
             ,function(error, result) {
 
