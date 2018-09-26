@@ -50,7 +50,8 @@
 			,filterStatus
 			,paginaStatus;
 			
-		if(jQuery.trim(inputValue)){
+		//if(jQuery.trim(inputValue)){	//We need empty for initvalues
+		if(typeof inputValue !== 'undefined'){
 		
 			//update ajax data type - it could be 'html', 'xml' or 'json'
 			if(context.options.dataSource && context.options.dataSource.server && context.options.dataSource.server.ajax){
@@ -88,14 +89,14 @@
 			statuses.push(paginaStatus);
 			
 			//load data from URL
-			jQuery.fn.jplist.dal.services.URIService.get(
+			jQuery.fn.jplist.URIService.get(
 				statuses
 				,context.options
 				
 				//OK callback
 				,function(content, statuses, ajax, response){
 					
-					var dataitem = new jQuery.fn.jplist.domain.server.models.DataItemModel(content, ajaxDataType, response['responseText']);
+					var dataitem = new jQuery.fn.jplist.DomainDataItemServerModel(content, ajaxDataType, response['responseText']);
 					
 					//draw html..
 					context.scopeObserver.trigger(context.scopeObserver.events.ServerDataLoaded, [dataitem, inputValue]);									
@@ -117,27 +118,11 @@
 	* get data
 	* @param {Object} context
 	* @param {string} inputValue
-
+	*/
 	var getData = function(context, inputValue){
-
-		if(context.options && context.options.dataSource){
-
-			switch(context.options.dataSource.type){
-				
-				//DOM data source
-				case 'html':{
-					getDataDOM(context, inputValue);
-				}
-				break;
-				
-				//server side (html) data source
-				case 'server':{
-					getServerData(context, inputValue);
-				}
-				break;
-			}
-		}
-	};*/
+		if(context.options && context.options.dataSource && context.options.dataSource.server) getServerData(context, inputValue);
+		else getDataDOM(context, inputValue);
+	};
 	
 	/**
 	* init events
@@ -149,8 +134,7 @@
 		//@param {Object} e
 		//@param {string} inputValue
 		context.scopeObserver.on(context.scopeObserver.events.inputValueChanged, function(e, inputValue){
-
-            getDataDOM(context, inputValue);
+            getData(context, inputValue);
 		});
 		
 	};
@@ -190,4 +174,4 @@
 		return new Init(scopeObserver, $root, options, autocompleteParams);
 	};	
 	
-})();	
+})();

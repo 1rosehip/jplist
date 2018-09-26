@@ -225,7 +225,7 @@
 		
 		if(dataitem){
 			if(context.params.render && jQuery.isFunction(jQuery.fn.jplist.settings[context.params.render])){
-			
+				dataitem.content.unshift({id:'',text:context.$control.find("input").attr('placeholder')});
 				html = jQuery.fn.jplist.settings[context.params.render](dataitem);
 			}
 			else{
@@ -245,6 +245,18 @@
 			//set data-length attribute
 			context.$placeholder.attr('data-length', 0);
 		}
+
+		//Set onclick for selection
+		var $dataItems = context.$placeholder.children();
+		$dataItems.on('click',function(e) {
+		  var $sel = $(e.target);
+		  context.params.selected=$sel.data('path');
+		  $dataItems.removeClass("autocomplete-active");
+		  $sel.addClass("autocomplete-active");
+		  context.$control.find("input").val($sel.eq(0).text());
+		  closeAll(context);		  
+		  context.scopeObserver.trigger(context.scopeObserver.events.onSelect);
+		})
 		
 		//set hidden content position
 		setVisibility(context);	
@@ -338,12 +350,15 @@
 		/**
 		* on input click -> disable placeholder hiding
 		*/
-		context.$input.on('click', function(e){
+		context.$input.on('click', function(e){			
 		
 			e.stopPropagation();
 			
 			//close all placeholders
 			closeAll(context);
+
+			if((Number(context.$placeholder.attr('data-length')) || 0) == 0)
+				context.scopeObserver.trigger(context.scopeObserver.events.inputValueChanged,'');		
 						
 			//show placeholder if needed
 			setVisibility(context);
@@ -412,7 +427,7 @@
 		render(context);
 		
 		//init events
-		initEvents(context);
+		initEvents(context);		
 		
 		return jQuery.extend(this, context);
 	};
