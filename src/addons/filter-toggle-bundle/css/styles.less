@@ -66,7 +66,34 @@
 	[data-control-type="range-filter"]{
 		cursor: pointer;
 	}
+}
+
+/**
+* range slider
+*/
+.range-slider-mixin(){
+
+    .jplist-range-slider{
+        float: left;
+        margin-top: 15px;
+
+        .value{
+            float: left;
+            margin: 0 15px;
+            font-size: 12px;
+        }
+
+        .ui-slider{
+            float: left;
+            width: 130px;
+        }
+    }
+
+    .ui-slider{
+        margin-top: 5px;
+    }
 }		
 
 .radio-filters-mixin();
 .range-filter-mixin();
+.range-slider-mixin();
